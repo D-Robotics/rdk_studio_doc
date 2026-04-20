@@ -1,0 +1,9 @@
+{
+  "label": "2. Quick Start",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "slug": "/category/2-quick-start",
+    "description": "The shortest path for new users: install and sign in, flash system images, connect the board over SSH, Type-C, or serial, then configure network and AI models and run your first conversation."
+  }
+}

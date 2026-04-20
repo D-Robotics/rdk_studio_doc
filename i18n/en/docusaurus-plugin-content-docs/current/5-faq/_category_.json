@@ -1,0 +1,9 @@
+{
+  "label": "5. Frequently Asked Questions",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "slug": "/category/5-faq",
+    "description": "Troubleshooting for common issues: SSH, Type-C flash, camera, model loading, WiFi, remote IDE, multi-device switching, token usage, model quality, and VNC or desktop latency."
+  }
+}

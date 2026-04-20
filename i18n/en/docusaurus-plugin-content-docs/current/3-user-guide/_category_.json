@@ -1,0 +1,9 @@
+{
+  "label": "3. User Guide",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "slug": "/category/3-user-guide",
+    "description": "Feature-by-feature guidance: dashboard, AI chat, remote terminal and file manager, remote IDE, remote desktop, flashing, networking, device management, OpenClaw, skills, configuration center, and more."
+  }
+}

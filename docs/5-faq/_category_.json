@@ -1,0 +1,9 @@
+{
+  "label": "5. 常见问题",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "slug": "/category/5-faq",
+    "description": "汇总 SSH、Type-C 闪连、摄像头、模型加载、网络、远程 IDE、多设备切换、Token、模型效果与远程桌面等常见问题的原因分析与排查要点。"
+  }
+}
