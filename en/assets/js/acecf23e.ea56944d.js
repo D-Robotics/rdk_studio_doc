@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkrdk_doc=self.webpackChunkrdk_doc||[]).push([[1903],{1912:o=>{o.exports=JSON.parse('{"blogBasePath":"/rdk_studio_doc/en/blog","blogTitle":"Blog","authorsListPath":"/rdk_studio_doc/en/blog/authors"}')}}]);

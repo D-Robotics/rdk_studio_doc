@@ -1,9 +1,0 @@
-{
-  "label": "2. 快速入门",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "slug": "/category/2-quick-start",
-    "description": "面向新用户的最短路径：安装与登录、系统烧录、通过 SSH / Type-C / 串口接入设备、网络与模型配置，直至完成首次 AI 对话。"
-  }
-}

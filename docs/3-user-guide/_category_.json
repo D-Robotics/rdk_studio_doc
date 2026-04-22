@@ -1,9 +1,0 @@
-{
-  "label": "3. 用户指南",
-  "position": 3,
-  "link": {
-    "type": "generated-index",
-    "slug": "/category/3-user-guide",
-    "description": "按功能模块深入说明：工作台、AI 对话、远程终端与文件、远程 IDE、远程桌面、系统烧录、网络与设备管理、OpenClaw、技能与配置中心等日常工作流。"
-  }
-}
