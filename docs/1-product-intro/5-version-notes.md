@@ -8,7 +8,7 @@ title: 1.5 版本说明
 
 ## 当前手册描述的版本
 
-本手册描述 **RDK Studio 1.1.x** 系列。如果你看到的客户端界面与本手册描述明显不一致，建议先升级客户端。
+本手册描述 **RDK Studio 1.1.x** 系列。如果你看到的客户端界面与本手册描述明显不一致，建议先升级客户端。  
 老版本 RDK Studio 客户端的下载地址及用户手册请参考[RDK Studio 使用指南](https://developer.d-robotics.cc/rdk_doc/RDK_Studio)。
 
 ## 版本检查与升级
