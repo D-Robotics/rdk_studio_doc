@@ -5,45 +5,88 @@ title: 1.5 Release Notes
 
 # 1.5 Release Notes
 
-![Settings Center · Application and Update Section](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/settings-app-update.png)
+## Version described in the current manual
 
-## Version Covered in This Document
+This manual describes the **RDK Studio 1.1.x** series. If the client interface you see differs significantly from what is described in this manual, it is recommended to upgrade the client first.  
+For download links and user manuals of older RDK Studio client versions, please refer to the [RDK Studio User Guide](https://developer.d-robotics.cc/rdk_doc/en/RDK_Studio).
 
-This document describes the **RDK Studio 1.1.x** series. If the interface you see in your client significantly differs from what is described here, we recommend upgrading your client first.
+## Version check and upgrade
 
-## Version Check and Upgrade
+Open the desktop client, navigate to *Settings Panel → Apps & Updates*. Here you can view the current version, check for the latest release, and perform a one-click upgrade. Studio upgrades will retain all local configurations (device list, model entries, installed skills, chat history) without any data loss.
 
-Open the desktop client and navigate to *Settings Panel → Application and Update* to view your current version number, check for the latest released version, and perform a one-click upgrade. Upgrading Studio preserves all local configurations (device list, model entries, installed skills, conversation history) without data loss.
-
-You can check CLI tool versions using the following commands:
+The version of the CLI tool can be checked using the following commands:
 
 ```bash
 rdkstudio --version
 dmoss-agent --version
 ```
 
-> `@dmoss/agent` is the npm package name; after installation, the command name is `dmoss-agent` (without the `@` prefix).
+> `@dmoss/agent` is the npm package name. After installation, the command name is `dmoss-agent` (without the `@` prefix).
 
-To upgrade the CLI tools:
+Upgrading the CLI:
 
 ```bash
-# rdkstudio is managed by the desktop client; simply re-enable it to sync to the latest version
-# Settings Panel → Application and Update → Command-line Tools → Re-enable
+# rdkstudio is managed by the desktop client; re-enable it to sync to the latest version
+# Settings Panel → Apps & Updates → Command Line Tools → Re-enable
 
-# dmoss-agent is upgraded via npm
+# Upgrade dmoss-agent via npm
 npm install -g @dmoss/agent@latest
 ```
 
-## Release Notes
+## Changelog
 
-For the complete version release notes, please click the version number at the lower left corner of the RDK Studio page to view the update details.
-## Feedback Channels
+### Version: v1.1.2
 
-If you encounter any issues during use, you can get help through the following methods:
+#### Updates
+
+- **Remote Desktop (VNC)**
+
+    Fixed an issue where the desktop installation version would immediately report "Connection closed (code 1006)" when connecting to the remote desktop. Both root causes (service port fallback (8788+/49152+) and file:// cross-origin SSO Cookie) have been addressed.
+
+- **Remote Desktop**
+
+    The noVNC handshake URL has been changed to follow Electron's actual backend port, and the SSO session mirror is attached to the WebSocket handshake query, ensuring consistent behavior between packaged and development environments.
+
+### Version: v1.0.10
+
+#### Updates
+
+- **Studio LAN Mesh**
+
+    This can be toggled in Settings → Device Connection, synchronized with persistent configuration and API. If `RDK_STUDIO_MESH=false` is set, the UI will be disabled with a prompt to change the environment variable and restart.  
+    The Studio Mesh port uses `RDK_STUDIO_MESH_PORT` (default 19090), separate from the standalone CLI's `DMOSS_MESH_PORT`, preventing port conflicts in the same environment.
+
+### Version: v1.0.9
+
+#### Updates
+
+- **Moss Memory**
+
+    - Preference and device/project-related follow-up questions now support multi-language keyword retrieval (Chinese/English) merged for more stable cross-language recall.
+    - Lightweight security check before writing to memory.
+    - Prompts to organize when the index size approaches the upper limit.
+
+- **Security & Persona**
+
+    - Clearly informs users when dangerous or unauthorized tools are intercepted, preventing command forgery to fake results.
+    - System-managed configuration files do not leak content to users.
+
+- **Multimodal & AI Dock**
+
+    - Attachments provide type-specific hints to the model and input area.
+    - Readable summaries for bubbles when only attachments are sent.
+    - Clearer guidance for handling attachments from external channels.
+
+- **@dmoss/agent CLI**
+
+    Automatically loads `.env` files upwards (including monorepo root). When local keys match Studio, `npm run cli` can be used directly.
+
+- **Development**
+
+    Updates to the `ai-dock-capability-probe` capability probe scenarios and acceptance criteria.
+
+## Contact Us
 
 - 🌐 [Developer Community](https://developer.d-robotics.cc/en)
 - 📧 [Technical Support Email](mailto:developer@d-robotics.cc)
 - 📱 [Official Technical Discussion Group](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=dd2ra5d5-a239-4b4d-bc26-46e3374d1428)
-- Within the client: *Settings Panel → Application and Update → Export Diagnostic Bundle*: send us the diagnostic information for troubleshooting
-
-The diagnostic bundle includes your local configuration, recent conversation logs (anonymized), and client runtime logs. It does **not** contain API keys or SSH passwords for edge devices.
