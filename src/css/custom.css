@@ -89,7 +89,7 @@ table.no-wrap-table,
 }
 
 /* Dify Chatbot Styles - Based on Official Documentation */
-#dify-chatbot-bubble-button {
+/* #dify-chatbot-bubble-button {
   background-color: var(--dify-chatbot-bubble-button-bg-color) !important;
   box-shadow: 0 0 0 0 rgba(255, 81, 37, 0.7) !important;
   animation: pulse-orange 2s infinite;
@@ -125,4 +125,4 @@ table.no-wrap-table,
   transform-origin: top left;
   width: 105.3% !important;
   height: 105.3% !important;
-}
+} */
