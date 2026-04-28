@@ -45,9 +45,9 @@ Trigger matching performs exact string matching without semantic understanding. 
 
 | Trigger Word(s) | User Message | Matched? |
 |---|---|---|
-| `USB摄像头` | "USB 摄像头黑屏怎么办" | Matched (exact string match) |
-| `USB摄像头` | "我板子的相机不显示画面" | Not matched (semantically equivalent but textually different) |
-| `USB摄像头,相机,camera` | "我板子的相机不显示画面" | Matched (trigger includes "相机") |
+| `USB camera` | "What should I do if the USB camera screen is black?" | Matched (exact string match) |
+| `USB camera` | "The camera on my board is not displaying any image" | Not matched (semantically equivalent but textually different) |
+| `USB camera, camera, cam` | "The camera on my board is not displaying any image" | Matched (trigger includes "camera") |
 
 To improve matching accuracy, we recommend the following when designing triggers:
 
