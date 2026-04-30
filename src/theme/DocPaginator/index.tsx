@@ -11,8 +11,8 @@ const getCustomTitle = (permalink: string, locale: string): string | null => {
       { pattern: /^\/rdk_studio_doc\/en\/category\/1-product-intro$/, title: '1. Product Introduction' },
       { pattern: /^\/rdk_studio_doc\/en\/category\/2-quick-start$/, title: '2. Quick Start' },
       { pattern: /^\/rdk_studio_doc\/en\/category\/3-user-guide$/, title: '3. User Guide' },
-      { pattern: /^\/rdk_studio_doc\/en\/category\/4-advanced-guide$/, title: '4. Advanced Guide' },
-      { pattern: /^\/rdk_studio_doc\/en\/category\/5-appendix$/, title: '5. Appendix' },
+      { pattern: /^\/rdk_studio_doc\/en\/category\/4-resources$/, title: '4. Resources & Community' },
+      { pattern: /^\/rdk_studio_doc\/en\/category\/5-faq$/, title: '5. Frequently Asked Questions' },
     ],
     // zh: [
     //   { pattern: /\/Quick_start/, title: '1. 快速开始' },
