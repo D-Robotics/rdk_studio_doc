@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.5.3 弹出编辑器窗口'
 title: 3.5.3 弹出编辑器窗口
-unlisted: true
 ---
 
 # 3.5.3 弹出编辑器窗口

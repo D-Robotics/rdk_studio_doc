@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.10.5 处理板端任务'
 title: 3.10.5 处理板端任务
-unlisted: true
 ---
 
 # 3.10.5 处理板端任务

@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.5.2 准备编辑环境'
 title: 3.5.2 准备编辑环境
-unlisted: true
 ---
 
 # 3.5.2 准备编辑环境

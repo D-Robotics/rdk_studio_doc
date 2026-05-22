@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.11.2 查看内置技能'
 title: 3.11.2 查看内置技能
-unlisted: true
 ---
 
 # 3.11.2 查看内置技能

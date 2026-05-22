@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.15.2 查看 Token 用量'
 title: 3.15.2 查看 Token 用量
-unlisted: true
 ---
 
 # 3.15.2 查看 Token 用量

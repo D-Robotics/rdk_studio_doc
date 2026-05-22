@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.10.6 配对和确认'
 title: 3.10.6 配对和确认
-unlisted: true
 ---
 
 # 3.10.6 配对和确认

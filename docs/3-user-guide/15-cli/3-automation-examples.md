@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.16.3 自动化示例'
 title: 3.16.3 自动化示例
-unlisted: true
 ---
 
 # 3.16.3 自动化示例

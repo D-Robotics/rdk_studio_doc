@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.8.2 添加隐藏 Wi-Fi'
 title: 3.8.2 添加隐藏 Wi-Fi
-unlisted: true
 ---
 
 # 3.8.2 添加隐藏 Wi-Fi

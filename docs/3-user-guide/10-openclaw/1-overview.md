@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.10.1 判断是否需要 OpenClaw'
 title: 3.10.1 判断是否需要 OpenClaw
-unlisted: true
 ---
 
 # 3.10.1 判断是否需要 OpenClaw

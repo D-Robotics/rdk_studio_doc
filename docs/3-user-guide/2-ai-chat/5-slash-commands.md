@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.2.5 使用快捷命令'
 title: 3.2.5 使用快捷命令
-unlisted: true
 ---
 
 # 3.2.5 使用快捷命令

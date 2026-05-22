@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.8.3 保存 Wi-Fi 配置'
 title: 3.8.3 保存 Wi-Fi 配置
-unlisted: true
 ---
 
 # 3.8.3 保存 Wi-Fi 配置
