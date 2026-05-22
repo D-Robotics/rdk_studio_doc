@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.9.2 自动识别设备'
 title: 3.9.2 自动识别设备
-unlisted: true
 ---
 
 # 3.9.2 自动识别设备

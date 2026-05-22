@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.11.6 同步到设备'
 title: 3.11.6 同步到设备
-unlisted: true
 ---
 
 # 3.11.6 同步到设备

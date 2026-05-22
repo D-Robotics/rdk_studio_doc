@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.13.1 看懂设置页'
 title: 3.13.1 看懂设置页
-unlisted: true
 ---
 
 # 3.13.1 看懂设置页

@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.11.5 设置触发词'
 title: 3.11.5 设置触发词
-unlisted: true
 ---
 
 # 3.11.5 设置触发词

@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.11.1 技能文件怎么写'
 title: 3.11.1 技能文件怎么写
-unlisted: true
 ---
 
 # 3.11.1 技能文件怎么写

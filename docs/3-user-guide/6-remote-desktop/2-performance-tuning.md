@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.6.2 弹出远程桌面窗口'
 title: 3.6.2 弹出远程桌面窗口
-unlisted: true
 ---
 
 # 3.6.2 弹出远程桌面窗口

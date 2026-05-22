@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.1.1 设备状态与诊断'
 title: 3.1.1 设备状态与诊断
-unlisted: true
 ---
 
 # 3.1.1 设备状态与诊断

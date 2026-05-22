@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.7.1 选择烧录方式'
 title: 3.7.1 选择烧录方式
-unlisted: true
 ---
 
 # 3.7.1 选择烧录方式

@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.13.4 设置设备连接'
 title: 3.13.4 设置设备连接
-unlisted: true
 ---
 
 # 3.13.4 设置设备连接

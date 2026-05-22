@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.4.3 哪些路径不能改'
 title: 3.4.3 哪些路径不能改
-unlisted: true
 ---
 
 # 3.4.3 哪些路径不能改

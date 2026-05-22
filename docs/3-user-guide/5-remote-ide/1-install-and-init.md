@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.5.1 打开代码编辑器'
 title: 3.5.1 打开代码编辑器
-unlisted: true
 ---
 
 # 3.5.1 打开代码编辑器

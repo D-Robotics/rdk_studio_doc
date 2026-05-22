@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.1.3 离线缓存'
 title: 3.1.3 离线缓存
-unlisted: true
 ---
 
 # 3.1.3 离线缓存

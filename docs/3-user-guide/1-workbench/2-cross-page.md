@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.1.2 跨页面联动'
 title: 3.1.2 跨页面联动
-unlisted: true
 ---
 
 # 3.1.2 跨页面联动

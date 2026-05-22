@@ -1,7 +1,6 @@
 ---
 sidebar_label: '3.2.3 查看历史会话'
 title: 3.2.3 查看历史会话
-unlisted: true
 ---
 
 # 3.2.3 查看历史会话
