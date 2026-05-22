@@ -1,11 +1,12 @@
 ---
-sidebar_label: '3.15.3 自动化场景示例'
-title: 3.15.3 自动化场景示例
+sidebar_label: '3.16.3 自动化示例'
+title: 3.16.3 自动化示例
+unlisted: true
 ---
 
-# 3.15.3 自动化场景示例
+# 3.16.3 自动化示例
 
-本节给出三个典型的自动化场景，展示 CLI 在 CI、定时任务、日志分析中的用法。每个示例可以直接复制到生产环境使用。
+下面给出三个典型自动化场景，展示 CLI 在 CI、定时任务、日志分析中的用法。示例需要按你的仓库、设备和模型配置调整后再用于正式环境。
 
 ## CI 中跑代码审查
 
@@ -44,7 +45,7 @@ jobs:
             "review the diff, focus on bugs and missing tests"
 ```
 
-Agent 会分析 diff、指出潜在 bug、建议补充测试。输出在 Action 日志中可见。
+`dmoss-agent` 会分析 diff、指出潜在 bug、建议补充测试。输出在 Action 日志中可见。
 
 ## 定时巡检板端
 
@@ -79,7 +80,7 @@ echo "$DIAGNOSIS" | dmoss-agent --pipe \
 
 ## AI 自动总结日志
 
-把 systemd 日志交给 AI 总结异常：
+把服务日志交给 AI 总结异常：
 
 ```bash
 # 手动或定时执行
@@ -87,7 +88,7 @@ journalctl -u myservice --since="1 hour ago" \
   | dmoss-agent --pipe "summarize errors and root causes"
 ```
 
-Agent 会读取日志、提取错误事件、按时间和严重程度归类、给出可能的根因。适合大量日志中快速定位问题的场景。
+`dmoss-agent` 会读取日志、提取错误事件、按时间和严重程度归类、给出可能的根因。适合大量日志中快速定位问题的场景。
 
 扩展：让 AI 在发现严重问题时主动通知：
 
@@ -127,9 +128,9 @@ ENTRYPOINT ["dmoss-agent"]
 docker build -t my-dmoss-agent .
 
 docker run -it --rm \
-  -e DMOSS_API_KEY=sk-xxxx \
+  -e DMOSS_API_KEY=<你的访问密钥> \
   -e DMOSS_MODEL=qwen3.6-plus \
   my-dmoss-agent "帮我分析当前工作目录的结构"
 ```
 
-这种方式适合在 Kubernetes 中部署短生命周期的 Agent 任务、或在 CI / CD 中提供一致的 Agent 运行环境。
+这种方式适合团队在统一环境中运行命令行任务，例如 CI / CD 或容器化调试。

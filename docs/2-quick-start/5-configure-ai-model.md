@@ -5,71 +5,64 @@ title: 2.5 接入 AI 模型
 
 # 2.5 接入 AI 模型
 
-RDK Studio 的所有 AI 能力都依赖大模型驱动。本节给出最简的接入方式；详细的模型条目字段、双车道路由机制、协议判定规则在 [3.12 配置中心](../3-user-guide/12-config-center/3-ai-engine.md) 详细说明。
+Moss 需要可用的模型才能回答问题和操作设备。多数新用户登录后可以直接使用默认模型；只有在公司已有模型服务、或想在电脑本机运行小模型时，才需要手动配置。
 
-## 两种接入方式
+## 三种路径
 
-| 你的情况 | 推荐方式 |
+| 你的情况 | 推荐路径 |
 |---|---|
-| 默认情况（所有 RDK Studio 用户） | 使用**内置官方推荐模型**，无需任何配置 |
-| 已有自己的外部模型 API Key，希望替换默认模型 | 在配置中心添加自定义模型条目 |
+| 刚安装，想先跑通 | 完成登录后直接使用内置推荐模型 |
+| 团队已有模型服务或密钥 | 进入 **设置 → AI 引擎** 添加模型 |
+| 想在电脑本机跑小模型做快速回答 | 进入 **AI 能力 → 本地大模型** 安装并下载模型 |
 
-## 方式一：使用内置官方推荐模型
+## 默认模型
 
-RDK Studio **对所有登录用户开放**一个官方推荐模型：完成 SSO 登录后，打开 *AI Dock* 直接发送消息即可，Studio 会自动使用内置模型——不需要申请额外的 API Key、也不需要在 Studio 中填任何字段。这个内置模型走 D-Robotics 官方网关统一转发，对公司内部账号与外部开发者账号一视同仁。
+完成登录后，多数情况下可以直接进入工作台发送第一条消息，不必先填写密钥。
 
-![新手引导向导 · 第 4 步试用 AI 助手：上面是"打个招呼"快捷发送，下面是可选的「OpenClaw 与模型（推荐）」入口，底部可"完成引导"进入正式工作台](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/onboarding-4-dmoss.png)
+若输入区出现“快速/思考模型未配置”或“模型连不上”的提示，点击提示中的 **AI 模型设置** 或 **本地模型** 按钮即可跳转到对应页面。
 
-内置模型足以覆盖大部分场景。如果暂时不需要接其他厂商，可以直接在上图的"打个招呼"卡片点击 *发送*、或跳到 [2.6 发起首次对话](./6-first-conversation.md)。
+## 使用自己的模型服务
 
-## 方式二：自定义模型接入
+如果团队已经给你提供了模型服务，进入 **设置 → AI 引擎**，把它设为思考模型或快速模型。
 
-适用于已经在外部模型厂商有账号和 API Key 的开发者。
+![配置中心 · AI 引擎：配置思考模式和快速模式的默认模型](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/settings-ai-engine.png)
 
-### 第 1 步：进入 AI 引擎配置
+| 模式 | 用途 |
+|---|---|
+| 思考 | 主对话、复杂任务、计划、排障 |
+| 快速 | 简短问答、执行结果总结、文件浏览等轻量任务 |
 
-打开桌面客户端，进入 *设置面板 → AI 引擎*。或者点击 AI Dock 底部的"模型"标签直接跳转。
+常见字段：
 
-### 第 2 步：新建模型条目
+| 页面字段 | 填什么 |
+|---|---|
+| 显示名称 | 给这条模型配置起个好认的名字 |
+| 服务商 | 选择和团队提供的模型平台一致的服务商 |
+| 模型名称 | 填团队或模型平台给你的模型名 |
+| Base URL（服务地址） | 填团队提供的接口地址；使用平台默认地址时可留空 |
+| API Key（访问密钥） | 在页面里填写团队或模型平台给你的密钥 |
 
-点击 *新建模型条目*，填写以下字段：
+不确定怎么填时，可以把模型平台的字段说明，或遮住 API Key 后的配置截图发给 Moss，让它帮你对应到页面字段。API Key 不要直接发到对话中。
 
-| 字段 | 说明 | 示例 |
-|---|---|---|
-| Label | 给条目起一个易识别的名字 | "我的 GPT-4" |
-| Provider | 选择厂商/协议 | `openai` / `anthropic` / `qwen` / `doubao` / `gemini` / `deepseek` / `moonshot` / `ollama` / `openai-compatible` / `anthropic-compatible` 等 |
-| Model | 厂商的模型 ID（必须精确） | `gpt-4o-mini` / `claude-sonnet-4-20250514` / `qwen-plus` / `doubao-1.5-pro-256k` |
-| API Key | 厂商控制台获取 | `sk-xxxx...` |
-| Base URL | 服务地址，使用厂商默认值留空即可 | （留空） |
+## 本地 Ollama
 
-### 第 3 步：测试连通性
+进入 **本地大模型** 页面可以完成：
 
-点击 *测试连通性*。Studio 会向模型发送一条测试请求。返回模型列表说明配置正确。
+![本地大模型页面：安装和启动 Ollama，下载模型并设为 Moss 快速模式](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/local-llm.png)
 
-### 第 4 步：保存并激活
+1. 安装或检测本机 Ollama 运行环境。
+2. 启动本机模型服务。
+3. 输入模型名称下载模型。
+4. 测试模型是否能完成一次对话。
+5. 一键设为 Moss 的快速模型。
 
-保存模型条目后，在 AI 引擎顶部的下拉框选择该条目作为当前激活模型。Studio 会立即生效，无需重启。
-
-## 关于双车道
-
-RDK Studio 设计了 Thinking 与 Quick 两套模型槽位：
-
-- **Thinking 车道**：处理主对话、复杂推理、规划
-- **Quick 车道**：处理工具结果总结、文件浏览、简短问答
-
-Studio 根据任务特征自动分发。如果只配置了 Thinking 车道、Quick 车道空缺，所有任务都会走 Thinking 车道，Token 成本会显著上升（5~10 倍）。强烈建议同时配置 Thinking 和 Quick 两个车道——Quick 车道选择便宜的小模型即可。
-
-## 协议判定规则
-
-Studio 通过模型条目的 **Provider** 字段决定使用哪种 API 协议（**不是看 URL**）：
-
-| Provider 字段 | 使用的协议 | 认证头 |
-|---|---|---|
-| `openai` / `qwen` / `doubao` / `openai-compatible` 等 | OpenAI Completions | `Authorization: Bearer <key>` |
-| `anthropic` / `anthropic-compatible` | Anthropic Messages | `x-api-key: <key>` |
-
-如果使用反向代理把 Anthropic 服务包装成不含 `anthropic` 字样的路径，仍需将 Provider 设置为 `anthropic-compatible`，否则 Studio 会按 OpenAI 协议发请求并得到 401 错误。
+本机模型适合做快速回答、摘要和简单问答。它默认运行在你的电脑上；如果要给板端 OpenClaw 使用，需要在板端 Agent 里单独设置。
 
 ## 后续操作
 
-完成模型配置后，进入 [2.6 发起首次对话](./6-first-conversation.md) 给 AI 发送第一条消息。
+模型可用后，进入 [2.6 发起首次对话](./6-first-conversation.md)。
+
+更详细配置见：
+
+- [3.13.3 配置 AI 模型](../3-user-guide/13-config-center/3-ai-engine.md)
+- [3.12 本地大模型](../3-user-guide/12-local-models/index.md)

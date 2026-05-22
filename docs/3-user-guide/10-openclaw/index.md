@@ -1,23 +1,56 @@
 ---
-sidebar_label: '3.10 OpenClaw 板端 Agent'
-title: 3.10 OpenClaw 板端 Agent
+sidebar_label: '3.10 OpenClaw'
+title: 3.10 OpenClaw
 ---
 
-# 3.10 OpenClaw 板端 Agent
+# 3.10 OpenClaw
 
-![OpenClaw 主面板：顶部是网关/网络/模型的实时状态徽章，右侧是配置进度与「重启网关、查看日志、升级、诊断并修复」四个快捷操作](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/03-OpenClaw.png)
+OpenClaw 是运行在 RDK 设备上的板端 Agent。需要让设备侧也具备 AI 助手能力时，再打开 **AI 能力 → 板端 Agent** 配置它。
 
-OpenClaw 是开源的 AI Agent 框架，可独立运行在任意 Linux 机器上。RDK Studio 把 OpenClaw 部署到 RDK 板端作为常驻 AI 运行时，由 systemd 管理为长期服务。同时，PC 端的 D-Moss Agent 可以通过 SSH 隧道与板端 OpenClaw 协同——任务在两端自动流转。
+![板端 Agent 页面：连接 RDK X5 后查看部署状态、模型配置和快捷操作](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/openclaw-connected.png)
 
-OpenClaw 的核心特性：长期运行的 Node.js 服务、跨会话记忆、多步工作流、工具调用、显式状态机驱动的任务断点续传。设计哲学是"操作系统思维"——把执行平面和控制平面分离，验证命令执行结果而不依赖模型声明。
+## 使用顺序
 
-本节是 OpenClaw 在 Studio 内的完整参考。前面 1.2、3.2 等章节中提到 OpenClaw 时仅一笔带过，详细机制全部在本节展开。
+| 顺序 | 你要做什么 |
+|---|---|
+| 1 | 先确认当前设备是 RDK 设备，并且在线 |
+| 2 | 打开 **板端 Agent** 页，看顶部状态 |
+| 3 | 如果未安装，先按页面提示检查环境，再部署 |
+| 4 | 部署完成后，确认模型配置是否可用 |
+| 5 | 状态正常后，再使用板端对话、技能或消息渠道 |
 
-## 本节包含
+## 页面里能做什么
 
-- [3.10.1 概述与适用场景](./1-overview.md)：什么时候需要 OpenClaw、什么时候不需要
-- [3.10.2 部署与卸载](./2-deploy-uninstall.md)：一键部署的完整流程与失败排查
-- [3.10.3 主面板与子页签](./3-main-panel.md)：6 个子页签的功能详解
-- [3.10.4 与 D-Moss 的协同机制](./4-collab-with-dmoss.md)：物理链路、工具家族、安全设计
-- [3.10.5 任务委派与自动 fallback](./5-task-delegation.md)：长任务委派与 SSH 阻塞时的自救机制
-- [3.10.6 配对与安全](./6-pairing-security.md)：首次连接的配对 token 与安全策略
+| 区域 | 用途 |
+|---|---|
+| 顶部状态 | 查看板端 Agent、模型和网络是否就绪 |
+| 部署与连接 | 部署、重新部署或卸载 OpenClaw |
+| 诊断并修复 | 查看异常提示，并按建议处理 |
+| 模型 | 配置 OpenClaw 可使用的模型 |
+| 接入飞书 | 配置飞书机器人和配对用户 |
+| 板端对话 | OpenClaw 就绪后，可直接和板端助手对话 |
+
+## 什么时候需要 OpenClaw
+
+| 场景 | 建议 |
+|---|---|
+| 短期调试、PC 始终在线 | 直接用 Moss + SSH 即可 |
+| 需要板端 Agent 参与设备任务 | 部署 OpenClaw |
+| 需要把技能部署到设备 | 部署 OpenClaw 后用技能工坊同步 |
+| 非 RDK Linux 主机 | 默认不提供 OpenClaw 部署，优先使用本机 Moss 技能 |
+
+## 部署前先确认
+
+- 设备已通过 SSH 添加并在线。
+- 设备网络可用，部署时能获取所需文件。
+- 板端有足够空间完成安装。
+- OpenClaw 要使用的模型能被板端访问。电脑本机 Ollama 通常不能直接作为板端模型地址。
+
+如果页面检测到 OpenClaw 缺失，会引导你按步骤部署。部署、卸载、重新部署这类会影响设备状态的动作，继续前都会提示确认。
+
+涉及写文件、执行命令、重启服务等操作时，请先确认目标设备和影响范围。
+
+## 继续阅读
+
+- [3.10.2 部署和卸载](./2-deploy-uninstall.md)：环境检查、一键部署、失败排查和卸载。
+- [3.10.3 查看状态和配置](./3-main-panel.md)：查看状态、配置模型和打开板端对话。

@@ -1,56 +1,52 @@
 ---
-sidebar_label: '5.1 AI 助手无响应'
-title: 5.1 AI 助手无响应
+sidebar_label: '5.1 Moss 无响应'
+title: 5.1 Moss 无响应
 ---
 
-# 5.1 AI 助手无响应
+# 5.1 Moss 无响应
 
 ## 典型现象
 
-在 AI 对话中发送消息后，发送按钮变灰、没有任何输出，或控制台报：
+- 工作台发送消息后一直转圈。
+- 输入区提示“快速/思考模型未正确配置”。
+- 本地 Ollama 模型提示服务不可达。
+- 外部模型返回密钥错误、模型不存在或连接超时。
 
-- `401 Unauthorized`
-- `403 Forbidden`
-- `Connection refused`
+## 先看输入区横幅
 
-## 快速判断
+AI Dock 会主动提示模型配置问题：
 
-进入 *配置中心 → AI 引擎*，找到当前激活的模型条目，点击 *测试连通性*：
-
-- **测试通过** → 不是配置问题，跳到"配置正确但仍无响应"
-- **测试失败** → 按错误码排查：
-  - 401 / 403：重新填写 API Key
-  - 404：检查 Base URL 末尾是否有多余的 `/v1`
-  - timeout：国内网络可能需要代理或镜像
-  - DNS 解析失败：公司网络可能未放行该域名
-
-## 排查清单
-
-| 检查项 | 方法 |
+| 横幅 | 处理 |
 |---|---|
-| API Key 有效 | 配置中心 → AI 引擎找到当前激活条目，确认 Key 没空、没含中文引号、没多余空格；到模型厂商控制台确认未撤销 |
-| 余额充足 | 多数厂商默认免费额度仅几百万 token，超出直接 402 |
-| 服务可达 | 终端运行 `curl -i -H "Authorization: Bearer YOUR_KEY" "${BASE_URL}/v1/models"`，预期返回 200 OK 和模型列表 |
-| 模型 ID 精确匹配 | 模型名必须一字不差，常见错误：`claude-sonnet` 错 → `claude-sonnet-4-20250514` 对；`gpt4o-mini` 错 → `gpt-4o-mini` 对 |
-| Provider 字段正确 | Provider 决定协议，不看 URL。`anthropic` / `anthropic-compatible` 走 Anthropic Messages（`x-api-key`）；其他走 OpenAI Completions（`Authorization: Bearer`） |
+| 快速/思考指向本机 Ollama 但服务不可达 | 打开 [3.12 本地大模型](../3-user-guide/12-local-models/index.md)，启动服务 |
+| 模型不在本机 Ollama 列表 | 到本地大模型页下载对应 tag，或改成列表中完整名称 |
+| 远程模型配置不完整 | 打开 *设置 → AI 引擎* 补全模型名称、Base URL 和 API Key |
 
-## 配置正确但仍无响应
+## 外部模型排查
 
-| 现象 | 原因 | 解决 |
-|---|---|---|
-| 几秒内秒断 | Base URL 末尾多了 `/v1` 被重复拼接 | 末尾去掉 `/v1`（除非你用固定路径反代） |
-| 一直卡转圈超过 60 秒 | 模型走推理（thinking）模式但前端未显示 | 配置中心把 *Reasoning visibility* 临时改为 `inline` 观察 |
-| `<think>...</think>` 出现在正文 | OpenAI 兼容协议下 reasoning 被发到上游 | Studio 会自动用 InlineThinkingRouter 解析；仍露出则升级到最新版 |
-| 单条消息算清零 | Agent 单轮上限被卡 | 升级到最新版 RDK Studio |
+进入 *设置 → AI 引擎*，测试当前思考或快速模型：
 
-## 关于协议判定
+| 错误 | 常见原因 |
+|---|---|
+| 密钥错误或权限不足 | API Key 复制错、已失效或没有权限 |
+| 模型不存在 | 模型名称填错，或 Base URL 不对 |
+| 连接超时 | 网络不可达、代理、公司防火墙或服务端繁忙 |
+| 服务商错误 | 服务商没有和模型平台对应 |
 
-协议判定**只看 Provider 字段**，不会根据 URL 里有无 `anthropic` 字样自动切换。如果使用反向代理把 Anthropic 服务包装成不含 anthropic 的路径，仍需将 Provider 设置为 `anthropic-compatible`，否则 Studio 会按 OpenAI 协议发请求并得到 401。
+如果不确定哪一项填错，可以把模型平台的字段说明、测试失败提示或遮住密钥后的截图发给 Moss，让它帮你逐项对应。API Key 不要直接发到对话中。
 
-这一逻辑由 `server/agent/provider-setup.ts` 的 `resolveProtocol()` 决定。
+## 本地模型排查
 
-## 永久解决
+如果使用 Ollama：
 
-- 在配置中心完成配置后 Studio 自动持久化到本机配置目录，换设备无需重填
-- 关注 AI Dock 右上角 Token 用量胶囊的配额预警
-- 团队场景使用配置导出生成 JSON 给同事一键导入
+1. 打开 *本地大模型*。
+2. 确认运行环境已安装。
+3. 确认服务已启动。
+4. 确认模型列表中存在当前配置的模型名称。
+5. 点击模型测试。
+
+更多见 [5.13 本地大模型 / Ollama 问题](./13-local-llm.md)。
+
+## 设备离线不是 Moss 无响应
+
+设备离线时，Moss 仍可做方案和知识回答；只是板端执行会等待重连或再次确认。如果你问的是“执行命令”，先检查设备标签是否在线。

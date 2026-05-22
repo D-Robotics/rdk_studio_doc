@@ -1,50 +1,31 @@
 ---
-sidebar_label: '5.7 WiFi 连接失败'
-title: 5.7 WiFi 连接失败
+sidebar_label: '5.7 Wi-Fi 连接失败'
+title: 5.7 Wi-Fi 连接失败
 ---
 
-# 5.7 WiFi 连接失败
+# 5.7 Wi-Fi 连接失败
 
-**典型现象**：在 *WiFi 配置* 弹窗输入 SSID 和密码后连接失败 / 连接显示成功但 `ip addr` 看 `wlan0` 没拿到 IP / 重启后 WiFi 配置丢失。
+## 典型现象
 
-## 30 秒决策
+- 添加设备后的 Wi-Fi 步骤扫不到 SSID。
+- 显示已连接但没有 IP。
+- Type-C 直连后电脑外网不可达。
+- 重启设备后 Wi-Fi 配置丢失。
 
-板端跑这三行，定位是哪一步坏的：
+## 先做这三步
 
-```bash
-nmcli dev status                # WiFi 模块是否正常
-nmcli dev wifi list             # 能否扫到目标 SSID
-nmcli dev wifi connect "目标SSID" password "密码"  # 手动连
-```
+1. 把设备靠近路由器，确认 Wi-Fi 名称和密码无误。
+2. 在 RDK Studio 的 Wi-Fi 配置弹窗中重新扫描并连接。
+3. 如果仍失败，把弹窗错误提示复制给 Moss，让它继续排查。
 
 ## 排查清单
 
-1. **SSID 扫描** — `nmcli dev wifi list` 看不到目标网络时：
-   - 信号弱（< -70 dBm）靠近路由器
-   - 5 GHz only 路由器 + 板端只有 2.4 GHz 模块 → 换路由器或开 2.4 GHz
-   - 隐藏 SSID：`nmcli dev wifi connect "SSID" password "密码" hidden yes`
+| 问题 | 处理 |
+|---|---|
+| 扫不到 SSID | 靠近路由器，确认频段支持；隐藏 SSID 需要手动输入 |
+| 密码错误 | 注意大小写、特殊字符和中文输入法空格 |
+| 获取不到 IP / DHCP 超时 | 检查路由器是否允许新设备接入，或重启路由器后再试 |
+| 重启后丢失 | 在 Studio 中重新连接一次，确认设备保存了该网络 |
+| Type-C 直连后电脑上不了网 | 按页面提示调整 Wi-Fi 优先级，或检查 USB 网卡的默认网关 / DNS |
 
-2. **密码错误** — `nmcli` 不会直接告诉你，会以 `Error: Connection activation failed` 笼统报错。手动重试注意大小写
-
-3. **DHCP 失败** — 连上但没 IP：
-
-   ```bash
-   sudo dhclient wlan0
-   # 或
-   sudo systemctl restart NetworkManager
-   ```
-
-4. **驱动问题** — RDK X3 / X5 偶发 WiFi 模块需重新加载：
-
-   ```bash
-   sudo rmmod 8852be
-   sudo modprobe 8852be
-   ```
-
-   模块名按 `lsmod | grep 88` 查
-
-## 永久解决
-
-- 在 *WiFi 配置* 弹窗勾"保存配置"，Studio 下发到板端 NetworkManager 持久化
-- 重启就丢一般是板端 NetworkManager 未自启：`sudo systemctl enable NetworkManager`
-- 长期生产环境推荐**网线 + 静态 IP**
+长期稳定使用建议给常用设备固定 IP，避免重启路由器后地址变化。
