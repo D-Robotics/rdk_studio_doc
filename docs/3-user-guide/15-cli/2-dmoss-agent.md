@@ -1,11 +1,13 @@
 ---
-sidebar_label: '3.15.2 @dmoss/agent'
-title: 3.15.2 @dmoss/agent
+sidebar_label: '3.16.2 dmoss-agent'
+title: 3.16.2 dmoss-agent
 ---
 
-# 3.15.2 @dmoss/agent
+# 3.16.2 dmoss-agent
 
-`@dmoss/agent` 是独立的 NPM 包，提供纯 Agent 运行时。适用于"不需要 RDK Studio 桌面客户端，只想要一个能调用工具、执行任务的 AI Agent"的场景。典型用途：CI / CD、Docker 镜像、嵌入式脚本。
+`@dmoss/agent` 是独立的 NPM 包，更适合自动化环境。日常使用 RDK Studio 时，优先看上一节的 `rdkstudio`。
+
+只有 CI / CD、Docker、脚本任务这类场景，才需要考虑 `dmoss-agent`。
 
 ## 安装
 
@@ -23,10 +25,10 @@ dmoss-agent --version
 
 ## 配置
 
-通过环境变量或本地配置文件 `~/.dmoss-agent/config.json`：
+通过环境变量或本地配置文件 `~/.dmoss-agent/config.json` 配置模型。访问密钥建议放在 CI 密钥或本机环境变量中，不要写进仓库。
 
 ```bash
-export DMOSS_API_KEY=sk-xxxx
+export DMOSS_API_KEY=<你的访问密钥>
 export DMOSS_MODEL=qwen3.6-plus
 export DMOSS_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
 export DMOSS_WORKSPACE=/path/to/your/project
@@ -36,14 +38,14 @@ export DMOSS_WORKSPACE=/path/to/your/project
 
 | 变量 | 用途 |
 |---|---|
-| `DMOSS_EXEC_BACKEND` | 命令执行后端：`local`（本地）或 `remote`（远程设备） |
+| `DMOSS_EXEC_BACKEND` | 命令执行方式：`local`（本地）或 `remote`（远程设备） |
 | `DMOSS_DEVICE_*` | 远程设备相关（IP、用户、密钥等） |
 | `DMOSS_WEIXIN_ILINK_TOKEN` | 微信通道的 iLink Token |
 
 ## 三种使用模式
 
 ```bash
-# 交互 REPL
+# 交互模式
 dmoss-agent
 
 # 单次提问
@@ -53,13 +55,13 @@ dmoss-agent "帮我整理这个目录"
 echo "解释这段代码" | dmoss-agent
 ```
 
-## 独有 flag
+## 独有选项
 
-`@dmoss/agent` 比 `rdkstudio` 有两个独有的 flag：
+`@dmoss/agent` 比 `rdkstudio` 有几个更偏自动化场景的选项：
 
-| flag | 用途 |
+| 选项 | 用途 |
 |---|---|
-| `--weixin` | 启用微信 iLink 通道，CLI 进程作为微信 Bot 服务端 |
+| `--weixin` | 启用微信 iLink 通道，命令行进程作为微信机器人服务端 |
 | `--mesh` | 加入 Agent Mesh，多机协作 |
 | `--debug` / `--quiet` | 日志详细度 |
 | `--log-level=<level>` | 精细控制 |
@@ -95,5 +97,5 @@ echo "解释这段代码" | dmoss-agent
 |---|---|
 | 在 CI 流水线中跑代码审查 | `@dmoss/agent`（不依赖桌面客户端） |
 | 在 Docker 镜像中部署 Agent | `@dmoss/agent`（镜像体积更小） |
-| 需要长期运行的微信 Bot | `@dmoss/agent --weixin` |
+| 需要在脚本环境里接入微信机器人 | `@dmoss/agent --weixin` |
 | 日常终端中跑命令、查文件 | `rdkstudio`（配置复用更省事） |

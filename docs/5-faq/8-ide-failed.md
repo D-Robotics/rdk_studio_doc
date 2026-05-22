@@ -1,42 +1,32 @@
 ---
-sidebar_label: '5.8 远程 IDE 无法启动'
-title: 5.8 远程 IDE 无法启动
+sidebar_label: '5.8 代码编辑器无法启动'
+title: 5.8 代码编辑器无法启动
 ---
 
-# 5.8 远程 IDE 无法启动
+# 5.8 代码编辑器无法启动
 
-**典型现象**：在 *IDE* tab 点"打开远程 IDE"后浏览器空白 / 报 `code-server 未安装` / 安装过程中卡在"下载 deb 包"。
+**典型现象**：在 *代码编辑器* 页点击打开后页面空白、提示编辑环境未安装，或安装过程一直卡住。
 
-## 30 秒决策
+## 先做这几步
 
-板端检查 code-server 状态：
-
-```bash
-which code-server
-code-server --version          # 期望 >= 4.x
-systemctl status code-server   # 或 ps aux | grep code-server
-```
+1. 确认设备在线，终端可以正常连接。
+2. 回到 *代码编辑器* 页，按页面提示重新安装或重试启动。
+3. 检查板端是否能联网，安装环境需要下载组件。
+4. 检查设备磁盘是否还有空间。
+5. 把页面错误提示复制给 Moss，让它继续判断。
 
 ## 排查清单
 
-1. **未安装** — Studio 自动从内置 BOS 下载 deb 包并 `dpkg -i`。板端没网或 BOS 不可达时手动装：
+| 问题 | 处理 |
+|---|---|
+| 设备离线 | 先恢复 SSH 连接 |
+| 安装包下载失败 | 检查板端网络，或稍后重试 |
+| 安装后仍打不开 | 点击重新安装，或让 Moss 根据日志排查 |
+| 页面空白 | 刷新页面，仍失败则重启 RDK Studio |
+| 磁盘不足 | 清理日志和临时文件后重试 |
 
-   ```bash
-   wget https://rdkstudio.bj.bcebos.com/code-server/code-server_版本号_arm64.deb
-   sudo dpkg -i code-server_*_arm64.deb
-   ```
+## 长期建议
 
-2. **端口冲突** — 默认 8080 常和 hobot_websocket 等冲突，改 `~/.config/code-server/config.yaml` 的 `bind-addr`：
-
-   ```yaml
-   bind-addr: 0.0.0.0:8443
-   ```
-
-   然后 `systemctl --user restart code-server`
-
-3. **空白页 / 资源 404** — 浏览器 F12 看 Network；反代下 baseUrl 没设时会 404
-
-## 永久解决
-
-- 远程 IDE 给固定密码 + 固定端口写进 `~/.config/code-server/config.yaml`
-- 板端磁盘紧张（`df -h /` 显示 80% +）时 `code-server` 启动会失败，定期清 `/var/log` 和 `/tmp`
+- 使用 RDK 官方镜像，减少缺少系统组件的情况。
+- 给项目预留足够磁盘空间。
+- 如果团队多人共用设备，约定谁在使用代码编辑器，避免同时安装或重启环境。

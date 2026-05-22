@@ -1,23 +1,47 @@
 ---
-sidebar_label: '3.11 技能（Skill）'
-title: 3.11 技能（Skill）
+sidebar_label: '3.11 技能工坊'
+title: 3.11 技能工坊
 ---
 
-# 3.11 技能（Skill）
+# 3.11 技能工坊
 
-![技能工坊界面：展示本地已安装的技能列表、来源（内置 / 社区）、触发关键词、风险等级等元数据](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/04-skill.png)
+技能工坊用于管理 Moss 和 OpenClaw 的技能。你可以把技能理解为一套可复用的操作说明：什么时候触发、要参考哪些信息、执行前要注意什么。
 
-技能（Skill）是给 AI Agent 的"操作策略"，本质是一份带 YAML frontmatter 的 SKILL.md 文件。Agent 在对话中根据 trigger 关键词命中后加载对应技能进入上下文——这是 Studio 让 Agent 学会专项能力的标准方式。
+![技能工坊界面：板端技能、对话沉淀、SkillHub、创建与链接导入](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/04-skill.png)
 
-技能机制不是 RAG（检索增强生成）。Agent 不会把所有 SKILL.md 都塞进上下文，而是只在用户消息命中 trigger 时才加载特定技能。这种"按需加载"的设计避免了上下文膨胀，让 Agent 即使安装了几十个技能也能保持决策清晰。
+## 使用顺序
 
-本节是 SKILL.md 字段、技能工作机制的完整参考。后续 4.1 与 4.2 章节中关于技能分享与获取的内容不再重复字段定义。
+| 顺序 | 你要做什么 |
+|---|---|
+| 1 | 先在 SkillHub 或本机技能里找有没有现成技能 |
+| 2 | 找到后，先预览说明和注意事项 |
+| 3 | 只在电脑端使用时，添加到本机 Moss |
+| 4 | 需要板端 OpenClaw 使用时，再部署到当前设备 |
+| 5 | 没有现成技能时，再创建或从链接生成 |
 
-## 本节包含
+## 当前技能来源
 
-- [3.11.1 SKILL.md 文件结构](./1-skill-md-structure.md)：YAML frontmatter 字段与正文模板
-- [3.11.2 内置技能与分类](./2-builtin-skills.md)：Studio 装包自带的官方技能与分类组织
-- [3.11.3 ClawHub 社区技能](./3-clawhub-community.md)：第三方技能的搜索、安装与镜像配置
-- [3.11.4 创建与导入技能](./4-create-and-import.md)：模板新建、AI 辅助生成、URL 导入流程
-- [3.11.5 触发匹配机制](./5-trigger-matching.md)：D-Moss 如何根据 trigger 加载技能
-- [3.11.6 同步至板端](./6-sync-to-board.md)：让板端 OpenClaw 也能使用同一套技能
+| 来源 | 目标 | 说明 |
+|---|---|---|
+| 设备 OpenClaw | 当前 RDK 设备 | 查看、部署、重新部署、删除设备端技能 |
+| 本机 Moss | 当前电脑的技能工作区 | 管理对话沉淀、手动创建或从市场写入的本机技能 |
+| 技能市场 / SkillHub | 远程技能库 | 搜索、预览、添加到本机或部署到设备 |
+| 创建技能 | Moss 辅助草稿 | 先生成技能草稿，你确认后再写入或部署 |
+| 从链接生成 | GitHub / NodeHub / 网页 | 让 Moss 从链接起草技能，确认后再部署 |
+
+非 RDK 主机通常不能部署 OpenClaw 技能，但仍可以把技能添加到本机 Moss 使用。
+
+## 使用前注意
+
+创建或从链接生成技能时，Moss 会先输出草稿和注意事项。写入本机或部署到设备前需要你确认。涉及设备命令、后台服务或网络访问的技能，需要先看清楚页面提示。
+
+## 同步到板端
+
+技能默认安装到电脑端，由 Moss 使用。需要让板端 OpenClaw 也使用时，在 **技能工坊 → 已安装（板端）** 选择技能并点击同步。
+
+同步只会把电脑端技能复制到当前设备；电脑端技能更新后，需要再次同步。
+
+## 继续阅读
+
+- [3.11.3 查找技能](./3-clawhub-community.md)：在技能市场 / SkillHub 搜索、预览、添加或部署技能。
+- [3.11.4 创建技能](./4-create-and-import.md)：新建技能、让 Moss 起草技能，或从链接生成技能。

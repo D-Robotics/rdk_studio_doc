@@ -5,20 +5,23 @@ title: 3.9 设备管理
 
 # 3.9 设备管理
 
-![设备连接设置页：局域网 Agent Mesh 开关、已保存的设备（含移除按钮）、添加设备入口、连接超时与开机自动连接](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/settings-device-connection.png)
+![设备连接设置页：查看连接设置、已保存设备和添加设备入口](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/settings-device-connection.png)
 
-设备管理是 RDK Studio 多设备并行的中枢。Studio 维护一份设备清单，每台已添加的设备包含连接信息、SSH 凭据、平台画像（型号、镜像、网卡列表等）、自定义备注。所有 tab 共享"当前激活设备"概念——切换设备后，远程终端、文件管理、IDE、远程桌面、AI Dock 全部自动跟随。
+设备管理是管理多台设备的地方。你可以在这里查看设备是否在线、切换当前设备、添加或移除设备、修改备注和连接信息。切换设备后，终端、文件、代码编辑器、远程桌面和 AI Dock 会跟着切换。
 
-设备清单存储位置：
+## 使用顺序
 
-| 操作系统 | 路径 |
+| 顺序 | 你要做什么 |
 |---|---|
-| Windows | `%USERPROFILE%\.rdk-studio\data\devices.json` |
-| macOS / Linux | `~/.rdk-studio/data/devices.json` |
+| 1 | 先看当前设备是否在线 |
+| 2 | 多台设备时，确认当前激活的是目标设备 |
+| 3 | 需要新增设备时，点击添加设备 |
+| 4 | 设备重刷或密码变化后，更新连接信息 |
+| 5 | 不再使用的设备，可以从本机列表移除 |
 
-## 本节包含
+添加设备后，Studio 会识别设备类型、在线状态和可用能力。设备离线时，先检查电源、网络、Host / IP 和 SSH；恢复连接后，设备列表会自动更新。
 
-- [3.9.1 设备列表与切换](./1-list-and-switch.md)：列表展示、三种切换方式、切换后的同步行为
-- [3.9.2 自动设备识别](./2-auto-detect.md)：第一次接入时的探测项与对 AI 上下文的影响
-- [3.9.3 在线状态监控](./3-online-monitoring.md)：心跳探测、离线判定、低频探测策略
-- [3.9.4 配置导入与导出](./4-import-export.md)：跨机器同步设备列表与 SSH 认证方式
+## 继续阅读
+
+- [设备列表与切换](./1-list-and-switch.md)：列表展示、切换当前设备和复制 IP。
+- [3.13.5 导入导出配置](../13-config-center/5-import-export.md)：跨机器同步设备列表与 SSH 认证方式

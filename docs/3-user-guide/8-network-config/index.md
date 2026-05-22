@@ -5,14 +5,31 @@ title: 3.8 网络配置
 
 # 3.8 网络配置
 
-![WiFi 配置对话框：可用网络列表、SSID 输入框、密码输入框，底部"取消 / 连接网络"按钮](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/wifi-config-dialog.png)
+![Wi-Fi 配置弹窗：选择网络、填写密码并查看连接状态](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/wifi-config-dialog.png)
 
-[2.4 配置网络](../../2-quick-start/4-configure-network.md) 介绍了首次接入设备时的最简 WiFi 配置流程。本节是日常多 WiFi 切换、隐藏 SSID 添加、配置持久化等高级场景的完整参考。
+网络配置用于把设备接入 Wi-Fi。第一次使用时，可以先按 [2.4 配置网络](../../2-quick-start/4-configure-network.md) 完成最简流程。
 
-底层实现依赖板端的 NetworkManager 守护进程：Studio 通过 SSH 远程让板端执行 `nmcli` 命令完成扫描、连接、持久化。配置写入板端 `/etc/NetworkManager/system-connections/`，重启板后自动重连，不需要每次手动配置。
+熟悉后，再处理切换网络、手动添加 SSID 等情况。
 
-## 本节包含
+## 使用顺序
 
-- [3.8.1 入口与状态显示](./1-entry-and-status.md)：网络配置的多个入口与顶栏 WiFi 状态实时显示
-- [3.8.2 隐藏 SSID 与高级选项](./2-hidden-ssid.md)：手动添加隐藏网络与加密类型选择
-- [3.8.3 配置持久化](./3-persistence.md)：开机自动重连机制与已保存网络的管理
+| 顺序 | 你要做什么 |
+|---|---|
+| 1 | 先通过 SSH 或 Type-C 把设备添加进列表 |
+| 2 | 打开 Wi-Fi 配置弹窗 |
+| 3 | 选择或输入 SSID，填写密码 |
+| 4 | 点击连接，并等待页面返回结果 |
+| 5 | 成功后记录新的 Wi-Fi IP，必要时用新地址重新添加 SSH 设备 |
+
+配置成功后，设备重启通常会继续连接同一个 Wi-Fi，不需要每次重新输入密码。
+
+## 常见场景
+
+- 扫描列表里找不到网络：使用 *手动添加 SSID*，按路由器或网络管理员提供的信息填写。
+- 重启后没有自动连上：先检查密码、信号、路由器是否允许新设备接入，以及 DHCP 是否正常。
+- Wi-Fi 不稳定：可以把 2.4 GHz 和 5 GHz 改成不同名称，选择更稳定的那个。
+- 长期使用设备：优先使用有线网络和固定 IP。
+
+## 继续阅读
+
+- [打开 Wi-Fi 配置](./1-entry-and-status.md)：网络配置入口、连接状态和失败排查。

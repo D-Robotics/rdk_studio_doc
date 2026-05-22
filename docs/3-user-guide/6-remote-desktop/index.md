@@ -5,15 +5,21 @@ title: 3.6 远程桌面
 
 # 3.6 远程桌面
 
-![远程桌面界面：Studio 内嵌 NoVNC，直接在工作台看到板端 GUI](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/07-remote.png)
+![远程桌面页面：连接 RDK X5 后在 Studio 内查看和操作板端桌面](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/remote-desktop-connected.png)
 
-连接成功后可在 Studio 内直接操作板端桌面：
+连接成功后，Studio 会在同一页面显示板端桌面，你可以像远程操作一台电脑一样点击、输入和查看图形界面。
 
-![板端桌面（VNC 画面）：D-Robotics 主题桌面，包含 File System / Home / Documentation / Community 等快捷入口，顶部工具栏显示时间与系统状态](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/remote-desktop-connected.png)
+远程桌面不需要你在电脑上额外安装远程桌面软件。第一次打开时，Studio 会检查设备环境；如果缺少组件，会按页面提示帮你安装。
 
-远程桌面让开发者在 RDK Studio 内直接看到板端的图形界面。基于 NoVNC（HTML5 Canvas + WebSocket 实现的浏览器版 VNC 客户端）实现，无需在 PC 上安装本地 VNC 客户端。Studio 通过 SSH 隧道安全访问板端 5900 端口，避免暴露到公网。
+## 第一次使用顺序
 
-板端的 VNC 服务通常是 `x11vnc`（接管现有 X server）、`tigervnc`（自带 X server）或 `Xvfb`（虚拟显示，板端无显示器时使用）。Studio 在第一次打开远程桌面时自动选择合适的 VNC 服务并部署。
+| 顺序 | 你要做什么 |
+|---|---|
+| 1 | 先确认设备在线，终端可以连接 |
+| 2 | 打开 **远程桌面** 页 |
+| 3 | 如果页面提示安装组件，按提示确认 |
+| 4 | 看到桌面画面后再操作鼠标和键盘 |
+| 5 | 如果卡顿，先降低画质或分辨率 |
 
 ## 典型使用场景
 
@@ -25,8 +31,10 @@ title: 3.6 远程桌面
 | HDMI 输出预览 | 板端接显示器后的实际画面 |
 | 桌面 OS 操作 | 已安装 Ubuntu Desktop 的 RDK 板 |
 
-## 本节包含
+## 使用建议
 
-- [3.6.1 启动与认证](./1-startup-auth.md)：第一次打开远程桌面时的自动安装流程与密码认证
-- [3.6.2 性能调优](./2-performance-tuning.md)：RTT 显示、画质滑块、分辨率调整等带宽控制方法
-- [3.6.3 替代方案对比](./3-alternatives.md)：NoVNC 与原生 VNC、xrdp、SSH X11 forwarding 的差异
+远程桌面对网络质量比较敏感。画面卡顿时，先降低分辨率或画质；长时间无法连接时，优先检查设备是否在线、桌面环境是否安装、远程桌面口令是否正确。
+
+## 继续阅读
+
+- [打开远程桌面](./1-startup-auth.md)：第一次打开远程桌面时的准备流程与密码认证

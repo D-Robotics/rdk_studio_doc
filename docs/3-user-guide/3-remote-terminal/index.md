@@ -1,16 +1,29 @@
 ---
-sidebar_label: '3.3 远程终端'
-title: 3.3 远程终端
+sidebar_label: '3.3 终端'
+title: 3.3 终端
 ---
 
-# 3.3 远程终端
+# 3.3 终端
 
-![远程终端界面：多标签 SSH 会话，顶栏显示当前设备身份与连接状态](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/05-terminal.png)
+![终端面板：未连接设备时提示先添加设备，连接后可创建 SSH 或本机串口会话](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/05-terminal.png)
 
-RDK Studio 内置的全功能 SSH 终端，基于 WebSocket + Socket.IO + PTY 实现。功能上等同于一个完整的 SSH 客户端（vim、htop、tmux 等基于 PTY 的工具都能正常运行），但与 Studio 其他模块共享设备状态与 Agent 上下文——这意味着 AI Agent 通过 `device_exec` 调用的命令也会在终端中实时显示，开发者可以完整看到 AI 在做什么。
+终端用于直接登录设备、运行命令和查看输出。它的使用方式接近常见 SSH 工具，但和 RDK Studio 的设备列表、Moss 工作区在同一个界面里。
 
-## 本节包含
+## 第一次使用顺序
 
-- [3.3.1 多标签 SSH 会话](./1-multi-tab-ssh.md)：每个标签独立的 SSH 会话与 PTY 进程
-- [3.3.2 断线重连机制](./2-reconnect.md)：网络抖动、设备短暂断电时的自动恢复
-- [3.3.3 串口连接](./3-serial.md)：串口与 SSH 在同一终端 tab 内的统一入口
+| 顺序 | 你要做什么 |
+|---|---|
+| 1 | 先确认设备已经通过 SSH 或 Type-C 添加成功 |
+| 2 | 打开 **终端** 页，选择当前设备 |
+| 3 | 新建 SSH 标签，等待命令提示符出现 |
+| 4 | 输入简单命令验证，例如 `pwd` 或 `uname -a` |
+| 5 | 需要看启动日志时，再新建串口连接 |
+
+当 Moss 帮你执行设备命令时，相关输出也会在工作区里显示。你可以看到 Moss 做了什么、命令是否成功，以及失败时返回了什么错误。
+
+网络短暂波动时，终端会尝试恢复连接。重连期间不要急着重复发送关键命令；如果多次失败，先检查设备电源、网络、Host / IP 和 SSH 服务。
+
+## 继续阅读
+
+- [3.3.1 SSH 终端](./1-multi-tab-ssh.md)：同时打开多个终端标签
+- [3.3.3 查看串口日志](./3-serial.md)：没有网络时查看设备启动日志

@@ -1,11 +1,12 @@
 ---
-sidebar_label: '3.11.2 内置技能与分类'
-title: 3.11.2 内置技能与分类
+sidebar_label: '3.11.2 查看内置技能'
+title: 3.11.2 查看内置技能
+unlisted: true
 ---
 
-# 3.11.2 内置技能与分类
+# 3.11.2 查看内置技能
 
-RDK Studio 装包自带一组精选官方技能，由 D-Robotics 维护，覆盖 RDK 开发中最常见的场景。开发者无需手动安装，开箱即可使用。
+RDK Studio 自带一组 D-Robotics 维护的官方技能，覆盖 RDK 开发中最常见的场景。你不需要手动安装，打开 Studio 就能使用。
 
 ## 五大分类
 
@@ -13,37 +14,39 @@ RDK Studio 装包自带一组精选官方技能，由 D-Robotics 维护，覆盖
 
 | 分类 | 用途 | 典型技能 |
 |---|---|---|
-| 核心操作（core/） | 设备诊断、硬件知识、OpenClaw 协作的底层能力 | `rdk-openclaw`、`rdk-device-ops`、`rdk-hardware`、`rdk-board-knowledge` |
-| 板型专属（boards/） | 针对特定板型的专项能力 | `rdk-x5-app`、`rdk-x5-ai-detect`、`rdk-x5-tros-runtime` |
-| 文档与搜索（docs/） | 在 RDK 官方文档与社区中检索 | `rdk-developer-docs`、`rdk-doc-optimized`、`rdk-ros`、`rdk-forum-search` |
-| 通用工具（tools/） | 跨场景通用能力 | `multi-search-engine`、`agent-browser`、`duckduckgo-search` |
-| 可选扩展（optional/） | 可选启用的高级能力 | `rdk-token-usage`、`nano-banana-pro`、`rdk-skill-authoring-guide` |
+| 核心操作 | 设备诊断、硬件知识、OpenClaw 协作的基础能力 | `rdk-openclaw`、`rdk-device-ops`、`rdk-hardware`、`rdk-board-knowledge` |
+| 板型专属 | 针对特定板型的专项功能 | `rdk-x5-app`、`rdk-x5-ai-detect`、`rdk-x5-tros-runtime` |
+| 文档与搜索 | 在 RDK 官方文档与社区中检索 | `rdk-developer-docs`、`rdk-doc-optimized`、`rdk-ros`、`rdk-forum-search` |
+| 通用工具 | 跨场景通用能力 | `multi-search-engine`、`agent-browser`、`duckduckgo-search` |
+| 可选扩展 | 可选启用的高级能力 | `rdk-token-usage`、`nano-banana-pro`、`rdk-skill-authoring-guide` |
 
-## 技能数量与查看入口
+## 在哪里查看技能
 
-仓库中实际包含 45 个 SKILL.md（按 `skills/**/SKILL.md` 文件计数）。其中 *技能工坊 → 技能中心 → catalog* 列出的是精选推荐子集，更多技能可在 ClawHub 社区搜索找到。
+进入 **技能工坊** 后，可以在板端技能、本机 Moss 技能和 SkillHub 中查看可用技能。界面里会显示技能名称、适用场景和风险提示。
 
-查看技能详情的方式：
+常用入口：
 
 | 入口 | 路径 |
 |---|---|
-| Studio 内置目录 | *技能工坊 → 技能中心 → catalog* |
-| 仓库源文件 | `<仓库根>/skills/<分类>/<技能名>/SKILL.md` |
+| Studio 内置目录 | *技能工坊 → 技能中心 / 节点中心* |
 | AI Dock 中查看当前激活的 | 输入 `/skills` 命令 |
+| SkillHub | 搜索并预览更多技能 |
 
-## 技能的实际"住所"
+## 技能保存在哪里
 
 | 位置 | 内容 |
 |---|---|
-| Studio 装包内 | 精选官方技能，约 12 条，由 `src/skill-center/manifest.json` 列出 |
-| 仓库 `skills/` 目录 | 完整官方技能集（45 个） |
-| 板端 OpenClaw 工作区 | 同步过来的技能（默认关闭自动同步） |
-| ClawHub 远程 | 社区第三方技能（按需拉取） |
+| Studio 装包内 | 开箱可用的官方技能 |
+| 本机 Moss 工作区 | 你自己创建、从对话沉淀或从 SkillHub 添加的技能 |
+| 板端 OpenClaw 工作区 | 已同步到当前 RDK 设备的技能 |
+| SkillHub | 可搜索和添加的远程技能 |
 
-D-Moss Agent 启动时会扫描本机的 `skills/**/SKILL.md` 建立索引，对话中按 trigger 关键词命中后加载到上下文。
+Moss 会根据你在对话中提到的关键词，自动选择相关技能。你也可以用 `/skills` 查看当前会话已经加载了哪些技能。
 
-## 内置技能的"为什么不全部加载"
+## 为什么技能不会全部同时生效
 
-Studio 不会把所有内置技能都注入每次对话的上下文。这是 trigger 触发匹配机制的核心设计——避免上下文膨胀、保持 Agent 决策清晰。详细的触发匹配逻辑见 [3.11.5 触发匹配机制](./5-trigger-matching.md)。
+Studio 会按你的提问加载相关技能，而不是把全部技能都放进每次对话。这样可以减少无关信息干扰，让 Moss 更容易围绕当前问题给出准确步骤。
 
-如果开发者希望某个技能"无论用户说什么都加载"，可以在 SKILL.md 的 trigger 字段中加入广义关键词（如 `rdk` `开发`），但这通常不推荐——会让技能与不相关的对话也命中，影响 Agent 的注意力分配。
+详细说明见 [设置触发词](./5-trigger-matching.md)。
+
+如果希望某个自定义技能更容易被触发，可以给它补充更贴近真实提问的 trigger 关键词。不要把关键词写得太宽泛，例如只写 `rdk` 或 `开发`，否则技能可能在无关对话中也被加载。

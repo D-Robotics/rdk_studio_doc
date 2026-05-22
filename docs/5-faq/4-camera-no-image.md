@@ -9,7 +9,7 @@ title: 5.4 USB 摄像头无图像
 
 启动 `hobot_usb_cam` 等节点后进程显示运行，但：
 
-- Web 8080 端口画面黑屏
+- 网页预览黑屏
 - `did not receive image data` 反复出现
 - 节点直接退出，报错 `code -6`、`SIGABRT`、`terminate called after throwing`
 
@@ -23,7 +23,7 @@ v4l2-ctl -d /dev/video0 --list-formats-ext
 
 看输出中是否有 `[0]: 'MJPG' (Motion-JPEG)`：
 
-- 没有 MJPG → 该摄像头只支持 YUYV，必须用低分辨率 `320x240`
+- 没有 MJPG → 该摄像头只支持 YUYV，优先降到 `320x240` 这类低分辨率
 - 有 MJPG → 修改 launch 参数 `pixel_format=MJPEG`，并选一档支持的分辨率 / 帧率
 
 ## 排查清单
@@ -45,7 +45,7 @@ v4l2-ctl -d /dev/video0 --list-formats-ext
 
 2. **切换像素格式**
 
-   UVC 摄像头默认尝试 YUYV，在板端 USB 总线带宽下经常断流，必须切换 MJPEG。在 launch 文件中设置：
+   UVC 摄像头默认尝试 YUYV，在板端 USB 带宽紧张时容易断流。优先切到 MJPEG，在 launch 文件中设置：
 
    ```python
    pixel_format='MJPEG'
@@ -54,23 +54,21 @@ v4l2-ctl -d /dev/video0 --list-formats-ext
    framerate=30
    ```
 
-3. **必须精确匹配**
+3. **分辨率和帧率要匹配**
 
-   （宽度、高度、帧率）三元组必须与 `v4l2-ctl` 输出中的某一档一字不差。跑不了就降到 `320x240@15`。
+宽度、高度、帧率最好和 `v4l2-ctl` 输出中的某一档一致。跑不了就降到 `320x240@15`。
 
-4. **换路尝试**
+4. **换设备节点尝试**
 
    如果 `/dev/video0` 崩溃，尝试 `/dev/video1` 或其他。
 
 5. **用 AI 协助**
 
-   在 AI Dock 中粘贴完整的报错日志，Studio 内置的错误模式识别会直接给出修复方法。
+   在 AI Dock 中粘贴完整的报错日志，Moss 会结合常见 RDK 摄像头问题给出修复建议。
 
-## 根本原因
+## 为什么这样处理
 
-`hobot_usb_cam` 等节点默认尝试 YUYV 格式。USB 2.0 带宽约 480 Mbps（实际可用约 320 Mbps），而 640×480 YUYV 30fps 单路就要 147 Mbps。同总线接其他 USB 设备时经常掉帧或直接 SIGABRT。
-
-MJPEG 压缩 10~20 倍，同样分辨率下数据量从 615 KB/帧 降到 150 KB/帧，整个总线轻松许多。
+`hobot_usb_cam` 等节点默认尝试 YUYV 格式时，图像数据量较大；同一条 USB 总线上还有其他设备时，更容易断流或退出。MJPEG 会压缩图像数据，同样分辨率下传输压力更小，稳定性通常更好。
 
 ## 永久解决
 
