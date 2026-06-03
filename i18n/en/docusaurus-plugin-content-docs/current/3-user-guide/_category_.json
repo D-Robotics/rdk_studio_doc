@@ -1,9 +1,9 @@
 {
-  "label": "3. User Guide",
+  "label": "3. User guide",
   "position": 3,
   "link": {
     "type": "generated-index",
     "slug": "/category/3-user-guide",
-    "description": "Feature-by-feature guidance: dashboard, AI chat, remote terminal and file manager, remote IDE, remote desktop, flashing, networking, device management, OpenClaw, skills, configuration center, and more."
+    "description": "Covers the workbench, AI Dock, terminal, files, code editor, remote desktop, flashing, network, device management, OpenClaw, skill workshop, local LLMs, and the settings center."
   }
 }

@@ -1,15 +1,16 @@
 ---
-sidebar_label: '3.15.3 Automation Scenario Examples'
-title: 3.15.3 Automation Scenario Examples
+sidebar_label: '3.16.3 Automation examples'
+title: 3.16.3 Automation examples
+unlisted: true
 ---
 
-# 3.15.3 Automation Scenario Examples
+# 3.16.3 Automation examples
 
-This section provides three typical automation scenarios demonstrating CLI usage in CI, scheduled tasks, and log analysis. Each example can be directly copied into production environments.
+Three patterns for automation: CI review, scheduled device health checks, and log summarization. Adapt paths, devices, and model settings before production use.
 
-## Running Code Reviews in CI
+## AI code review in CI
 
-Use `@dmoss/agent` to review PR diffs within a GitHub Actions workflow:
+GitHub Actions example using `@dmoss/agent` on a PR diff:
 
 ```yaml
 # .github/workflows/review.yml
@@ -44,11 +45,11 @@ jobs:
             "review the diff, focus on bugs and missing tests"
 ```
 
-The Agent analyzes the diff, points out potential bugs, and suggests adding tests. The output appears in the Action logs.
+`dmoss-agent` interprets the diff, flags likely bugs, and suggests tests—output lands in Action logs.
 
-## Scheduled On-Device Health Checks
+## Scheduled device checks
 
-Use `rdkstudio` in a crontab to periodically check the health of production devices:
+Hourly health capture with `rdkstudio`:
 
 ```bash
 # /etc/cron.d/rdk-checkin
@@ -56,12 +57,12 @@ Use `rdkstudio` in a crontab to periodically check the health of production devi
   | tee -a /var/log/rdk-checkin.log
 ```
 
-This runs hourly, appending disk usage, memory usage, and uptime information to the log file. Regularly reviewing this log helps identify abnormal trends.
+Disk, memory, and uptime append each hour—scan the log for trends.
 
-Going further, use `@dmoss/agent` to let AI automatically analyze inspection results:
+Daily AI commentary on top:
 
 ```bash
-# Trigger a full diagnostic once daily at midnight
+# midnight
 0 0 * * * bash /opt/rdk/daily-health.sh
 ```
 
@@ -73,42 +74,40 @@ set -e
 DIAGNOSIS=$(rdkstudio exec "cat /proc/meminfo; df -h; dmesg | tail -100" --device prod-x5-01)
 
 echo "$DIAGNOSIS" | dmoss-agent --pipe \
-  "Analyze the following device status output and provide a health score and recommendations" \
+  "Analyze this device output and give a health score plus recommendations" \
   > /var/log/rdk-daily-report.log
 ```
 
-## AI-Powered Log Summarization
+## Summarize logs with AI
 
-Hand systemd logs to AI for summarizing anomalies:
+Pipe service logs:
 
 ```bash
-# Execute manually or via scheduled job
 journalctl -u myservice --since="1 hour ago" \
   | dmoss-agent --pipe "summarize errors and root causes"
 ```
 
-The Agent reads the logs, extracts error events, categorizes them by time and severity, and suggests possible root causes—ideal for quickly pinpointing issues amid large volumes of logs.
+`dmoss-agent` clusters issues and suggests causes—handy when logs are huge.
 
-Extension: Let AI proactively notify you when critical issues are detected:
+Optional alert hook:
 
 ```bash
 LOG=$(journalctl -u myservice --since="5m ago" --no-pager)
 
 RESULT=$(echo "$LOG" | dmoss-agent --pipe --json \
-  "Analyze whether the logs contain severe errors. Return JSON: {severity: none|low|medium|high, summary: '...'}")
+  "Check for severe errors. Return JSON: {severity: none|low|medium|high, summary: '...'}")
 
 SEVERITY=$(echo "$RESULT" | jq -r '.severity')
 
 if [ "$SEVERITY" = "high" ]; then
-  # Trigger alert channel
   curl -X POST https://your-alert-endpoint \
     -d "$(echo "$RESULT" | jq -r '.summary')"
 fi
 ```
 
-## Deployment in Docker Images
+## Docker image
 
-Package `@dmoss/agent` into a Docker image for containerized Agent services:
+Minimal container hosting `@dmoss/agent`:
 
 ```dockerfile
 FROM node:22-alpine
@@ -121,15 +120,15 @@ WORKDIR /app
 ENTRYPOINT ["dmoss-agent"]
 ```
 
-Build and run:
+Build & run:
 
 ```bash
 docker build -t my-dmoss-agent .
 
 docker run -it --rm \
-  -e DMOSS_API_KEY=sk-xxxx \
+  -e DMOSS_API_KEY=<your-api-key> \
   -e DMOSS_MODEL=qwen3.6-plus \
-  my-dmoss-agent "Help me analyze the structure of the current working directory"
+  my-dmoss-agent "Analyze the structure of the current workspace"
 ```
 
-This approach is well-suited for deploying short-lived Agent tasks in Kubernetes or providing a consistent Agent runtime environment in CI/CD pipelines.
+Useful for standardized CI/CD or containerized debugging.

@@ -1,55 +1,37 @@
 ---
-sidebar_label: '3.3.1 Multi-tab SSH Sessions'
-title: 3.3.1 Multi-tab SSH Sessions
+sidebar_label: '3.3.1 Open SSH terminal'
+title: 3.3.1 Open SSH terminal
 ---
 
-# 3.3.1 Multi-tab SSH Sessions
+# 3.3.1 Open SSH terminal
 
-The remote terminal supports opening multiple independent SSH tabs simultaneously. Each tab maintains its own session and PTY process, operating independently without interference. This design makes common workflows—such as "running a long-running task in one tab while checking status in another"—a standard practice.
+The terminal supports multiple SSH tabs side by side, each isolated—handy when one tab runs a long job while another checks status.
 
-## Tab Independence
+## Tab isolation
 
-Each tab represents an independent SSH session, which means:
+Each tab is its own SSH session:
 
-- Environment variables, current working directory (`cd` path), and shell functions defined in Tab A do not affect Tab B.
-- Interrupting a command in Tab A (e.g., with Ctrl+C) does not impact commands running in Tab B.
-- Closing a specific tab only terminates that tab’s SSH session; any processes started on the remote device with `nohup` will continue running.
+- Env vars, working directory `cd`, and shell functions in tab A do not affect tab B
+- Ctrl+C in tab A does not interrupt what runs in tab B
+- Closing a tab closes only that SSH session; processes started with `nohup` on the board keep running
 
-## AI Integration: Transparent Agent
+## What you see when Moss runs commands
 
-Commands invoked by the AI Agent via the `device_exec` tool are also displayed in real time within the remote terminal. Specifically:
+Device commands Moss needs also stream in the terminal:
 
-| Initiator | Command Display Location |
+| Origin | Where commands show |
 |---|---|
-| Developer manually typing in the terminal | Current tab |
-| AI Agent invoking via tool | Also displayed in real time in the current tab |
+| You type in the terminal | Current tab |
+| Moss runs on the device | Same tab, live |
 
-This design ensures every action taken by the Agent remains visible to the developer, preventing scenarios where "the AI secretly performs actions behind the scenes." If the Agent executes an unintended command, the developer can immediately interrupt it using Ctrl+C directly in the terminal (and the corresponding Agent task in AI Dock will be canceled synchronously).
+You can watch exactly what Moss runs. If a command looks wrong, Ctrl+C in the terminal cancels it and the AI Dock task stays in sync.
 
-## Tab Behavior When Switching Devices
+## Switching devices and tabs
 
-When switching the currently active device, the remote terminal opens a new session for the new device in a new tab by default, while preserving tabs associated with the previous device. This prevents accidentally terminating long-running tasks when switching devices. If you don’t need to retain the old tab, you can close it manually.
+When you change the active device, Terminal usually opens the new session in a **new** tab while old tabs remain—long jobs are not torn down unexpectedly. Close old tabs manually if you do not need them.
 
-## Standard Shell Shortcuts
+## Common actions
 
-The terminal fully supports standard shell keyboard shortcuts:
-
-| Shortcut | Function |
-|---|---|
-| Ctrl + C | Interrupt current command |
-| Ctrl + D | Exit shell (close tab) |
-| Ctrl + L | Clear screen (when terminal has focus) |
-| Tab | Auto-complete |
-| ↑ / ↓ | Navigate command history |
-| Ctrl + R | Reverse search through history |
-| Ctrl + W | Delete previous word |
-| Ctrl + U | Clear entire line |
-
-
-
-## Copy and Paste
-
-| Platform | Copy | Paste |
-|---|---|---|
-| Windows / Linux | Selecting text automatically copies it (to avoid accidentally interrupting commands with Ctrl + C) | Ctrl + Shift + V or middle mouse button |
-| macOS | Select text + Cmd + C | Cmd + V |
+- Stop a running command: use the usual interrupt key in the terminal.
+- Copy output: select text, then copy per your OS habit.
+- Paste commands: read them first, then paste to avoid accidents.

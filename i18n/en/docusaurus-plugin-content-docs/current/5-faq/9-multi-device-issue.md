@@ -1,31 +1,35 @@
 ---
-sidebar_label: '5.9 Multi-device Switching Issues'
-title: 5.9 Multi-device Switching Issues
+sidebar_label: '5.9 Wrong device target'
+title: 5.9 Wrong device target
 ---
 
-# 5.9 Multi-device Switching Issues
+# 5.9 Wrong device target
 
-**Typical symptoms**: After switching devices, the AI conversation context appears to remain on the previous device / the "device list" is missing / two boards are connected simultaneously, and running `device_exec` targets the wrong device.
+## Typical symptoms
 
-## 30-Second Decision Guide
+- After switching boards, Moss still talks about the previous one.
+- Unclear which host will run a command.
+- Mixing RDK with generic Linux—RDK-only tools vanish.
 
-*Settings Panel → Device Connection* → Check the "Device List":
+## Check three UI spots
 
-- **List is empty** → Refer to "Backup & Restore" below  
-- **List is complete** → Confirm the currently active device via the device dropdown in the top-right corner of the header bar
+1. Device chip in the workbench composer.  
+2. Workspace header (alias, Host/IP, project path).  
+3. Device list online / pending / offline badges.
 
-## Troubleshooting Checklist
+## Recommended habits
 
-1. **Missing device list** — Occasionally occurs after upgrades. Go to *Settings Panel → Device Connection → Import Device Configuration* to re-import; if you never exported before, re-enter the device details manually.
+| Situation | Approach |
+|---|---|
+| New unrelated task | Start a fresh chat |
+| Must pin a board | Mention alias or Host/IP explicitly |
+| Device just added | Wait until SSH verify completes |
+| Non-RDK Linux | Don’t insist on OpenClaw or BPU tools |
 
-2. **AI conversation context mixed up** — Studio creates one session per device by default and automatically switches sessions when changing devices, but **model token usage is globally shared**. If responses clearly don’t match the current device’s context, click *New Session* at the top of the *AI Chat* panel to force open a fresh window.
+Example:
 
-3. **Commands executed on the wrong device** — Verify the "Target Device" label at the top of AI Dock. If AI automatically selected the "primary device," explicitly specify the target by saying in the AI chat: “Execute XX on device X.”
+```text
+Run on RDK-X5-bench1 only—verify Host/IP and SKU before proceeding.
+```
 
-4. **Concurrent connection limit per device** — Studio enforces a default SSH concurrency limit of 8 per device. When long-running tasks occupy all slots, other operations will queue—this is **not an error**. Simply wait for the running commands to finish.
-
-## Permanent Solutions
-
-- When multiple team members share the same board, designate a **dedicated operator** to avoid accidentally killing each other’s processes.
-- Add **clear labels** to production devices (use the "Notes" field when adding a device).
-- Regularly back up your configuration via *Settings Panel → Device Connection → Export Device Configuration*.
+Serial alone does **not** register a managed device—paste logs manually or regain SSH before expecting Moss device tools.

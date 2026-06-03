@@ -1,45 +1,59 @@
 ---
-sidebar_label: '3.1.2 Cross-Page Interaction'
-title: 3.1.2 Cross-Page Interaction
+sidebar_label: '3.1.2 Cross-page integration'
+title: 3.1.2 Cross-page integration
+unlisted: true
 ---
 
-# 3.1.2 Cross-Page Interaction
+# 3.1.2 Cross-page integration
 
-The workspace consolidates "reading data → taking action" onto a single screen: the metric bar displays status, and buttons below directly navigate to corresponding functional pages, eliminating the need for developers to constantly switch between multiple tabs.
+The Workbench puts Moss chat and the **current workspace** on one screen. The right-hand workspace shows what you can view and operate on, centered on the current project, device, directory, and diagnostic state.
 
-## Four Primary CTAs Below the Metrics
+## Live cards
 
-Below the metric bar is a row of primary action buttons covering high-frequency scenarios:
+The workspace **Live** page mainly includes these cards:
 
-| Button | Behavior |
+| Card | Behavior |
 |---|---|
-| Quick Dev (primary) | Fills the AI Dock with a "one-click development" prompt; the Agent plans development tasks based on the current device |
-| Terminal | Switches to the *Remote Terminal* tab and opens the first SSH session by default |
-| OpenClaw | Switches to the *OpenClaw* tab to view the onboard Agent status |
-| Device Health Check | Fills the AI Dock with a "device health check" prompt; the Agent automatically runs a diagnostic cycle |
+| Device management | Opens device management / add-device; when connected you can switch devices or verify SSH |
+| Project workspace settings | Set or view the current remote project directory; shows a Git change summary when there is a repo |
+| Send current context to Moss | Inserts references to project, device, directory, and change summary into the input box |
+| Diagnostic snapshot | Collect device runtime status and send it to Moss in one step |
+| Chat history | Open a past session and continue the task |
 
-## Capability Badges
+At the bottom of the Live page there are shortcuts: **History, Terminal, Files**. They switch panels inside the right workspace without leaving the Workbench.
 
-Beneath the primary CTAs is a row of "Capability Badges" indicating the installation and runtime status of workspace modules. Clicking any badge navigates directly to its corresponding tab:
+## Workspace panels
 
-| Badge | Corresponding Tab | Status Meaning |
-|---|---|---|
-| Dev Environment | *Remote Terminal* | Green dot = ready; gray dot = not started; red dot = not installed |
-| IDE | *Remote IDE* | Same as above (shows ready when code-server is installed and running) |
-| Remote Desktop | *Remote Desktop* | Same as above (shows ready when the NoVNC service is running) |
+You can switch these panels at the top of the workspace:
 
-Badge colors reflect the actual status of onboard services:  
-- A green dot means the service is ready to use immediately upon entry.  
-- A gray dot indicates the service is installed but not running (Studio will guide you through starting it after clicking).  
-- A red dot means the service isn't installed yet (Studio will guide you through installation after clicking).
+| Panel | Role |
+|---|---|
+| Live | Device, project directory, Git status, diagnostic snapshot, and history entry points |
+| Terminal | Open an SSH terminal in the current project directory |
+| Files | Browse, upload, download, and edit remote files under the current directory |
+| Changes | View remote Git status and initialize a repo when needed |
+| History | Open local session history |
+| Browser | Appears when Moss opens a webpage or preview; refresh, copy URL, or close |
 
-## Offline Diagnostic Alerts
+Terminal, Files, and Changes all use the same **current project directory**. If no directory is set, the UI will first prompt you to choose an on-board or remote directory.
 
-If an orange banner appears below the metric bar (e.g., "Incorrect or missing device password—please reconnect in Device Management"), it indicates the latest probe attempt failed. This alert distinguishes among the following scenarios:
+## Integration with other pages
 
-- Authentication failure (wrong password or missing SSH key)
-- Response timeout (device offline or network congestion)
-- Connection loss (physical disconnection of Ethernet/Wi-Fi)
-- Other data collection failures
+**Flashing, Remote desktop, Code editor, On-board Agent, Local LLM, and Skill workshop** in the left main nav are separate pages. Moss or workspace panels can take you there, for example:
 
-If the overall network is functioning normally but the system reports "offline," AI chat and software-installation-dependent features will be temporarily unavailable. However, basic workspace information will still be loaded from cache.
+- Open **Flashing** when you need to reflash the system.
+- Open **Remote desktop** when you need a graphical desktop.
+- Open **Code editor** for project-level development.
+- Open **On-board Agent** to deploy or fix OpenClaw.
+- Open **Local LLM** when you need local Ollama on this machine.
+
+## Offline and read-only states
+
+The workspace header shows the current device, directory, and executable status:
+
+| State | Meaning |
+|---|---|
+| SSH verified / executable | Terminal, Files, Changes, and Moss device operations are available |
+| Offline snapshot / read-only | Existing info and history are viewable; device operations wait for reconnect |
+| On-board directory not set | Terminal, Files, and Changes first prompt to pick a directory |
+| No device selected | Moss can plan and answer knowledge questions; execution needs a device added first |

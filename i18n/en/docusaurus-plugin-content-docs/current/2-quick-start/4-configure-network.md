@@ -1,48 +1,52 @@
+﻿---
+sidebar_label: '2.4 Configure network'
+title: 2.4 Configure network
 ---
-sidebar_label: '2.4 Configure Network'
-title: 2.4 Configure Network
----
 
-# 2.4 Configure Network
+# 2.4 Configure network
 
-Configure Wi-Fi connectivity for the board so it can independently access the network. After configuration, even if the Type-C data cable or Ethernet cable is unplugged, you can still remotely access the board over the wireless network.
+![Wi-Fi setup dialog: scan networks, enter password, and connect the device to Wi-Fi](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/wifi-config-dialog.png)
 
-Under the hood, Studio uses SSH to remotely execute `nmcli` (NetworkManager command-line tool) on the board to scan for and connect to Wi-Fi networks. The configuration is saved to `/etc/NetworkManager/system-connections/` on the board, enabling automatic reconnection after reboot—no need to manually reconnect each time.
+Wi-Fi setup usually appears **after device verification succeeds**. RDK Studio reuses the SSH session to scan Wi-Fi on the device, join a network, and report whether it is online.
 
-## Configure via Setup Wizard
+## When you need it
 
-After completing [2.3 Connect Device](./3-connect-device/index.md), the setup wizard automatically navigates to the Wi-Fi configuration page:
+| Scenario | Suggestion |
+|---|---|
+| Connected via Type-C direct | Configure Wi-Fi so you can unplug and use remotely |
+| Ethernet SSH | Optional; skip if the device stays on wired LAN |
+| Added via Wi-Fi IP | Likely already online; you can finish quickly |
+| Non-RDK Linux | Depends on OS and wireless driver support |
 
-1. Click **Scan** and wait for Studio to list available Wi-Fi networks nearby.
-2. Select your target SSID from the list.
-3. Enter the Wi-Fi password (for hidden SSIDs, check **Hidden Network** and manually enter the SSID name).
-4. Click **Connect** and wait for Studio to confirm successful connection.
+## Wi-Fi flow after adding a device
 
-If you're only using Type-C or Ethernet connectivity, you may skip Wi-Fi configuration—this step prepares for future wireless access and won't affect your current development workflow.
+1. RDK Studio reads current Wi-Fi state on the device.
+2. If already connected, the current SSID is shown; you can complete.
+3. If not, pick or enter SSID and password.
+4. Click Connect and wait for the device to join and return status.
+5. After success, keep using the current session or add another SSH entry with the new Wi-Fi IP.
 
-## Configure via AI
+Hidden SSIDs, weak signal, bad password, or missing drivers surface in the UI. You can paste the message to Moss for triage.
 
-You can also let the AI Agent handle Wi-Fi setup. In the AI Dock, describe: "Connect the board to the office_5g Wi-Fi network with password xxxx." The Agent will perform scanning, connecting, IP verification, and other steps, then inform you of the board's new Wi-Fi IP address upon completion.
+## PC loses internet after Type-C direct
 
-If the connection fails (due to incorrect password, weak signal, hidden SSID, etc.), the AI will proactively indicate the specific reason.
+Some OSes prefer the USB NIC as the default route, so Wi-Fi looks up but the internet is unreachable. RDK Studio warns about this during add-device.
 
-## Next Steps After Successful Connection
+Mitigations:
 
-After successfully connecting to Wi-Fi, we recommend **adding a new device** in your device list using the board’s Wi-Fi IP address, labeled as "Board Name (Wi-Fi)." This way, after the next boot-up, you can directly select the Wi-Fi-connected device without rescanning or reconfiguring.
+- Windows: Follow the in-app hint to raise Wi-Fi priority or remove default gateway/DNS on the USB NIC.
+- macOS (Apple Silicon): In service order, place Wi-Fi above the board’s USB Ethernet.
 
+## Troubleshoot with Moss
+
+If scan fails, join fails, or no IP appears, paste the UI message to Moss:
+
+```text
+This device failed to connect to Wi-Fi; the UI says DHCP timed out while obtaining an IP—help me figure out what to check next.
 ```
-Original device: RDK-X5-Workstation1 (Type-C, 192.168.128.10)
-New entry: RDK-X5-Workstation1-WiFi (SSH, 192.168.1.45)
-```
 
-You can later switch between these two devices via the top toolbar: use Type-C when at your workstation, and Wi-Fi when mobile.
+Moss will suggest next steps from device state, logs, and common network issues. Still enter SSID/password and start the join from the Wi-Fi dialog.
 
-## Detailed Operations and Advanced Usage
+## Next steps
 
-This section covers only the minimal steps needed to get up and running quickly. For advanced usage, please refer to [3.8 Network Configuration](../3-user-guide/8-network-config/index.md):
-
-- Switching between multiple Wi-Fi networks  
-- Manually adding hidden SSIDs  
-- Persistent configuration and auto-reconnect on boot  
-- Deleting saved Wi-Fi networks  
-- Forcing priority between Ethernet and Wi-Fi
+When the device is online, go to [2.5 Connect an AI model](./5-configure-ai-model.md), or ask Moss on the workbench to check device health.

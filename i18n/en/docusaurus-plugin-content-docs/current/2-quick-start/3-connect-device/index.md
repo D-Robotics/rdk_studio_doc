@@ -1,51 +1,61 @@
+﻿---
+sidebar_label: '2.3 Connect a device'
+title: 2.3 Connect a device
 ---
-sidebar_label: '2.3 Connecting Devices'
-title: 2.3 Connecting Devices
----
 
-# 2.3 Connecting Devices
+# 2.3 Connect a device
 
-RDK Studio provides three methods to add a board to the device list. This section compares these methods and offers recommendations; detailed step-by-step instructions are provided in the three corresponding subsections.
+Add-device flows use three entry points: **SSH device**, **RDK Type-C direct**, and **local serial log**.
 
-![Onboarding Wizard · Step 3 Connect Device: Three side-by-side cards representing SSH over network, FlashConnect, and USB serial connection methods](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/onboarding-3-connect.png)
+Only SSH and Type-C save a device to the list; serial opens a local debug terminal only and is not stored as a device.
 
-## Comparison of the Three Connection Methods
+![Add device dialog: SSH device, RDK Type-C direct, and local serial log—the three entry points](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/add-device-dialog.png)
 
-| Method | Recommended Scenario | Advantages | Limitations |
+## Compare the three
+
+| Entry | Best for | Saved as device? | What you get next |
 |---|---|---|---|
-| Type-C Connection | Board and PC are on the same desk, without a router | Ready to use within 5 seconds after plugging in—no IP configuration required | Only supported on RDK X5 |
-| SSH Connection | Board is already connected to a local network (via Ethernet or Wi-Fi) | Universal, stable, usable across rooms | Requires knowing the board's IP address |
-| Serial Connection | Board fails to boot or has network issues | Does not depend on successful system startup on the board | Terminal-only—no file transfer, remote desktop, or IDE support |
+| SSH device | You know Host / IP and remote login works | Yes | Moss, terminal, files, code editor, remote desktop, workspace |
+| RDK Type-C direct | RDK X5 / S100 next to the PC, no LAN IP | Yes | USB NIC auto-config, then same as SSH |
+| Local serial log | Boot failure, no network, need boot log | No | Serial terminal only—no files, Moss tools, or OpenClaw |
 
-## Recommendations
+SSH is the generic path for RDK, generic Linux, Jetson, Raspberry Pi, Rockchip, and more. RDK-only features show or hide based on detected board type.
 
-| Your Hardware and Board Status | Recommended Method |
+## How to choose
+
+| Your situation | Recommended entry |
 |---|---|
-| RDK X5 + full-featured Type-C data cable | [Type-C Connection](./1-typec-flash.md) (fastest) |
-| RDK X3 or RDK S100 | [SSH Connection](./2-ssh.md) (first connect the board to your router, then obtain its IP from the router’s admin interface or via network scanning) |
-| Board system corrupted or SSH inaccessible | [Serial Connection](./3-serial.md) (for emergency recovery) |
+| Device pingable or IP known | [2.3.2 Add device via SSH](./2-ssh.md) |
+| RDK X5 / S100 plugged into the PC | [2.3.1 Type-C direct](./1-typec-flash.md) |
+| Boot failure, no network, need logs | [2.3.3 Serial log](./3-serial.md) |
+| Non-RDK Linux host | [2.3.2 Add device via SSH](./2-ssh.md) |
 
-## Automatic Actions After Successful Connection
+## After a device is saved
 
-Regardless of the method used, once a board is added to Studio, the following actions are automatically performed:
+RDK Studio will:
 
-- The "Current Device" dropdown in the top toolbar displays the newly added device and automatically activates it as the current target for operations.
-- *Remote Terminal / File Manager / IDE / Remote Desktop* automatically point to the currently active device.
-- AI chat switches to the session associated with that specific device (each device has an independent session).
-- Background device probing runs automatically to identify the board model, image version, CPU/RAM specs, disk info, TROS status, etc.
+- Add it to the device list and allow it as the active workbench target.
+- Verify SSH reachability instead of trusting cache alone.
+- Classify the host (RDK, generic Linux, Jetson, Raspberry Pi, Rockchip, etc.).
+- Let Moss use the current device, project path, and workspace context.
+- Share the same connection across terminal, files, code editor, and remote desktop.
 
-For more details on device identification and advanced multi-device switching workflows, see [3.9 Device Management](../../3-user-guide/9-device-management/index.md).
+For RDK boards you can continue with Wi-Fi, OpenClaw deploy, RDK hardware context, and flashing features.
 
-## Connecting via AI
+## Wi-Fi step
 
-You can also let the AI Agent handle the connection for you. Simply describe your request in the AI Dock, for example:
+After device verification, a dialog may continue to Wi-Fi setup. It reuses the SSH session to scan and join wireless networks on the device.
 
-- "Scan the RDK board connected via USB"—Agent initiates the Type-C connection workflow.
-- "My board is at 192.168.1.123 with root/root credentials—please add it to my device list"—Agent initiates the SSH connection workflow.
-- "The board failed to boot—help me open a serial console to view the boot logs"—Agent initiates the serial connection workflow.
+Skip if the device is already online or you only need Ethernet/Type-C for now.
 
-The AI Agent will automatically select the appropriate method, configure parameters, establish the connection, and add the board to your device list.
+Details: [2.4 Configure network](../4-configure-network.md).
 
-## Next Steps
+## Ask Moss which entry to use
 
-After successfully connecting your board, we recommend configuring Wi-Fi ([2.4 Configure Network](../4-configure-network.md)) so you can later disconnect the data or Ethernet cable and access the board remotely over wireless network.
+You can describe your goal on the workbench:
+
+- “I know the IP is 192.168.1.23—which add flow should I use?”
+- “I plugged RDK X5 Type-C—what’s next?”
+- “Board won’t boot—how do I read serial logs?”
+
+Moss will point you to the right UI. Enter Host / IP, username, and password in the add-device dialog—do not paste secrets into chat. Actions that need OS permission, device writes, or risky operations will ask for confirmation in the UI.

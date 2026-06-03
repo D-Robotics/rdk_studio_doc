@@ -1,70 +1,38 @@
+﻿---
+sidebar_label: '3.11.3 Find skills'
+title: 3.11.3 Find skills
 ---
-sidebar_label: '3.11.3 ClawHub Community Skills'
-title: 3.11.3 ClawHub Community Skills
----
 
-# 3.11.3 ClawHub Community Skills
+# 3.11.3 Find skills
 
-![Skill Marketplace (SkillHub): Left-side toggle between SkillHub / On-device skills, top search bar, and skill detail preview on the right](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/skill-marketplace.png)
+The skill marketplace / SkillHub is your online doorway to reusable automation. Skill Workshop exposes search, preview, add-to-local Moss, deploy to OpenClaw on the device, plus batch actions.
 
-ClawHub is the registry for SKILL.md files, analogous to npm Registry for npm packages or PyPI for Python packages. RDK Studio uses the embedded ClawHub client within the *Skill Workshop* to search, preview, and install skills published by third-party developers.
+![Skill marketplace: search, taxonomy, preview, add locally, deploy to device](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/skill-marketplace.png)
 
-ClawHub shares the same underlying registry data as SkillHub—they are functionally identical, differing only in name.
+## Two install destinations
 
-## Default Configuration
+| Action | Writes to | When to choose |
+|---|---|---|
+| Add locally | Moss skill folder on this PC | No hardware connected, non-RDK host, desktop-only workflows |
+| Deploy to device | OpenClaw workspace on the chosen RDK | Board Agent must invoke the skill |
 
-| Item | Default Value |
-|---|---|
-| Registry URL | Domestic mirror (for faster access) |
-| Search Cache | 24 hours |
-| Installation Directory | Same location as local skills: `<repo-root>/skills/community/<skill-name>/` |
+Lists show **Added** and **Deployed** states. Non-RDK hosts warn that OpenClaw deploy is unavailable, yet local skills still operate.
 
-If the default mirror is unreachable, you can modify `CLAWHUB_REGISTRY` to another mirror or the official source in *Settings → AI Engine*.
+## Search and preview
 
-## Search and Preview
+Filter by keywords, taxonomy, installation state. The preview spells out purpose, targeting, risks—before deploy validate:
 
-| Action | Path |
-|---|---|
-| Keyword Search | *Skill Workshop → Skill Center → ClawHub Community* → Top search bar |
-| Browse by Category | Left-side category navigation |
-| View Skill Details | Click skill name → Full SKILL.md content and frontmatter displayed on the right |
+- Will it execute device commands, write files, or start background workloads?
+- Does it genuinely require RDK hardware?
+- Do risk tags match how you intend to use it?
+- Do keywords cover phrases you naturally type?
 
-The detail page shows:
+## Batch actions
 
-- Complete skill description and trigger
-- Risk level and permission requirements
-- Maintainer info (username, license, version notes)
-- Last update time and download count
-- Rendered view of the SKILL.md body
+Bulk add locally or deploy to multiple skills. Failures bubble per row with remediation hints.
 
-## One-click Installation
+## Generate from links
 
-| Action | Behavior |
-|---|---|
-| Install Locally | Downloads SKILL.md to local path `skills/community/<skill-name>/`; immediately available to the PC-side D-Moss Agent |
-| Deploy to Device | Syncs to the device-side OpenClaw workspace via OpenClaw; usable by the on-device Agent |
-| Batch Deployment | Select multiple skills → *Batch Install*; installs sequentially |
+For GitHub, NodeHub, or normal pages, choose **generate from URL**. Moss pauses after drafting; approve content, then add locally or deploy.
 
-After installation, Studio automatically scans the skill directory—new skills become immediately available without restarting the client.
-
-## Uninstallation
-
-| Entry Point | Action |
-|---|---|
-| *Skill Workshop → Installed* List | Select skill → *Uninstall* |
-| Direct File Deletion | Delete the `skills/community/<skill-name>/` directory, then refresh the *Installed* list |
-
-Uninstallation only removes the SKILL.md file and does not affect other skills or Agent behavior.
-
-## Handling Empty Search Results
-
-If a ClawHub search returns no results:
-
-1. Verify network connectivity to the ClawHub domain (if the default mirror is unreachable, try switching mirrors)
-2. Use broader keywords (e.g., replace "BPU debugging" with "BPU")
-3. Check if filters are active (e.g., device type, category)
-4. The skill may genuinely not exist on ClawHub—consider creating one yourself; see [3.11.4 Creating and Importing Skills](./4-create-and-import.md)
-
-## Let AI Help You Find Skills
-
-Describe your need in the AI Dock: *"Is there a skill that helps me debug a USB camera?"* The Agent will search both the built-in catalog and ClawHub, present a few candidates with brief capability summaries, and install the selected skill upon your confirmation.
+Never bypass draft review—silent writes break Skill Workshop safeguards.

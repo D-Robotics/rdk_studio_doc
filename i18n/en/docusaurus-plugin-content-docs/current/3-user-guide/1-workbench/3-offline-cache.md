@@ -1,39 +1,33 @@
 ---
-sidebar_label: '3.1.3 Offline Caching Mechanism'
-title: 3.1.3 Offline Caching Mechanism
+sidebar_label: '3.1.3 Offline cache'
+title: 3.1.3 Offline cache
+unlisted: true
 ---
 
-# 3.1.3 Offline Caching Mechanism
+# 3.1.3 Offline cache
 
-When the device goes offline or experiences network instability, the workspace won’t keep spinning indefinitely or display a blank screen. Instead, it switches to a low-frequency heartbeat mode and displays cached data. This mechanism ensures developers retain awareness of the device’s state even during temporary connectivity loss.
+When the device is offline or the network is unstable, the Workbench does not go blank—it shows the last fetched state and marks the device offline. That way you can still gauge what was happening before the device dropped.
 
-## Offline Detection and Refresh Strategy
+## What you see when offline
 
-The diagnostic polling interval of the workspace is controlled by `DEVICE_POLL_PERIOD_MS` (**15 seconds** in the current version). In cases of network jitter or SSH unavailability, Studio automatically retries within the same polling cycle:
+| Page state | Meaning |
+|---|---|
+| Online | Data comes live from the device |
+| Slow response or connection failure | The page explains why and keeps trying to recover |
+| Offline | Offline badge and the last known state |
 
-| Device Status | Refresh Behavior | Workspace Display |
-|---|---|---|
-| Online | Diagnostics and heartbeat every 15 seconds | Real-time data |
-| Timeout / Authentication Failure | Automatic retry in the next cycle | Orange diagnostic bar indicating the specific reason |
-| Consecutive Failures (Offline) | Continues probing at the same interval, waiting for recovery | "Offline" label at the top + cached data |
-| Network Restored | Immediately refreshes upon successful detection in the next cycle | Orange bar disappears; data becomes real-time |
+After the device is back online, the Workbench updates automatically. You usually do not need to refresh manually.
 
-Once the device comes back online, Studio instantly updates all metrics without requiring manual refresh.
+## How to interpret offline data
 
-## Semantics of Cached Data
+Data shown offline is not live—use it only as reference:
 
-Cached data represents a snapshot of metrics collected during the device’s last online session—it is not real-time data. This means:
+- Check any timestamp on the page to see how old the data is.
+- Do not use offline data to judge current temperature, load, or task state.
+- To keep running device actions, restore the network or reconnect the device first.
 
-- The workspace displays a timestamp for the data (e.g., "State from 2 minutes ago")
-- Cached data helps developers recall "what the device’s state was before disconnection," but should not be used for real-time decision-making
-- For critical scenarios (e.g., temperature monitoring), we recommend combining with [3.10 OpenClaw](../10-openclaw/index.md) to run a persistent agent on the device, enabling continued monitoring even during network outages
+## Workbench with multiple devices
 
-## Workspace with Multiple Devices
+The Workbench only shows the **active** device. To switch devices, use the device dropdown at the top, or pick another device under *Configuration center → Device connection*.
 
-The workspace only displays the currently active device. Methods to switch devices:
-
-- Device dropdown in the top-left corner → select another device  
-- *Device Management* tab → click the *Quick Activate* button in the list  
-- Say directly to AI Dock: "Switch to RDK-X5-Mobile"
-
-After switching, the workspace fully reloads the new device’s data (takes approximately 2–5 seconds) and will not show cached data from the previously selected device.
+After switching, the Workbench reloads data for that device and does not keep the previous device’s state.

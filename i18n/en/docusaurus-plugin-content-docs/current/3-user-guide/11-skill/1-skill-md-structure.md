@@ -1,18 +1,19 @@
 ---
-sidebar_label: '3.11.1 SKILL.md File Structure'
-title: 3.11.1 SKILL.md File Structure
+sidebar_label: '3.11.1 How to author SKILL.md'
+title: 3.11.1 How to author SKILL.md
+unlisted: true
 ---
 
-# 3.11.1 SKILL.md File Structure
+# 3.11.1 How to author SKILL.md
 
-SKILL.md consists of two parts: YAML frontmatter (structured metadata) and Markdown body (detailed operational steps). Both parts are essential.
+`SKILL.md` has two parts: frontmatter and body instructions. Frontmatter tells Moss what the skill is called, when to use it, and how risky it is; the body explains how to execute it.
 
-## Full Template
+## Full template
 
 ```markdown
 ---
 name: my-skill
-description: A one-sentence summary of what it does
+description: One-line explanation of purpose
 version: 1.0.0
 trigger: keyword1,keyword2,keyword3
 risk: low
@@ -25,57 +26,57 @@ scheduler_template: none
 category: Custom
 ---
 
-# Skill Title
+# Skill title
 
-## Applicable Scenarios  
-(When to use this skill)
+## When to use
+(Scenarios where this skill applies)
 
-## Execution Workflow  
-(Step 1 → Step 2 → ...)
+## Execution flow
+(Step 1 → step 2 → ...)
 
-## Tool Mapping  
-(Which Studio tools or board-side commands are used)
+## Tool mapping
+(Which Studio tools or board commands to use)
 
-## Common Issues  
-(Known pitfalls and workarounds)
+## FAQ / pitfalls
+(Known issues and workarounds)
 ```
 
-YAML frontmatter is a metadata block enclosed by `---` at the top of a Markdown file. This format was originally introduced by static site generators like Jekyll and Hugo. Its key characteristics include structured fields, human readability, and machine readability.
+The YAML block bounded by `---` is frontmatter—you only need to fill it in using the template.
 
-## Key Field Descriptions
+## Key fields
 
-| Field | Required | Description |
+| Field | Required | Meaning |
 |---|---|---|
-| `name` | Yes | Unique skill ID (in slug format); used by AI to reference the skill |
-| `description` | Yes | One-sentence description—**the most critical factor for AI when selecting a skill** |
-| `version` | No | Skill version number, following semantic versioning (e.g., 1.0.0) |
-| `trigger` | Yes | List of trigger keywords (comma-separated); skills matching these keywords are prioritized for loading |
-| `risk` | Yes | Risk level: `low` / `medium` / `high` |
-| `permissions` | Yes | Required tool permissions (e.g., `device_exec`, `network`) |
-| `delegate_preference` | No | Preferred execution location: `local` (PC) / `board` (on-device) / `hybrid` |
-| `approval_level` | No | Whether approval is required before execution: `none` / `prompt` / `always` |
-| `requires_board` | No | Whether a board-side device is mandatory for using this skill |
-| `category` | No | Category tag used for grouping in the UI |
+| `name` | Yes | Unique skill name; prefer short English or romanized identifiers |
+| `description` | Yes | One sentence—**the strongest signal Moss uses to choose the skill** |
+| `version` | No | Semantic version (for example `1.0.0`) |
+| `trigger` | Yes | Comma-separated keywords; boosts priority when matched |
+| `risk` | Yes | `low` / `medium` / `high` |
+| `permissions` | Yes | Tools the skill expects to call |
+| `delegate_preference` | No | `local` (PC), `board`, or `hybrid` |
+| `approval_level` | No | Whether user confirmation runs before execution |
+| `requires_board` | No | Must a board-attached session exist |
+| `category` | Optional | Groups skills in UI |
 
-## Impact of the `risk` Field
+## How `risk` changes behavior
 
-| Value | Agent Behavior |
+| Value | Moss behavior |
 |---|---|
-| `low` | Executes the skill automatically without interrupting the user |
-| `medium` | Prompts the developer in the conversation about what will be executed before proceeding |
-| `high` | Requires explicit developer confirmation (clicking *Allow*) before continuing |
+| `low` | Lightweight tasks—fewer confirmation prompts |
+| `medium` | Call out planned actions before running |
+| `high` | Requires an explicit **Allow** click before continuing |
 
-When designing skills, never underestimate the risk level—err on the side of caution. Operations involving board-side system configuration changes, file deletion, service restarts, etc., should be set to `medium` or `high`.
+Prefer conservative labeling. Board tuning, deletes, restarts deserve `medium` or `high`.
 
-## Recommended Body Structure
+## Recommended body outlines
 
-Although the Markdown body allows flexible formatting, we recommend the following structure to enhance AI comprehension:
+Markdown bodies are flexible, but structuring helps Moss parse reliably:
 
 | Section | Content |
 |---|---|
-| Applicable Scenarios | When to use this skill (complements the `description`) |
-| Execution Workflow | Step-by-step operational instructions (numbered list) |
-| Tool Mapping | Studio tools and board-side commands used |
-| Common Issues | Known pitfalls, error handling, and workarounds |
+| When to use | Complements `description` with timing cues |
+| Execution flow | Numbered procedural steps |
+| Tool mapping | Studio tools and shell snippets |
+| FAQ / pitfalls | Errors, remediation, escapes |
 
-Avoid large blocks of prose. AI parsing is more reliable with structured, step-by-step lists.
+Avoid long prose blobs—numbered steps parse more reliably.

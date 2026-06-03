@@ -1,62 +1,48 @@
 ---
-sidebar_label: '3.11.6 Sync to Board'
-title: 3.11.6 Sync to Board
+sidebar_label: '3.11.6 Sync to device'
+title: 3.11.6 Sync to device
+unlisted: true
 ---
 
-# 3.11.6 Sync to Board
+# 3.11.6 Sync to device
 
-Skills are installed on the PC by default and loaded by D-Moss Agent. If you want the always-on OpenClaw Agent on the board to use these skills as well (e.g., for long-term monitoring, offline autonomous operation, or message processing in channels), you need to sync the skills to the board's OpenClaw workspace.
+Skills default to the PC for Moss.
 
-## Sync Process
+To let board OpenClaw handle them—on-board chat, device-side messaging, hardware-local automation—mirror them into the OpenClaw workspace.
+
+## Sync flow
 
 | Step | Action |
 |---|---|
-| 1 | *Skill Workshop → Installed* (Board) |
-| 2 | Select the skills you want to sync (or select all) |
-| 3 | Click the *Sync Skills* button |
-| 4 | Studio transfers the selected skills to the board’s OpenClaw workspace via an SSH tunnel |
-| 5 | The board’s OpenClaw rescans the skills directory, and the new skills become immediately available |
+| 1 | *Skill Workshop → Installed* (board scope) |
+| 2 | Select skills (multi-select OK) |
+| 3 | Press *Sync skills* |
+| 4 | Wait until the progress banner clears |
 
-Syncing is unidirectional: PC → Board. If the board’s skills fall out of sync with the PC, you must manually trigger syncing again.
+Synchronization pushes PC copies to the attached board—after edits locally, rerun sync intentionally.
 
-## Auto-sync Disabled by Default
+## Auto-sync stays off by default
 
-Studio disables "automatically sync newly installed PC skills to the board" by default. Reasons include:
+Studio disables “Automatically sync newly installed PC skills to the board.” Rationale:
 
-- Initial sync of all 45 built-in skills takes 1–3 minutes  
-- Not all skills need to run on the board (e.g., skills designed exclusively for the PC)  
-- Auto-sync could consume bandwidth without the user’s awareness  
+- Many skills remain desktop-only (docs review, repos on disk)
+- Background sync wastes bandwidth unnoticed
 
-If your team workflow truly requires "PC and board to always stay in sync," you can enable auto-sync in *OpenClaw → Configuration*.
+Teams needing parity should agree on cadence or run manual batch sync periodically.
 
-## When Sync Is Needed
+## When sync matters
 
-| Scenario | Required? |
+| Scenario | Need sync |
 |---|---|
-| Board used only as an SSH remote target, with PC always online | No—skills loaded by PC-side D-Moss suffice |
-| Board runs a persistent Agent handling long-term monitoring tasks | Yes—sync monitoring-related skills to the board |
-| WeChat / Feishu Bot deployed on the board | Yes—sync message-processing skills to the board |
-| Multi-board collaboration requiring identical capabilities on each board | Yes—sync skills to every board |
+| Board is only SSH target; Moss on PC suffices | Usually no |
+| Board Agent invokes the capability | Yes—push related skills |
+| WeChat/Feishu bots pinned to hardware | Yes—include handler skills |
+| Same skill spans multiple robots | Repeat per hardware |
 
-## Viewing Sync Progress
+## Progress and failures
 
-Sync progress is displayed in real time under the *Logs* sub-tab in the OpenClaw tab:
+Status chips live directly in Skill Workshop. On failure validate device uptime and OpenClaw health, retry sync afterward.
 
-```
-[14:23:15] Starting sync of 12 skills to board
-[14:23:16] Pushing rdk-openclaw → /home/root/openclaw/skills/rdk-openclaw/
-[14:23:17] Pushing rdk-device-ops → ...
-...
-[14:23:45] Sync completed; board’s OpenClaw reloading skill index
-```
+## Uninstall from board
 
-If syncing fails midway (e.g., due to network disconnection), you can re-trigger it—the already synced skills will be skipped, and only missing ones will be resent.
-
-## Uninstalling Skills from the Board
-
-| Access Point | Action |
-|---|---|
-| Within Studio | *Skill Workshop → Installed* (Board) → Select → *Uninstall from Board* |
-| Board Command Line | SSH into the board and delete the `~/openclaw/skills/<skill-name>/` directory |
-
-Uninstalling from the board removes only the board’s local copy and does not affect the identically named skill on the PC.
+Under *Skill Workshop → Installed* (board), pick **Remove from board**. That wipes the device copy—not the PC originals.

@@ -1,65 +1,64 @@
 ---
-sidebar_label: '3.13.3 Security Policies and Approvals'
-title: 3.13.3 Security Policies and Approvals
+sidebar_label: '3.14.3 Confirm high-risk actions'
+title: 3.14.3 Confirm high-risk actions
+unlisted: true
 ---
 
-# 3.13.3 Security Policies and Approvals
+# 3.14.3 Confirm high-risk actions
 
-External channels (Feishu, WeChat) apply stricter approval policies by default compared to those within Studio. This section describes these policies and best practices.
+Feishu and WeChat are not in the main Studio window, so targets and blast radius need extra care. High‑risk actions therefore require confirmation in that channel again.
 
-## Secondary Confirmation for High-Risk Commands
+## Second confirmation for high-risk commands
 
-High-risk operations triggered via external channels require users to confirm a second time within the channel itself (not via a Studio pop-up):
+When triggered via an external channel, high‑risk operations require a second confirmation **in the channel** (no Studio popup):
 
-| Trigger Command | Behavior |
+| Trigger | Behavior |
 |---|---|
-| `rm -rf` | Bot replies: "About to delete X. Confirm? Please reply `/yes` to proceed." |
-| `kill` critical processes | Same as above |
-| `dd` disk writes | Same as above |
-| Modifying systemd service configurations | Same as above |
-| Deleting large numbers of files | Same as above |
+| Deleting many files | Bot replies “About to delete X. Confirm?” |
+| Stopping critical processes | Same |
+| Disk writes | Same |
+| Changing system service config | Same |
+| Sending or exporting sensitive files | Same |
 
-The command executes only after the user replies with `/yes` (on Feishu) or `确认` ("Confirm" on WeChat). Any other reply or timeout (default: 60 seconds) cancels execution.
+Execution proceeds only after you confirm as prompted; anything else or a timeout cancels.
 
-This mechanism mitigates security risks arising from the combination of "malicious insiders + external Bot access"—even if the Bot is misused, destructive commands cannot be executed directly.
+This reduces misuse from external channels—even if someone mis-triggers the bot, destructive steps do not run immediately.
 
-## Multi-Channel Approval Coordination
+## Confirmation by entry point
 
-| Trigger Method | Approval Requirement |
+| How it was triggered | Approval |
 |---|---|
-| Studio desktop client | Determined by the `risk` field (low: auto-execute; medium: prompt; high: mandatory confirmation) |
-| External channels (Feishu / WeChat) | All high-risk commands require in-channel secondary confirmation, regardless of the `risk` field |
-| Autonomy (OpenClaw autonomous tasks) | Only executes operations explicitly permitted in the OpenClaw configuration |
+| Studio desktop client | Follow on-page prompts |
+| External channel (Feishu / WeChat) | High‑risk commands always need in-channel confirmation |
+| On-device agent tasks | Only tasks you already allow on device |
 
-## Security Best Practices
+## Recommendations
 
-| Practice | Explanation |
+| Tip | Why |
 |---|---|
-| Use allowlists or approval mode in production environments | Do not allow arbitrary Feishu users to connect to the Bot |
-| Never commit App Secrets to Git | Not even in private repositories—leakage can be extremely costly |
-| Deny high-risk skills by default in multi-channel scenarios | Grant explicit authorization only to specific allowlisted users when necessary |
-| Regularly audit paired clients | Remove clients belonging to former employees or unused accounts |
-| Monitor Bot invocation logs | Unusually high-frequency calls may indicate abuse or compromise |
+| Use allowlist or approval mode in production | Do not let unrelated people use the bot freely |
+| Never commit app secrets to a repo | Even private repos—leak cost is huge |
+| High‑risk skills may be denied in message channels by default | Grant narrowly to specific allowlisted users if needed |
+| Periodically audit paired clients | Remove unused or departed colleagues |
+| Monitor bot logs | Unusual volume may mean abuse or compromise |
 
-## Disabling Channels
+## Turning off a channel
 
-When discontinuing use of a channel:
+When you no longer use a channel:
 
-| Channel | Disable Method |
+| Channel | How to stop |
 |---|---|
-| Feishu | Go to *Configuration Center → Multi-Channel → Feishu → Channel Toggle* and turn it off |
-| WeChat | Go to *Configuration Center → Multi-Channel → WeChat → Channel Control → Stop* |
+| Feishu | Stop the channel under *Settings center → Message channels · Feishu* |
+| WeChat | Restart or remove bindings under *Settings center → Message channels · WeChat* |
 
-Disabling a channel does not delete its configured credentials or user lists. Re-enabling takes effect immediately. If you no longer intend to use the channel at all, we recommend also cleaning up its credentials to prevent accidental misuse.
+Stopping does not erase saved credentials or user lists; re‑enabling reuses prior config. If you are done for good, clear credentials too to avoid accidental reuse.
 
-## Incident Response
+## If something looks wrong
 
-If Bot misuse or anomalous behavior is detected:
+If the bot seems abused or misbehaving:
 
-1. **Immediately disable the channel**: Turn off the corresponding channel toggle in the *Configuration Center*
-2. **Revoke credentials**: Revoke the App Secret or unbind the integration in the Feishu developer console or WeChat backend
-3. **Audit logs**: Review all invocations during the suspicious period in the *Logs* tab of OpenClaw
-4. **Clean up data**: Check the board for unexpected files or modified configurations
-5. **Notify the team**: Alert all team members authorized to use the Bot
-
-Regularly practice this incident response procedure to ensure rapid reaction when incidents occur.
+1. **Stop the channel immediately**: turn off the switch in *Settings center*
+2. **Revoke credentials**: in Feishu developer console or WeChat, rotate secrets or unbind
+3. **Audit logs**: check channel status in settings, Feishu/WeChat console events, and on-device agent diagnostics
+4. **Inspect data**: look for unexpected files or config changes on device
+5. **Notify the team**: ask people with access to pause using the bot until resolved

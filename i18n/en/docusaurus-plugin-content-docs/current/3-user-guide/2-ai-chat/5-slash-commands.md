@@ -1,45 +1,48 @@
 ---
-sidebar_label: '3.2.5 Slash Commands'
-title: 3.2.5 Slash Commands
+sidebar_label: '3.2.5 Slash commands'
+title: 3.2.5 Slash commands
+unlisted: true
 ---
 
-# 3.2.5 Slash Commands
+# 3.2.5 Slash commands
 
-Slash commands are special instructions entered in the AI Dock input box that start with `/`. They trigger internal behaviors of Studio rather than being sent to the large language model. These commands do not consume tokens and execute immediately.
+Slash commands start with `/` in the AI Dock. They manage the current session, list skills, or temporarily switch models. They are **not** sent to the model and do **not** use tokens.
 
-## Command List
+## Command list
 
-| Command | Function |
+| Command | Effect |
 |---|---|
-| `/help` | Displays a list and descriptions of all available slash commands |
-| `/clear` | Clears the context of the current session, starting a fresh conversation (while preserving the session history) |
-| `/sessions` | Lists all historical sessions; allows switching to any session to continue |
-| `/skills` | Lists the skill IDs and brief descriptions currently loaded in the session |
-| `/model` | Temporarily switches the model used for the current conversation (effective only for this session) |
-| `/reset` | Performs a deep reset of the Agent state: clears context, resets tool-loading status, and re-probes the device |
+| `/help` | Lists available slash commands and what they do |
+| `/clear` | Clears the current session’s reference context and restarts “empty” (history kept) |
+| `/sessions` | Lists past sessions; pick one to continue |
+| `/skills` | Lists skill IDs loaded in this session with short descriptions |
+| `/model` | Temporarily switches the model for **this session only** |
+| `/reset` | Resets Moss: clears context, reloads capabilities, re-probes devices |
 
-## Typical Use Cases
+## Typical uses
 
-### `/clear` vs. Creating a New Session
+### `/clear` vs new chat
 
-`/clear` empties the current session's context while retaining the session history—ideal for "changing the topic within the same conversation." Creating a new session starts a completely independent conversation, suitable for "beginning an entirely new task." Developers can choose based on their specific scenario.
+`/clear` drops reference context but keeps the session record—good for “new topic, same thread.” **New chat** is better for a fully new task. Pick what fits.
 
-### Verifying Skill Loading with `/skills`
+### `/skills` to verify loading
 
-If a developer suspects that a particular skill hasn't been automatically loaded by the Agent (e.g., a skill was installed but the Agent’s responses don’t seem to utilize it), they can enter `/skills` to view the list of skills actually activated in the current session.
+If a skill seems absent (installed but unused), run `/skills` to see what is active.
 
-Skill loading is demand-driven: only skills whose trigger keywords match the user's message will be loaded. If the user's description doesn't align with a skill's trigger keywords, the skill won't activate. In such cases, developers can adjust the skill's trigger keywords in [Section 3.11 Skills](../11-skill/index.md).
+Skills load on demand: only when your message matches a trigger keyword.
 
-### Temporarily Switching Models with `/model`
+If wording and triggers disagree, adjust triggers in [3.11 Skill Workshop](../11-skill/index.md).
 
-When a specific conversation requires a more powerful model (e.g., for complex code generation), you can temporarily switch using `/model`:
+### `/model` for a one-off stronger model
+
+For heavy code generation, temporarily switch:
 
 ```
 /model claude-sonnet-4-20250514
 ```
 
-The switch takes effect immediately and applies only to the current session without altering the global default configuration. The model reverts to the default upon ending or creating a new session.
+Takes effect immediately for this session only; does not change global defaults. New sessions revert to defaults.
 
-### Handling Agent Anomalies with `/reset`
+### `/reset` when Moss misbehaves
 
-When the Agent appears "stuck"—for example, repeatedly invoking the same failing tool or providing responses clearly disconnected from the context—you can use `/reset` for a deep reset. This clears the conversation context, reloads tools, and re-probes the current device, offering a more thorough recovery than `/clear`.
+If Moss loops a failed step or drifts off-topic, `/reset` clears context, reloads tools, and re-probes the device—stronger than `/clear`.

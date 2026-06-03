@@ -1,13 +1,25 @@
 ---
-sidebar_label: '3.14 Monitoring and Operations'
-title: 3.14 Monitoring and Operations
+sidebar_label: '3.15 Monitoring & operations'
+title: 3.15 Monitoring & operations
 ---
 
-# 3.14 Monitoring and Operations
+# 3.15 Monitoring & operations
 
-Monitoring and operations consist of two independent yet related features: the task queue in the top bar and the Token usage statistics in AI Dock. Both serve as visual tools to help developers understand the current status of Studio.
+Operations view focuses on two things: the header task queue, and AI Dock token usage. One shows task progress; the other helps spot unusually expensive AI work.
 
-## This section includes
+## Recommended order
 
-- [3.14.1 Task Queue](./1-task-queue.md): Display and management of workspace execution tasks on the right side of the top bar  
-- [3.14.2 Token Usage Statistics](./2-token-usage.md): The capsule at the top of AI Dock, summary of tokens used per Run, and the statistical boundaries in the current version
+| Step | What to check |
+|---|---|
+| 1 | During flash, deploy, or bulk transfer, watch the header task chips |
+| 2 | Click a chip to jump back to the feature page for details |
+| 3 | When AI feels slow or cost looks wrong, open token usage |
+| 4 | For billing truth, rely on your model provider |
+
+## Task progress
+
+The right side of the header lists long-running work: flashing, OpenClaw deploy, bulk file transfers, skill sync, and similar. Chips deep-link you to each feature. Finish important tasks on the page before closing the window.
+
+## Token usage
+
+AI Dock shows approximate model usage for the current conversation or task—useful for complexity and anomaly checks. Final billing still comes from the provider console.

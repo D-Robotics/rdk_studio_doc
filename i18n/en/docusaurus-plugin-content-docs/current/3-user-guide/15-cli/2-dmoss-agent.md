@@ -1,21 +1,23 @@
 ---
-sidebar_label: '3.15.2 @dmoss/agent'
-title: 3.15.2 @dmoss/agent
+sidebar_label: '3.16.2 dmoss-agent'
+title: 3.16.2 dmoss-agent
 ---
 
-# 3.15.2 @dmoss/agent
+# 3.16.2 dmoss-agent
 
-`@dmoss/agent` is a standalone NPM package that provides a pure Agent runtime. It is suitable for scenarios where "you don't need the RDK Studio desktop client and only want an AI Agent capable of invoking tools and executing tasks." Typical use cases include CI/CD, Docker images, and embedded scripts.
+`@dmoss/agent` is a standalone NPM package aimed at automation. For normal RDK Studio workflows, prefer the previous section’s `rdkstudio`.
 
-## Installation
+Consider `dmoss-agent` for CI/CD, Docker, or headless scripts only.
+
+## Install
 
 ```bash
 npm install -g @dmoss/agent
 ```
 
-Requirements: Node.js 20 or higher; Node.js 22.x is recommended.
+Requires Node.js 20+ (22.x recommended).
 
-Verify installation:
+Verify:
 
 ```bash
 dmoss-agent --version
@@ -23,77 +25,77 @@ dmoss-agent --version
 
 ## Configuration
 
-Via environment variables or the local configuration file `~/.dmoss-agent/config.json`:
+Set the model via environment variables or `~/.dmoss-agent/config.json`. Keep API keys in CI secrets or env—not in git.
 
 ```bash
-export DMOSS_API_KEY=sk-xxxx
+export DMOSS_API_KEY=<your-api-key>
 export DMOSS_MODEL=qwen3.6-plus
 export DMOSS_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
 export DMOSS_WORKSPACE=/path/to/your/project
 ```
 
-Optional environment variables:
+Optional variables:
 
 | Variable | Purpose |
 |---|---|
-| `DMOSS_EXEC_BACKEND` | Command execution backend: `local` (local machine) or `remote` (remote device) |
-| `DMOSS_DEVICE_*` | Remote device-related settings (IP, user, key, etc.) |
-| `DMOSS_WEIXIN_ILINK_TOKEN` | iLink Token for WeChat channel |
+| `DMOSS_EXEC_BACKEND` | Command backend: `local` or `remote` |
+| `DMOSS_DEVICE_*` | Remote device (IP, user, keys, …) |
+| `DMOSS_WEIXIN_ILINK_TOKEN` | WeChat iLink channel token |
 
-## Three Usage Modes
+## Modes
 
 ```bash
-# Interactive REPL
+# Interactive
 dmoss-agent
 
-# Single query
-dmoss-agent "Help me organize this directory"
+# One-shot
+dmoss-agent "Organize this directory"
 
-# Piped input
+# Pipe
 echo "Explain this code" | dmoss-agent
 ```
 
-## Unique Flags
+## Extra flags
 
-`@dmoss/agent` has two unique flags compared to `rdkstudio`:
+`@dmoss/agent` adds automation-oriented switches beyond `rdkstudio`:
 
 | Flag | Purpose |
 |---|---|
-| `--weixin` | Enable WeChat iLink channel; CLI process acts as a WeChat Bot server |
-| `--mesh` | Join Agent Mesh for multi-machine collaboration |
-| `--debug` / `--quiet` | Control log verbosity |
-| `--log-level=<level>` | Fine-grained log control |
-| `--json` | Output in JSON format for programmatic parsing |
-| `--no-color` | Disable ANSI colors |
-| `--help`, `-h` | Show help |
-| `--version`, `-v` | Show version |
+| `--weixin` | Enable WeChat iLink; CLI acts as bot server |
+| `--mesh` | Join Agent Mesh for multi-host work |
+| `--debug` / `--quiet` | Verbosity |
+| `--log-level=<level>` | Fine-grained logging |
+| `--json` | Machine-readable output |
+| `--no-color` | Disable ANSI color |
+| `--help`, `-h` | Help |
+| `--version`, `-v` | Version |
 
-## In-Session Commands
+## Interactive commands
 
-| Command | Function |
+| Command | Action |
 |---|---|
-| `/model` | Switch current model |
-| `/models` | List available models |
-| `/memory` | View current Agent memory |
+| `/model` | Switch model |
+| `/models` | List models |
+| `/memory` | Inspect agent memory |
 | `/skills` | List loaded skills |
-| `/quit` | Exit session |
+| `/quit` | Exit |
 
-## Comparison with rdkstudio
+## vs `rdkstudio`
 
 | Aspect | `rdkstudio` | `@dmoss/agent` |
 |---|---|---|
-| Installation | Enabled via desktop client | `npm install -g` |
-| Configuration source | Shared with desktop client | Independent (environment variables or local config) |
-| Device management | Supported (`device` subcommand) | Not supported |
-| WeChat channel | Not supported | Supported (`--weixin`) |
-| Mesh | Not supported | Supported (`--mesh`) |
-| Best suited for | Daily development and automation | CI / Docker / pure Agent scenarios |
+| Install | Desktop enables + PATH | `npm install -g` |
+| Config | Shared with desktop | Env or `~/.dmoss-agent/config.json` |
+| Devices | `device` subcommands | Not supported |
+| WeChat | Not supported | `--weixin` |
+| Mesh | Not supported | `--mesh` |
+| Best for | Daily dev + light automation | CI / Docker / pure agent |
 
-## When to Choose @dmoss/agent Over rdkstudio
+## Picking between them
 
 | Scenario | Choice |
 |---|---|
-| Running code reviews in CI pipelines | `@dmoss/agent` (no dependency on desktop client) |
-| Deploying Agent inside Docker images | `@dmoss/agent` (smaller image footprint) |
-| Long-running WeChat Bot | `@dmoss/agent --weixin` |
-| Running commands or checking files in daily terminal usage | `rdkstudio` (configuration reuse is more convenient) |
+| CI code review | `@dmoss/agent` (no desktop dependency) |
+| Agent inside Docker | `@dmoss/agent` (smaller image story) |
+| WeChat bot from scripts | `dmoss-agent --weixin` |
+| Everyday terminal tasks | `rdkstudio` (shared config) |

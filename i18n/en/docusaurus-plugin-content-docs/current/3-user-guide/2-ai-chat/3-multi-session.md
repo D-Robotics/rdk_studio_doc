@@ -1,69 +1,33 @@
 ---
-sidebar_label: '3.2.3 Multi-Session Management'
-title: 3.2.3 Multi-Session Management
+sidebar_label: '3.2.3 View chat history'
+title: 3.2.3 View chat history
+unlisted: true
 ---
 
-# 3.2.3 Multi-Session Management
+# 3.2.3 View chat history
 
-AI Dock supports parallel multi-session operation, preventing context interference between different tasks. Sessions are persisted locally in JSONL format, allowing historical conversations to remain accessible even after restarting the client.
+Moss sessions are stored locally. Use the history drawer, workspace context, and current device chip to organize work.
 
-## One Independent Session per Device
+## New session
 
-By default, Studio maintains a separate conversation session for each added device:
+Click **New chat** at the top of the Dock for a blank thread. Good when:
 
-- When switching devices, AI Dock automatically switches to the corresponding device's session.
-- Each session has its own independent context window and conversation history.
-- Sessions do not interfere with each other—eliminating confusion such as "the Agent still thinks it's talking to X5 when switched to X3."
+- The last task is done and you want a new topic.
+- The session’s token use is high and earlier context was compressed.
+- Device, project, or goal changed and you do not want old assumptions mixed in.
 
-This design is especially useful during parallel development across multiple devices—developers can discuss X3-related issues within the X3 session and seamlessly switch to the X5 session to handle X5-specific tasks, without the AI mixing up the states of the two boards.
+## Resume history
 
-## Manually Creating New Sessions
+The history button opens the local chat list. When resuming, Moss reads that session’s messages, results, and summaries; if device or project changed, state the new target first to avoid stale assumptions.
 
-In addition to the default per-device sessions, developers can manually create new sessions:
+## Long sessions get summarized
 
-- Click "New Session" at the top of AI Dock.
-- Ideal for scenarios where "multiple unrelated tasks run on the same board and require isolated contexts."
-- For example: one session dedicated to ROS node debugging, another focused exclusively on model deployment.
+Near the model’s context limit, RDK Studio summarizes older content and keeps summaries plus recent messages. Conversation can continue, but early detail thins out. Keep important logs, configs, and conclusions as attachments or files.
 
-## Session Persistence
+## Cancel and continue
 
-Sessions are stored locally in JSONL format, with one message per line:
+In-flight tasks can be canceled. Cancellation does not roll back finished commands, file writes, or device changes; your next message can say “continue from the failed step” and Moss will try to pick up from the last run record.
 
-| Operating System | Path |
-|---|---|
-| Windows | `%USERPROFILE%\.rdk-studio\sessions\` |
-| macOS / Linux | `~/.rdk-studio\sessions/` |
+## Multi-device tip
 
-The JSONL format (one independent JSON object per line) is well-suited for append-only writes and stream processing. After restarting the client, the full session history remains intact. Developers can also directly read these files for offline analysis.
-
-## Context Window and Automatic Compaction
-
-Tokens consumed during each conversation accumulate continuously. When the total token count reaches 70% of the model's context window limit, Studio automatically triggers **compaction**: summarizing earlier dialogue into a concise summary while preserving the full content of recent exchanges. This mechanism enables long-running sessions to continue, but since summarization inherently involves "information compression," the ability to recall fine-grained details from early interactions diminishes.
-
-If users notice the Agent inaccurately referencing earlier content, we recommend manually starting a new session for new topics to avoid accumulating excessive irrelevant context within a single session.
-
-## Canceling an Ongoing Task
-
-Running Agent tasks can be canceled at any time:
-
-- Click the cancel button to the right of the input box.
-
-Upon cancellation, the Agent stops subsequent tool invocations and model inference. The behavior of currently executing commands depends on the specific tool—for example, SSH commands will send a SIGINT signal to terminate the process running on the board.
-
-## Session History
-
-Use the slash command `/sessions` to list all historical sessions, view the title, associated device, and last updated time of each prior conversation, and switch to any historical session to continue.
-
-```
-/sessions
-```
-
-Example output:
-
-```
-- Current session: RDK-X5-Workstation1 (5 minutes ago)
-- abc123: Camera Debugging (Yesterday)
-- def456: YOLO Deployment (3 days ago)
-```
-
-Click a session ID or specify it directly in the slash command to switch sessions.
+Avoid vague “that board” in one message. Prefer device aliases, hostnames, or workspace labels to name the target.

@@ -1,77 +1,48 @@
 ---
-sidebar_label: '5.12 Remote Desktop Connection Issues or Lag'
-title: 5.12 Remote Desktop Connection Issues or Lag
+sidebar_label: '5.12 Remote desktop slow or disconnected'
+title: 5.12 Remote desktop slow or disconnected
 ---
 
-# 5.12 Remote Desktop Connection Issues or Lag
+# 5.12 Remote desktop slow or disconnected
 
-**Typical symptoms**: The *Remote Desktop* tab keeps spinning without connecting / noticeable delay (>2 seconds) after connection / mouse clicks register at incorrect positions / only half the screen is displayed / black screen.
+**Typical symptoms:** *Remote desktop* spinner never finishes; session is buttery but unusable; pointer mapping wrong; clipped window or pure black framebuffer.
 
-## 30-Second Decision
+## First steps
 
-Check on the board:
+1. Confirm SSH is healthy.
+2. Re-open *Remote desktop* and relaunch components per banners.
+3. Install missing prerequisites if prompted.
+4. Reduce bitrate/resolution when only perf suffers.
+5. Paste errors back to Moss.
 
-```bash
-ps aux | grep -E "x11vnc|tigervnc|Xvfb"   # Check for VNC processes
-ss -tlnp | grep 5900                       # Check if port 5900 is listening
-```
+## Troubleshooting buckets
 
-## Troubleshooting Checklist
+### 1. Backend never ready
 
-### 1. VNC Service Not Started
+Studio bootstraps VNC-ish pieces on demand. Typical blockers = offline board, disk full, or stripped-down OS builds. Prefer in-page retry/install actions.
 
-Studio automatically installs `x11vnc` or `tigervnc` via `apt install` on first use. Common failure reasons: no network on the board / unreachable apt repositories / full disk. Install manually:
+### 2. Motion judder / latency
 
-```bash
-sudo apt install -y x11vnc xvfb
-sudo x11vnc -display :0 -forever -shared -rfbport 5900 -nopw &
-```
+Higher pixel clocks stress SoC uplinks. Mitigate via toolbar quality presets—or lower desktop resolution directly on-device.
 
-### 2. Port Conflict
+### 3. Cursor offset
 
-If port 5900 is occupied by a ROS node, switch to another port:
+Usually HiDPI host scaling ≠ 100%. Right-click the video surface → settings → pin zoom to **100 %**.
 
-```bash
-x11vnc -rfbport 5901 ...
-```
+### 4. Black screen
 
-Then, in Studio, go to *Remote Desktop → Settings* and change the port to 5901.
+Happens without physical display, stalled DE, or corrupted agent stack. Restart from the page; escalate with Moss + logs if persists.
 
-### 3. Screen Lag
+## Hardening
 
-RDK's BPU does not participate in X11 rendering; VNC streams are encoded purely by the CPU, which often maxes out when streaming full-screen 1080p. Two ways to reduce load:
+- Official RDK roots ship required bits.
+- Stabilize network (wired when possible).
+- Pilot on a small fleet before wide rollout.
 
-- Lower the board's resolution: `Xvfb :0 -screen 0 1280x720x24`
-- In Studio’s *Remote Desktop* toolbar, drag the "Quality" slider down (e.g., to level 6), which significantly reduces bandwidth usage
+## Still stuck?
 
-### 4. Mouse Click Misalignment
-
-Common with 4K monitors / HiDPI displays. In Studio, right-click the remote screen → *Settings → Scaling* and set it to 100%.
-
-### 5. Black Screen
-
-Caused by no physical monitor connected or X server not started on the board:
-
-```bash
-sudo apt install -y xvfb
-Xvfb :0 -screen 0 1280x720x24 &
-export DISPLAY=:0
-```
-
-Then start `x11vnc`.
-
-## Permanent Solutions
-
-- Pre-install `xvfb + x11vnc` on production boards and configure them to auto-start via systemd
-- For long-term remote work, use **NoVNC + WebSocket** (default in Studio) instead of native VNC clients
-- For maximum smoothness, consider switching to **xrdp** (RDP protocol); however, ARM xrdp packages on RDK boards have compatibility issues with certain OS images—test on a small scale first
-
-## Still Not Resolved?
-
-Seek help in the following order:
-
-1. Paste error logs directly into *AI Chat* — Studio’s built-in system recognizes over 30 common RDK board-side error patterns and automatically provides fixes  
-2. In *AI Chat*, say “Help me search the forum for similar issues” — Studio will automatically query the RDK developer community  
-3. [RDK Official Documentation](https://developer.d-robotics.cc/rdk_doc/en/RDK)  
-4. [RDK Developer Community](https://developer.d-robotics.cc/en/forum)  
-5. In Studio, go to *Settings Panel → Application & Updates → Export Diagnostic Package*, and send us the diagnostic package for further investigation
+1. Paste stack traces into AI Dock for RDK-aware triage.  
+2. Ask Moss to search forum threads for similar symptoms.  
+3. [Official RDK docs](https://developer.d-robotics.cc/rdk_doc)  
+4. [RDK developer community](https://developer.d-robotics.cc/forum)  
+5. *Settings → App & updates → Export diagnostics* and share the bundle with support.

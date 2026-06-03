@@ -1,30 +1,38 @@
+﻿---
+sidebar_label: '3.5 Code editor'
+title: 3.5 Code editor
 ---
-sidebar_label: '3.5 Remote IDE'
-title: 3.5 Remote IDE
----
 
-# 3.5 Remote IDE
+# 3.5 Code editor
 
-![Remote IDE entry: The startup page of the embedded code-server in Studio, showing a connected RDK X5 device (root@192.168.128.10:22) in the top bar, a central "Open code-server" button, and features listed below such as "F11 Fullscreen Mode / Floating Window / AI Chat Integration / Device Port 9888 / Chinese UI + Plugin Ecosystem"](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/remote-ide.png)
+![Code editor: after connecting to RDK X5, edit device files inside Studio](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/remote-ide.png)
 
-Click "Open code-server" to enter the browser-based full VS Code:
+With a device connected, the code editor opens projects in the main region. The desktop app can also tear the editor out into a floating window — handy for docs or Moss side by side.
 
-![Browser-based VS Code (code-server fully loaded): Left-side file explorer listing files under /root on the board, right-side Welcome page displaying the "Get Started with VS Code for the Web" tutorial](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/remote-ide-connected.png)
+Code editor is for whole‑project work. Sources stay on device; RDK Studio brings the IDE to the desktop without copying the tree to the PC first.
 
-The Remote IDE provides a complete VS Code experience within RDK Studio, powered by code-server. All files, Git repositories, debuggers, and terminals operate directly on the board—developers don't need to sync code back to their PC; the Studio client serves only as a UI container.
+## First-time workflow
 
-## Difference from File Manager
-
-| Use Case | Recommendation |
+| Step | What to do |
 |---|---|
-| Editing one or two files, quick code inspection | [3.4 File Manager](../4-file-manager/index.md) (Monaco Editor—ready instantly) |
-| Project-level development involving multiple files, Git, debugging | Remote IDE in this section |
-| Running commands, viewing lengthy outputs | [3.3 Remote Terminal](../3-remote-terminal/index.md) or the integrated terminal in the IDE |
+| 1 | Add device and confirm online |
+| 2 | Open **Code editor** |
+| 3 | If prompted to prepare environment, follow the dialog |
+| 4 | Once open, pick project directory on device |
+| 5 | For multi‑monitor, pop out editor to a separate window |
 
-In short: File Manager is for "quick edits," while Remote IDE is for "developing entire projects."
+## Files vs editor
 
-## Contents of This Section
+| Scenario | Prefer |
+|---|---|
+| Tweaking a couple files; quick code peek | [3.4 Files](../4-file-manager/index.md) |
+| Project work, Git, multi‑file, debugging | Code editor |
+| Long command output | [3.3 Terminal](../3-remote-terminal/index.md) or editor‑integrated terminal |
 
-- [3.5.1 Installation and Initialization](./1-install-and-init.md): Automatic installation process upon first opening the IDE  
-- [3.5.2 System Requirements](./2-system-requirements.md): Hardware and network requirements for the board  
-- [3.5.3 Floating Window Mode and Extension Management](./3-floating-window.md): Desktop-client-exclusive floating window mode and recommended extensions
+In short: Files = quick patches; Code editor = shipping a project.
+
+## First launch
+
+First open runs device checks and onboarding from the page. Best when online, stable network, and ample free disk.
+
+Desktop can float the editor. Enable it when referencing Moss or docs during coding.

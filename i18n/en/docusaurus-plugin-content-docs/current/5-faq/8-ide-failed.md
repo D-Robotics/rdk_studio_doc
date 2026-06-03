@@ -1,42 +1,32 @@
 ---
-sidebar_label: '5.8 Remote IDE Fails to Start'
-title: 5.8 Remote IDE Fails to Start
+sidebar_label: '5.8 Code editor won’t start'
+title: 5.8 Code editor won’t start
 ---
 
-# 5.8 Remote IDE Fails to Start
+# 5.8 Code editor won’t start
 
-**Typical symptoms**: After clicking "Open Remote IDE" in the *IDE* tab, the browser shows a blank page, displays an error `code-server not installed`, or gets stuck at "Downloading deb package" during installation.
+**Typical symptoms:** *Code editor* opens blank, says the environment is missing, or the installer never finishes.
 
-## 30-Second Decision
+## First steps
 
-Check the code-server status on the board:
+1. Ensure the device is online and terminal SSH works.
+2. Return to *Code editor* and reinstall/retry per banner.
+3. Confirm the board can reach the internet—downloads are required.
+4. Check free disk space.
+5. Copy errors to Moss for guidance.
 
-```bash
-which code-server
-code-server --version          # Expected version >= 4.x
-systemctl status code-server   # or ps aux | grep code-server
-```
+## Checklist
 
-## Troubleshooting Checklist
+| Issue | Fix |
+|---|---|
+| Device offline | Fix SSH first |
+| Package download failed | Network or retry later |
+| Still blank after install | Reinstall; share logs with Moss |
+| Empty webview | Refresh UI; restart RDK Studio if needed |
+| Disk full | Clear logs/temp, retry |
 
-1. **Not installed** — Studio automatically downloads the deb package from the built-in BOS and runs `dpkg -i`. If the board lacks internet access or BOS is unreachable, install manually:
+## Longer term
 
-   ```bash
-   wget https://rdkstudio.bj.bcebos.com/code-server/code-server_version_number_arm64.deb
-   sudo dpkg -i code-server_*_arm64.deb
-   ```
-
-2. **Port conflict** — Port 8080 (default) often conflicts with services like `hobot_websocket`. Change the `bind-addr` in `~/.config/code-server/config.yaml`:
-
-   ```yaml
-   bind-addr: 0.0.0.0:8443
-   ```
-
-   Then run `systemctl --user restart code-server`.
-
-3. **Blank page / 404 for resources** — Open browser DevTools (F12) and check the Network tab; 404 errors occur when baseUrl isn't configured under reverse proxy setups.
-
-## Permanent Fixes
-
-- Set a fixed password and fixed port for Remote IDE in `~/.config/code-server/config.yaml`.
-- When disk space on the board is low (`df -h /` shows usage ≥ 80%), `code-server` may fail to start. Regularly clean up `/var/log` and `/tmp`.
+- Stay on official RDK images to avoid missing OS bits.
+- Reserve enough storage for toolchains.
+- Coordinate among teammates so multiple installs don’t race the same device.

@@ -1,23 +1,56 @@
+﻿---
+sidebar_label: '3.10 OpenClaw'
+title: 3.10 OpenClaw
 ---
-sidebar_label: '3.10 OpenClaw On-Device Agent'
-title: 3.10 OpenClaw On-Device Agent
----
 
-# 3.10 OpenClaw On-Device Agent
+# 3.10 OpenClaw
 
-![OpenClaw main panel: Real-time status badges for gateway/network/model at the top; on the right, configuration progress and four quick actions—"Restart Gateway," "View Logs," "Upgrade," and "Diagnose & Repair"](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/03-OpenClaw.png)
+OpenClaw is an on-board agent that runs on RDK hardware. Enable AI assistant capabilities on the device by configuring it under **AI Capabilities → On-device Agent**.
 
-OpenClaw is an open-source AI Agent framework that can run independently on any Linux machine. RDK Studio deploys OpenClaw onto the RDK device as a resident AI runtime, managed by systemd as a long-running service. Meanwhile, the PC-side D-Moss Agent can collaborate with the on-device OpenClaw via an SSH tunnel—tasks automatically flow between both ends.
+![On-device Agent page: after connecting RDK X5, view deployment status, model settings, and quick actions](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/openclaw-connected.png)
 
-Core features of OpenClaw include: a long-running Node.js service, cross-session memory, multi-step workflows, tool invocation, and explicit state-machine-driven task checkpointing and resumption. Its design philosophy embodies an "operating system mindset"—separating the execution plane from the control plane and verifying command execution results rather than relying on model declarations.
+## Suggested workflow
 
-This section serves as the complete reference for OpenClaw within Studio. Earlier sections (e.g., 1.2, 3.2) only briefly mention OpenClaw; all detailed mechanisms are elaborated here.
+| Step | What to do |
+|---|---|
+| 1 | Confirm the current device is an RDK device and is online |
+| 2 | Open the **On-device Agent** page and check the header status |
+| 3 | If not installed yet, follow the page to check prerequisites, then deploy |
+| 4 | After deployment, verify model configuration works |
+| 5 | Once status is OK, use on-board chat, skills, or message channels |
 
-## This Section Includes
+## What you can do on this page
 
-- [3.10.1 Overview and Use Cases](./1-overview.md): When you need OpenClaw—and when you don’t  
-- [3.10.2 Deployment and Uninstallation](./2-deploy-uninstall.md): Full one-click deployment process and troubleshooting failures  
-- [3.10.3 Main Panel and Sub-tabs](./3-main-panel.md): Detailed functionality of the six sub-tabs  
-- [3.10.4 Collaboration Mechanism with D-Moss](./4-collab-with-dmoss.md): Physical link, tool families, and security design  
-- [3.10.5 Task Delegation and Automatic Fallback](./5-task-delegation.md): Long-task delegation and self-recovery mechanisms when SSH is blocked  
-- [3.10.6 Pairing and Security](./6-pairing-security.md): Pairing token for initial connection and security policies
+| Area | Purpose |
+|---|---|
+| Header status | See whether on-board Agent, models, and network are ready |
+| Deploy & connection | Deploy, redeploy, or uninstall OpenClaw |
+| Diagnose & fix | Review warnings and follow suggested actions |
+| Models | Configure models OpenClaw can use |
+| Feishu integration | Set up Feishu bot app and pairing |
+| On-board chat | After OpenClaw is ready, talk to the on-board assistant directly |
+
+## When you need OpenClaw
+
+| Scenario | Recommendation |
+|---|---|
+| Short-term debugging with your PC always online | Moss plus SSH is enough |
+| Need the on-board agent to handle device-centric tasks | Deploy OpenClaw |
+| Need to deploy skills to the device | Deploy OpenClaw, then sync from Skill Workshop |
+| Non-RDK Linux host | OpenClaw deployment not offered by default—prefer local Moss skills |
+
+## Before deployment
+
+- The device must be added over SSH and be online.
+- The device network must reach required files during deployment.
+- Enough free space on the board for installation.
+- Any model OpenClaw uses must be reachable from the board; a PC-local Ollama URL is usually not reachable from the board.
+
+If OpenClaw is missing, the page guides you step by step. Actions that affect device state (deploy, uninstall, redeploy) always ask you to confirm first.
+
+Confirm the target device and scope of impact before any operation that writes files, runs commands, or restarts services.
+
+## Further reading
+
+- [3.10.2 Deploy and uninstall](./2-deploy-uninstall.md): Prerequisites, one-click deployment, troubleshooting, uninstall.
+- [3.10.3 View status and configure](./3-main-panel.md): Status, models, and on-board chat.

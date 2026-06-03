@@ -4,6 +4,6 @@
   "link": {
     "type": "generated-index",
     "slug": "/category/1-product-intro",
-    "description": "Explains what RDK Studio is, its architecture and scope, and covers the feature matrix, supported hardware, release notes, and hands-on AI Dock demos to build a mental model before you dive in."
+    "description": "Introduce the product positioning of RDK Studio, the Moss and OpenClaw architecture, the left-side navigation, supported devices, version notes, and AI Dock in action to help you establish an overall understanding first."
   }
 }

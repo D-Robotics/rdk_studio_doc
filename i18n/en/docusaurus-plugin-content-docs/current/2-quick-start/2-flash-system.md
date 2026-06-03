@@ -1,62 +1,53 @@
+﻿---
+sidebar_label: '2.2 Flash system image'
+title: 2.2 Flash system image
 ---
-sidebar_label: '2.2 Flashing the System Image'
-title: 2.2 Flashing the System Image
----
 
-# 2.2 Flashing the System Image
+# 2.2 Flash system image
 
-Begin from this step when your board lacks a usable system, the existing system is corrupted, or you need to replace the image. If your board already boots normally, you can skip this section and proceed directly to [2.3 Connecting Your Device](./3-connect-device/index.md).
+Start here when the board has no usable OS, the OS is damaged, or you need to switch images. If the device already boots normally, skip this and go to [2.3 Connect a device](./3-connect-device/index.md).
 
-## Flashing via the Onboarding Wizard
+## Enter flashing from onboarding
 
-After your first login, once you complete the "Select Hardware" step in the onboarding wizard, it will automatically proceed to the **Flash System** step. This step lists recommended images compatible with your selected board and provides one-click access to the flashing tool:
+After “Choose board” in first-time onboarding, you reach “Prepare system.” If you choose to flash, the full flashing page opens. The wizard has four steps:
 
-![Onboarding Wizard · Step 2 – Flash System: Recommends RDKOS 3.4.1 Desktop (Ubuntu 22.04 / GUI) for the selected RDK X5, with buttons below labeled "Download Image" and "Open Flashing Tool"](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/onboarding-2-flash.png)
+1. **Choose device**: RDK X3, RDK X5, RDK S100 / S100P, or another target for writing a local image.
+2. **Choose image**: Official image, or a local image / firmware file.
+3. **Start flash**: Confirm the TF card, disk, or device to write, then begin.
+4. **Done**: Safely remove the TF card as prompted, or wait for the device to reboot.
 
-Clicking *Open Flashing Tool* navigates you to the full flashing wizard (*System Flashing* tab). The entire process consists of four steps: **Select Device → Select Image → Start Flashing → Complete**.
+![RDK Studio flash wizard: first choose the device type to flash](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/08-burning.png)
 
-![Studio Flashing Wizard · Step 1 – Select Board Type: Cards display RDK X3 / X5 / S100(P), with S100(P) marked as using the dedicated XBURN channel](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/08-burnning.png)
+## Device and flash method
 
-Follow these steps in order:
+| Device | Recommended method | Notes |
+|---|---|---|
+| RDK X3 | TF card | Pick an official image and write to TF card |
+| RDK X5 | TF card; eMMC-capable boards can use eMMC flow | Official image list is filtered by board |
+| RDK S100 / S100P | S100 flash flow | Official firmware package or extracted firmware folder |
+| Other device | Local image write | Generic SD / TF write for non-RDK boards |
 
-1. Select your target board type (RDK X3 / RDK X5 / RDK S100)
-2. Choose a recommended image version (D-Robotics official images listed by default)
-3. Confirm the target storage medium (TF card, eMMC, or dedicated tool)
-4. Wait for the download and flashing process to complete
+RDK S100 supports firmware download, environment prep, and writing inside RDK Studio. If the local environment is unsupported or write fails, the UI will point you to the official flashing tool.
 
-Flashing duration depends on the storage medium and image size; TF card flashing typically takes 5–15 minutes.
+## Stable vs high-speed mode
 
-If you missed the onboarding wizard, you can re-enter the flashing workflow from the *System Flashing* tab.
+TF-style writes offer two performance modes:
 
-## Quick Reference: Three Flashing Media Options
-
-| Board Type | Recommended Flashing Method |
+| Mode | Best for |
 |---|---|
-| RDK X3 | TF Card Flashing |
-| RDK X5 (without eMMC) | TF Card Flashing |
-| RDK X5 (with eMMC version) | TF Card Flashing or eMMC Flashing |
-| RDK S100 | Dedicated xburn Tool |
+| Stable mode | Default; lower resource use; suitable for most PCs |
+| High-speed mode | Faster writes; higher resource use; may affect other apps on low-end PCs |
 
-## Important Notes During Flashing
+Flashing erases the target card or disk. Before starting, confirm you did not select the system disk, a portable drive, or any volume with important data.
 
-During the flashing process, you may switch to other tabs to view AI chat or run commands, but you must **not**:
+## What not to do while flashing
 
-- Remove the TF card or disconnect the USB cable
-- Allow your PC to enter sleep or hibernation mode
-- Close the main Studio window (minimizing is allowed)
+- Do not unplug the TF card, reader, Type-C cable, or S100 connection.
+- Do not sleep, shut down, or force-quit RDK Studio.
+- Do not dismiss system permission dialogs carelessly; canceling during S100 write may still require waiting for the writer to stop.
 
-After flashing completes, insert the TF card into your board and power it on, then wait for the board to boot.
+## Next steps
 
-## Detailed Procedures and Advanced Usage
+Power the device after flashing. When the system boots, go to [2.3 Connect a device](./3-connect-device/index.md).
 
-This section only covers the minimal steps needed to get up and running quickly. For advanced scenarios, please refer to [3.7 System Flashing](../3-user-guide/7-system-flashing/index.md):
-
-- Balanced vs. Turbo modes for TF card flashing
-- Uploading custom local images
-- eMMC flashing and eMMC backup
-- Detailed xburn operations for RDK S100
-- Comprehensive troubleshooting checklist for flashing failures
-
-## Next Steps
-
-Once your board has been flashed and powered on successfully, proceed to [2.3 Connecting Your Device](./3-connect-device/index.md) to add your board to Studio’s device list.
+For full TF card, eMMC, S100, and local image write coverage, see [3.7 System Flashing](../3-user-guide/7-system-flashing/index.md).

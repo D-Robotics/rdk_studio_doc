@@ -1,45 +1,41 @@
 ---
-sidebar_label: '5.10 Abnormal Token Usage'
-title: 5.10 Abnormal Token Usage
+sidebar_label: '5.10 Token usage looks high'
+title: 5.10 Token usage looks high
 ---
 
-# 5.10 Abnormal Token Usage
+# 5.10 Token usage looks high
 
-**Typical symptoms**: After sending just a few messages, the token capsule at the top of *AI Dock* turns red; monthly bills far exceed budget.
+**Typical symptoms:** After only a handful of prompts, AI Dock shows large token totals; billing portals spike too.
 
-## 30-Second Decision
+## Revisit model pairing
 
-*Settings Panel → AI Engine* → Check the "dual-lane" configuration:
+Under *Settings → AI engine*, confirm defaults for **Thinking** vs **Fast**:
 
-- **Quick lane is empty** → All tasks default to the main model. Create a new Quick entry.
-- **Quick lane exists but uses the wrong model** → Switch to an actually cheaper small model (`gpt-4o-mini`, `qwen-turbo`, `doubao-seed-2.0-lite`).
-- **Quick lane already configured** → Proceed to "Troubleshooting by Scenario" below.
+- Fast unset ⇒ even tiny asks may ride the heavy thinking backend.
+- Wrong fast model ⇒ pick a lighter model tuned for summaries/short QA.
+- If settings look sane, inspect whether oversized attachments/logs repeat every turn.
 
-## Token Accounting Boundaries in Current Version
+## What the counters mean
 
-| What You See | Actual Behavior |
+| UI surface | Accuracy |
 |---|---|
-| Token capsule in top-right corner of AI Dock (current session) | Accurate, real-time at session level |
-| Summary shown after a single Run completes in AI Dock | Accurate, cumulative for that Run |
-| Cross-session totals / aggregation by tool / daily totals / cost equivalents | **Not persisted** in current version; **resets to zero upon Studio restart** |
+| AI Dock capsule (current session) | Live session rollup |
+| Post-task summaries | Matches that single invocation |
+| Cross-session / dollar estimates | Guidance only—invoices beat UI |
 
-For strict cost control:
+Budget hardening tips:
 
-- **Short term**: Take daily screenshots of the *AI Dock* token capsule for archiving.
-- **Long term**: Enable **billing alerts** in your model provider’s console (most reliable, decoupled from Studio).
+- **Short term:** note the AI Dock capsule daily.
+- **Long term:** configure spend alerts inside the inference vendor portal.
 
-## Troubleshooting by Scenario
+## Scenario drill-down
 
-1. **Quick lane not enabled** — Studio implements a dual-lane design: Thinking (deep reasoning) uses models like `claude-sonnet-4` or `qwen3.6-plus`, while Quick (fast tasks) uses lightweight models like `gpt-4o-mini`, `qwen-turbo`, or `doubao-seed-2.0-lite`. If the Quick lane is empty, even small tasks go through the Thinking lane, causing **token usage to surge 5–10×**. Simply create a Quick entry in *Settings Panel → AI Engine*.
+1. **Fast lane empty** — Thinking excels at deep work; fast should soak short pings. Populate fast in *AI engine*.
+2. **Huge files every message** — reprocessing full logs/screens blows tokens: prefer *Attachments*, trim snippets first, fork new chats once threads sprawl.
+3. **Mega single tasks** — long tool/agent loops accumulate tokens organically; leave sane iteration caps—don't crank max turns sky high without reason.
 
-2. **Large files repeatedly uploaded** — Attaching long files or screenshots to every message repeatedly loads them into context:
-   - Use *Attachments* instead of pasting directly.
-   - Truncate long logs first (e.g., with `head -200`).
-   - Do not manually disable D-Moss’s built-in pruning (automatically compacts context when it reaches 70% of the window size).
+## Remediation recap
 
-3. **Single task runs too long continuously** — By default, each message allows the model up to 64 consecutive reasoning steps (one step = one model call; tool calls count as well). Increasing this significantly (e.g., to 256) can generate massive token usage from a single message. **64 steps are sufficient for the vast majority of everyday tasks.**
-
-## Permanent Solutions
-
-- **Always configure a Quick lane** (choose a "lite"-series model from the four default built-in options).
-- Review your model provider’s billing statement every Monday; if it deviates by >20% from the token counts shown in Studio’s capsule, investigate the three scenarios above.
+- Wire up a cheap fast endpoint.
+- Chunk long inputs.
+- Reconcile invoices regularly; escalate anomalies via this playbook.

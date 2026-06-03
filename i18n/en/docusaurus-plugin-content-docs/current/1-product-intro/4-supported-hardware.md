@@ -5,69 +5,65 @@ title: 1.4 Supported Hardware
 
 # 1.4 Supported Hardware
 
-RDK Studio currently supports three RDK-series development boards released by D-Robotics. This section provides key hardware specifications and BPU architecture differences among these three boards, along with how these differences impact the development workflow.
+RDK Studio offers the most comprehensive support for the RDK series development boards, while also allowing SSH access to standard Linux hosts, Jetson, Raspberry Pi, Rockchip, and other devices.
 
-## Comparison of the Three Boards
+You can think of the RDK as the primary development board and other Linux hosts as remote development environments.
 
-| Item | RDK X3 | RDK X5 | RDK S100/S100P |
+## RDK Device Support
+
+| Item | RDK X3 | RDK X5 | RDK S100 / S100P |
 |---|---|---|---|
-| **SoC** | Sunrise 3 | Sunrise 5 | Sunrise S100E/S100P |
-| **CPU** | Quad-core ARM Cortex-A53 @1.5 GHz | Octa-core ARM Cortex-A55 @1.5 GHz | Hexa-core ARM Cortex-A78AE @1.5 GHz (S100P: 2.0 GHz) |
-| **MCU** | — | — | Quad-core ARM Cortex-R52+ @1.2 GHz |
-| **BPU Performance (INT8 equivalent)** | 5 TOPS | 10 TOPS | 80 TOPS (S100) / 128 TOPS (S100P) |
-| **BPU Architecture** | Bernoulli2 | Bayes | Nash |
-| **GPU** | — | 32 GFLOPS (Mali) | 100 GFLOPS (Mali-G78AE) |
-| **Memory** | 2 GB / 4 GB LPDDR4 | 4 GB / 8 GB LPDDR4 | 12 GB (S100) / 24 GB (S100P) LPDDR5 |
-| **Storage** | Micro SD | Micro SD (some versions include eMMC) | 64 GB eMMC + M.2 Key M SSD interface |
-| **Networking** | Gigabit Ethernet | Gigabit Ethernet (PoE) + Wi-Fi 6 + BT 5.4 | Varies by configuration |
-| **USB** | USB 3.0 / USB 2.0 | 4× USB 3.0 Type-A + 1× USB-C | Varies by configuration |
-| **Camera Interfaces** | 2× MIPI CSI | 2× 4-lane MIPI CSI | Varies by configuration |
-| **Typical Use Cases** | Entry-level AI, low-cost robotics | Primary development platform, ROS/TROS, vision applications | Embodied intelligence, Transformer inference, multi-sensor fusion |
+| **Flashing Method** | TF card flashing | TF card flashing; models with eMMC can use the eMMC process | S100 flashing process; the page will guide you to prepare xburn |
+| **Type-C Direct Connection** | Not supported | Supported | Supported |
+| **OpenClaw Deployment** | Supported, requires SSH access to the device | Supported, requires SSH or Type-C access to the device | Supported, requires the device to be online with network access |
 
-> Source: [RDK X3 Official Page](https://developer.d-robotics.cc/en/rdkx3), [RDK X5 Official Page](https://developer.d-robotics.cc/en/rdkx5), [RDK S100 Official Page](https://developer.d-robotics.cc/en/rdks100), and official D-Robotics hardware documentation. Refer to official pages for exact specifications.
+This table only describes the support for common features in RDK Studio.
 
-The RDK X5 is currently the flagship development board, offering a balanced performance-to-power ratio and supporting Type-C Flash Connect (5-second connection). The RDK X3 is an entry-level board commonly used for learning and lightweight inference tasks. The RDK S100 targets high-compute scenarios such as embodied intelligence; its Nash BPU architecture offers significantly better support for Transformer-family operators compared to previous generations and introduces LPDDR5 memory and NVMe storage.
+For hardware specifications such as memory, storage, and interfaces, please refer to the official pages:
 
-## Impact of BPU Architecture Differences on Development
+- [RDK X3](https://developer.d-robotics.cc/rdkx3)
+- [RDK X5](https://developer.d-robotics.cc/rdkx5)
+- [RDK S100](https://developer.d-robotics.cc/rdks100)
 
-The three boards use three different generations of BPU architectures:
+## General SSH Devices
 
-| Generation | Architecture | Board Model | Equivalent Performance |
-|---|---|---|---|
-| 1st | Bernoulli2 | RDK X3 | 5 TOPS |
-| 2nd | Bayes | RDK X5 | 10 TOPS |
-| 3rd | Nash | RDK S100 / S100P | 80 / 128 TOPS |
+The **SSH Device** option in "Add Device" is a general entry point, not limited to RDK. The following devices can be used as remote hosts:
 
-HBM model files compiled by D-Robotics’ model conversion tool `hb_mapper` **cannot be used across different BPU architectures**:
+| Device Family | Available Capabilities | Limited Capabilities |
+|---|---|---|
+| General Linux Host | Moss, terminal, files, code editor, project workspace | RDK-specific flashing, BPU/TROS knowledge, OpenClaw device deployment |
+| NVIDIA Jetson | Moss, terminal, files, code editor, project workspace | RDK-specific flashing and some board-side capabilities |
+| Raspberry Pi | Moss, terminal, files, code editor, project workspace | RDK-specific flashing, OpenClaw deployment limitations |
+| Rockchip Boards | Moss, terminal, files, code editor, project workspace | RDK-specific hardware knowledge and flashing process |
 
-- An HBM compiled on RDK X3 cannot run directly on RDK X5.
-- An HBM compiled on RDK X5 cannot run directly on RDK S100.
+RDK Studio distinguishes between "RDK development boards" and "Linux hosts" based on detection results.
 
-To deploy the same model across different boards, you must recompile it using the corresponding board-specific toolchain. Errors such as `hbm version mismatch` or `model incompatible` during runtime typically indicate that a model compiled for the wrong board type is being used. For detailed troubleshooting steps, see [5.5 HBM Model Fails to Load](../5-faq/5-hbm-not-found.md).
+Some features are only displayed on RDK or board-type devices, such as Wi-Fi configuration, Type-C direct connection, BPU temperature, and the OpenClaw installation entry.
 
-RDK Studio automatically detects the currently active device’s board type in AI conversations and loads the corresponding hardware knowledge. If a user issues a command or performs an operation incompatible with the current board type, the AI will proactively alert them—for example, if a developer connected to an RDK X3 requests to “use an RDK X5 Bayes-architecture HBM,” the AI will first point out the board-type mismatch.
+## Pay Attention to hbm When Running On-Device AI Models
 
-## Feature Availability Across Different Boards
+hbm is the model file format used by the RDK's on-board BPU, typically with a `.hbm` file extension. It is only relevant to **on-device AI inference** and is not prerequisite knowledge for connecting devices or using RDK Studio.
 
-Most RDK Studio features offer consistent experiences across all three boards. The following capabilities differ:
+If you are only logging in, flashing, adding devices, opening terminals, transferring files, using remote desktop, or working with local large language models, you can ignore hbm for now.
 
-| Feature | RDK X3 | RDK X5 | RDK S100 |
-|---|---|---|---|
-| Type-C Flash Connect | Not supported | Supported | Not supported |
-| TF Card Flashing | Supported | Supported | Not supported (no TF card slot) |
-| eMMC Flashing | Not supported | Supported (requires eMMC version) | N/A (xburn only) |
-| xburn Flashing | Not supported | Not supported | Supported (only method available) |
-| Serial Console Access | Via UART2 on GPIO | Via onboard micro-USB | Via onboard USB-UART |
+hbm becomes important when you run on-device AI examples like YOLO, detection, segmentation, or deploy your own models to the BPU: different RDK boards require corresponding hbm files and cannot be used interchangeably.
 
-All other features not listed in the table—including remote terminal, AI conversation, file management, IDE, remote desktop, Wi-Fi configuration, device management, OpenClaw, etc.—function identically across all three boards.
+- hbm files for RDK X3 cannot be directly run on RDK X5 / S100.
+- hbm files for RDK X5 cannot be directly run on RDK X3 / S100.
+- The RDK S100 series also requires using the corresponding compiled model artifacts.
 
-## Recommended Initial Connection Methods
+If you encounter issues like `hbm version mismatch`, `model incompatible`, or model loading failures, first verify whether the model has been recompiled for the current board type.
 
-| Board Model | Recommended Initial Connection Method |
+For detailed troubleshooting, see [5.5 Cannot load hbm model](../5-faq/5-hbm-not-found.md).
+
+## Recommendations for Choosing Connection Methods
+
+| Scenario | Recommended Entry |
 |---|---|
-| RDK X5 | Type-C Flash Connect (fastest, no network setup required) |
-| RDK X3 | SSH over network (connect the board to a router first and obtain its IP from the router’s admin interface) |
-| RDK S100 | SSH over network |
-| Any board with boot failure | Serial console access (for recovery; allows reading boot logs) |
+| Known IP, device supports SSH | Add Device → SSH Device |
+| RDK X5 / S100 is near the computer, no LAN IP available | Add Device → RDK Type-C Direct Connection |
+| Only want to view boot logs or the system network is unreachable | Terminal or Add Device → Local Serial Logs |
+| Need to flash a new system | Flash → Select Device → Select Image |
+| Non-RDK Linux host | Add Device → SSH Device |
 
-For detailed instructions, see [2.3 Connecting to Your Device](../2-quick-start/3-connect-device/index.md).
+Serial connection is not a complete device access method. It only opens a local serial terminal, suitable for viewing boot logs or troubleshooting network-unreachable devices. File management, Moss, OpenClaw, and the code editor still require adding the device via SSH.

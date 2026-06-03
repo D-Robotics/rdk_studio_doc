@@ -1,92 +1,54 @@
 ---
-sidebar_label: '2.3.1 Connect via Type-C (RDK X5)'
-title: 2.3.1 Connect via Type-C (RDK X5)
+sidebar_label: '2.3.1 Type-C direct'
+title: 2.3.1 Type-C direct
 ---
 
-# 2.3.1 Connect via Type-C (RDK X5)
+# 2.3.1 Type-C direct
 
-![Add Device dialog: interface showing three connection options, with Type-C Flash Connect in the middle](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/add-device-dialog.png)
+RDK Type-C direct is for when the device is next to your PC but has no LAN IP yet. RDK Studio helps detect the Type-C NIC, set up the direct link, and add the device using default credentials.
 
-## Applicability
-
-Type-C connection is the fastest way to connect devices on RDK X5: a single Type-C data cable enables direct communication between your PC and the board—no router or manual IP configuration required. This method supports only the RDK X5; for other board models, please use [SSH Connection](./2-ssh.md) or [Serial Connection](./3-serial.md).
-
-Under the hood, it relies on the USB CDC RNDIS protocol: the board’s USB Device Controller emulates itself as an Ethernet adapter. Once recognized by the PC, a virtual USB Ethernet adapter appears, enabling communication between the PC and the board—functionally equivalent to connecting two devices directly via an Ethernet cable.
-
-## Prerequisites
+## When it applies
 
 | Item | Requirement |
 |---|---|
-| Board Model | RDK X5 (including both 4GB and 8GB RAM variants) |
-| Data Cable | Full-featured Type-C data cable (must support data transfer; common phone charging cables often only support power delivery, not data) |
-| Board Image | Official RDK image or a custom image that retains RNDIS configuration |
-| Studio Client | Desktop client (logged in) |
-| PC OS Permissions | Administrator privileges (required to configure the IP address of the virtual network adapter during first-time setup) |
+| Device | RDK hardware with USB networking |
+| Cable | Full-feature Type-C data cable; charge-only cables will not work |
+| Client | RDK Studio desktop app |
+| Permissions | Admin rights may be needed the first time you configure the local NIC |
 
-## Procedure
+After a successful direct link, the device appears in the device list like any SSH device. File manager, terminal, Moss, OpenClaw, and other features then work the same way.
 
-### Step 1: Physical Connection
+## Steps
 
-Connect your PC to the RDK X5 using a full-featured Type-C data cable. Within approximately 5–10 seconds after the board boots up, the PC should recognize the USB virtual network adapter.
+1. Connect the board to your PC with a Type-C cable and wait for it to boot.
+2. Open *Add device → RDK Type-C direct*.
+3. In the NIC list, pick the interface that appears or goes online after you plug in.
+4. Click *Connect*. RDK Studio configures the local network and tries to reach the device.
+5. After success, enter or confirm the device alias and save to the list.
 
-If the USB network adapter does not appear on the PC, the most common cause is that the cable only supports charging (lacks data transfer capability). We recommend keeping a dedicated "debugging-only" full-featured data cable clearly labeled for development purposes.
+Typical addresses:
 
-### Step 2: Select Type-C Connection in Studio
-
-Open the RDK Studio desktop client, click **Add Device** in the top toolbar, and select **Type-C Flash Connect** in the pop-up window. Studio will scan for USB network adapters on your PC; recognized adapters are typically displayed as **RNDIS** or **Ethernet adapter (USB)**.
-
-If multiple adapters appear in the list, Studio will highlight the recommended match. Select this item to proceed.
-
-### Step 3: Automatic IP Configuration
-
-After confirming the target network adapter, the desktop client will automatically assign a static IP address `192.168.128.100/24` to the USB virtual network adapter. This operation requires administrator privileges:
-
-- **Windows**: A UAC prompt appears—click **Yes**.
-- **macOS**: A sudo privilege escalation dialog appears—enter your user password.
-- **Linux**: A polkit privilege escalation dialog appears.
-
-Once IP configuration is complete, Studio proceeds to the next step.
-
-### Step 4: Automatic SSH Connection Establishment
-
-Studio establishes an SSH session using the following default credentials:
-
-| Field | Default Value |
+| Side | Address |
 |---|---|
-| Board IP | `192.168.128.10` (factory preset, fixed) |
-| Username | `root` |
-| Password | `root` |
+| Device | `192.168.128.10` |
+| PC | A local address on the same subnet as the device |
 
-Upon successful connection, the board appears in the **Current Device** dropdown in the top toolbar and is automatically activated as the target device for subsequent operations. Simultaneously, Studio runs background diagnostics to detect the board model, image version, CPU/RAM specs, and other information.
+The UI prefers online interfaces; you can switch to “show all” to debug offline or unrecognized NICs.
 
-## IP Addressing Scheme
+## Common messages
 
-In Type-C connection mode, the fixed subnet `192.168.128.0/24` is used:
-
-| Endpoint | IP Address |
+| Symptom | What to do |
 |---|---|
-| PC side (USB virtual network adapter) | `192.168.128.100/24` |
-| Board side (`usb0` interface) | `192.168.128.10/24` |
+| Type-C NIC not detected | Confirm the cable supports data; replug and refresh |
+| NIC present but no IP | Confirm you selected the RDK NIC, then start connect again |
+| SSH timeout | Wait for full boot and stable power, then retry |
+| Auth failure | Defaults are often `root/root`; if the image password was changed, use the SSH flow and enter credentials manually |
+| PC loses internet | USB NIC may have changed route priority; follow the in-app hint to adjust network settings |
 
-Do not modify these addresses. AI Dock’s troubleshooting and auto-recovery templates rely on this convention.
+Full troubleshooting: [5.3 Type-C direct failed](../../5-faq/3-typec-flash-failed.md).
 
-## Handling Reconnection After Unplugging
+## Next steps
 
-When you unplug and reinsert the Type-C cable, the PC typically re-enumerates the USB virtual network adapter, and the IP configuration is automatically restored. Click the **Refresh** button in Studio to trigger device rescan.
+Type-C direct suits first bring-up and bench debugging.
 
-If the IP configuration is not automatically restored upon reinsertion (due to differing network adapter management policies across operating systems), simply repeat Step 3.
-
-## Common Issues
-
-| Symptom | Possible Cause | Solution |
-|---|---|---|
-| USB network adapter not appearing on PC | Data cable supports charging only | Replace with a full-featured data cable |
-| USB adapter shows "Not Connected" | RNDIS not started on board, or non-official image used | Wait for board boot completion; verify image version |
-| USB adapter connected but SSH fails | PC-side IP not properly configured | Restart Studio and ensure the IP configuration prompt was approved |
-| Desktop client doesn’t prompt for permissions | Client not running with admin privileges | Close Studio and relaunch it as Administrator (right-click → Run as administrator) |
-
-For a complete troubleshooting checklist, see [5.3 Type-C Flash Connect Failure](../../5-faq/3-typec-flash-failed.md).
-
-## Next Steps
-
-After successfully connecting via Type-C, we recommend configuring Wi-Fi on the board ([2.4 Configure Network](../4-configure-network.md)) so you can maintain remote access even after unplugging the cable.
+To use the device without the cable later, continue with [2.4 Configure network](../4-configure-network.md). After Wi-Fi is set up, add another SSH device entry using the Wi-Fi IP.

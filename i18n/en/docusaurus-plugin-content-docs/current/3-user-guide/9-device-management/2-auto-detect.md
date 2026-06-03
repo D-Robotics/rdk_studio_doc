@@ -1,46 +1,46 @@
 ---
-sidebar_label: '3.9.2 Automatic Device Identification'
-title: 3.9.2 Automatic Device Identification
+sidebar_label: '3.9.2 Automatic device detection'
+title: 3.9.2 Automatic device detection
+unlisted: true
 ---
 
-# 3.9.2 Automatic Device Identification
+# 3.9.2 Automatic device detection
 
-When a device is connected for the first time, Studio automatically probes its hardware and software status and saves the results as the device's "profile." This profile influences the AI's injection of hardware-specific knowledge and tool-loading behavior during conversations.
+On first connect Studio captures hardware and OS metadata and stores it so Moss knows what kind of board it is talking to.
 
-## Probed Items
+## What gets detected
 
-| Probed Item | Data Source | Purpose |
-|---|---|---|
-| Board Type (X3 / X5 / S100) | `cat /proc/device-tree/model` | Determines which board-specific skills to load |
-| Image Version | `cat /etc/rdkos-release` | Helps the AI assess system capabilities |
-| Linux Kernel | `uname -r` | Serves as reference when troubleshooting kernel-related issues |
-| TROS Version | `ls /opt/tros/` | Determines the ROS command syntax version (humble / foxy) |
-| OpenClaw Installed? | `which openclaw` | Determines whether to load OpenClaw collaboration tools |
-| BPU Type | Inferred from board type | Provides compatibility hints for hbm model architectures |
-| Physical Network Interfaces | `ip addr show` | Data source for quick IP lookup in the top bar |
+| Info | Why it matters |
+|---|---|
+| Board type (X3 / X5 / S100) | Gates board-specific features |
+| System image details | Grounds environment-aware answers |
+| ROS / TROS stack | Better ROS command guidance |
+| OpenClaw status | Whether the on-board agent is available |
+| BPU type | Warns if model artifacts match the board |
+| Network addresses | Quick lookup in lists and Workbench |
 
-Probing is automatically performed when adding a device, and developers typically don’t need to trigger it manually. If the board environment changes (e.g., after reflashing the system), you can click *Re-probe* in the device details to update its profile.
+Detection runs when you add a device—no manual trigger needed. After a full reflash, follow device detail prompts to refresh.
 
-## Impact of the Profile on AI
+## How Moss uses it
 
-The device profile is injected into the D-Moss Agent’s context before each conversation. This ensures that the AI’s responses are based on the actual state of the current device, rather than generic answers.
+Moss leans on this context for practical answers instead of generic templates.
 
 Examples:
 
-| User Query | AI Decision Based on Profile |
+| You ask | Moss tends to |
 |---|---|
-| "Check BPU usage" | Profile shows X5 → executes `hrut_bpuprofile -b 0` (not necessarily installed on X3 / S100; AI falls back to generic command `cat /sys/devices/system/bpu/bpu0/ratio`) |
-| "Install a ROS 2 package" | Profile shows humble → suggests `apt install ros-humble-xxx` instead of foxy |
-| "Why does hbm fail to load?" | Profile shows X5 (Bayes architecture) → advises that hbm must be compiled with the Bayes toolchain |
+| “Check BPU usage” | Pick checks appropriate to the board |
+| “Install a ROS 2 package” | Suggest commands aligned with the installed distro |
+| “Why does hbm load fail?” | Relate errors to BPU/model compatibility |
 
-This experience—where the AI “knows” the current device—is one of the key distinctions between Studio and generic AI assistants.
+“Knowing the active device” is one of the biggest differences from a plain chat client.
 
-## Handling Probe Failures
+## Incomplete detection
 
-Some custom images may lack standard probing items (e.g., missing `/proc/device-tree/model`). In such cases:
+Custom images may omit standard fields—then:
 
-- Studio marks the missing item as "Unknown" without affecting other probes
-- You can manually set the board type and image version on the device detail page in the device list
-- Once manually set, the AI can still leverage the profile information
+- Studio marks missing items as “unknown” without blocking the rest.
+- You can set board type and image version manually on the device page.
+- Moss can still use those manual fields.
 
-If the AI’s responses remain inaccurate even after manual configuration, it may indicate that Studio’s built-in hardware knowledge base doesn’t yet cover your specific image. We recommend reporting this on the [RDK Developer Community](https://developer.d-robotics.cc).
+If answers stay wrong after manual fixes, post on [RDK developer community](https://developer.d-robotics.cc).

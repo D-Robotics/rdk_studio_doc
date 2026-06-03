@@ -1,37 +1,31 @@
 ---
-sidebar_label: '3.6.1 Launch and Authentication'
-title: 3.6.1 Launch and Authentication
+sidebar_label: '3.6.1 Open remote desktop'
+title: 3.6.1 Open remote desktop
 ---
 
-# 3.6.1 Launch and Authentication
+# 3.6.1 Open remote desktop
 
-## Automatic Launch Process
+## Auto startup
 
-The first time you open the *Remote Desktop* tab, Studio performs the following steps:
+First Remote desktop page visit fires:
 
-1. SSH into the board to check whether `x11vnc`, `tigervnc`, or `Xvfb` is installed.
-2. If none are installed, a confirmation dialog pops up; upon developer confirmation, they are installed via `apt install`.
-3. If the board has no physical display, Xvfb is automatically started as a virtual display.
-4. The VNC service is launched, listening on local port 5900.
-5. The Studio client connects an embedded NoVNC client through an SSH tunnel.
+1. Check whether viewer stack exists.
+2. Prompt to install gaps.
+3. After install Studio starts remote desktop.
+4. Interactive once canvas renders.
 
-The entire process requires no manual intervention from the developer. The initial installation takes 1–3 minutes; subsequent launches are nearly instantaneous.
+Hands‑free — no SSH package hunting. Prep takes longer once; repeats are quicker.
 
-## VNC Password Authentication
+## Password auth
 
-The VNC service supports password authentication via the RFB protocol:
+To block casual openings, a viewer password gate may appear on first boot:
 
-- On the first launch, Studio prompts the developer to set a VNC password (or optionally generate a random one).
-- The password is encrypted and stored in the current device configuration under *Configuration Center → Device Connections*.
-- When switching devices or logging into Studio from a new machine with the same account, the password is automatically synchronized—no re-entry required.
+- On first launch the UI may show an eight‑digit default PIN, or you can align it with the passphrase actually used on the device.
+- This credential is **only** for remote desktop; it is **not** the device SSH password.
+- If you switch PC or device, or change the passphrase on the board, enter it again in the page before connecting.
 
-## Security Notice
+## Security
 
-Do **not** expose VNC port 5900 to the public internet. The RFB protocol has historically had multiple security vulnerabilities, making public exposure highly risky. By default, RDK Studio accesses VNC through an SSH tunnel, with port 5900 bound only to the board's localhost (`127.0.0.1`), which is a secure approach.
+Avoid exposing raw desktop services WAN‑wide — normal Studio path is safest.
 
-If you need to manually access the board using another VNC client, we recommend:
-
-- Setting up port forwarding in your SSH client:  
-  `ssh -L 5900:localhost:5900 root@<board_IP>`
-- Then connecting your local VNC client to `localhost:5900`
-- **Never** bind port 5900 directly to `0.0.0.0` or expose it publicly.
+If the canvas stays blank or the session drops, copy the UI message and describe device status to Moss so it can check network, desktop components, and permissions.

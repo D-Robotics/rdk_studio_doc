@@ -1,50 +1,50 @@
 ---
-sidebar_label: '3.2.4 Attachments and Multimodal Input'
-title: 3.2.4 Attachments and Multimodal Input
+sidebar_label: '3.2.4 Upload files and screenshots'
+title: 3.2.4 Upload files and screenshots
 ---
 
-# 3.2.4 Attachments and Multimodal Input
+# 3.2.4 Upload files and screenshots
 
-AI Dock supports uploading files, images, and screenshots as additional context for conversations. When the currently active model in Studio supports vision capabilities, images can be directly analyzed by the model; documents are treated as long-text context for the Agent to reference.
+The AI Dock accepts files, images, and screenshots as reference. Whether images are analyzed directly depends on whether the current model supports vision.
 
-## Supported Attachment Types
+## Supported attachment types
 
-| Type | Supported Formats | Purpose |
+| Type | Supported | Use |
 |---|---|---|
-| Images | png, jpg, jpeg, webp, gif | Analyzed by vision-capable models (requires vision support, e.g., GPT-4V, Claude 3.5 Sonnet, Qwen-VL) |
-| Documents | txt, py, yaml, json, sh, xml, md, cpp, h, log, etc. | Used as long-text context |
-| Screenshots (from clipboard) | Paste directly via Ctrl + V | Treated the same as images |
+| Images | png, jpg, jpeg, webp, gif | Show Moss screenshots, UI, or error dialogs |
+| Documents | txt, py, yaml, json, sh, xml, md, cpp, h, log, etc. | Give Moss file contents |
+| Screenshots | Paste or upload as an image | Quickly show what you see |
 
-## Three Ways to Add Attachments
+## Three ways to add attachments
 
 | Method | Action |
 |---|---|
-| Click the attachment button | Paperclip icon next to the AI Dock input box opens a file selector |
-| Drag and drop files | Drag from your file explorer onto the AI Dock input box |
-| Paste screenshot | Ctrl + V (macOS: Cmd + V) directly attaches the image from your clipboard |
+| Attachment button | Paperclip next to the AI Dock input opens the file picker |
+| Drag and drop | Drag from the file manager onto the input |
+| Paste screenshot | Paste clipboard image into the input |
 
-Attached files appear above the input box and are submitted together with your message to the Agent.
+Attachments appear above the input and are sent with the message.
 
-## Typical Use Cases
+## Typical scenarios
 
-### Analyzing Error Screenshots
+### Analyze an error screenshot
 
-A developer sees a GUI error popup on their device, takes a screenshot, and pastes it into AI Dock with the prompt: "What does this error mean, and how can I fix it?" The vision model reads the screenshot content and, combined with the Agent’s device-aware capabilities, provides troubleshooting suggestions.
+When you see a GUI error on the board, paste a screenshot into the AI Dock and ask, for example: “What does this error mean and how do I fix it?” Vision-capable models read the image; Moss combines it with device context.
 
-### Uploading Configuration Files for Modification
+### Upload a config for edits
 
-Upload launch files, YAML configurations, etc., to AI Dock and describe the desired changes. The Agent reads the file content, generates a modified version, and can directly write it back to the device using `device_file_write`.
+Upload launch files, YAML, etc., and describe the change you want. Moss reads the content, proposes edits, and writes back after you confirm.
 
-### Summarizing and Diagnosing Long Logs
+### Long logs: summarize and locate
 
-Save a 1000+ line journalctl log as a .txt file and upload it, then prompt: "Identify errors and summarize them chronologically." The Agent scans the entire log and extracts key events.
+Save logs as text, upload, and ask: “Find the errors and summarize in time order.” Moss pulls the key events.
 
 ## Notes
 
-Attachments are included in the conversation’s context window and therefore consume tokens:
+Attachments become part of the model input and consume tokens:
 
-- A 1080p screenshot typically uses 1k–3k tokens (depending on the model’s visual encoding method)
-- A 100 KB text file consumes approximately 25k–30k tokens
-- Re-sending the same file repeatedly will consume tokens each time; we recommend adopting the pattern of “upload once and have the Agent reference it continuously”
+- Larger images and longer text cost more.
+- Resending the same file spends tokens again.
+- Prefer uploading once, then referring to it in follow-ups.
 
-If the token counter at the top of AI Dock approaches its limit, consider starting a new session or reducing the size/number of attachments.
+If the token pill near the top of the AI Dock nears the limit, start a new session or trim attachments.

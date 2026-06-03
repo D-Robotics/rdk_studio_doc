@@ -1,40 +1,81 @@
+﻿---
+sidebar_label: '3.2.1 Open the AI Dock'
+title: 3.2.1 Open the AI Dock
 ---
-sidebar_label: '3.2.1 Overview and Entry Point'
-title: 3.2.1 Overview and Entry Point
----
 
-# 3.2.1 Overview and Entry Point
+# 3.2.1 Open the AI Dock
 
-![AI Dock input prompt and quick access: The input box at the bottom of the screen displays the prompt "Describe your issue or goal to Moss (troubleshooting, solutions, device operations)—or drag and drop files..."; three common example questions float above the input box; a dropdown in the bottom-left corner allows switching between Quick and Deep Thinking lanes](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/ai-dock-focused.png)
+![AI Dock: device chip, attachments, Execute/Plan, Fast/Think, and Send](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/ai-dock-focused.png)
 
-AI Dock is the persistent conversational entry point in RDK Studio, located at the bottom of the client window. Regardless of which tab the user is currently on (Workspace, Remote Terminal, File Manager, IDE, etc.), they can interact with the Agent through the same AI Dock—this reflects Studio’s philosophy of treating AI as a “globally integrated interaction layer” rather than just a “sidebar chatbox.”
+The first time you use the AI Dock, follow **open entry → confirm device → choose mode → send message → review results**.
 
-![AI Dock real conversation flow: User asks "Hello, please introduce yourself," and Moss responds with a segmented self-introduction (Xiaodigua / project assistance / areas of expertise). The reply appears streamingly in the conversation panel, with "12 sec · 9.4k tokens" displayed at the bottom. The top status bar shows "Moss Ready OpenClaw Connected," and the current device is root@192.168.128.10:22](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/ai-dock-valid-conversation.png)
+## Step 1: Open an entry
 
-## Invoking AI Dock
-
-| Method | Action |
+| Scenario | Entry |
 |---|---|
-| / | Cursor positioned on the dialog box |
-| Mouse | Click the input box at the bottom of the screen |
+| Daily chat and execution | Left sidebar **Core → Workbench** |
+| Return to Moss from another page | Bottom-right **Open Moss** button |
+| View history | History button on the Dock or History panel in the workspace |
+| On-board Agent page | Bottom input reaches OpenClaw directly |
+| Model setup issues | **AI model settings** or **Local LLM** in input-area banners |
 
-Once invoked, the input box gains focus and you can start typing immediately.
+Start from **Core → Workbench** when you can—it shows Moss and the right workspace together so you are less likely to miss device state, terminal output, or confirmation prompts.
 
-## AI Dock Top Status Bar
+## Step 2: Confirm the current device
 
-The top status bar of AI Dock displays contextual information about the current conversation:
+Before device-related questions, check the device chip:
 
-- **Current Model**: Indicates the model used for this conversation (Thinking or Quick lane)
-- **Session ID**: ID of the current session; click to switch sessions or start a new one
-- **Token Usage Indicator**: Shows the proportion of tokens used in this session relative to the model’s context limit; turns red as it approaches the limit to provide a warning
-- **Settings Entry**: Navigate to *Configuration Center → AI Engine*
+| State | How to read it |
+|---|---|
+| Shows a device | Moss treats that device as the current target |
+| Not bound | Plans and knowledge Q&A work; on-board commands cannot run directly |
+| Device offline | Existing logs can be analyzed; actions wait for reconnect |
 
-## Relationship with Other Tabs
+If you manage multiple devices, confirm the target in the top device dropdown or in the input area first.
 
-AI Dock shares the concept of “currently active device” with all functional tabs:
+## Step 3: Choose work mode
 
-- In the *Remote Terminal* tab, commands invoked by AI are displayed synchronously within the terminal
-- In the *File Manager* tab, file operations performed by AI share the same file system as those performed manually by the developer
-- In the *Remote Desktop* tab, you can view the device’s graphical interface while simultaneously asking AI to analyze the screen or execute commands
+Defaults are fine at first. When impact is unclear, prefer **Plan**:
 
-When switching devices, AI Dock automatically switches to the corresponding device’s session—each device maintains its own independent conversation history.
+| Control | When to use |
+|---|---|
+| Execute | You already want to inspect, read, or run something specific |
+| Plan | You want steps, risks, and confirmations first |
+| Fast | Short answers, summaries, light explanations |
+| Think | Troubleshooting, code changes, multi-step tasks |
+
+## Step 4: Send the first message
+
+When connected, you might ask:
+
+```text
+Check current device status—focus on OS version, disk, memory, network, and recent error hints.
+```
+
+When not connected yet:
+
+```text
+I have not connected a device yet. What can RDK Studio help me do?
+```
+
+## Step 5: Review results
+
+After sending, check four places:
+
+- Whether Moss’s reply ties to the current device and next steps.
+- Whether terminal commands, file ops, or errors surfaced in the UI.
+- Whether confirmations appear for writing files, changing device state, or outbound sends.
+- Whether the right workspace shows diagnostics, terminal, files, or history to dig into.
+
+## Top buttons
+
+| Button | Use |
+|---|---|
+| Chat history | Local session list; resume old tasks |
+| Workspace | Expand/collapse the right workspace |
+| Terminal drawer | Quick peek at terminal output related to the task |
+| New chat | New session with current device and page |
+
+## Other pages
+
+Most feature pages have their own controls. When you need Moss, use the bottom-right button or return to the Workbench for full chat.

@@ -5,67 +5,55 @@ title: 1.2 Core Architecture
 
 # 1.2 Core Architecture
 
-RDK Studio consists of two ends and three processes. Understanding this architecture is key to grasping how RDK Studio differs from ordinary remote development tools—when you issue a single command, Agents on both your PC and the board can collaboratively complete the task, powered precisely by this dual-Agent orchestration mechanism.
+RDK Studio can be understood in three parts: the desktop client on your computer, Moss who assists you within the interface, and OpenClaw, which is deployed to the RDK board when needed.
 
-## Roles of the Three Processes
+## The Three Parts You Will Encounter
 
-| Process | Running Location | Responsibilities |
+| Part | Where You See It | What It Is Used For |
 |---|---|---|
-| Desktop Client | Your PC (Windows / macOS / Ubuntu) | An Electron-based GUI workspace providing all functional tabs, AI Dock, and device management interface |
-| D-Moss Agent | Embedded within the desktop client process | The PC-side AI orchestration engine. Understands user intent, schedules built-in tools, plans multi-step tasks, and coordinates across devices |
-| OpenClaw Agent | Runs on the RDK board, managed as a persistent service by systemd | The board-side AI runtime. Can independently handle board-local tasks or receive subtasks delegated by D-Moss |
+| Desktop Client | The RDK Studio window on your computer | Adding devices, flashing systems, opening terminals, files, remote desktop, code editor, and settings |
+| Moss | Workbench and AI Dock | Analyzing problems, generating steps based on the current device, project, logs, and attachments, and executing supported actions after your confirmation |
+| OpenClaw | Board-side Agent page | Board-side conversations, device skills, and tasks more closely tied to the current device after deployment to the RDK board |
 
-Both D-Moss and OpenClaw are full-fledged AI Agent runtimes—their differences lie in deployment location and the types of tasks they excel at.
+In daily use, you don't need to remember these layers. First, add a device, then tell Moss your goal in the Workbench.
 
-![OpenClaw main panel in Studio: The top displays real-time status of gateway, network, and models; the right side shows configuration progress and quick actions (restart gateway, view logs, upgrade, diagnose and fix)](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/03-OpenClaw.png)
+If a task requires the board-side Agent, RDK Studio will guide you to the corresponding page to deploy or connect OpenClaw.
 
-## Dual-Agent Collaboration Mechanism
+## When to Use Moss and When to Use OpenClaw
 
-D-Moss and OpenClaw communicate via an SSH tunnel. When a developer initiates a task, it first arrives at D-Moss, which then determines the optimal execution location based on task characteristics:
+Most daily development tasks should be handed to Moss first: checking logs, organizing steps, explaining errors, opening terminals, handling files, generating troubleshooting plans, or analyzing information across the current page.
 
-- **Executed directly by D-Moss**: Pure PC operations (e.g., local file handling), tasks requiring strong model inference, or cross-device planning
-- **Delegated to OpenClaw**: Tasks requiring long-running execution, offline operation, or tight integration with hardware sensors
+Use OpenClaw when you need a board-side assistant. For example, managing board-side skills, configuring board-side models, having conversations directly with the development board, or handling tasks more dependent on the current device.
 
-Once delegated, OpenClaw executes the task on the board and sends results back to the PC. Throughout this process, developers don’t need to manage the coordination between the two ends—the AI Agents handle scheduling automatically behind the scenes.
+The board-side Agent page will show entry points for deployment, connection, models, and message integration. For what you can do, follow the prompts on the page.
 
-For example: You say, "Check the BPU temperature on the board every 5 minutes, and automatically throttle if it exceeds 70°C." D-Moss evaluates that this is a long-term monitoring task requiring persistent execution on the board, so it writes the task along with execution parameters (threshold, throttling method, reporting mechanism) into OpenClaw’s state machine. Even if you shut down your PC or close Studio afterward, OpenClaw on the board continues executing the task. When the temperature threshold is triggered, OpenClaw pushes an event back to the PC through the SSH tunnel (notifying you in real time if the PC is online).
+## Connection Relationship
 
-## Communication Link
+RDK Studio first accesses the device via SSH or Type-C direct connection. Once connected, the terminal, files, code editor, remote desktop, and Moss all work around the same device.
 
-```text
-PC Side
-├─ Desktop Client
-│  └─ D-Moss Agent
-│     └─ oc-bridge (SSH tunnel client)
-│           ↓
-Board Side
-├─ sshd (SSH server, port 22)
-│  └─ Port forwarding to localhost 127.0.0.1:18789
-│        ↓
-└─ OpenClaw Gateway Process
-   └─ OpenClaw Agent (Node.js persistent service)
-```
+After OpenClaw is deployed to the RDK board, it is also used through the connection established by RDK Studio. You usually don't need to handle complex network configurations separately.
 
-By default, the OpenClaw gateway on the board listens only on `127.0.0.1:18789` and is not exposed to the public internet. Studio reuses the established SSH connection for TCP port forwarding, maintaining security while avoiding the need to open additional public ports on the board.
+## What Happens After Sending a Message
 
-## Standard Task Flow
+1. You type a message in the AI Dock and choose the **Execute** or **Plan** working mode.
+2. RDK Studio provides Moss with the current page, current device, project directory, attachments, and workspace information.
+3. Moss either answers directly, asks follow-up questions, or provides execution steps.
+4. If the terminal, files, device, or OpenClaw is needed, the interface will display the corresponding actions and execution results.
+5. For high-risk actions such as writing files, changing device states, or sending external messages, the interface will ask for your confirmation.
+6. If the task is better suited for the board-side Agent, Moss will guide you to the relevant OpenClaw page to continue.
 
-The complete flow for a user speaking to the AI Dock is as follows:
+## What You Can See Before and After Execution
 
-1. The desktop client sends the user input to the D-Moss Agent.
-2. D-Moss injects the profile of the currently active device (board type, image, status) as context.
-3. After matching relevant skills (SKILL.md), D-Moss injects the skill content into the context.
-4. D-Moss invokes a large language model, which decides whether to reply to the user or call a tool.
-5. Tool invocations are dispatched based on type:
-   - General-purpose tools (web search, document retrieval) are executed locally by D-Moss.
-   - Device-specific tools (SSH commands, file transfers) are executed via direct SSH connection from the PC to the board.
-   - OpenClaw tools (task delegation, long-running task orchestration) are forwarded to the board-side OpenClaw via oc-bridge.
-6. Tool results are returned to the model, which continues making decisions until the task is complete.
-7. Streaming output is sent back to the desktop client for display to the user.
+Moss can help you analyze problems or, after your confirmation, use the terminal, files, device, and other functions to complete operations. Key actions will leave visible results in the interface, and you will typically see:
 
-This entire flow is transparent to developers, yet Studio displays every tool invocation—including commands, parameters, and outputs—in real time within both the conversation area and the remote terminal. This approach neither forces developers to understand architectural details nor hides those details from them.
+- Terminal commands, file operations, execution results, and error messages displayed in the conversation or workspace for easy review.
+- For high-risk actions such as writing files, changing device states, or sending external messages, the interface will ask for your confirmation.
+- When the device is offline, Moss can still answer knowledge-based questions, organize solutions, and analyze existing logs; actions requiring execution on the board must wait until the device reconnects.
+- The serial port is mainly used to view logs from the locally connected development board. Opening the serial port does not add the board to the device list, nor does it equate to SSH device access.
+- Ollama in the local large model page refers to the local service on your computer. Which model the board-side OpenClaw uses must be configured separately in the model settings on the board-side Agent page.
 
 ## Further Reading
 
-- [3.10 OpenClaw Board-side Agent](../3-user-guide/10-openclaw/index.md): Deployment, sub-tabs, and collaboration details of OpenClaw
-- [3.2 AI Chat](../3-user-guide/2-ai-chat/index.md): Specific capabilities of the D-Moss Agent within AI Dock
+- [3.1 Workbench](../3-user-guide/1-workbench/index.md): How the Moss workspace organizes device status, projects, and history.
+- [3.2 AI Dock](../3-user-guide/2-ai-chat/index.md): Execute/Plan, Quick/Think, and current task information.
+- [3.10 OpenClaw](../3-user-guide/10-openclaw/index.md): Deployment, diagnostics, model synchronization, and board-side conversations.

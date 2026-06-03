@@ -1,49 +1,52 @@
 ---
-sidebar_label: '3.11.2 Built-in Skills and Categories'
-title: 3.11.2 Built-in Skills and Categories
+sidebar_label: '3.11.2 View built-in skills'
+title: 3.11.2 View built-in skills
+unlisted: true
 ---
 
-# 3.11.2 Built-in Skills and Categories
+# 3.11.2 View built-in skills
 
-RDK Studio comes bundled with a curated set of official skills maintained by D-Robotics, covering the most common scenarios in RDK development. Developers can use them out of the box without manual installation.
+RDK Studio ships curated D-Robotics official skills spanning common development tasks. Nothing to install separately—launch Studio and they appear.
 
-## Five Major Categories
+## Five families
 
-Built-in skills are organized into the following categories:
+Skills are grouped as follows:
 
-| Category | Purpose | Example Skills |
+| Family | Purpose | Typical skills |
 |---|---|---|
-| Core Operations (`core/`) | Device diagnostics, hardware knowledge, and foundational capabilities for OpenClaw collaboration | `rdk-openclaw`, `rdk-device-ops`, `rdk-hardware`, `rdk-board-knowledge` |
-| Board-Specific (`boards/`) | Specialized capabilities tailored to specific board models | `rdk-x5-app`, `rdk-x5-ai-detect`, `rdk-x5-tros-runtime` |
-| Documentation & Search (`docs/`) | Searching within RDK official documentation and community resources | `rdk-developer-docs`, `rdk-doc-optimized`, `rdk-ros`, `rdk-forum-search` |
-| General Tools (`tools/`) | Cross-scenario通用 capabilities | `multi-search-engine`, `agent-browser`, `duckduckgo-search` |
-| Optional Extensions (`optional/`) | Advanced capabilities that can be optionally enabled | `rdk-token-usage`, `nano-banana-pro`, `rdk-skill-authoring-guide` |
+| Core operations | Device ops, hardware context, OpenClaw basics | `rdk-openclaw`, `rdk-device-ops`, `rdk-hardware`, `rdk-board-knowledge` |
+| Board-specific | Features targeting certain boards | `rdk-x5-app`, `rdk-x5-ai-detect`, `rdk-x5-tros-runtime` |
+| Documentation & search | Official docs plus community lookups | `rdk-developer-docs`, `rdk-doc-optimized`, `rdk-ros`, `rdk-forum-search` |
+| General utilities | Cross-cutting helpers | `multi-search-engine`, `agent-browser`, `duckduckgo-search` |
+| Optional expansions | Advanced opt-in tooling | `rdk-token-usage`, `nano-banana-pro`, `rdk-skill-authoring-guide` |
 
-## Number of Skills and Access Points
+## Where to browse
 
-The repository actually contains 45 `SKILL.md` files (counted by files matching `skills/**/SKILL.md`). The subset listed under *Skill Workshop → Skill Center → catalog* represents a curated selection; additional skills can be found via search on the ClawHub community.
+Inside **Skill Workshop**, explore device OpenClaw skills, local Moss skills, SkillHub entries, names, summaries, and risk notes.
 
-Ways to view skill details:
+Shortcuts:
 
-| Access Point | Path |
+| Entry | Path |
 |---|---|
-| Built-in Studio Directory | *Skill Workshop → Skill Center → catalog* |
-| Repository Source Files | `<repo-root>/skills/<category>/<skill-name>/SKILL.md` |
-| View Currently Active Skills in AI Dock | Enter the `/skills` command |
+| Bundled catalogs | *Skill Workshop → Skill center / Node center* |
+| Active session skills | Type `/skills` in AI Dock |
+| SkillHub | Search and preview more skills |
 
-## The Actual "Home" of Skills
+## Where files live
 
-| Location | Content |
+| Location | Holds |
 |---|---|
-| Within RDK Studio Installation | Curated official skills (~12), listed in `src/skill-center/manifest.json` |
-| Repository `skills/` Directory | Full official skill set (45 skills) |
-| On-Device OpenClaw Workspace | Skills synced from the repository (auto-sync disabled by default) |
-| Remote ClawHub | Community-contributed third-party skills (pulled on demand) |
+| Studio bundle | Ship-with official skills |
+| Local Moss workspace | Skills you create, capture from chats, or add from SkillHub |
+| Board OpenClaw workspace | Skills synced onto the current device |
+| SkillHub | Discoverable remote skills |
 
-When the D-Moss Agent starts, it scans local `skills/**/SKILL.md` files to build an index. During conversations, skills are loaded into context when their trigger keywords are matched.
+Moss auto-selects matching skills based on wording; `/skills` shows what loaded for this session.
 
-## Why Not Load All Built-in Skills?
+## Why not everything loads each turn
 
-RDK Studio does not inject all built-in skills into the context of every conversation. This is a core design principle of the trigger-based matching mechanism—to prevent context bloat and maintain clear decision-making by the Agent. For detailed trigger-matching logic, see [3.11.5 Trigger Matching Mechanism](./5-trigger-matching.md).
+Studio injects relevant skills per question—not the entire catalogue—reducing noise and improving grounding.
 
-If a developer wishes a particular skill to be loaded "regardless of what the user says," they can add broad keywords (e.g., `rdk`, `development`) to the `trigger` field in `SKILL.md`. However, this is generally discouraged—it may cause the skill to activate during irrelevant conversations, disrupting the Agent’s attention allocation.
+See [3.11.5 Tune trigger keywords](./5-trigger-matching.md).
+
+To elevate a custom skill, add realistic trigger phrases—not overly broad keywords like lone `rdk` or generic “development”, which inflate false positives.

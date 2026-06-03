@@ -1,75 +1,68 @@
+﻿---
+sidebar_label: '2.5 Connect an AI model'
+title: 2.5 Connect an AI model
 ---
-sidebar_label: '2.5 Connect to AI Models'
-title: 2.5 Connect to AI Models
----
 
-# 2.5 Connect to AI Models
+# 2.5 Connect an AI model
 
-All AI capabilities in RDK Studio are powered by large language models. This section provides the simplest way to connect; detailed explanations of model entry fields, dual-lane routing mechanisms, and protocol determination rules can be found in [3.12 Configuration Center](../3-user-guide/12-config-center/3-ai-engine.md).
+Moss needs a working model to answer questions and operate devices. Most new users can rely on the default after sign-in; manual setup is mainly for corporate model endpoints or running a small model locally.
 
-## Two Connection Methods
+## Three paths
 
-| Your Situation | Recommended Method |
+| Situation | Path |
 |---|---|
-| Default case (all RDK Studio users) | Use the **built-in official recommended model**, requiring no configuration |
-| You already have an external model API key and wish to replace the default model | Add a custom model entry in the Configuration Center |
+| Fresh install, just want it working | After sign-in, use the built-in recommended models |
+| Team already has a model service or keys | **Settings → AI engine** |
+| Want a fast local small model | **AI capabilities → Local LLM**: install and pull a model |
 
-## Method 1: Use the Built-in Official Recommended Model
+## Default models
 
-RDK Studio provides **all logged-in users** with an official recommended model: after completing SSO login, simply open *AI Dock* and send a message directly—Studio will automatically use the built-in model. No additional API key application or field filling in Studio is required. This built-in model is routed through D-Robotics' official gateway, treating internal company accounts and external developer accounts equally.
+After sign-in you can usually go straight to the workbench—no keys required first.
 
-![Onboarding Guide · Step 4: Try the AI Assistant — Top shows a "Say hello" quick-send button; below is an optional entry for “OpenClaw and Model (Recommended)”; bottom has a “Complete Onboarding” button to enter the main workspace](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/onboarding-4-dmoss.png)
+If the composer shows “fast/reasoning model not configured” or “model unreachable,” use **AI model settings** or **Local model** from the hint to jump to the right page.
 
-The built-in model is sufficient for most scenarios. If you don’t need to integrate other vendors’ models for now, you can click *Send* on the "Say hello" card shown above or proceed directly to [2.6 Start Your First Conversation](./6-first-conversation.md).
+## Bring your own model service
 
-## Method 2: Custom Model Integration
+If your team provided an endpoint, open **Settings → AI engine** and set it as the reasoning or fast model.
 
-For developers who already have accounts and API keys with external model providers.
+![Config center · AI engine: configure default models for reasoning mode and fast mode](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/settings-ai-engine.png)
 
-### Step 1: Access AI Engine Settings
+| Mode | Role |
+|---|---|
+| Reasoning | Main chat, complex tasks, planning, troubleshooting |
+| Fast | Short Q&A, summarizing results, light file browsing |
 
-Open the desktop client and navigate to *Settings Panel → AI Engine*. Alternatively, click the "Models" tab at the bottom of AI Dock to jump directly.
+Common fields:
 
-### Step 2: Create a New Model Entry
+| Field | What to enter |
+|---|---|
+| Display name | Friendly label for this configuration |
+| Provider | Match your team’s platform |
+| Model name | Name from your team or provider |
+| Base URL | API base from your team; leave empty if using the platform default |
+| API key | Key from your team or provider (enter in the settings page) |
 
-Click *Create New Model Entry* and fill in the following fields:
+If unsure, share the provider’s field guide or a redacted screenshot (hide the key) with Moss to map fields. Do not paste API keys into chat.
 
-| Field | Description | Example |
-|---|---|---|
-| Label | Give the entry a recognizable name | "My GPT-4" |
-| Provider | Select vendor/protocol | `openai` / `anthropic` / `qwen` / `doubao` / `gemini` / `deepseek` / `moonshot` / `ollama` / `openai-compatible` / `anthropic-compatible`, etc. |
-| Model | The vendor's exact model ID (must be precise) | `gpt-4o-mini` / `claude-sonnet-4-20250514` / `qwen-plus` / `doubao-1.5-pro-256k` |
-| API Key | Obtain from the vendor’s console | `sk-xxxx...` |
-| Base URL | Service endpoint; leave blank to use the vendor’s default | (Leave blank) |
+## Local Ollama
 
-### Step 3: Test Connectivity
+**Local LLM** lets you:
 
-Click *Test Connectivity*. Studio will send a test request to the model. A successful return of the model list indicates correct configuration.
+![Local LLM page: install and start Ollama, download a model, and set it as Moss fast mode](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/local-llm.png)
 
-### Step 4: Save and Activate
+1. Install or detect local Ollama.
+2. Start the local model server.
+3. Enter a model name to pull.
+4. Run a one-shot chat test.
+5. One-click set as Moss fast model.
 
-After saving the model entry, select it from the dropdown menu at the top of the AI Engine as your currently active model. Studio applies the change immediately—no restart required.
+Local models suit quick answers, summaries, and light Q&A. They run on your PC; board-side OpenClaw needs its own agent settings on the device.
 
-## About Dual Lanes
+## Next steps
 
-RDK Studio features two dedicated model slots: **Thinking** and **Quick**:
+When models work, continue to [2.6 First conversation](./6-first-conversation.md).
 
-- **Thinking Lane**: Handles main conversations, complex reasoning, and planning  
-- **Quick Lane**: Handles tool result summarization, file browsing, and short Q&A  
+Deeper docs:
 
-Studio automatically routes tasks based on their characteristics. If only the Thinking lane is configured and the Quick lane remains empty, all tasks will be processed through the Thinking lane, significantly increasing token costs (by 5–10×). We strongly recommend configuring both lanes—use a cost-effective small model for the Quick lane.
-
-## Protocol Determination Rules
-
-Studio determines which API protocol to use based on the **Provider** field in the model entry (**not the URL**):
-
-| Provider Field | Protocol Used | Authentication Header |
-|---|---|---|
-| `openai` / `qwen` / `doubao` / `openai-compatible`, etc. | OpenAI Completions | `Authorization: Bearer <key>` |
-| `anthropic` / `anthropic-compatible` | Anthropic Messages | `x-api-key: <key>` |
-
-If you're using a reverse proxy to wrap an Anthropic service under a path that doesn't contain "anthropic," you must still set the Provider to `anthropic-compatible`; otherwise, Studio will send requests using the OpenAI protocol and receive a 401 error.  
-
-## Next Steps
-
-Once model configuration is complete, proceed to [2.6 Start Your First Conversation](./6-first-conversation.md) to send your first message to the AI.
+- [3.13.3 Configure AI models](../3-user-guide/13-config-center/3-ai-engine.md)
+- [3.12 Local LLMs](../3-user-guide/12-local-models/index.md)
