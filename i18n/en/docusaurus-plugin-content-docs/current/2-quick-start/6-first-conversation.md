@@ -1,71 +1,70 @@
+﻿---
+sidebar_label: '2.6 First conversation'
+title: 2.6 First conversation
 ---
-sidebar_label: '2.6 Initiate Your First Conversation'
-title: 2.6 Initiate Your First Conversation
----
 
-# 2.6 Initiate Your First Conversation
+# 2.6 First conversation
 
-By now, you’ve completed all six steps: installation, login, flashing, device connection, network configuration, and model integration. This section guides you through sending your first message to the AI to verify that the entire pipeline is working.
+![Workbench first conversation: after sending Hello, Moss replies in the chat area and waits for more input](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/first-conversation.png)
 
-## Invoke AI Dock
+After sign-in and device setup, send your first message to Moss from the workbench. You can brainstorm without a connected device; for on-board actions Moss will remind you to connect first.
 
-AI Dock is a persistent conversation area at the bottom of the screen that can be activated by clicking the input field at the bottom.
+## Open the workbench
 
-## Your First Message
+**Core → Workbench** on the left is Moss’s primary entry. It combines chat with the project workspace; the right rail can surface status, history, diagnostics, changes, files, terminal, and more.
 
-Enter the following in the input box:
+Finishing onboarding’s last step “Start using Moss” may auto-send an example prompt.
 
+## Pick work style and reply mode
+
+The composer exposes two switches. Defaults are fine for a first try:
+
+| Switch | Options | Meaning |
+|---|---|---|
+| Work style | Execute / Plan | Execute runs tasks directly; Plan lists steps and risks first |
+| Reply mode | Fast / Reasoning | Fast for simple asks; reasoning for debugging, code, multi-step |
+
+If unsure, start with **Execute + Reasoning** so Moss inspects the current device thoroughly.
+
+## First prompts
+
+If a device is connected:
+
+```text
+Check this device's system summary—tell me board model, OS version, disk, memory, and what you'd suggest next.
 ```
-Help me check the system overview of this device.
+
+If not connected yet:
+
+```text
+Introduce what RDK Studio and Moss can do for me, then give three example prompts I can try after I connect a device over SSH.
 ```
 
-Press Enter to send. Studio will perform the following steps:
+## What success looks like
 
-1. Send the message to the currently active Thinking Lane model.
-2. After understanding your intent, the model automatically invokes device tools (executing commands on the board via SSH).
-3. Within a few seconds, it returns hardware metrics of the currently active device: CPU, memory, disk usage, image version, and key service statuses.
+A typical on-device task shows:
 
-Throughout this process, the commands invoked by the Agent are displayed in real time in the remote terminal, helping developers understand what the AI is doing.
+- Device chip in the composer shows online/bound state.
+- Moss states what it will check.
+- Results or terminal output stream into the thread.
+- Workspace panels show diagnostics, files, terminal, changes, etc.
+- Risky actions prompt for confirmation.
 
-## A Few Initial Prompts Worth Trying
+If the device is offline, Moss can still answer and plan but will not pretend remote commands ran.
 
-| Prompt | What the Agent Does |
+## Prompts worth trying
+
+| Prompt | What Moss does |
 |---|---|
-| `What ROS nodes are currently running on this board?` | Executes `ros2 node list` via SSH and returns the node list. |
-| `Copy /tmp/test.txt to my desktop.` | Invokes the file transfer tool to download the file to your PC. |
-| `What’s the BPU utilization on the board?` | Executes `hrut_bpuprofile -b 0` (for X5) or reads `/sys/devices/system/bpu/bpu0/ratio` (fallback), then parses and returns real-time data. |
-| `Explain the differences between RDK X5 and X3.` | Answers using the built-in hardware knowledge base. |
-| `What does this error mean: <paste error here>` | Matches against over 30 built-in RDK error patterns and provides troubleshooting guidance. |
+| `Which ROS 2 nodes are running on this device?` | SSH to list ROS 2 nodes |
+| `Help me check recent errors under /var/log` | Remote commands or file reads for recent errors |
+| `What does this error mean: <paste error>` | Uses RDK context plus device state |
+| `Summarize Git changes in the current project directory` | Workspace changes or remote Git status |
+| `Give me a plan first—don't execute yet` | Stays in or uses plan mode first |
 
-## Tips for Effective Usage
+## Next steps
 
-- **Don’t ask the AI to tackle complex tasks right away**: Start with simple questions to let the Agent understand the current state of your board.
-- **Paste full error messages**: Studio’s error pattern recognition relies on complete, original error logs.
-- **Don’t blindly approve tool invocation prompts**: By default, potentially destructive commands (e.g., `rm`, `kill`) trigger a confirmation dialog before execution.
-- **Speak up if you’re unsatisfied**: For example, say “Don’t do X; instead, do Y,” and the Agent will adjust its strategy accordingly.
-
-## Essential AI Dock Shortcuts
-
-| Action | Shortcut |
-|---|---|
-| / | Cursor positioned on the dialog box|
-| Send message | Enter |
-| Insert line break in multi-line input | Shift + Enter |
-
-
-## Full Pipeline Verification
-
-If your first message successfully returns device status information, it confirms that the complete RDK Studio pipeline is operational:
-
-- Desktop client (PC)
-- D-Moss Agent (AI orchestration on PC)
-- Large model API (cloud-hosted or self-hosted)
-- SSH channel (PC ↔ board)
-- Board-side hardware response
-
-Next, you can:
-
-- Explore each functional module in detail → [3. User Guide](../3-user-guide/1-workbench/index.md)
-- Install additional capabilities for the AI → [3.11 Skills](../3-user-guide/11-skill/index.md)
-- Run a persistent AI agent on the board → [3.10 OpenClaw On-Device Agent](../3-user-guide/10-openclaw/index.md)
-- Troubleshoot issues → [5. FAQs](../5-faq/1-ai-no-response.md)
+- Workbench & Moss workspace → [3.1 Workbench](../3-user-guide/1-workbench/index.md)
+- AI Dock composer → [3.2 AI Dock](../3-user-guide/2-ai-chat/index.md)
+- Board agent deploy → [3.10 OpenClaw](../3-user-guide/10-openclaw/index.md)
+- Local models → [3.12 Local LLMs](../3-user-guide/12-local-models/index.md)

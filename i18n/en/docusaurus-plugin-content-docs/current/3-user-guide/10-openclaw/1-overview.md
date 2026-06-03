@@ -1,61 +1,48 @@
 ---
-sidebar_label: '3.10.1 Overview and Applicable Scenarios'
-title: 3.10.1 Overview and Applicable Scenarios
+sidebar_label: '3.10.1 Decide whether you need OpenClaw'
+title: 3.10.1 Decide whether you need OpenClaw
+unlisted: true
 ---
 
-# 3.10.1 Overview and Applicable Scenarios
+# 3.10.1 Decide whether you need OpenClaw
 
-OpenClaw is not a mandatory component of RDK Studio. This section helps developers determine **when OpenClaw needs to be installed and when it does not**, avoiding unnecessary deployment costs.
+OpenClaw does not need to be installed from day one. This page helps you decide when to install it and when Moss plus SSH is enough.
 
-## Role Division Between D-Moss and OpenClaw
+## Decide first
 
-| Role | Deployment Location | Strengths |
-|---|---|---|
-| D-Moss Agent | Inside the PC-side Studio process | Powerful model inference, cross-device planning, long-context handling, invoking both PC-side and board-side tools |
-| OpenClaw Agent | Long-running systemd service on the RDK board | Persistent on-board presence, offline autonomy, tight hardware integration, long-duration monitoring tasks |
-
-Both are complete AI Agent runtimes; the difference lies in their deployment locations and the types of tasks they excel at.
-
-## Scenario Assessment
-
-| Scenario | Is OpenClaw Required? |
+| What you want to do | Recommendation |
 |---|---|
-| Occasionally running commands via SSH | No—remote terminal is sufficient |
-| Letting AI run commands (with PC online) | No—AI can directly use `device_exec` over SSH |
-| Needing a persistent Agent on the board that continues operating even when the PC is powered off | Required |
-| PC delegating task planning to the board itself | Required |
-| Multi-board collaboration and cross-board orchestration | Required (each board must have OpenClaw installed) |
-| 24/7 integration with WeChat or Feishu | Recommended to deploy on the board to avoid channel interruption when the PC is off |
+| General Q&A, reading logs, organizing steps | Start with Moss |
+| Occasionally run commands over SSH | Use Terminal or Moss |
+| Need on-board skills, on-board models, or device-side message channels | Then deploy OpenClaw |
 
-In short: **Temporary debugging doesn’t require it; persistent operation, autonomous execution, and multi-board coordination do.**
+## Common scenarios
 
-## Typical Use Cases
+| Scenario | Need OpenClaw? |
+|---|---|
+| Occasionally run commands over SSH | No—Terminal is enough |
+| Let AI run commands (PC online) | No—Moss can run on the connected device and show output in the UI |
+| Need on-board skills or on-board models | Usually yes |
+| Need message channels attached to the device | Deploy per page guidance |
+| Want work centered on this specific device | Consider it |
 
-### Scenario A: Long-Term On-Board Monitoring
+In short: **use Moss plus Terminal for ad hoc debugging; open the On-device Agent page when you need an on-board assistant.**
 
-> "Check the BPU temperature on the board every 5 minutes and automatically throttle if it exceeds 70°C."
+## Examples
 
-D-Moss identifies this as a long-term monitoring task and delegates it to OpenClaw on the board. OpenClaw continuously executes this within its state machine, unaffected even if the PC is powered off. When the temperature threshold is triggered, OpenClaw notifies the PC in real time via an SSH tunnel (if the PC is online).
+- “Check board temperature and key services; tell me first if anything looks wrong.”
+- “My team wants to query on-board status from a group chat.”
+- “A critical service misbehaved on the board; I want root cause before deciding to restart.”
 
-### Scenario B: 24/7 On-Board Bot Availability
+These can change device behavior—prefer having Moss propose investigation steps first, and confirm in the UI before execution.
 
-> "Team members @mention the bot in our WeChat group to check board status—even after I’ve left work, it should still respond."
-
-Deploy the WeChat integration directly on the board’s OpenClaw, which handles all WeChat messages. As long as the board has power and network connectivity, it operates independently without relying on any PC.
-
-### Scenario C: Automatic Recovery
-
-> "If a critical service on the board crashes, I want it to restart automatically."
-
-OpenClaw itself is managed by systemd and automatically restarts if it crashes. Tasks running inside OpenClaw are persisted via a state machine and resume from the latest checkpoint after restart. This self-healing capability enables unattended, reliable board operation.
-
-## Scenarios Unsuitable for OpenClaw
+## When OpenClaw is a poor fit
 
 | Scenario | Reason |
 |---|---|
-| Board hardware resources are constrained (RAM < 1 GB) | OpenClaw itself consumes ~150 MB of memory |
-| Board image lacks Node.js 22+ | OpenClaw depends on a relatively recent Node.js runtime |
-| One-off tasks that don’t require persistence | Using D-Moss + remote terminal is simpler |
-| Board cannot access external networks | Installation requires pulling packages from npm |
+| Board resources are obviously tight | The on-board service uses extra resources |
+| Board image lacks the runtime | Components must install before OpenClaw |
+| One-off task | Moss plus Terminal is simpler |
+| Board cannot reach the internet | Install may fail to download deps |
 
-If your use case involves **short-term debugging with the PC always online**, you can skip installing OpenClaw entirely and rely solely on D-Moss + remote terminal.
+If you only need short-lived debugging with the PC staying online, you can skip OpenClaw and use Moss plus Terminal.

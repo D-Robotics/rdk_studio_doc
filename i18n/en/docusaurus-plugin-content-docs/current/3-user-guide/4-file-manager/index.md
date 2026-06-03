@@ -1,18 +1,29 @@
+﻿---
+sidebar_label: '3.4 Files'
+title: 3.4 Files
 ---
-sidebar_label: '3.4 File Management'
-title: 3.4 File Management
----
 
-# 3.4 File Management
+# 3.4 Files
 
-![File Management Interface: directory tree on the left, file list on the right, path breadcrumbs at the top](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/06-file.png)
+![Files panel: switch to Files view from the workspace sidebar; read-only prompt when no device or remote folder is selected](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/06-file.png)
 
-File Management is a visual file operation interface within RDK Studio for onboard devices, offering capabilities such as directory browsing, uploading, downloading, and online editing. All file transfers are based on the SFTP protocol (a subsystem of SSH) and are fully encrypted throughout—never transmitted in plaintext—unlike traditional FTP.
+The Files page is for browsing and managing files on the device. You can browse folders, upload, and download files like a local file explorer, or open small files for editing inline.
 
-File Management shares the same file system with AI Dock's file operation tools (`device_file_read`, `device_file_write`, `device_file_list`): files edited and saved by developers in File Management will reflect the updated content the next time AI reads them; similarly, files modified by AI will display those changes in File Management after the developer refreshes the view.
+## First-time workflow
 
-## This section includes
+| Step | What to do |
+|---|---|
+| 1 | Confirm the device is online and a remote folder is selected |
+| 2 | Open the **Files** page and review the folder tree on the left and list on the right |
+| 3 | To transfer files, drag and drop or use upload/download |
+| 4 | For one-off text edits, double-click a file to open and save |
+| 5 | If you lack permissions or hit a restricted path, confirm you really need to change it |
 
-- [3.4.1 Directory Browsing and Transfers](./1-browse-and-transfer.md): directory tree on the left, file list on the right, drag-and-drop uploads, and batch downloads  
-- [3.4.2 Online Editing](./2-online-edit.md): browser-based editor powered by Monaco Editor, supported file types and limitations  
-- [3.4.3 Path Access Control](./3-path-access-control.md): write restrictions on sensitive paths (/sys, /proc) and exception-based authorization
+Files and Moss see the same filesystem on the same device. Edits saved in Files can be read by Moss later; after Moss modifies files, refresh Files to see updates.
+
+System and sensitive paths may block writes. If save fails due to permission or non-writable location, verify you really need that path, then share the UI message with Moss for troubleshooting.
+
+## Read next
+
+- [3.4.1 Browse and transfer files](./1-browse-and-transfer.md): browse folders, upload, download
+- [3.4.2 Edit files](./2-online-edit.md): edit common text files directly in Studio

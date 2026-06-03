@@ -1,62 +1,63 @@
 ---
-sidebar_label: '3.6.3 Alternative Solutions Comparison'
-title: 3.6.3 Alternative Solutions Comparison
+sidebar_label: '3.6.3 Other remote approaches'
+title: 3.6.3 Other remote approaches
+unlisted: true
 ---
 
-# 3.6.3 Alternative Solutions Comparison
+# 3.6.3 Other remote approaches
 
-NoVNC is a browser-native VNC client, and its performance is inferior to certain dedicated solutions. If lower latency is required, consider the following alternatives.
+Bundled viewer covers most robotics GUI needs. Pursue natives only if chasing lower latency.
 
-## Solution Comparison
+## Comparison
 
-| Solution | Advantages | Disadvantages |
+| Approach | Upside | Limitation |
 |---|---|---|
-| NoVNC (Studio default) | Browser-native, no installation required, highest integration level | Weakest performance among the four solutions |
-| Native VNC Client | Better performance than NoVNC | Requires installing an additional client on the PC; manual SSH tunnel setup needed for each connection |
-| xrdp (RDP protocol) | Extremely smooth; Microsoft's RDP protocol is mature | ARM xrdp packages for RDK boards have poor compatibility with some images |
-| SSH X11 Forwarding | Forwards individual GUI applications instead of the entire desktop | Not suitable for displaying a full desktop; only appropriate for specific GUI applications |
+| Studio baked viewer | Zero extra tooling, deepest integration | Very high FPS may jitter |
+| Native VNC | Potentially smoother | Extra client tuning |
+| xrdp (RDP stack) | Mature polish | ARM image quirks |
+| SSH X11 forward | Forward lone apps, not whole desktop | Not full session compositor |
 
-## Applicable Scenarios for Each Solution
+## When each fits
 
-### NoVNC (Recommended)
+### Studio remote desktop (default)
 
-Suitable for most remote desktop needs: rviz debugging, camera preview, and GUI application verification. Offers the highest integration with Studio and works out-of-the-box.
+rviz, camera feeds, generic GUI validation — built‑in path wins.
 
-### Native VNC Client
+### Native VNC
 
-Ideal for scenarios requiring "long-duration observation with high sensitivity to smoothness." Common clients include:
+Long sessions where micro‑stutter matters. Examples:
 
-- macOS: Built-in *Screen Sharing* (open vnc:// URLs directly)
-- Windows / Linux: RealVNC Viewer, TigerVNC Viewer
+- macOS (Apple Silicon): built‑in *Screen Sharing*
+- Windows: RealVNC Viewer, TigerVNC Viewer
 
-Usage:
-
-```bash
-# Establish an SSH tunnel from the PC
-ssh -L 5900:localhost:5900 root@<board_IP>
-
-# Then connect using a VNC client
-# vnc://localhost:5900
-```
+You own networking + hardening — advanced users.
 
 ### xrdp
 
-Best suited for scenarios with "strict smoothness requirements and board images compatible with xrdp." Requirements:
+Only if image plays nice and you want RDP semantics:
 
-- Install xrdp on the board: `sudo apt install xrdp`
-- Configure xrdp user and session type
-- Use an RDP client on the PC (Windows built-in *Remote Desktop Connection*; Microsoft Remote Desktop for macOS)
+- Board: `sudo apt install xrdp`
+- Configure users + session type
+- Client: Windows *Remote Desktop Connection*; macOS (Apple Silicon) Microsoft Remote Desktop
 
-xrdp compatibility on ARM platforms varies significantly—small-scale testing is recommended before wider adoption.
+ARM xrdp hit‑or‑miss — pilot before fleet roll.
 
-### SSH X11 Forwarding
+### SSH X11 forwarding
 
-Appropriate for scenarios where you "only need to view one or two GUI applications without requiring the full desktop":
+Single GUI binary without whole desktop:
 
 ```bash
-ssh -X root@<board_IP>
-# Run GUI applications within the SSH session
+ssh -X root@<device-ip>
+# Run GUI inside SSH
 rviz2
 ```
 
-GUI application windows appear directly on the PC desktop. Performance depends on the complexity of individual applications, but the PC must run an X server (XQuartz is required for macOS).
+The GUI window appears on your PC desktop. Performance depends on how heavy the app is, but the PC must run an X server (on macOS Apple Silicon use XQuartz).
+
+## Quick pick
+
+| Need | Pick |
+|---|---|
+| Standard robotics desktop | Studio viewer |
+| Long watch / smoother | Native VNC or xrdp |
+| Isolated GUI windows | SSH X11 |

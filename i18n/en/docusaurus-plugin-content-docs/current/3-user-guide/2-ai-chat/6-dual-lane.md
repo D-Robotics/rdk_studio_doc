@@ -1,47 +1,36 @@
 ---
-sidebar_label: '3.2.6 Dual-Lane Routing'
-title: 3.2.6 Dual-Lane Routing
+sidebar_label: '3.2.6 Choose reply mode'
+title: 3.2.6 Choose reply mode
 ---
 
-# 3.2.6 Dual-Lane Routing
+# 3.2.6 Choose reply mode
 
-RDK Studio provides two model slots—Thinking and Quick—which automatically dispatch tasks based on their type. This mechanism allows developers to leverage the strong reasoning capabilities of heavy models without incurring skyrocketing token costs from routing all tasks through them.
+RDK Studio offers **Fast** and **Think** reply modes. Toggle them in the input area; defaults can be set separately in settings.
 
-## Responsibilities of the Two Lanes
+## What each mode is for
 
-| Lane | Trigger Scenarios | Recommended Model Types |
+| Mode | Good for | Suggested models |
 |---|---|---|
-| Thinking (Deep) | Main conversations, complex reasoning, multi-step planning, tasks requiring hardware awareness and tool invocation | Powerful models such as Claude Sonnet, Qwen Plus, Doubao Seed Pro, etc. |
-| Quick (Fast) | Summarizing tool results, summarizing file browsing content, converting commands into descriptions, short Q&A | Lightweight models such as gpt-4o-mini, qwen-turbo, Doubao Seed Lite, etc. |
+| Fast | Short Q&A, summarizing execution output, light file notes | Small or local Ollama models |
+| Think | Multi-step troubleshooting, code changes, execution plans, complex device tasks | Stronger cloud or self-hosted models |
 
-The Thinking lane handles tasks that "require deep thought," while the Quick lane handles tasks that "generate brief responses based on existing data."
+If Fast is unset, simple tasks fall back to Think—slower and costlier. Configure at least one low-cost Fast model.
 
-## Automatic Routing
+## Local Ollama with Fast mode
 
-Studio automatically selects the appropriate lane based on task characteristics, and developers typically don’t need to intervene manually. For example:
+On the Local LLM page you can one-click assign a downloaded Ollama model as Moss **Fast** mode. Typical flow:
 
-- User asks, "Check my BPU usage and explain why it’s so high" → Handled by the Thinking lane (requires planning: first invoke a tool, then analyze the data)
-- User asks, "What does the output of that previous command mean?" → Handled by the Quick lane (only needs to summarize based on existing context)
-- After an Agent invokes a tool and needs to summarize the result for the user → Handled by the Quick lane
+1. Open *AI capabilities → Local LLM*.
+2. Install and start Ollama.
+3. Download a chat model.
+4. Test the model.
+5. Click **Set as Fast model configuration**.
 
-The "Current Model" label at the bottom of AI Dock displays the lane and model actually used for the current response, allowing developers to observe Studio's routing decisions.
+If the input warns that Ollama is unreachable, the local service is not running or is blocked by another process.
 
-## Cost of Leaving the Quick Lane Unconfigured
+## Where to configure
 
-If a developer configures only the Thinking lane and leaves the Quick lane empty, all tasks will be routed through the Thinking lane, leading to the following consequences:
+- Fast setup: left sidebar *AI capabilities → Local LLM*.
+- Full setup: *Settings → AI engine*.
 
-- **Token costs increase by 5–10×**: Short tasks that should go through the Quick lane are instead processed by powerful models
-- **Slower responses**: Heavy models generally take longer to generate responses than lightweight ones
-- **No functional impact**: Capabilities remain unaffected; only cost and speed degrade
-
-We strongly recommend configuring the Quick lane. For this lane, you can choose the most cost-effective small models offered by vendors (e.g., gpt-4o-mini, qwen-turbo), with each invocation typically costing less than ¥0.01.
-
-## Configuration Entry
-
-The dual-lane assignment settings are located under *Configuration Center → AI Engine*:
-
-- Two separate dropdown menus at the top allow you to assign model entries for Thinking and Quick lanes respectively
-- Each lane can be independently configured with its own model entry (even from different vendors)
-- Changes take effect immediately without requiring a restart
-
-For complete details on model entry fields and protocol-based routing rules, see [3.12.3 AI Engine Configuration](../12-config-center/3-ai-engine.md).
+Service type on each model entry must match the provider. Field details: [3.13.3 Configure AI models](../13-config-center/3-ai-engine.md).

@@ -1,68 +1,57 @@
 ---
-sidebar_label: '1.3 Feature Matrix'
-title: 1.3 Feature Matrix
+sidebar_label: '1.3 Feature Access Points'
+title: 1.3 Feature Access Points
 ---
 
-# 1.3 Feature Matrix
+# 1.3 Feature Access Points
 
-RDK Studio provides 15 functional modules covering four scenarios: device onboarding, remote development, AI collaboration, and system configuration. This section presents the complete feature matrix as a starting point for reference; detailed usage instructions for each module can be found in [3. User Guide](../3-user-guide/1-workbench/index.md).
+The feature access points of RDK Studio are divided into three groups based on the left navigation: **Core, Development Tools, and AI Capabilities**.
 
-![Desktop client main interface: IconRail on the left aggregates all feature tabs, the center displays the workspace of the currently active device, and the AI Dock is persistently docked at the bottom](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/01-dashboard.png)
+You can start from the Workbench, and then proceed to tasks such as Flashing, Remote Desktop, Code Editor, On-board Agent, Local Large Language Models, or Skill Workshop as needed.
 
-## 15 Functional Modules
+## Main Navigation
 
-| Module | One-sentence Description | See |
-|---|---|---|
-| Workspace | Overview of hardware metrics and system information for the currently active device | [3.1](../3-user-guide/1-workbench/index.md) |
-| AI Chat | Entry point for D-Moss Agent—a natural language-driven development assistant | [3.2](../3-user-guide/2-ai-chat/index.md) |
-| Remote Terminal | Multi-tab SSH terminal with automatic reconnection and shared display for AI tool invocation | [3.3](../3-user-guide/3-remote-terminal/index.md) |
-| File Manager | Visual browsing, uploading, downloading, and online editing of board-side files | [3.4](../3-user-guide/4-file-manager/index.md) |
-| Remote IDE | Browser-based VS Code powered by code-server, operating directly on the board | [3.5](../3-user-guide/5-remote-ide/index.md) |
-| Remote Desktop | Browser-native remote desktop based on NoVNC | [3.6](../3-user-guide/6-remote-desktop/index.md) |
-| System Flashing | One-stop flashing for TF cards / eMMC / RDK S100 xburn | [3.7](../3-user-guide/7-system-flashing/index.md) |
-| Network Configuration | Remotely configure board-side Wi-Fi without needing a keyboard or mouse connected to the board | [3.8](../3-user-guide/8-network-config/index.md) |
-| Device Management | Multi-device list, switching, automatic device recognition, and import/export of configurations | [3.9](../3-user-guide/9-device-management/index.md) |
-| OpenClaw On-board Agent | Deployment and coordination of on-board AI runtime | [3.10](../3-user-guide/10-openclaw/index.md) |
-| Skill | Operational strategies for Agents—installable, user-created, and community-shared | [3.11](../3-user-guide/11-skill/index.md) |
-| Configuration Center | Unified entry point for global settings including account, AI engine, device connections, and UI appearance | [3.12](../3-user-guide/12-config-center/index.md) |
-| Multi-channel Integration | Integrate Studio’s AI Chat into communication tools like Feishu and WeChat | [3.13](../3-user-guide/13-channels/index.md) |
-| Monitoring & Operations | Task queue and token usage statistics | [3.14](../3-user-guide/14-monitoring/index.md) |
-| Command-Line Interface (CLI) | `rdkstudio` and `@dmoss/agent`, supporting automation and CI scenarios | [3.15](../3-user-guide/15-cli/index.md) |
+| Group | Access Point | One-sentence Description | Details |
+|---|---|---|---|
+| Core | Workbench | Moss conversation and project workspace, centralized display of device status, history, diagnostics, changes, files, and terminal | [3.1 Workbench](../3-user-guide/1-workbench/index.md) |
+| Development Tools | Flashing | Image writing process for RDK X3 / X5 / S100 and other local images | [3.7 System Flashing](../3-user-guide/7-system-flashing/index.md) |
+| Development Tools | Remote Desktop | View and operate the on-board graphical interface | [3.6 Remote desktop](../3-user-guide/6-remote-desktop/index.md) |
+| Development Tools | Code Editor | Open the on-board code editing workspace | [3.5 Code editor](../3-user-guide/5-remote-ide/index.md) |
+| AI Capabilities | On-board Agent | OpenClaw deployment, diagnostic repair, model synchronization, on-board conversations | [3.10 OpenClaw](../3-user-guide/10-openclaw/index.md) |
+| AI Capabilities | Local Large Language Models | Install/start Ollama, download models, set as Moss quick mode | [3.12 Local LLMs](../3-user-guide/12-local-models/index.md) |
+| AI Capabilities | Skill Workshop | Local Moss skills, device OpenClaw skills, skill marketplace, generate skills from links | [3.11 Skill Workshop](../3-user-guide/11-skill/index.md) |
 
-## Comparison of Distribution Forms
+## What You Can Do in the Workbench
 
-RDK Studio is available in two distribution forms:
+The Workbench is not a single information card but the main workspace for Moss. It includes the following common features:
 
-| Form | Suitable Scenario | Key Capabilities |
-|---|---|---|
-| Desktop Client | Primary daily development scenario | Full feature set, including modules requiring native OS capabilities such as flashing, serial console, and remote desktop |
-| Command-Line Interface (CLI) | Automation scripts, CI/CD, batch operations, remote sessions | No GUI dependency; supports piping; shares device list and model configurations with the desktop client |
+| Feature | Description |
+|---|---|
+| Moss Conversation | Send natural language tasks, supports attachments, device information, project information, execution/planning, quick/thinking modes |
+| Current Status | View current project, device, directory, Git changes, diagnostic snapshots |
+| History | Open local conversation history and continue previous tasks |
+| Diagnostics | Capture device runtime snapshots and send them to Moss |
+| Changes | View remote project Git status, initialize workspace if necessary |
+| File / Terminal / Browse | Open common tools next to Moss to reduce switching back and forth |
 
-The CLI is further divided into two separate commands:
+## Settings and Resource Access Points
 
-- **`rdkstudio`**: Product CLI that shares device and model configurations with the desktop client. Run commands, inspect files, and invoke AI directly in the terminal, seamlessly integrated with the desktop client.
-- **`@dmoss/agent`**: Standalone NPM package providing a pure Agent runtime. Ideal for Docker images, CI containers, and remote scripting scenarios without dependency on the desktop client.
+| Access Point | Content |
+|---|---|
+| Settings | Account & Security, Device Connection, Interface Display, AI Engine, Feishu, WeChat, Apps & Updates |
+| Resources & Support | Dajiang Developer Forum, RoboGo Platform, User Feedback |
+| AI Dock Settings Jump | Direct access to "Local Models" or "AI Engine" when model configuration is abnormal |
 
-For detailed differences, installation methods, and typical usage of both CLIs, see [3.15 Command-Line Tools](../3-user-guide/15-cli/index.md).
+## Device and Platform Compatibility
 
-## Module Compatibility Across Distribution Forms
+| Feature | RDK Device | General Linux / Jetson / Raspberry Pi / Rockchip | Desktop Client | CLI |
+|---|---|---|---|---|
+| Moss Conversation & Workbench | Supported | Supported | Supported | Partially supported |
+| SSH Terminal / File / Code Editor | Supported | Supported | Supported | Supported |
+| Remote Desktop | Supported, requires on-board graphical services | Depends on target host environment | Supported | Not supported |
+| Flashing | RDK X3 / X5 / S100 are primary targets | Local image can be written to other media optionally | Supported | Not supported |
+| OpenClaw Deployment | Primary path for RDK devices | Not deployable by default; interface shows limitations | Supported | Supports some commands |
+| Local Large Language Models | Runs locally on the computer | Runs locally on the computer | Supported | Not applicable |
+| Skill Workshop | Deployable to device OpenClaw, also writable to local Moss | Writable to local Moss; device deployment limited | Supported | Supports some commands |
 
-| Module | Desktop Client | CLI |
-|---|---|---|
-| Workspace | Supported | Not supported (GUI exclusive) |
-| AI Chat | Supported | Supported |
-| Remote Terminal | Supported | Supported (via pipe and interactive modes) |
-| File Manager | Supported | Supported |
-| Remote IDE | Supported | Not supported (GUI exclusive) |
-| Remote Desktop | Supported | Not supported (GUI exclusive) |
-| System Flashing | Supported | Not supported (requires native disk scanning) |
-| Network Configuration | Supported | Supported |
-| Device Management | Supported | Supported |
-| OpenClaw On-board Agent | Supported | Supported |
-| Skill | Supported | Supported |
-| Configuration Center | Supported | Partially supported (via `rdkstudio config`) |
-| Multi-channel Integration | Supported | Only via `@dmoss/agent --weixin` |
-| Monitoring & Operations (Task Queue) | Supported | Not supported (GUI exclusive) |
-| Command-Line Tools | Built-in launch entry | CLI itself |
-
-The CLI does not support GUI-related capabilities (Workspace, IDE, Remote Desktop, visual System Flashing interface, Task Queue). Core functionalities—including AI Chat, Terminal, File Management, Device Management, OpenClaw collaboration, and Skills—are fully supported in both forms.
+The CLI does not support graphical interfaces, flashing wizards, remote desktop, or local model management — capabilities exclusive to the desktop client. For scripting scenarios, `rdkstudio` or `dmoss-agent` can be used as needed for conversations, device management, files, and script tasks.

@@ -1,53 +1,38 @@
 ---
-sidebar_label: '3.8.2 Hidden SSID and Advanced Options'
-title: 3.8.2 Hidden SSID and Advanced Options
+sidebar_label: '3.8.2 Add hidden Wi‑Fi'
+title: 3.8.2 Add hidden Wi‑Fi
+unlisted: true
 ---
 
-# 3.8.2 Hidden SSID and Advanced Options
+# 3.8.2 Add hidden Wi‑Fi
 
-## Manually Adding a Hidden SSID
+## Adding a hidden SSID manually
 
-Some enterprise Wi-Fi networks do not broadcast their SSID, so they won't appear in scan results. To connect to such networks, you need to enter the details manually:
+Some enterprise or lab networks do not advertise in scans—you add them manually:
 
-1. Click *Manually Add SSID* at the bottom of the Wi-Fi configuration dialog.
-2. Enter the SSID name (case-sensitive).
+1. Click *Add SSID manually* at the bottom of the Wi‑Fi dialog.
+2. Enter the SSID (**case‑sensitive**).
 3. Enter the password.
-4. Select the security type (WPA2 / WPA3 / WEP / Open).
-5. Check the *Hidden Network* checkbox.
+4. If prompted for security type, use what your router/admin provided.
+5. Check *Hidden network*.
 6. Click *Connect*.
 
-After rebooting the board, it will automatically attempt to reconnect to the saved hidden network without requiring manual intervention again.
+On success the device remembers the profile—reboot usually auto‑reconnects.
 
-## Security Type Selection
+## Advanced options
 
-| Security Type | Applicability |
-|---|---|
-| WPA2 | The most common standard for home and office Wi-Fi today |
-| WPA3 | A newer standard used by some modern routers |
-| WEP | An obsolete legacy standard, only found on old devices |
-| Open | Password-less networks (e.g., cafes, public Wi-Fi) |
+Most home and office setups need no tweaks—only change values when admins require them explicitly.
 
-If you're unsure about the security type, try WPA2 first; if that fails, try other types. `nmcli` usually automatically attempts common security types during connection.
+When unsure what an option means, leave defaults first. After a failure, send the hint to Moss or confirm network type/password with IT.
 
-## Switching Priority Between Wired and Wireless
+## Ethernet and Wi‑Fi together
 
-When the board is connected to both wired and Wi-Fi networks simultaneously, routing defaults to the wired connection (as it offers more stable performance). If you need to force traffic through Wi-Fi (e.g., when the wired network has access restrictions):
+With both plugged in and Wi‑Fi up, the system typically favors the stabler link—no extra daily steps.
 
-```bash
-# Temporarily disable wired connection
-sudo ip route del default dev eth0
-```
+If you only need to verify Wi‑Fi, unplug Ethernet temporarily. For permanent routing policy, have someone versed in networking apply it.
 
-To make this change permanent, adjust the connection priority in NetworkManager on the board:
+## 2.4 GHz vs 5 GHz
 
-```bash
-sudo nmcli connection modify "<connection-name>" connection.autoconnect-priority 100
-```
+With dual‑band radios, the device often picks by itself.
 
-Higher values indicate higher priority.
-
-## Switching Between 2.4 GHz and 5 GHz
-
-Some dual-band routers use the same SSID for both 2.4 GHz and 5 GHz bands. `nmcli` typically connects to the band with the stronger signal, but in areas with marginal signal strength, frequent switching between bands may cause instability.
-
-If you encounter this issue, we recommend configuring distinct SSIDs for each band in your router's admin interface (e.g., `office_5g` and `office_2g`), then manually selecting the more stable one in Studio.
+If links are flaky, rename bands in router admin—for example `office_2g` and `office_5g`—then choose whichever is stabler in Studio.

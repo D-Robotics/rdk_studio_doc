@@ -1,23 +1,30 @@
 ---
-sidebar_label: '3.15 Command-Line Tools'
-title: 3.15 Command-Line Tools
+sidebar_label: '3.16 Command-Line Interface (CLI)'
+title: 3.16 Command-Line Interface (CLI)
 ---
 
-# 3.15 Command-Line Tools
+# 3.16 Command-Line Interface (CLI)
 
-![rdkstudio --help terminal output: displays comprehensive information including common tasks, usage, options, interactive commands, environment variables, tips, end-to-end examples, etc.](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/cli-help.png)
+Get devices and models working in the desktop app before CLI work—then the CLI reuses the same device and model profiles and saves setup time.
 
-You can leverage RDK Studio's AI and device capabilities without launching the desktop client. Studio provides two separate command-line tools, each tailored for different scenarios:
+## Recommended order
 
-| CLI | Source | Use Case |
+| Step | What to do |
+|---|---|
+| 1 | Add devices and configure models in the desktop client |
+| 2 | In **Settings center → Apps & updates**, enable the CLI |
+| 3 | Run `rdkstudio --version` in a terminal |
+| 4 | Prefer `rdkstudio` day to day |
+| 5 | For CI, Docker, or isolated scripts, consider `dmoss-agent` |
+
+| CLI | Origin | Best for |
 |---|---|---|
-| `rdkstudio` | Added to system PATH after enabling CLI in the desktop client | Works alongside the desktop client to automate routine tasks |
-| `dmoss-agent` | Standalone NPM package `@dmoss/agent` (command name is `dmoss-agent` after installation) | CI/CD pipelines, Docker environments, embedded scripts, pure Agent scenarios |
+| `rdkstudio` | Enabled from desktop; added to PATH | Daily terminal use sharing desktop config |
+| `dmoss-agent` | NPM package `@dmoss/agent` | CI/CD, Docker, scripted agents |
 
-These are **not the same tool**—choose carefully based on your needs. If you're unsure, use `rdkstudio` for most scenarios.
+If you mostly develop with RDK Studio, use `rdkstudio`. Reach for `dmoss-agent` only when you cannot depend on the desktop install.
 
-## This Section Includes
+## Next
 
-- [3.15.1 rdkstudio](./1-rdkstudio.md): Enabling the product CLI, subcommands, and commonly used flags  
-- [3.15.2 @dmoss/agent](./2-dmoss-agent.md): Installation, configuration, and unique capabilities of the standalone Agent CLI  
-- [3.15.3 Automation Scenario Examples](./3-automation-examples.md): CI code reviews, scheduled inspections, AI-powered log summarization
+- [3.16.1 rdkstudio](./1-rdkstudio.md): Enable, verify, common commands
+- [3.16.2 dmoss-agent](./2-dmoss-agent.md): Standalone agent CLI install, config, unique features

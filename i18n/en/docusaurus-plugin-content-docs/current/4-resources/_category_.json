@@ -1,9 +1,9 @@
 {
-  "label": "4. Resources and Community",
+  "label": "4. Resources & community",
   "position": 4,
   "link": {
     "type": "generated-index",
     "slug": "/category/4-resources",
-    "description": "Pointers to skill sharing and acquisition, NodeHub case studies, and other resources so you can go beyond the core docs and engage with the community."
+    "description": "Central RDK Studio resource links: the RDK developer community forum, RoboGo, user feedback, the skill marketplace / SkillHub, NodeHub case studies, and sharing skills."
   }
 }

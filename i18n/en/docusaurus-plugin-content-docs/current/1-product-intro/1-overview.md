@@ -5,57 +5,81 @@ title: 1.1 Product Overview
 
 # 1.1 Product Overview
 
-**RDK Studio is an AI Native development workspace built specifically for robotics—enabling AI not only to write code but also directly interact with hardware on your board.**
+**RDK Studio is an AI-native desktop workspace designed for robotics development. It integrates Moss conversation, project workspace, device connection, remote development, flashing, local models, and on-board agents into a single native window.**
 
-Describe your task, and the Agent autonomously handles SSH login, command execution, and log retrieval. Chat, terminal, file management, and flashing—all integrated into a single native window, eliminating constant tool switching.
+After entering RDK Studio, the workspace brings **Moss conversation** and **project workspace** together.
 
-![RDK Studio desktop client main interface: functional tabs on the left, overview of the currently active device in the center, and a persistent AI Dock at the bottom](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/01-dashboard.png)
+You can start by describing your goals, letting Moss help you plan, check device and project status, and organize terminal or file information. You can also directly open functional pages such as flashing, remote desktop, code editor, on-board agent, local large model, and skill workshop for manual operations.
 
-## How Is This Different from "an IDE with Added AI"?
+## Product Form
 
-AI assistants in general-purpose IDEs can only help developers write code—they don’t know your board model, can’t connect to your device, and can’t execute any commands. In contrast, RDK Studio’s AI is a truly hands-on Agent:
+The main navigation of RDK Studio is divided into three groups based on workflow:
 
-- Say “Help me connect to my board,” and the Agent automatically scans your local network, identifies RDK boards, and establishes an SSH session.
-- Say “Check BPU utilization,” and the Agent logs into the board and runs `hrut_bpuprofile -b 0` (or falls back to `cat /sys/devices/system/bpu/bpu0/ratio` depending on the board type), then parses and explains the result.
-- Say “Launch the camera node—it keeps failing; can you check?”, and the Agent starts the node, captures the error logs, matches them against over 30 built-in RDK error patterns, and provides a direct fix.
-- Say “Flash this new firmware onto the SD card,” and the Agent pops up a disk selection dialog, invokes the underlying flashing interface, and displays real-time progress.
+| Group | Entry | Purpose |
+|---|---|---|
+| Core | Workspace | Moss conversation, project workspace, device status, history, diagnostics, changes, file and terminal information |
+| Development Tools | Flashing, Remote Desktop, Code Editor | System image writing, on-board GUI, remote code workspace |
+| AI Capabilities | On-board Agent, Local Large Model, Skill Workshop | OpenClaw deployment and conversation, Ollama local model, Moss / OpenClaw skill management |
 
-Throughout this process, developers don’t need to memorize SSH commands, look up nmcli parameters, or Google error messages—just describe what you want to do.
+The **Resources & Support** section in the lower-left corner provides access to the D-Robotics Developer Forum, RoboGo platform, and user feedback entry; the settings entry is located at the bottom of the sidebar.
+
+## What Makes It Different from Ordinary Remote Development Tools
+
+Traditional remote development tools typically split SSH, files, remote desktop, code editor, flashing, and model configuration into multiple applications. The difference with RDK Studio is that these functions can work together within the same workspace:
+
+- You say, "Help me figure out why this device can't connect to Wi-Fi," and Moss will analyze the current device status, terminal output, and network configuration together to troubleshoot.
+- You say, "Don't execute yet, give me a risk plan," and you can switch to **Plan** mode, letting Moss list steps, risks, and actions that need confirmation.
+- You say, "Answer the meaning of this error message in fast mode," and you can switch to **Fast** mode; for complex troubleshooting, switch back to **Thinking** mode.
+- When you send a message on the on-board agent page, you can converse with OpenClaw; when you send a message in the workspace, Moss combines project, device, file, and diagnostic snapshots.
+
+Actions such as commands, file writes, and on-board execution still have visible outputs and necessary confirmations. The goal of RDK Studio is to keep key processes visible, allowing you to know what Moss did and why.
 
 ## Core Problems Solved
 
-RDK Studio addresses two key challenges in robotics and embedded AI development workflows.
+The first type of problem is **information fragmentation**. Robotics development often involves on-board systems, networking, models, code directories, logs, cameras, BPU, remote desktop, and community knowledge simultaneously.
 
-The first is **tool fragmentation**. Traditionally, developers constantly switch between SSH clients, SCP/SFTP tools, VNC clients, IDEs, flashing utilities, and model API consoles. RDK Studio consolidates all these operations into a single native window—each capability can be triggered either by clicking a button manually or by simply telling the AI what to do.
+RDK Studio brings this information into the Moss workspace, reducing the need to switch between multiple tools.
 
-The second is **experience barriers**. Traditional embedded development requires engineers to be proficient with Linux commands, SSH, nmcli, systemd, ROS workspaces, and other foundational tools. RDK Studio’s AI Native design abstracts these tools into internal implementation details of the Agent—developers only need to express their intent. If a developer is already familiar with these low-level tools, all commands remain fully accessible for direct use; if not, the Agent handles everything on their behalf.
+The second type of problem is **the learning curve**. Beginners don't need to memorize a large number of commands first; those familiar with the command line can still operate directly in the terminal and hand over the output to Moss for further analysis.
+
+The third type of problem is **how AI can be applied to actual development**. Moss is not just a Q&A box; it can combine terminal, file, device, and diagnostic information from RDK Studio to assist you in completing tasks.
+
+OpenClaw is used for operations that are closer to the on-board device.
 
 ## Target Users
 
-RDK Studio is designed for all robotics developers—regardless of whether they use RDK boards or work individually or in teams:
+- **RDK and robotics development**: Need to connect, flash, and debug development boards, and want to delegate repetitive troubleshooting steps to Moss.
+- **ROS / ROS 2 / TROS development**: Need to run nodes, check topics, view logs, and locate startup failures on the board.
+- **AI applications and embodied AI teams**: Need to manage models, code, and device status across RDK X3 / X5 / S100 or other Linux hosts.
+- **Teaching and research scenarios**: Want to reduce the cost of environment setup and command memorization, focusing energy on algorithms, tasks, and experiments.
 
-- **Robotics and Embedded AI Engineers**: Frontline developers who frequently switch between multiple dev boards, seek to reduce operational complexity, and want AI as a daily companion.
-- **ROS / ROS 2 / TROS Developers**: Automate manual tasks like board-side node/topic management, launch debugging, and log troubleshooting with the Agent.
-- **Robotics Deployment Teams**: Engineering or DevOps teams needing to orchestrate board tasks within CI/CD pipelines or automation scripts.
-- **Robotics Education and Research**: Students, educators, and researchers who wish to delegate tedious environment setup and command memorization to AI, so they can focus on algorithm and solution design.
+## Which Devices Can Be Connected
 
-While RDK Studio offers deep integration with RDK boards (including hardware awareness, board-type recognition, TROS knowledge, and flashing toolchains), its capabilities aren’t limited to the RDK platform—the AI Dock, remote terminal, IDE, and Skill Marketplace modules are usable with any SSH-accessible Linux board or robot host.
+RDK Studio focuses on supporting RDK X3, RDK X5, and RDK S100, including board type identification, RDKOS images, flashing, BPU/TROS knowledge, OpenClaw deployment, and more.
 
-## Capabilities Outside Product Scope
+At the same time, SSH is a universal entry point. General Linux hosts, NVIDIA Jetson, Raspberry Pi, Rockchip boards, and others can also be connected as remote hosts.
 
-To prevent misuse, the following capabilities are currently **not** included in RDK Studio. Please use the recommended dedicated tools instead:
+These devices can use Moss conversation, terminal, files, code editor, and project workspace. Features specific to RDK hardware will be hidden or shown as unavailable on non-RDK devices.
 
-| Requirement | Recommended Tool |
-|---|---|
-| Model Training | D-Robotics OE Toolchain, PyTorch, TensorFlow, etc. |
-| Model Quantization and Compilation to HBM | D-Robotics model conversion tool `hb_mapper` |
-| Cross-Platform BUILD CI | GitHub Actions, GitLab CI, etc. |
-| Real-Time Collaborative Editing | Feishu Docs, Notion, or other knowledge base tools |
-| User-Level Permission Isolation (RBAC) | Implement via SSH jump hosts or dedicated ops platforms |
+## Scenarios Requiring Coordination with Other Platforms
 
-## Next Steps
+RDK Studio is primarily responsible for local development, device connection, flashing, debugging, Moss collaboration, OpenClaw, and local model management.
 
-- [1.2 Core Architecture](./2-architecture.md): Understand the collaboration mechanism between the PC-side D-Moss and board-side OpenClaw dual Agents.
-- [1.3 Feature Matrix](./3-feature-matrix.md): Comprehensive list of functional modules and compatibility across release variants.
-- [1.6 AI Dock Demo](./6-ai-showcase.md): Three real-world dialogues (device health check, end-to-end YOLO deployment, AI-generated community post draft).
-- [2. Quick Start](../2-quick-start/1-install-and-login.md): Complete the full workflow—from installation → device connection → configuration → conversational interaction—in six steps.
+For the following tasks, it is recommended to use RDK Studio in conjunction with the corresponding platforms. The **Resources & Support** section in the lower-left corner provides direct access to RoboGo, the D-Robotics Developer Forum, and user feedback entry.
+
+| Scenario | Recommended Approach | Description |
+|---|---|---|
+| Cloud-based end-to-end robotics development | RoboGo | Suitable for data闭环, embodied AI training fields, agent development services, application development and deployment, and other cloud-based workflows; local debugging and on-board validation return to RDK Studio. |
+| Ready-made applications / Demos / Cases | RoboGo, NodeHub | When looking for applications, cases, or consolidating project materials, start with these platforms; return to RDK Studio when you need to connect devices and run them. |
+| Model training / Dataset management | Existing data闭环 or training pipelines in RoboGo, or PyTorch, TensorFlow, training platforms | Training is typically not done within RDK Studio. RDK Studio is better suited for connecting devices, preparing runtime environments, and validating model performance. |
+| Model quantization and compilation to hbm | D-Robotics model conversion toolchain; if RoboGo provides a corresponding process, it can also be used in coordination | After generating hbm, deploy, run, and troubleshoot on devices connected via RDK Studio. |
+| Multi-person collaboration and code hosting | Git platforms, online documents, collaborative code editors | RDK Studio is suitable for individual development and device debugging; multi-person collaboration should continue using your team's existing platforms. |
+| Enterprise-level permissions and auditing | Enterprise operation platforms, jump servers, unified identity and role-based permission systems | RDK Studio will prompt risks and require confirmation but does not replace enterprise permission systems. |
+| High-risk operation decisions | Confirm before executing | RDK Studio will explain risks and impacts as clearly as possible, but ultimately you need to decide whether to proceed. |
+
+## Further Reading
+
+- [1.2 Core Architecture](./2-architecture.md): Understand the collaboration boundaries between Moss, OpenClaw, and the desktop client.
+- [1.3 Feature Access Points](./3-feature-matrix.md): Find commonly used features via the left navigation.
+- [2.1 Install and sign in](../2-quick-start/1-install-and-login.md): Complete the first experience by following "Choose a development board → Prepare the system → Add a device → Start using Moss."
+- [3.1 Workbench](../3-user-guide/1-workbench/index.md): Learn how the Moss workspace handles device status, history, diagnostics, changes, files, and the terminal.

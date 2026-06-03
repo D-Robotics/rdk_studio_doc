@@ -1,64 +1,66 @@
 ---
-sidebar_label: '3.4.1 Directory Browsing and Transfer'
-title: 3.4.1 Directory Browsing and Transfer
+sidebar_label: '3.4.1 Browse and transfer files'
+title: 3.4.1 Browse and transfer files
 ---
 
-# 3.4.1 Directory Browsing and Transfer
+# 3.4.1 Browse and transfer files
 
-The main interface of file management is divided into three parts: the left-side directory tree, the right-side file list, and the bottom task bar.
+The Files UI has three parts: the folder tree on the left, the file list on the right, and the task bar at the bottom.
 
-## Interface Layout
+## Layout
 
-| Area | Display Content |
+| Area | What it shows |
 |---|---|
-| Left-side directory tree | Common root directories on the board and the currently opened subtree |
-| Right-side file list | Files in the current directory, including name, size, modification time, and permissions |
-| Top address bar | Directly enter a path for quick navigation, e.g., `/opt/tros/humble/lib/` |
-| Top breadcrumb | Each segment of the current path is clickable for navigation |
-| Bottom task bar | Ongoing upload/download tasks, showing speed and estimated remaining time |
+| Left folder tree | Common root folders on device and children of what you expanded |
+| Right file list | Files in the current folder: name, size, modified time, permissions |
+| Top address bar | Type a path to jump quickly (e.g. `/opt/tros/humble/lib/`) |
+| Top breadcrumbs | Each segment can be clicked |
+| Bottom task bar | Active uploads/downloads with speed and ETA |
 
-## Uploading Files
+## Upload files
 
-| Method | Operation |
+| Method | How |
 |---|---|
-| Drag-and-drop upload | Drag files or folders directly from your PC into the Studio window |
-| Upload button | Click the *Upload* button at the top to open a file selector |
-| Batch upload | Select multiple files or an entire folder for one-time upload |
+| Drag and drop | Drag files or folders from the PC onto the Studio window |
+| Upload button | **Upload** in the toolbar opens a file picker |
+| Bulk upload | Select multiple files or a whole folder in one shot |
 
-During upload, progress is displayed in the bottom task bar. Uploading to sensitive paths (e.g., `/sys`, `/proc`) is restricted by access control—see [3.4.3 Path Access Control](./3-path-access-control.md) for details.
+Progress appears in the task bar. Writes to sensitive paths (e.g. `/sys`, `/proc`) follow access-control rules — see [3.4.3 Paths you cannot edit](./3-path-access-control.md).
 
-## Downloading Files
+## Download files
 
-| Method | Operation |
+| Method | How |
 |---|---|
-| Download button | Click the download icon next to a filename to download it to your PC's default download directory |
-| Batch download | Select multiple files, right-click, and choose *Download Selected* to download them as a zip archive |
-| Drag-and-drop download | Supported on macOS and Linux—drag files directly to the desktop or file explorer |
+| Download icon | Icon next to a file downloads to your PC default download folder |
+| Bulk download | Select multiple files → right‑click **Download selection** → gets a ZIP |
+| Drag out | On hosts that support it, drag to desktop or Explorer |
 
-## Right-Click Context Menu
+## Context menu
 
-Right-clicking a file or directory opens an action menu:
+Right‑click a file or folder:
 
-| Action | Description |
+| Action | Purpose |
 |---|---|
-| New File | Create a new empty file in the current directory |
-| New Directory | Create a new subdirectory in the current directory |
-| Rename | Rename the selected file or directory (also accessible via the F2 shortcut) |
-| Delete | Delete the selected item (also accessible via the Delete key) |
-| Copy Full Path | Copy the absolute path to the clipboard |
-| Open Terminal Here | Open a new tab in the *Remote Terminal*, automatically changing directory (`cd`) to this location |
+| New file | Creates an empty file in this folder |
+| New folder | Creates a subfolder here |
+| Rename | Renames the file or folder |
+| Delete | Deletes the selection (Delete key works too) |
+| Copy full path | Copies absolute path to clipboard |
+| Open terminal here | Opens a new **Terminal** tab with `cd` to this folder |
 
-## Filename Search
+## Filename search
 
-The search box at the top searches only filenames in the current directory (non-recursive) to prevent freezing in large directories. For recursive searches across the entire filesystem, describe your request in AI Dock—for example: "Find all `.hbm` files under `/opt/tros`"—and the Agent will execute a `find` command to complete the task.
+The search box searches file names **only** in the current folder (no recursion), avoiding stalls on huge trees.
 
-## Quick Reference for Common Paths
+For wider search, tell AI Dock: “Under `/opt/tros`, find `.hbm` files” — Moss can run appropriate find commands.
 
-| Path | Purpose |
+## Common paths
+
+| Path | Use |
 |---|---|
-| `/userdata/` | RDK-recommended user-writable area; persists across system reboots |
-| `/tmp/` | Temporary files; cleared on reboot |
-| `/opt/tros/humble/` | TROS installation directory (includes lib, share, include) |
-| `/home/<user>/` | User home directory |
+| `/userdata/` | RDK‑recommended writable user area (survives image refresh) |
+| `/tmp/` | Temp files cleared on reboot |
+| `/opt/tros/humble/` | TROS install (lib, share, include) |
+| `/home/<user>/` | User home |
 | `/var/log/` | System logs |
 | `/etc/` | System configuration |

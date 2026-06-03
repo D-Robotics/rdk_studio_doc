@@ -1,49 +1,50 @@
 ---
-sidebar_label: '3.7.4 RDK S100 xburn'
-title: 3.7.4 RDK S100 xburn
+sidebar_label: '3.7.4 S100 flashing'
+title: 3.7.4 S100 flashing
 ---
 
-# 3.7.4 RDK S100 xburn
+# 3.7.4 S100 flashing
 
-The RDK S100 uses a dedicated xburn toolchain and cannot directly flash SD cards like the RDK X3 and X5. xburn-gui is a graphical flashing tool provided by D-Robotics, supporting Windows, macOS, and Linux platforms.
+RDK S100 uses the dedicated **xburn** tool—you cannot flash a TF card the same way as RDK X3 / X5.
 
-## Procedure
+RDK Studio’s flashing page guides you to download **xburn-gui** from D-Robotics.
 
-1. In the desktop client, navigate to **System Flashing → S100**.
-2. Studio provides a download link for xburn-gui (automatically selected based on your current PC platform).
+## Steps
+
+1. In the desktop client, open *Flashing → S100*.
+2. Studio shows an xburn-gui download link (matched to your OS).
 3. Download and install xburn-gui.
-4. Prepare the image file, typically named `product.zip` or its extracted directory.
-5. Follow the flashing instructions within Studio to complete the flashing process in xburn-gui.
+4. Prepare the image—usually `product.zip` or an extracted folder.
+5. Follow the in-Studio guide and complete flashing in xburn-gui.
 
-When system support is available, the desktop client may also offer options to **Open Local xburn** and **One-Click CLI Flashing**, eliminating the need for developers to manually launch external tools.
+When available, the desktop client also offers *Open local xburn* and *one-click CLI flash* to reduce manual tool launches.
 
-## Obtaining xburn-gui
+## Getting xburn-gui
 
-| Platform | Download Method |
+| OS | Download |
 |---|---|
-| Windows | Studio flashing page provides a link to the Windows installer |
-| macOS | Studio flashing page provides a dmg link (supports both Apple Silicon and Intel) |
-| Linux | Studio flashing page provides links to either a deb package or an AppImage |
+| Windows | Install package link on the Studio flashing page |
+| macOS (Apple Silicon / M series) | DMG link on the Studio flashing page |
 
-The latest version of xburn-gui is maintained by D-Robotics. For detailed usage documentation, refer to the RDK S100 flashing section in the [RDK Official Documentation](https://developer.d-robotics.cc/rdk_doc/en/rdk_s/RDK).
+xburn-gui is maintained by D-Robotics. For full usage docs, see the RDK S100 flashing section in [RDK official documentation](https://developer.d-robotics.cc/rdk_doc).
 
-## Image Preparation
+## Preparing the image
 
-RDK S100 images are typically distributed as a `product.zip` file, which includes:
+RDK S100 images are often shipped as `product.zip` containing:
 
-- The system image itself
+- The system image
 - Bootloader
-- Partition table
-- Checksum information
+- Partition layout
+- Checksums / metadata
 
-Do not manually extract and modify files inside the archive, as this may cause flashing failures or prevent the board from booting. Simply provide the `product.zip` file directly to xburn-gui.
+Do **not** manually unpack and edit contents—that can brick the flash or fail boot. Provide `product.zip` to xburn-gui as-is.
 
-## Common Issues
+## Troubleshooting
 
-| Symptom | Troubleshooting |
+| Symptom | What to try |
 |---|---|
-| xburn-gui fails to launch | Missing underlying drivers—install them according to D-Robotics' official documentation |
-| Board unresponsive | Verify that the USB cable is fully functional and that the boot mode is correctly set |
-| Flashing fails mid-process | Replug the board's USB connection and retry; if failures persist, verify the integrity of `product.zip` |
+| xburn-gui won’t start | Install required drivers/components per D‑Robotics docs |
+| Board not responding | Full-feature USB cable? Correct boot mode? |
+| Flash fails mid-way | Re-seat USB and retry; if persistent, verify `product.zip` integrity |
 
-If troubleshooting does not resolve the issue, we recommend consulting the S100 section of the [RDK Developer Community](https://developer.d-robotics.cc) or describing the specific error in AI Dock.
+If troubleshooting stalls, check the S100 section on [RDK developer community](https://developer.d-robotics.cc) or describe the error in AI Dock.

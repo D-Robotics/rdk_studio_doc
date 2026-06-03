@@ -1,16 +1,29 @@
+﻿---
+sidebar_label: '3.3 Terminal'
+title: 3.3 Terminal
 ---
-sidebar_label: '3.3 Remote Terminal'
-title: 3.3 Remote Terminal
----
 
-# 3.3 Remote Terminal
+# 3.3 Terminal
 
-![Remote terminal interface: Multi-tab SSH sessions, with the top bar showing the current device identity and connection status](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/05-terminal.png)
+![Terminal panel: prompts to add a device when disconnected; after connection you can create SSH or local serial sessions](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/05-terminal.png)
 
-RDK Studio includes a full-featured SSH terminal implemented using WebSocket + Socket.IO + PTY. Functionally equivalent to a complete SSH client (PTY-based tools such as vim, htop, and tmux all work properly), it shares device state and Agent context with other Studio modules—meaning commands invoked by the AI Agent via `device_exec` are also displayed in real time within the terminal, allowing developers to fully observe what the AI is doing.
+The terminal is for logging into the device, running commands, and viewing output. It feels like typical SSH tooling, while sharing the UI with RDK Studio’s device list and Moss workspace.
 
-## This section includes
+## First-time flow
 
-- [3.3.1 Multi-tab SSH Sessions](./1-multi-tab-ssh.md): Independent SSH sessions and PTY processes for each tab  
-- [3.3.2 Reconnection Mechanism](./2-reconnect.md): Automatic recovery during network fluctuations or brief device power outages  
-- [3.3.3 Serial Connection](./3-serial.md): Unified access point for both serial and SSH connections within the same terminal tab
+| Step | What to do |
+|---|---|
+| 1 | Confirm the device was added successfully via SSH or Type-C |
+| 2 | Open the **Terminal** page and select the current device |
+| 3 | Create a new SSH tab and wait for the shell prompt |
+| 4 | Run a simple check such as `pwd` or `uname -a` |
+| 5 | Add a serial connection only when you need boot logs |
+
+When Moss runs commands for you, output also appears in the workspace so you can see what ran, whether it succeeded, and any errors.
+
+Under brief network fluctuation the terminal tries to reconnect. Avoid spam-critical commands mid-reconnect; after repeated failures check power, network, host/IP, and SSH.
+
+## Next
+
+- [3.3.1 Open SSH terminal](./1-multi-tab-ssh.md): multiple terminal tabs at once
+- [3.3.3 View serial logs](./3-serial.md): view boot logs when there is no network

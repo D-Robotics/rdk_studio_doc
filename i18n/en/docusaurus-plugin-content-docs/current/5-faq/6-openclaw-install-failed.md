@@ -1,69 +1,36 @@
 ---
-sidebar_label: '5.6 OpenClaw Installation Failure'
-title: 5.6 OpenClaw Installation Failure
+sidebar_label: '5.6 OpenClaw install failed'
+title: 5.6 OpenClaw install failed
 ---
 
-# 5.6 OpenClaw Installation Failure
+# 5.6 OpenClaw install failed
 
-## Typical Symptoms
+## Typical symptoms
 
-After clicking "One-click Deployment" in the *OpenClaw* tab:
+- On-device Agent UI shows deployment failed.
+- Prompts complain about missing runtime dependencies.
+- Device offline—deploy disabled.
+- “Installation corrupted” banner.
+- Model settings won’t sync to the board.
 
-- Stuck at "Syncing Skills" for a long time with no progress  
-- Error: "Gateway failed to register"  
-- Error: "Board workspace is not writable"  
-- Stuck at "Installing npm global packages"
+## Read the status strip
 
-## Quick Diagnosis
+The board agent page tracks OpenClaw, model, and network health:
 
-Diagnose based on the specific stage where it gets stuck:
-
-| Where It Gets Stuck | What To Do |
+| State | Action |
 |---|---|
-| Stuck at "Preparing Environment" | Node.js is not installed on the board or its version is < 18. SSH into the board and run `node -v` to verify. |
-| Stuck at "Syncing Skills" for a long time | This is normal behavior; syncing dozens of skills for the first time takes 1–3 minutes. |
-| Gateway failed to register | Port 18789 on the board is unreachable. SSH into the board and run `netstat -tlnp \| grep 18789`. |
-| Workspace not writable | The default `/app` directory is read-only in some images; switch to a writable directory on the board. |
+| Device offline | Restore SSH first—deploy pauses |
+| Missing deps | Start deploy to auto-install; if it fails, get the device online |
+| npm download errors | Fix networking or switch npm registry |
+| Corrupted install | Use *Diagnose & repair* and follow prompts |
+| Model unreachable | Verify Base URL / API key reachable from the board |
 
-## Troubleshooting Checklist
+## Local Ollama rarely feeds OpenClaw directly
 
-1. **Slow Skill Sync**
+If Moss’s thinking model is desktop Ollama, OpenClaw generally **cannot** reuse it. Pick a remote endpoint the board can reach, or host inference on the device.
 
-   It is normal for the initial deployment to take **1–3 minutes** to sync dozens of skills. Only start troubleshooting if there’s no progress after 5 minutes.
+## Triage tips
 
-2. **Workspace Path Not Writable**
+Prefer **Check environment** and **Diagnose & repair** in-app. If deployment logs exist, paste them to Moss for deeper analysis.
 
-   On some RDK images, `/app` on the board is read-only. Studio automatically detects writable paths (e.g., `~/openclaw`, `/userdata/openclaw`). If detection fails, manually specify a writable directory in *OpenClaw Panel → Deployment Settings*.
-
-3. **Node.js Version on Board**
-
-   SSH into the board and run `node --version` to confirm the version is ≥ 18. If not:
-
-   ```bash
-   curl -fsSL https://deb.nodesource.com/setup_22.x | sudo bash -
-   sudo apt install -y nodejs
-   ```
-
-4. **Board Network Issues**
-
-   If npm on the board cannot access the default registry:
-
-   ```bash
-   npm config set registry https://registry.npmmirror.com
-   ```
-
-5. **Port 18789 Occupied**
-
-   Check port usage:
-
-   ```bash
-   ss -tlnp | grep 18789
-   ```
-
-   Either kill the occupying process or change the port in *Deployment Settings*.
-
-## Permanent Solutions
-
-- Before deployment, use the "Pre-check" button (if available) at the top of the *OpenClaw Panel* to automatically run checks for Node.js, disk space, and port availability.
-- Immediately after installation, run a full health check under *OpenClaw Panel → Health* to establish baseline data for future comparisons.
-- Always use the official recommended image for production boards to avoid compatibility issues introduced by third-party images.
+Unless you maintain the board yourself, avoid hand-editing OpenClaw install trees or systemd units.

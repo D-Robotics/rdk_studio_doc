@@ -1,36 +1,30 @@
 ---
-sidebar_label: '3.5.1 Installation and Initialization'
-title: 3.5.1 Installation and Initialization
+sidebar_label: '3.5.1 Open the code editor'
+title: 3.5.1 Open the code editor
+unlisted: true
 ---
 
-# 3.5.1 Installation and Initialization
+# 3.5.1 Open the code editor
 
-The first time you open the IDE tab, Studio detects whether `code-server` is already installed on the board. If not installed, it automatically guides you through deployment. The entire process requires no manual configuration from the developer.
+On first open Studio checks whether editing components exist on device. If not, the page guides an automatic install — follow prompts.
 
-## Automatic Installation Process
+## Automatic install
 
-1. Studio uses SSH to check whether `code-server` is installed on the board.
-2. If not installed, a confirmation dialog appears: "code-server needs to be installed. Continue?"
-3. After the developer clicks *Continue*, Studio downloads the `.deb` package matching the board’s architecture (ARM64) from its built-in BOS image.
-4. Installs the package on the board by running `dpkg -i`.
-5. Registers and starts a systemd service that listens on a local port (default: 8080).
-6. The Studio client opens code-server in an embedded window via an SSH tunnel.
+1. Studio checks for the editor environment.
+2. If missing, a confirmation dialog appears.
+3. Choose **Continue** to download and install components.
+4. Editor opens in the page when finished.
 
-The initial installation typically takes 2–5 minutes (depending on the board’s network and disk speed). Once installed, subsequent openings of the IDE tab are instantaneous.
+First install time depends on board network, image, and disk. Later opens are faster.
 
-## Installation Paths
+## When to reinstall
 
-| Item | Path |
-|---|---|
-| Binary | `/usr/lib/code-server/` |
-| Configuration file | `~/.config/code-server/config.yaml` |
-| User data | `~/.local/share/code-server/` |
-| systemd service | `code-server.service` |
+Rarely needed manually. Retry per page guidance after:
 
-To manually uninstall or reinstall, run `sudo apt remove code-server`, then delete the directories listed above before reinstalling.
+- Fresh image flash on device
+- Editor fails to start (corrupt/missing components)
+- Team image shipped without preinstalled editor bits
 
-## Default State After Startup
+## Signs of success
 
-By default, `code-server` binds to local port 8080 after startup and only listens on `127.0.0.1`, without exposing it to the public network. The Studio client accesses this port through an SSH tunnel—similar to running `ssh -L 8080:localhost:8080 root@<board-IP>`—but fully automated.
-
-If you need to access `code-server` manually via a browser (e.g., using a local browser on the same PC for debugging), set up port forwarding in your SSH command and then navigate to `http://localhost:8080`.
+You should see a VS Code‑like layout: device tree, open buffers, integrated terminal. Persistent blank page or install errors — copy the UI text to Moss.

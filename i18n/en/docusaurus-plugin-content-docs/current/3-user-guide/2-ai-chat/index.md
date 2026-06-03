@@ -1,21 +1,49 @@
 ---
-sidebar_label: '3.2 AI Chat'
-title: 3.2 AI Chat
+sidebar_label: '3.2 AI Dock'
+title: 3.2 AI Dock
 ---
 
-# 3.2 AI Chat
+# 3.2 AI Dock
 
-![AI Dock and Quick Prompts: Top bar shows a connected RDK X5 device (root@192.168.128.10:22); the workspace center displays device overview and metrics; AI Dock is expanded at the bottom showing example questions; Quick/Deep Thinking lane toggle is in the bottom-left](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/ai-dock-focused.png)
+The **AI Dock** is Moss’s input area. Open it from **Core → Workbench**, then follow **confirm device → choose mode → enter your question → review results**.
 
-AI Chat is the core module that distinguishes RDK Studio from generic remote development tools. The persistent AI Dock at the bottom of the screen not only supports natural language conversations but can also invoke over 50 tools to perform real-world operations (SSH commands, file transfers, document retrieval, hardware diagnostics), and features hardware awareness—AI knows the model, image version, and status of the currently active device.
+## First-time flow
 
-![Real AI Dock conversation example: User asks "What are the core features of RDK Studio? Please give a brief introduction." Moss responds with five points (Full Device Lifecycle Management / All-in-One Development Environment / AI Development Toolchain / Multimodal Debugging Capabilities / Collaborative Extensibility). Bottom displays "25 seconds · 8.9k tokens"](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/ai-dock-rdk-intro.png)
+| Step | What to do |
+|---|---|
+| 1 | Open **Core → Workbench** and find the input area at the bottom |
+| 2 | Check the device chip in the input area and confirm it points to the right device |
+| 3 | Choose **Plan** when impact is unclear; choose **Execute** when you want direct action |
+| 4 | Use **Fast** for simple questions; use **Think** for troubleshooting and code work |
+| 5 | After sending, check the chat, terminal, files, or diagnostics for outcomes |
 
-## This Section Includes
+## Common controls
 
-- [3.2.1 Overview and Access](./1-overview-and-entry.md): Location of AI Dock, how to open it, and its relationship with other tabs  
-- [3.2.2 Device Awareness and Tool Invocation](./2-device-aware-tools.md): How the Agent understands the current device and invokes tools to complete tasks  
-- [3.2.3 Multi-Session Management](./3-multi-session.md): Design of one independent session per device and session persistence  
-- [3.2.4 Attachments and Multimodal Input](./4-attachments.md): Uploading files, images, and screenshots for Agent analysis  
-- [3.2.5 Slash Commands](./5-slash-commands.md): Shortcut commands to trigger special behaviors  
-- [3.2.6 Dual-Lane Routing](./6-dual-lane.md): How the Thinking and Quick models automatically route requests
+| Control | Options | Role |
+|---|---|---|
+| Device chip | Current device / not bound | Tells Moss whether the task can reach a device directly |
+| Work mode | Execute / Plan | Execute runs the task; Plan lists steps, risks, and confirmation points first |
+| Reply mode | Fast / Think | Fast suits short Q&A; Think suits complex troubleshooting and multi-step tasks |
+| Attachments | Files / images / screenshots | Give Moss logs, configs, screenshots, or code snippets for context |
+
+## Relationship to the workspace
+
+Moss sits in the main column on the left; workspace panels are on the right. You can let Moss analyze while you open Terminal, Files, Changes, Diagnostics, or History. Moss uses the current page, device, project directory, and references you selected.
+
+## Offline and model error banners
+
+The input area can show two important banners:
+
+- **Device offline**: Moss can still plan and answer knowledge questions; device execution waits for reconnect or confirmation.
+- **Model configuration error**: When Fast or Think points to local Ollama but the service is down or the model is missing, the banner links to **Local LLM** or **AI model settings**.
+
+## History and slash commands
+
+The AI Dock keeps local chat history—you can start a new session or resume an older one. The input supports a few slash commands for clearing context, switching models, or viewing help; natural language is fine whenever you are unsure.
+
+## Next
+
+- [3.2.1 Open the AI Dock](./1-overview-and-entry.md): first-time order of operations.
+- [3.2.2 Device operations and results](./2-device-aware-tools.md): target device, execution output, and confirmation prompts.
+- [3.2.4 Upload files and screenshots](./4-attachments.md): give Moss logs, images, and screenshots to analyze.
+- [3.2.6 Choose reply mode](./6-dual-lane.md): when to use Fast vs Think.

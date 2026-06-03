@@ -1,53 +1,44 @@
 ---
-sidebar_label: '3.9.3 Online Status Monitoring'
-title: 3.9.3 Online Status Monitoring
+sidebar_label: '3.9.3 View online status'
+title: 3.9.3 View online status
+unlisted: true
 ---
 
-# 3.9.3 Online Status Monitoring
+# 3.9.3 View online status
 
-The Studio backend performs heartbeat probing on every added device to promptly reflect its online status. Developers don't need to manually query—the status indicator in the device list updates continuously.
+Studio periodically checks whether saved devices are reachable—no manual refresh needed; list badges update on their own.
 
-## Heartbeat Strategy
+## How status changes
 
-| Phase | Probing Frequency | Trigger Condition |
-|---|---|---|
-| Device online and actively in use | Every 30 seconds | Default |
-| 3 consecutive heartbeat failures | Marked as offline | Network jitter or temporary unreachability of the device |
-| Low-frequency probing after going offline | Every 5 minutes | Reduce network requests to known offline devices |
-| Successful probe | Immediately mark as online + trigger notification | Automatically detect when device recovers |
+| UI | Meaning |
+|---|---|
+| Online | Terminal, Files, Moss, and other device features are usable |
+| Offline | Power loss, unreachable network, or SSH failure |
+| Back online | List updates once connectivity returns |
 
-This strategy—"high-frequency probing when online, low-frequency when offline, immediate detection upon recovery"—balances real-time responsiveness with system resource consumption.
+## “Online” but operations hang
 
-## Handling "Online but Unresponsive" Scenarios
+Sometimes the badge says online while terminal/file ops stall—try:
 
-Sometimes the heartbeat indicates the device is online, yet specific command operations (e.g., executing commands in a remote terminal) hang without response. Possible causes include:
+- Wait a few seconds for recovery.
+- Check load—heavy jobs can starve the session.
+- If the shell still accepts input, ask Moss to inspect system health.
 
-- Heartbeat uses a simple SSH connection probe that doesn’t depend on the device’s application processes
-- Actual commands may stall due to high CPU usage, I/O blocking, or other issues on the device
-- In such cases, verify using commands in the remote terminal: `uptime`, `top`, `iostat`, etc.
+If the terminal is dead, verify power and network, then consider rebooting.
 
-If remote terminal commands also become unresponsive, consider alternative approaches like [3.7.4 RDK S100 xburn](../7-system-flashing/4-s100-xburn.md) or physically rebooting the device.
+## Too many concurrent operations
 
-## Concurrent Connection Limits per Device
+Many parallel terminals, transfers, and Moss tasks can queue—let earlier work finish before retrying.
 
-Studio enforces a maximum limit on concurrent SSH connections to the same device (default: 8). This prevents long-running tasks from occupying all SSH channels and blocking essential probes.
+## Multi-user caveats
 
-You might encounter this concurrency limit in scenarios such as:
+When several people use Studio against one device:
 
-- Opening multiple remote terminal tabs simultaneously + AI Agent invoking `device_exec` concurrently + background heartbeat probing
-- Bulk uploading large files via File Manager + AI Agent reading many small files at the same time
+- One person’s commands can disrupt another’s session.
+- Someone changing saved credentials can lock others out.
 
-When the concurrency limit is reached, new requests enter a waiting queue—they won’t fail. This queuing behavior is expected, not an error. If needed, you can adjust the limit via the environment variable `RDK_DEVICE_EXEC_MAX_CONCURRENT` (default value: 8).
+Team practices help:
 
-## Collaboration Considerations
-
-When multiple developers operate the same device through Studio simultaneously, the following issues may arise:
-
-- One developer’s commands might interfere with another’s work (e.g., accidentally killing the other’s processes)
-- If one user modifies the SSH credentials in the device list, others may lose access
-
-Team recommendations:
-
-- Assign dedicated personnel for production devices to avoid accidental process termination
-- Use SSH key-based authentication for critical devices, with each team member having their own key
-- Clearly annotate devices (e.g., “Dedicated / Shared Debugging”) in the device notes so the entire team understands usage rules
+- Assign an owner for production boards.
+- Use personal or agreed team accounts for critical devices.
+- Use device notes like “Owner only” / “Shared lab” so expectations are clear.

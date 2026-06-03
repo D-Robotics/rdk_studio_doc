@@ -1,47 +1,31 @@
 ---
-sidebar_label: '3.3.2 Reconnection Mechanism'
-title: 3.3.2 Reconnection Mechanism
+sidebar_label: '3.3.2 Reconnect after disconnect'
+title: 3.3.2 Reconnect after disconnect
+unlisted: true
 ---
 
-# 3.3.2 Reconnection Mechanism
+# 3.3.2 Reconnect after disconnect
 
-When network fluctuations occur or the remote device becomes temporarily unreachable, the remote terminal does not immediately terminate the session but instead attempts to automatically reconnect. This mechanism ensures developers don't need to worry about "having to log in again just because of a brief network hiccup" during long-running sessions.
+Under network jitter or brief device unreachability, Terminal does not drop the session immediately—it tries automatic reconnect—so long jobs and log watching are less fragile.
 
-## Reconnection Triggers
+## What you will see
 
-| Scenario | Studio Behavior |
+| Situation | UI behavior |
 |---|---|
-| Network jitter (brief packet loss) | Automatically reconnects; unsent input is preserved |
-| Device briefly loses power and then recovers | Displays a "Connection lost" banner; automatically reconnects once connectivity resumes |
-| Inactivity for a long period (> 30 minutes) | Maintains connection via background heartbeats; does not actively disconnect |
-| Tab closed manually | Disconnects immediately; no reconnection attempt |
+| Brief network dip | Reconnect banner; Studio retries automatically |
+| After device reboot reconnects | Terminal becomes usable again |
+| Closing the tab intentionally | Session ends; no further reconnect |
 
-## Session State During Reconnection
+Usually, text you typed but have not sent is preserved. Output produced while disconnected may not replay fully—run critical commands once the link feels stable again.
 
-During reconnection:
+## If reconnect keeps failing
 
-- A yellow banner appears at the top of the terminal saying "Connection lost, reconnecting..."
-- The input box remains usable; entered content is temporarily stored on the frontend and will not be lost
-- No new output from the device is received (if the device continues producing output during disconnection, some buffered output may be lost)
+Check power, network, host/IP, and SSH service. Typical hints:
 
-After successful reconnection:
-
-- The yellow banner disappears
-- Buffered input can be sent normally
-- The device-side session resumes from the point of disconnection—however, output from commands that were sent but not yet acknowledged before disconnection may not be replayed
-
-## Heartbeat Maintenance
-
-To prevent SSH sessions from being dropped by firewalls or routers due to prolonged inactivity, Studio sends an empty data packet every 30 seconds to keep the connection alive. This heartbeat mechanism is transparent to developers, though in environments with strict firewall policies, adjustments might be needed (contact your operations team to allow long-lived SSH connections).
-
-## Reconnection Still Fails
-
-If Studio fails to reconnect after multiple attempts (5 consecutive failures), it stops trying and prompts the developer to take manual action:
-
-| Message | Recommended Action |
+| Message | What to try |
 |---|---|
-| `Connection refused` | The sshd service on the device may have stopped; log in via another method (e.g., serial console) to check |
-| `Connection timed out` | The device is completely unreachable over the network; verify the device's power and network connectivity |
-| `Host key changed` | The device image may have been reflashed; run `ssh-keygen -R <IP>` to remove the old key and reconnect |
+| `Connection refused` | Device may be up but SSH is not responding normally |
+| `Connection timed out` | Host cannot reach the device yet—check network and address |
+| `Host key changed` | Possible reflash—follow the prompt to confirm the new host key |
 
-For comprehensive troubleshooting, see [5.2 SSH Connection Failures](../../5-faq/2-ssh-failed.md).
+Broader troubleshooting: [5.2 SSH connection failed](../../5-faq/2-ssh-failed.md).

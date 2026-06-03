@@ -1,55 +1,43 @@
 ---
-sidebar_label: '3.9.1 Device List and Switching'
-title: 3.9.1 Device List and Switching
+sidebar_label: '3.9.1 Switch active device'
+title: 3.9.1 Switch active device
 ---
 
-# 3.9.1 Device List and Switching
+# 3.9.1 Switch active device
 
-## Device List Display Items
+## What appears in the list
 
-Each device in the list displays the following information:
+Each row shows:
 
 | Field | Description |
 |---|---|
-| Custom Name | Developer-defined device name |
-| IP Address | IP address currently used for connection |
-| Online Status | Real-time heartbeat result (see [3.9.3](./3-online-monitoring.md) for details) |
+| Note name | The label you gave the device |
+| IP address | Address used for access |
+| Online state | Whether the device is reachable now—see [3.9.3 View online status](./3-online-monitoring.md) |
 
-The list supports sorting by name, IP, or status, making it easy to locate devices quickly in multi-device scenarios.
+Sort by name, IP, or state to find devices quickly in multi-board setups.
 
-## Three Ways to Switch Active Devices
+## Three ways to change the active device
 
-| Method | Path | Use Case |
+| Method | Where | When to use |
 |---|---|---|
-| Top-left device dropdown in header bar | Available on any tab | Fastest method; preferred for daily use |
-| *Activate* button in device list | *Configuration Center → Device Connection* | When you need to review device details before switching |
-| AI Dock natural language command | Say directly, e.g., "Switch to RDK-X5-Workstation2" | When editing documents or code and don't want to leave your current position |
+| Top-left device dropdown | Most pages | Fastest for daily work |
+| *Activate* in the device list | *Configuration center → Device connection* | When you need details before switching |
+| Natural language in AI Dock | e.g. “Switch to RDK-X5-bench-2” | When you don’t want to leave the editor |
 
-Whichever method is used, the switch takes effect immediately.
+After switching, the workspace tracks the newly active device.
 
-## Synchronization Behavior After Switching
+## What changes after switching
 
-| Item | Behavior After Switching |
+Workbench, Files, IDE, Remote Desktop, and AI Dock target the new device. Open terminal tabs and chat history stay—switch back later and continue where you left off.
+
+| Area | Effect |
 |---|---|
-| Remote Terminal | Opens a new SSH session for the new device in a new tab; tabs for previous devices remain open |
-| File Manager | Automatically points to the root directory of the new device |
-| Remote IDE | Switches to the code-server instance on the new device |
-| Remote Desktop | Switches to the VNC session of the new device |
-| AI Dock | Switches to the session associated with the new device (each device has an independent session) |
-| Dashboard | Reloads metrics data for the new device (takes approximately 2–5 seconds) |
-| Header IP List | Updates to show all network interface IPs of the new device |
+| Workbench | Reloads state for the new device |
+| Files / IDE | Points at the new device’s environment |
+| AI Dock | Uses the new device’s context |
+| Top bar IP list | Shows the new device’s addresses |
 
-Switching does not lose the running state of the previous device—commands already running in the remote terminal and conversation history in AI Dock are preserved. You can resume work seamlessly when switching back later.
+## Quick IP from the top bar
 
-## Quick IP Lookup in Header Bar
-
-After switching devices, clicking the device name in the header bar displays all network interface IPs for that device:
-
-```
-RDK-X5-Workstation1
-- wlan0: 192.168.1.45 (WiFi)
-- eth0:  192.168.127.10 (Ethernet direct connection)
-- usb0:  192.168.128.10 (Type-C)
-```
-
-Each IP can be copied with one click—eliminating the need to SSH into the device to query IPs when using external tools.
+After switching, click the device name in the top bar to view/copy its IP—no terminal query needed for external tools.

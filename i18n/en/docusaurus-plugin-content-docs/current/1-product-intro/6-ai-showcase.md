@@ -40,7 +40,7 @@ Run a YOLO example on the current device following official procedures, and tell
 
 **Full Conversation**
 
-![AI Dock YOLO planning and launch conversation: The agent sequentially invokes the OpenClaw expert, fetches official documentation (developer.d-robotics.cc/rdk-doc), and queries the rdk-doc-search knowledge base. It then presents a structured response with sections: "1. Requirement Clarification / 2. Current On-Board Environment / 3. Compatibility Summary / 4. Online Validation / 5. Executable Plan (YOLOv8n series)." The executable plan includes the launch command `ros2 launch yolo_dnn_example hobot_dnn_node_example.launch.py yolo_example_config_file:=config/...`, sample INFO log output, and optional configurations for YOLOv5/YOLOv8/YOLOv10/YOLOv11/YOLOv12. A "Confirm Execution" button appears at the end—actual command execution only occurs after the user clicks "Execute." Total time: 51 seconds.](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/showcase-case2-yolo-plan.png)
+![AI Dock YOLO planning and launch conversation: The agent sequentially invokes the OpenClaw expert, fetches official documentation (developer.d-robotics.cc/rdk-doc), and queries the rdk-doc-search knowledge base. It then presents a structured response with sections: "1. Requirement Clarification / 2. Current On-Board Environment / 3. Compatibility Summary / 4. Online Validation / 5. Executable Plan (YOLOv8n series)." The executable plan includes the launch command `ros2 launch yolo_dnn_example hobot_dnn_node_example.launch.py yolo_example_config_file:=config/...`, sample INFO log output, and optional configurations for YOLOv5/YOLOv8/YOLOv10/YOLOv11/YOLOv12. A "Confirm Execution" button appears at the end—actual command execution only occurs after the user clicks "Execute." Total time: 51 seconds.](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/showcase-case2-yolo-plan.png)
 
 Key observations:
 
@@ -58,7 +58,7 @@ Stop the previous YOLO instance, relaunch YOLOv8n, and open the web page for me 
 
 **Full Conversation**
 
-![AI Dock restarting YOLO and displaying the web view: The agent first uses device_exec to kill the old process (`kill -9 67335 2>/dev/null || true`), then relaunches YOLOv8n. The panel shows: "YOLOv8n object detection example restarted / New PID: 83250 / Log path: /tmp/rdkstudio-bg-82831.log / Status: USB camera, encoding, DNN inference, and web service all started successfully / Preview page opened: http://192.168.127.10:8000." A floating TogetheROS Web Display window on the right shows real-time camera feed with detected objects labeled as "keyboard" and "bed" in blue bounding boxes. Bottom metrics display cpu 1500000, temp 84.4, fps 0. Total time: 57 seconds.](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/showcase-case2-yolo-running.png)
+![AI Dock restarting YOLO and displaying the web view: The agent first uses device_exec to kill the old process (`kill -9 67335 2>/dev/null || true`), then relaunches YOLOv8n. The panel shows: "YOLOv8n object detection example restarted / New PID: 83250 / Log path: /tmp/rdkstudio-bg-82831.log / Status: USB camera, encoding, DNN inference, and web service all started successfully / Preview page opened: http://192.168.127.10:8000." A floating TogetheROS Web Display window on the right shows real-time camera feed with detected objects labeled as "keyboard" and "bed" in blue bounding boxes. Bottom metrics display cpu 1500000, temp 84.4, fps 0. Total time: 57 seconds.](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/showcase-case2-yolo-running.png)
 
 Key observations:
 
@@ -76,7 +76,7 @@ Summarize the process of successfully running YOLO-World into a community forum 
 
 **Conversation Output**
 
-![AI Dock generating a community forum draft: Title reads "[Copy-Paste Ready Draft]," body titled "Running YOLO-World Open-Vocabulary Object Detection on RDK X5 in 5 Minutes." Sections include—Environment & Preparation (Device: RDK X5 8GB; OS: Official RDK Ubuntu 22.04 + TROS Humble; Camera: Standard USB plug-and-play 720P; Software: tros-humble-hobot-yolo-world v0.4.1); Complete Execution Steps (1. Install software / 2. Prepare config & environment / 3. Launch detection service—with separate bash commands for USB camera, MIPI camera, and local image test versions); Real-World Performance Table (Inference FPS ~6 / Per-frame latency ~150ms / BPU utilization ~60% / Full-partition resource usage 76bit); Viewing Results (via http://device-IP:8000 or studio_open_url for pop-up window); Common Issues & Fixes (5 scenarios: browser not opening, successful launch but blank page, camera not working, unstable bounding boxes, no detections—with root causes and troubleshooting commands); Advanced Tips (custom detection categories via yolo_world_texts, saving results, further development); Conclusion recommends directly copying these steps.](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/showcase-case3-forum-draft.png)
+![AI Dock generating a community forum draft: Title reads "[Copy-Paste Ready Draft]," body titled "Running YOLO-World Open-Vocabulary Object Detection on RDK X5 in 5 Minutes." Sections include—Environment & Preparation (Device: RDK X5 8GB; OS: Official RDK Ubuntu 22.04 + TROS Humble; Camera: Standard USB plug-and-play 720P; Software: tros-humble-hobot-yolo-world v0.4.1); Complete Execution Steps (1. Install software / 2. Prepare config & environment / 3. Launch detection service—with separate bash commands for USB camera, MIPI camera, and local image test versions); Real-World Performance Table (Inference FPS ~6 / Per-frame latency ~150ms / BPU utilization ~60% / Full-partition resource usage 76bit); Viewing Results (via http://device-IP:8000 or studio_open_url for pop-up window); Common Issues & Fixes (5 scenarios: browser not opening, successful launch but blank page, camera not working, unstable bounding boxes, no detections—with root causes and troubleshooting commands); Advanced Tips (custom detection categories via yolo_world_texts, saving results, further development); Conclusion recommends directly copying these steps.](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/showcase-case3-forum-draft.png)
 
 Key observations:
 
@@ -96,12 +96,12 @@ Key observations:
 | Output Formats | Diverse outputs: tables, step-by-step lists, forum drafts, live web previews |
 | Interruption Methods | "End Current / Stop All" buttons in panel + Esc key |
 
-For technical details on tool invocation and device awareness, see [3.2.2 Device Awareness and Tool Invocation](../3-user-guide/2-ai-chat/2-device-aware-tools.md).
+For technical details on tool invocation and device awareness, see [3.2.2 Device operations and results](../3-user-guide/2-ai-chat/2-device-aware-tools.md).
 
 ## Reproduction Requirements
 
-1. Complete [2.1 Installation and Login](../2-quick-start/1-install-and-login.md) and connect an RDK board.
-2. Activate an accessible model as described in [2.5 Configure AI Model](../2-quick-start/5-configure-ai-model.md).
+1. Complete [2.1 Install and sign in](../2-quick-start/1-install-and-login.md) and connect an RDK board.
+2. Activate an accessible model as described in [2.5 Connect an AI model](../2-quick-start/5-configure-ai-model.md).
 3. Case 2 requires a USB camera (or follow instructions to switch to MIPI/local image versions).
 4. Enter the prompts from this section into AI Dock.
 

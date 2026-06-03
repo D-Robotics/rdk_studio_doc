@@ -1,58 +1,32 @@
 ---
-sidebar_label: '3.8.3 Configuration Persistence'
-title: 3.8.3 Configuration Persistence
+sidebar_label: '3.8.3 Saved Wi‑Fi profiles'
+title: 3.8.3 Saved Wi‑Fi profiles
+unlisted: true
 ---
 
-# 3.8.3 Configuration Persistence
+# 3.8.3 Saved Wi‑Fi profiles
 
-Wi-Fi configured via Studio is persistent by default—after rebooting the board, it automatically reconnects without requiring manual intervention each time. This behavior is provided by the NetworkManager daemon on the board.
+Wi‑Fi profiles you configure through Studio persist on the device. After reboot, it usually reconnects without re-entering the password.
 
-## Persistence Mechanism
+## If it doesn’t reconnect after reboot
 
-| Step | Implementation |
-|---|---|
-| Studio triggers `nmcli dev wifi connect` | NetworkManager receives the connection request |
-| Configuration written after successful connection | Config saved to `/etc/NetworkManager/system-connections/<SSID>.nmconnection` |
-| Board reboots | NetworkManager daemon starts automatically |
-| Daemon reads configuration | Actively attempts to connect to saved networks |
+Check in roughly this order:
 
-This mechanism is transparent to developers; under normal circumstances, "connect once, use indefinitely."
+- Router/Wi‑Fi health.
+- Password was not changed upstream.
+- Device range/obstruction—metal enclosures, racks, walls.
+- Router allows new clients; DHCP can hand out addresses.
 
-## Common Causes for Lost Configuration After Reboot
+A changed IP alone is often normal—DHCP rotated leases. Prefer router reservations or static IPs when you need a fixed address.
 
-| Symptom | Troubleshooting |
-|---|---|
-| Wi-Fi not connected at all after reboot | NetworkManager service may not be enabled to start automatically; run `sudo systemctl enable NetworkManager` |
-| Connects after reboot but IP changes | Caused by router's DHCP allocation; recommend binding a static IP to the MAC address |
-| Occasional failure after reboot | Incorrect system time on the board causing certificate validation failures; ensure NTP synchronization is working properly |
-| Unable to connect to previous SSID at all | Router password may have changed; re-enter the password |
+## Removing saved networks
 
-## Deleting Saved Networks
+Remove unused profiles from the *Saved* list in the Wi‑Fi dialog—credentials for that SSID go away until you reconnect.
 
-Wi-Fi configurations no longer needed can be deleted:
+If deletion fails, share the hint with Moss for next steps.
 
-| Method | Action |
-|---|---|
-| Within Studio | Wi-Fi configuration popup → *Saved* list → Select network → *Forget* |
-| Board command line | Use `nmcli connection show` to list saved connections, then `nmcli connection delete <connection-name>` to delete |
+## Long‑term deployments
 
-After deletion, the network’s password is also cleared from the board, requiring re-entry upon next connection.
+Ethernet plus fixed IPs reduce Wi‑Fi variability and roaming IP headaches.
 
-## Recommendations for Long-Term Production Environments
-
-For production boards intended for long-term operation (e.g., devices in a server room), we recommend:
-
-1. Prefer **wired network + static IP**: eliminates Wi-Fi signal instability and DHCP uncertainty.
-2. Configure static IP using `nmcli`:
-
-   ```bash
-   nmcli connection modify "<connection-name>" \
-     ipv4.addresses 192.168.1.100/24 \
-     ipv4.gateway 192.168.1.1 \
-     ipv4.dns 8.8.8.8 \
-     ipv4.method manual
-   ```
-
-3. Add the device in Studio’s device list using the same static IP to avoid querying the board’s IP address after each boot.
-
-For comprehensive Wi-Fi troubleshooting, see [5.7 Network Connection Failure](../../5-faq/7-network-failed.md).
+See [5.7 Wi-Fi connection failed](../../5-faq/7-network-failed.md) for full Wi‑Fi troubleshooting.

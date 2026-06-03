@@ -1,57 +1,59 @@
+﻿---
+sidebar_label: '3.14.2 Connect WeChat'
+title: 3.14.2 Connect WeChat
 ---
-sidebar_label: '3.13.2 WeChat Channel'
-title: 3.13.2 WeChat Channel
----
 
-# 3.13.2 WeChat Channel
+# 3.14.2 Connect WeChat
 
-The WeChat channel enables AI conversation integration by binding the developer's personal WeChat account. Please note: this refers to your **personal WeChat account**, not WeCom (Enterprise WeChat). After binding, developers can send messages to the Bot via WeChat, check board status, and remotely trigger tasks.
+![Settings center · WeChat: scan to bind a personal WeChat account and manage channel status](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/settings-weixin.png)
 
-## Binding Steps
+The WeChat channel connects Moss by binding your **personal WeChat** account—not WeCom (enterprise WeChat). After binding, you can message the bot in WeChat, check on-device status, or trigger configured tasks.
+
+## Binding steps
 
 | Step | Action |
 |---|---|
-| 1 | *Configuration Center → Multi-channel Integration → WeChat* → Click *Bind WeChat* |
-| 2 | Studio displays a QR code |
-| 3 | Scan the QR code using WeChat |
-| 4 | Receive a "Binding Successful" message from the Bot in WeChat |
-| 5 | Send messages to the Bot afterward to start conversing with the AI |
+| 1 | *Settings center → Message channels · WeChat* → *Bind WeChat* |
+| 2 | Studio shows a QR code |
+| 3 | Scan with WeChat |
+| 4 | You receive a “binding succeeded” message in WeChat |
+| 5 | Message the bot anytime to talk to Moss |
 
-After binding, a new contact (or group bot, depending on implementation) will appear in WeChat. Conversations with this contact are equivalent to conversations with the AI.
+After binding, a new contact (or group bot, depending on channel settings) appears in WeChat; chatting with that contact is chatting with Moss.
 
-## Management Operations
+## Management
 
-| Action | Path |
+| Action | Where |
 |---|---|
-| View bound accounts | *WeChat → User List* |
-| Remove a binding | *User List → Select Account → Remove* |
-| Restart WeChat channel | *WeChat → Channel Control → Restart* |
+| View bound accounts | *WeChat → User list* |
+| Remove a binding | *User list → select account → Remove* |
+| Restart WeChat channel | *WeChat → Channel control → Restart* |
 
-## Limitations of the WeChat Channel
+## WeChat limitations
 
 | Limitation | Impact |
 |---|---|
-| Personal WeChat | Only a **limited number of accounts** can be bound simultaneously (exact limit depends on WeChat's policy) |
-| High-risk operations | Require secondary confirmation, same as Feishu channel |
-| Rich text display | Limited formatting in WeChat chat; long outputs may be truncated or split into multiple messages |
-| File transfer | Restricted by WeChat API; large files require alternative methods (e.g., direct SSH transfer) |
-| Account risk | Frequent automated messaging may trigger WeChat’s account suspension policy—use with caution |
+| Personal WeChat | Only a **small number** of accounts can be bound at once (exact cap depends on WeChat) |
+| High‑risk actions | Also require a second confirmation, same as Feishu |
+| Rich text | WeChat chat UI is limited; long output may be truncated or split |
+| File transfer | Subject to WeChat APIs; use other paths (e.g. SSH) for large files |
+| Account risk | Heavy automated messaging may trigger WeChat risk controls—use carefully |
 
-## Recommended Use Cases
+## When to use
 
 | Scenario | Recommendation |
 |---|---|
-| Checking board status while traveling or away from the office | Recommended |
-| Team members operating the board via a WeChat group | Not recommended (use Feishu enterprise Bot instead) |
-| 7×24 automated bot integration | Not recommended (due to account risk; use a dedicated Bot platform or Feishu instead) |
+| Check device status while away from the office | Recommended |
+| Let the whole team operate devices from a WeChat group | Not recommended (prefer a Feishu enterprise bot) |
+| Long‑running unattended bot on WeChat | Not recommended (account risk; prefer enterprise bot platforms or Feishu) |
 
-## Deploying on OpenClaw Board
+## OpenClaw on device
 
-If you want WeChat messages to be processed even after your PC is shut down, you can deploy the WeChat channel on the OpenClaw board:
+To handle WeChat messages on the device, follow the page hints to configure the WeChat channel for on-device OpenClaw:
 
-1. Go to *OpenClaw → Configuration → WeChat Channel*
-2. Configure or scan to bind your account
-3. The OpenClaw board takes over WeChat message processing
-4. PC shutdown no longer affects functionality—as long as the board has power and network connectivity, it can process messages
+1. Open *Settings center → Message channels · WeChat*
+2. Configure or scan to bind
+3. Choose on-device handling as prompted
+4. Send a test message and confirm the reply
 
-Bindings on the board and on the PC can coexist independently, but binding the same WeChat account simultaneously on both is not recommended (may cause message handling conflicts).
+PC-side and device-side bindings can coexist, but do **not** bind the same WeChat account in both places—message handling may conflict.

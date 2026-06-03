@@ -1,68 +1,70 @@
+﻿---
+sidebar_label: '3.14.1 Connect Feishu'
+title: 3.14.1 Connect Feishu
 ---
-sidebar_label: '3.13.1 Feishu Channel'
-title: 3.13.1 Feishu Channel
----
 
-# 3.13.1 Feishu Channel
+# 3.14.1 Connect Feishu
 
-The Feishu channel integrates RDK Studio's AI conversation capabilities into your enterprise Feishu bot, enabling team members to:
+The Feishu channel connects Moss to an enterprise Feishu bot. Team members can:
 
-- Mention the @Bot in a Feishu group to let AI assist with board operations  
-- Have one-on-one conversations with AI via private chat  
-- View all AI responses directly within Feishu, ensuring full traceability of task flows  
+- @ the bot in a Feishu group so Moss checks status, analyzes logs, or triggers on-device tasks you have already approved
+- Chat 1:1 with Moss in direct messages
+- See Moss replies and key actions in Feishu for easier tracking
 
-## Configuration Settings
+## Configuration fields
 
-Configure the following fields under *Configuration Center → Multi-channel Integration → Feishu*:
+In *Settings center → Message channels · Feishu*, set:
 
-| Field | Required | Source |
+![Settings center · Message channels · Feishu: channel status, everyday usage, app credentials, and connection mode](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/settings-feishu.png)
+
+| Field | Required | Where to get it |
 |---|---|---|
-| App ID | Yes | Feishu Developer Console → Your App → Credentials & Basic Info |
-| App Secret | Yes | Same as above |
-| Encrypt Key | No | Feishu Console → Event Subscriptions |
-| Verification Token | No | Same as above |
+| App ID | Yes | Feishu developer console → your app → Credentials & basic info |
+| App secret | Yes | Same as above |
+| Encryption key | No | Feishu console → Event subscription |
+| Verification token | No | Same as above |
 
-App ID and App Secret are authentication credentials for your Feishu self-built app. The Encrypt Key is used to decrypt events pushed by Feishu, and the Verification Token verifies the event source—both are optional and will fall back to default security policies if not configured.
+App ID and app secret identify your Feishu custom app. The encryption key and verification token tighten event verification; fill them according to the Feishu console.
 
-## Creating a Feishu Self-Built App
+## Create a Feishu custom app
 
-If your team doesn’t already have a Feishu self-built app, create one first:
+If your team does not have a custom app yet:
 
-1. Go to the Feishu Developer Console  
-2. Create a new "Self-Built App" and fill in the app name, icon, and description  
-3. Under *Permission Management*, enable required permissions such as reading messages, sending messages, and accessing group info  
-4. Under *Event Subscriptions*, subscribe to the "Receive Message" event and enter the callback URL (pointing to your Studio instance’s public address)  
-5. Submit the app under *Version Release* and wait for approval from your enterprise admin  
-6. After approval, retrieve the App ID and App Secret  
+1. Open the Feishu developer console
+2. Create a new custom app and set name, icon, and description
+3. Under *Permission management*, enable required permissions: read messages, send messages, group info, etc.
+4. Under *Event subscription*, subscribe to “receive messages” and set the callback URL
+5. Under *Version release*, submit the app and wait for enterprise admin approval
+6. After approval, obtain the app ID and app secret
 
-For detailed instructions, refer to the official Feishu Open Platform documentation.
+For full steps, refer to Feishu Open Platform official documentation.
 
-## Three Private Chat Policies
+## Direct message access modes
 
-| Mode | Behavior | Recommended Scenario |
+| Mode | Behavior | When to use |
 |---|---|---|
-| Allowlist Mode | Only specified Feishu users can initiate private chats with the Bot | Strongly recommended for production environments |
-| Approval Mode | Any user can message the Bot, but requires admin approval for continued use | Internal teams wanting moderate control |
-| Open Mode | Any Feishu user who can see the Bot can use it directly | Testing environments or scenarios with no sensitive operations |
+| Allowlist | Only listed Feishu users can DM the bot | Strongly recommended in production |
+| Approval | Anyone can send a message; an admin approves once before continued use | Internal teams that want light control |
+| Open | Anyone who can see the bot can use it | Testing or when there is clearly no sensitive operation |
 
-**Always use Allowlist Mode in production.** Open Mode means anyone can instruct the AI to run commands on your boards—this poses extremely high risk.
+**Use allowlist mode in production.** Open mode means anyone who sees the bot may trigger Moss to act on devices—high risk.
 
-## User Management
+## User management
 
-| Action | Path |
+| Action | Where |
 |---|---|
-| View bound users | *Feishu → User Management* |
-| Approve pending pairing requests | *Feishu → Pending Approvals* |
-| Remove a user | *User Management → Select User → Remove* |
-| Enable / Disable the entire Feishu channel | *Feishu → Channel Toggle* |
+| View bound users | *Feishu → User management* |
+| Approve pending pairing | *Feishu → Pending approval* |
+| Remove a user | *User management → select user → Remove* |
+| Start / stop the whole Feishu channel | *Feishu → Channel switch* |
 
-## Bot Capabilities in Feishu
+## What the bot can do in Feishu
 
-The Bot offers nearly identical functionality to AI Dock:
+The Feishu bot capabilities are nearly the same as AI Dock:
 
-- Check device status: e.g., "Check BPU usage on RDK-X5-Workstation1"  
-- File transfer: e.g., "Send me /tmp/log.txt" (the Bot sends the file as an attachment in Feishu)  
-- Command execution: e.g., "Restart ROS node camera_publisher"  
-- Invoke any installed skill  
+- Device status: “Show BPU usage on RDK-X5-workstation1”
+- Files: “Send me /tmp/log.txt” (bot sends the file as an attachment to Feishu)
+- Commands: “Restart ROS node camera_publisher”
+- Use loaded related skills
 
-When invoking high-risk commands (e.g., `rm -rf`, `kill`, `dd`) via Feishu, the Bot will always require explicit secondary confirmation within Feishu—even if such commands are allowed by default in Studio. This stricter policy exists because Feishu is an external channel, warranting enhanced security measures.
+For high‑risk commands, file writes, or tasks that might change device state, the bot will ask you to confirm again in Feishu. Because Feishu is external, confirmation is stricter than inside Studio.

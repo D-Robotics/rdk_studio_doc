@@ -1,40 +1,40 @@
 ---
-sidebar_label: '5.4 No Image from USB Camera'
-title: 5.4 No Image from USB Camera
+sidebar_label: '5.4 USB camera no image'
+title: 5.4 USB camera no image
 ---
 
-# 5.4 No Image from USB Camera
+# 5.4 USB camera no image
 
-## Typical Symptoms
+## Typical symptoms
 
-After launching nodes such as `hobot_usb_cam`, the process appears to be running, but:
+After launching `hobot_usb_cam` (or similar) the node shows running, but:
 
-- The web interface on port 8080 shows a black screen
-- The message `did not receive image data` repeatedly appears
-- The node exits immediately with errors like `code -6`, `SIGABRT`, or `terminate called after throwing`
+- Web preview stays black  
+- Logs repeat `did not receive image data`  
+- The node exits with `code -6`, `SIGABRT`, or `terminate called after throwing …`
 
-## Quick Diagnosis
+## Quick check
 
-Run the following command on the board:
+On the board:
 
 ```bash
 v4l2-ctl -d /dev/video0 --list-formats-ext
 ```
 
-Check whether the output contains `[0]: 'MJPG' (Motion-JPEG)`:
+Look for `[0]: 'MJPG' (Motion-JPEG)` in the output:
 
-- **No MJPG** → The camera only supports YUYV; you must use a low resolution of `320x240`
-- **MJPG present** → Modify the launch parameter to `pixel_format=MJPEG` and select a supported resolution/frame rate combination
+- **No MJPG** → camera may be YUYV-only; try low resolutions such as `320x240`
+- **Has MJPG** → set launch `pixel_format=MJPEG`, pick resolution/fps the camera lists as supported
 
-## Troubleshooting Checklist
+## Checklist
 
-1. **Verify the device node**
+1. **Identify the `/dev/video` node**
 
    ```bash
    ls -l /dev/video*
    ```
 
-   For multiple devices:
+   Multiple devices:
 
    ```bash
    for d in /dev/video*; do
@@ -45,7 +45,7 @@ Check whether the output contains `[0]: 'MJPG' (Motion-JPEG)`:
 
 2. **Switch pixel format**
 
-   UVC cameras default to YUYV, which often causes stream interruptions under the limited USB bus bandwidth on embedded boards. You must switch to MJPEG. Set the following in your launch file:
+   UVC often defaults to YUYV—on tight USB bandwidth the stream stalls. Prefer MJPEG—e.g. in launch:
 
    ```python
    pixel_format='MJPEG'
@@ -54,31 +54,29 @@ Check whether the output contains `[0]: 'MJPG' (Motion-JPEG)`:
    framerate=30
    ```
 
-3. **Exact match required**
+3. **Match reported modes**
 
-   The triplet (width, height, frame rate) must exactly match one of the modes listed in the `v4l2-ctl` output. If it fails, fall back to `320x240@15`.
+Width, height, and fps should match a line from `v4l2-ctl`. Drop to `320x240@15` if needed.
 
-4. **Try a different device path**
+4. **Try another device node**
 
-   If `/dev/video0` crashes, try `/dev/video1` or another available video device.
+   If `/dev/video0` crashes, try `/dev/video1`, etc.
 
-5. **Use AI assistance**
+5. **Paste logs**
 
-   Paste the full error log into AI Dock. The built-in error pattern recognition in Studio will directly suggest a fix.
+   Drop the full traceback into AI Dock—Moss can suggest RDK‑specific fixes.
 
-## Root Cause
+## Why this works
 
-Nodes like `hobot_usb_cam` default to the YUYV format. USB 2.0 has a theoretical bandwidth of ~480 Mbps (with ~320 Mbps practically usable), yet a single 640×480 YUYV stream at 30 fps already consumes ~147 Mbps. When other USB devices share the same bus, this often leads to frame drops or immediate `SIGABRT` crashes.
+Defaults that force YUYV move large payloads; extras on the same USB bus worsen drops. MJPEG squeezes bandwidth and is usually stabler.
 
-MJPEG compresses data by 10–20×, reducing the per-frame size from ~615 KB to ~150 KB at the same resolution—significantly easing the load on the USB bus.
+## Permanent fix workflow
 
-## Permanent Fix
+Proceed stepwise:
 
-Follow these steps sequentially—only proceed to the next step after successfully completing the current one:
+1. **Characterize modes** via `v4l2-ctl` (formats, sizes, fps)  
+2. **Edit launch** with `pixel_format='MJPEG'` matching a supported combo  
+3. **Verify topics**—RViz2 or `ros2 topic echo` should show steady frames  
+4. **Then** stack detection/other nodes  
 
-1. **First, use `v4l2-ctl` to fully understand your camera’s capabilities**: supported formats, resolutions, and frame rates  
-2. **Modify the launch file**: set `pixel_format='MJPEG'` and choose a resolution/frame rate combination that the camera supports  
-3. **Confirm image topic is publishing**: verify stable image streaming via RViz or `ros2 topic echo`  
-4. **Then attach detection or recognition nodes**
-
-For detailed on-board ROS/TROS configuration, refer to the [RDK Official Documentation](https://developer.d-robotics.cc/rdk_doc/en/Robot_development).
+For ROS / TROS details see [official RDK documentation](https://developer.d-robotics.cc/rdk_doc/Robot_development).

@@ -1,6 +1,6 @@
 {
-  "label": "3.15 Command-Line Tools",
-  "position": 15,
+  "label": "3.16 Command-Line Interface (CLI)",
+  "position": 16,
   "link": {
     "type": "doc",
     "id": "index"
