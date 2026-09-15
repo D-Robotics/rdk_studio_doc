@@ -1,13 +1,12 @@
-name: OSS probe (LIST ONLY)
+name: OSS 防新增对照实验 (cp -r vs sync)
 
-# 一次性诊断：只读列举 cn-rdk-front-prod，判定 0 字节目录对象是「物理对象」还是「虚拟目录」。不写、不删、不改任何东西。
 on:
   push:
     branches:
       - chore/oss-probe-list
 
 jobs:
-  probe:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,53 +18,58 @@ jobs:
           echo "$PWD/ossutil-2.1.2-linux-amd64" >> "$GITHUB_PATH"
           ossutil-2.1.2-linux-amd64/ossutil version
 
-      - name: Stat known dir keys (physical 0-byte object vs virtual dir)
-        env:
-          OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
-          OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+      - name: Build test source tree
         run: |
-          for k in \
-            "rdk_x_doc/" \
-            "rdk_x_doc/RDK/" \
-            "rdk_studio_doc/user-guide/ai-chat/" ; do
-            echo "===== stat $k ====="
-            ossutil stat "oss://cn-rdk-front-prod/$k" \
-              -e https://d-robotics.cc \
-              -i "$OSS_ACCESS_KEY_ID" \
-              -k "$OSS_ACCESS_KEY_SECRET" \
-              --region cn-beijing 2>&1 || echo "(stat failed/exit=$?)"
-          done
+          rm -rf /tmp/src && mkdir -p /tmp/src/sub
+          echo root > /tmp/src/root.txt
+          echo sub > /tmp/src/sub/sub.txt
+          echo "=== local source tree ==="
+          find /tmp/src | sort
 
-      - name: Count size-0 objects and '/'-keys in full recursive list
+      - name: cp -r 对照
         env:
           OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
           OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
         run: |
-          ossutil ls oss://cn-rdk-front-prod/ \
-            -e https://d-robotics.cc \
-            -i "$OSS_ACCESS_KEY_ID" \
-            -k "$OSS_ACCESS_KEY_SECRET" \
-            --region cn-beijing > /tmp/full.txt 2>&1
-          echo "== total lines: $(wc -l < /tmp/full.txt) =="
-          echo "== size-0 rows count: $(awk 'NR>1 && $2==0' /tmp/full.txt | wc -l) =="
-          echo "== sample size-0 rows =="
-          awk 'NR>1 && $2==0' /tmp/full.txt | head -30
-          echo "== '/'-ending rows count: $(grep -cE '/[[:space:]]*$' /tmp/full.txt || true) =="
+          ossutil cp -r /tmp/src oss://cn-rdk-front-prod/__oss_dir_test__/cp/ \
+            -e https://d-robotics.cc -i "$OSS_ACCESS_KEY_ID" -k "$OSS_ACCESS_KEY_SECRET" \
+            --region cn-beijing -f 2>&1 | tail -8 || echo "cp exit=$?"
 
-      - name: List directories under rdk_x_doc and rdk_studio_doc (one level)
+      - name: sync 对照
         env:
           OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
           OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
         run: |
-          echo "== rdk_x_doc/ -d =="
-          ossutil ls oss://cn-rdk-front-prod/rdk_x_doc/ -d \
-            -e https://d-robotics.cc \
-            -i "$OSS_ACCESS_KEY_ID" \
-            -k "$OSS_ACCESS_KEY_SECRET" \
-            --region cn-beijing 2>&1 | head -80
-          echo "== rdk_studio_doc/user-guide/ -d =="
-          ossutil ls oss://cn-rdk-front-prod/rdk_studio_doc/user-guide/ -d \
-            -e https://d-robotics.cc \
-            -i "$OSS_ACCESS_KEY_ID" \
-            -k "$OSS_ACCESS_KEY_SECRET" \
-            --region cn-beijing 2>&1 | head -80
+          ossutil sync /tmp/src oss://cn-rdk-front-prod/__oss_dir_test__/sync/ \
+            -e https://d-robotics.cc -i "$OSS_ACCESS_KEY_ID" -k "$OSS_ACCESS_KEY_SECRET" \
+            --region cn-beijing 2>&1 | tail -8 || echo "sync exit=$?"
+
+      - name: 对比 (目录对象 = 以 / 结尾的行)
+        env:
+          OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+        run: |
+          ARGS="-e https://d-robotics.cc -i $OSS_ACCESS_KEY_ID -k $OSS_ACCESS_KEY_SECRET --region cn-beijing"
+          echo "===== cp -r 递归 ls ====="
+          ossutil ls oss://cn-rdk-front-prod/__oss_dir_test__/cp/ $ARGS 2>&1
+          echo "cp 目录对象数(=以/结尾): $(ossutil ls oss://cn-rdk-front-prod/__oss_dir_test__/cp/ $ARGS 2>/dev/null | grep -cE '/[[:space:]]*$' || true)"
+          echo ""
+          echo "===== sync 递归 ls ====="
+          ossutil ls oss://cn-rdk-front-prod/__oss_dir_test__/sync/ $ARGS 2>&1
+          echo "sync 目录对象数(=以/结尾): $(ossutil ls oss://cn-rdk-front-prod/__oss_dir_test__/sync/ $ARGS 2>/dev/null | grep -cE '/[[:space:]]*$' || true)"
+          echo ""
+          echo "===== stat 子目录 key ====="
+          echo "-- cp/sub/ --"
+          ossutil stat oss://cn-rdk-front-prod/__oss_dir_test__/cp/sub/ $ARGS 2>&1 | grep -iE 'Content-Type|Content-Length|Error|NoSuch|exist' || true
+          echo "-- sync/sub/ --"
+          ossutil stat oss://cn-rdk-front-prod/__oss_dir_test__/sync/sub/ $ARGS 2>&1 | grep -iE 'Content-Type|Content-Length|Error|NoSuch|exist' || true
+
+      - name: 清理 (always)
+        if: always()
+        env:
+          OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+        run: |
+          ossutil rm oss://cn-rdk-front-prod/__oss_dir_test__/ -r -f \
+            -e https://d-robotics.cc -i "$OSS_ACCESS_KEY_ID" -k "$OSS_ACCESS_KEY_SECRET" \
+            --region cn-beijing 2>&1 | tail -5 || echo "rm exit=$?"
