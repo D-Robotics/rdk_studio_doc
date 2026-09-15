@@ -1,7 +1,6 @@
 name: OSS probe (LIST ONLY)
 
-# 一次性诊断：只读列举 cn-rdk-front-prod，定位 0 字节目录对象。不写、不删、不改任何东西。
-# 用 push 触发（而非 workflow_dispatch），这样可以直接在特性分支上跑，无需合入 main。
+# 一次性诊断：只读列举 cn-rdk-front-prod，判定 0 字节目录对象是「物理对象」还是「虚拟目录」。不写、不删、不改任何东西。
 on:
   push:
     branches:
@@ -20,18 +19,24 @@ jobs:
           echo "$PWD/ossutil-2.1.2-linux-amd64" >> "$GITHUB_PATH"
           ossutil-2.1.2-linux-amd64/ossutil version
 
-      - name: List directories (read-only sanity check)
+      - name: Stat known dir keys (physical 0-byte object vs virtual dir)
         env:
           OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
           OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
         run: |
-          ossutil ls oss://cn-rdk-front-prod/ \
-            -e https://d-robotics.cc \
-            -i "$OSS_ACCESS_KEY_ID" \
-            -k "$OSS_ACCESS_KEY_SECRET" \
-            --region cn-beijing -d
+          for k in \
+            "rdk_x_doc/" \
+            "rdk_x_doc/RDK/" \
+            "rdk_studio_doc/user-guide/ai-chat/" ; do
+            echo "===== stat $k ====="
+            ossutil stat "oss://cn-rdk-front-prod/$k" \
+              -e https://d-robotics.cc \
+              -i "$OSS_ACCESS_KEY_ID" \
+              -k "$OSS_ACCESS_KEY_SECRET" \
+              --region cn-beijing 2>&1 || echo "(stat failed/exit=$?)"
+          done
 
-      - name: Dump full listing and count 0-byte dir objects (read-only)
+      - name: Count size-0 objects and '/'-keys in full recursive list
         env:
           OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
           OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
@@ -40,11 +45,27 @@ jobs:
             -e https://d-robotics.cc \
             -i "$OSS_ACCESS_KEY_ID" \
             -k "$OSS_ACCESS_KEY_SECRET" \
-            --region cn-beijing > /tmp/oss-ls.txt 2>&1
-          echo "== ls exit=$? ; total lines: $(wc -l < /tmp/oss-ls.txt) =="
-          echo "== head 80 (format sample) =="
-          head -80 /tmp/oss-ls.txt
-          echo "== '/'-ending lines (0-byte directory placeholders) =="
-          grep -E '/[[:space:]]*$' /tmp/oss-ls.txt | head -200 || true
-          echo "== count of '/'-ending lines =="
-          grep -cE '/[[:space:]]*$' /tmp/oss-ls.txt || true
+            --region cn-beijing > /tmp/full.txt 2>&1
+          echo "== total lines: $(wc -l < /tmp/full.txt) =="
+          echo "== size-0 rows count: $(awk 'NR>1 && $2==0' /tmp/full.txt | wc -l) =="
+          echo "== sample size-0 rows =="
+          awk 'NR>1 && $2==0' /tmp/full.txt | head -30
+          echo "== '/'-ending rows count: $(grep -cE '/[[:space:]]*$' /tmp/full.txt || true) =="
+
+      - name: List directories under rdk_x_doc and rdk_studio_doc (one level)
+        env:
+          OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+        run: |
+          echo "== rdk_x_doc/ -d =="
+          ossutil ls oss://cn-rdk-front-prod/rdk_x_doc/ -d \
+            -e https://d-robotics.cc \
+            -i "$OSS_ACCESS_KEY_ID" \
+            -k "$OSS_ACCESS_KEY_SECRET" \
+            --region cn-beijing 2>&1 | head -80
+          echo "== rdk_studio_doc/user-guide/ -d =="
+          ossutil ls oss://cn-rdk-front-prod/rdk_studio_doc/user-guide/ -d \
+            -e https://d-robotics.cc \
+            -i "$OSS_ACCESS_KEY_ID" \
+            -k "$OSS_ACCESS_KEY_SECRET" \
+            --region cn-beijing 2>&1 | head -80
