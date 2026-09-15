@@ -1,8 +1,11 @@
 name: OSS probe (LIST ONLY)
 
 # 一次性诊断：只读列举 cn-rdk-front-prod，定位 0 字节目录对象。不写、不删、不改任何东西。
+# 用 push 触发（而非 workflow_dispatch），这样可以直接在特性分支上跑，无需合入 main。
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - chore/oss-probe-list
 
 jobs:
   probe:
