@@ -1,0 +1,47 @@
+name: OSS probe (LIST ONLY)
+
+# 一次性诊断：只读列举 cn-rdk-front-prod，定位 0 字节目录对象。不写、不删、不改任何东西。
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup ossutil v2
+        run: |
+          curl -so ossutil.zip https://gosspublic.alicdn.com/ossutil/v2/2.1.2/ossutil-2.1.2-linux-amd64.zip
+          unzip -o ossutil.zip
+          chmod 755 ossutil-2.1.2-linux-amd64/ossutil
+          echo "$PWD/ossutil-2.1.2-linux-amd64" >> "$GITHUB_PATH"
+          ossutil-2.1.2-linux-amd64/ossutil version
+
+      - name: List directories (read-only sanity check)
+        env:
+          OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+        run: |
+          ossutil ls oss://cn-rdk-front-prod/ \
+            -e https://d-robotics.cc \
+            -i "$OSS_ACCESS_KEY_ID" \
+            -k "$OSS_ACCESS_KEY_SECRET" \
+            --region cn-beijing -d
+
+      - name: Dump full listing and count 0-byte dir objects (read-only)
+        env:
+          OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+        run: |
+          ossutil ls oss://cn-rdk-front-prod/ \
+            -e https://d-robotics.cc \
+            -i "$OSS_ACCESS_KEY_ID" \
+            -k "$OSS_ACCESS_KEY_SECRET" \
+            --region cn-beijing > /tmp/oss-ls.txt 2>&1
+          echo "== ls exit=$? ; total lines: $(wc -l < /tmp/oss-ls.txt) =="
+          echo "== head 80 (format sample) =="
+          head -80 /tmp/oss-ls.txt
+          echo "== '/'-ending lines (0-byte directory placeholders) =="
+          grep -E '/[[:space:]]*$' /tmp/oss-ls.txt | head -200 || true
+          echo "== count of '/'-ending lines =="
+          grep -cE '/[[:space:]]*$' /tmp/oss-ls.txt || true
