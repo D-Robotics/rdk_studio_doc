@@ -69,9 +69,9 @@ For the following tasks, it is recommended to use RDK Studio in conjunction with
 
 | Scenario | Recommended Approach | Description |
 |---|---|---|
-| Cloud-based end-to-end robotics development | RoboGo | Suitable for data闭环, embodied AI training fields, agent development services, application development and deployment, and other cloud-based workflows; local debugging and on-board validation return to RDK Studio. |
+| Cloud-based end-to-end robotics development | RoboGo | Suitable for closed-loop data workflows, embodied AI training fields, agent development services, application development and deployment, and other cloud-based workflows; local debugging and on-board validation return to RDK Studio. |
 | Ready-made applications / Demos / Cases | RoboGo, NodeHub | When looking for applications, cases, or consolidating project materials, start with these platforms; return to RDK Studio when you need to connect devices and run them. |
-| Model training / Dataset management | Existing data闭环 or training pipelines in RoboGo, or PyTorch, TensorFlow, training platforms | Training is typically not done within RDK Studio. RDK Studio is better suited for connecting devices, preparing runtime environments, and validating model performance. |
+| Model training / Dataset management | Existing closed-loop data or training pipelines in RoboGo, or PyTorch, TensorFlow, training platforms | Training is typically not done within RDK Studio. RDK Studio is better suited for connecting devices, preparing runtime environments, and validating model performance. |
 | Model quantization and compilation to hbm | D-Robotics model conversion toolchain; if RoboGo provides a corresponding process, it can also be used in coordination | After generating hbm, deploy, run, and troubleshoot on devices connected via RDK Studio. |
 | Multi-person collaboration and code hosting | Git platforms, online documents, collaborative code editors | RDK Studio is suitable for individual development and device debugging; multi-person collaboration should continue using your team's existing platforms. |
 | Enterprise-level permissions and auditing | Enterprise operation platforms, jump servers, unified identity and role-based permission systems | RDK Studio will prompt risks and require confirmation but does not replace enterprise permission systems. |

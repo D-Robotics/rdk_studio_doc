@@ -8,7 +8,10 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "RDK Studio DOC",
+  title:
+    process.env.DOCUSAURUS_CURRENT_LOCALE === "en"
+      ? "RDK Studio User Manual"
+      : "RDK Studio 用户手册",
   // tagline: 'Dinosaurs are cool',
   favicon: "img/logo.png",
   // Set the production url of your site here
@@ -186,29 +189,16 @@ const config = {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
       },
-    }),
-  themes: [
-    "@docusaurus/theme-mermaid",
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      {
-        // 性能优化
-        hashed: true, // 启用长期缓存
-        language: ["en", "zh"], // 中英文支持
-        highlightSearchTermsOnTargetPage: true,
-        explicitSearchResultPath: true,
-        docsRouteBasePath: ["/", "rdk_s"], // 支持多个文档路径
-        
-        // 优化索引大小和加载速度
-        indexDocs: true,
-        indexBlog: false, // 禁用博客索引
-        indexPages: false, // 禁用页面索引
-        
-        // 搜索行为优化
-        searchResultContextMaxLength: 50, // 减少上下文长度
+      algolia: {
+        appId: process.env.ALGOLIA_APP_ID || "YOUR_APP_ID",
+        apiKey: process.env.ALGOLIA_SEARCH_API_KEY || "YOUR_SEARCH_API_KEY",
+        indexName: process.env.ALGOLIA_INDEX_NAME || "rdk_studio_doc",
+        contextualSearch: true,
+        searchPagePath: "search",
       },
-    ],
-  ],
+    }),
+  themes: ["@docusaurus/theme-mermaid"],
+  plugins: [require.resolve("./plugins/docScopePlugin.js")],
 };
 
 export default config;
