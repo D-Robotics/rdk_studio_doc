@@ -1,0 +1,17 @@
+{
+  "default": "rdk_studio::current",
+  "dimensions": {
+    "product": {
+      "queryParam": "p",
+      "default": "rdk_studio",
+      "label": "RDK Studio"
+    },
+    "version": {
+      "queryParam": "v",
+      "default": "current",
+      "label": "Current"
+    }
+  },
+  "baseUrl": "/rdk_studio_doc/",
+  "generatedAt": "2026-10-25T17:01:11.499Z"
+}
