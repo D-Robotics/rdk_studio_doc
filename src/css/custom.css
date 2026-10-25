@@ -5,6 +5,12 @@
  */
 
 /* You can override the default Infima variables here. */
+.search-result-match,
+.algolia-docsearch-suggestion--highlight {
+  background: rgba(255, 81, 37, 0.2);
+  font-weight: 600;
+}
+
 :root {
   --ifm-color-primary: #FF5125;
   --ifm-color-primary-dark: #29784c;
