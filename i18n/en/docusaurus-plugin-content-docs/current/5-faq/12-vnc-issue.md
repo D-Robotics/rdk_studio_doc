@@ -43,6 +43,6 @@ Happens without physical display, stalled DE, or corrupted agent stack. Restart 
 
 1. Paste stack traces into AI Dock for RDK-aware triage.  
 2. Ask Moss to search forum threads for similar symptoms.  
-3. [Official RDK docs](https://developer.d-robotics.cc/rdk_doc)  
+3. [Official RDK docs](https://developer.d-robotics.cc/rdk_doc/)  
 4. [RDK developer community](https://developer.d-robotics.cc/forum)  
 5. *Settings → App & updates → Export diagnostics* and share the bundle with support.
