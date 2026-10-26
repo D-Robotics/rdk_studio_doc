@@ -48,6 +48,6 @@ title: 5.12 远程桌面连接或卡顿
 
 1. 在 AI Dock 直接贴报错日志，让 Moss 结合常见 RDK 问题给出修复建议
 2. 在 AI Dock 里说"帮我搜下论坛上类似的问题"，让 Moss 帮你检索社区经验
-3. [RDK 官方文档](https://developer.d-robotics.cc/rdk_doc/)
+3. [RDK 官方文档](https://developer.d-robotics.cc/rdk_doc_center/)
 4. [RDK 开发者社区](https://developer.d-robotics.cc/forum)
 5. Studio 内 *设置面板 → 应用与更新 → 诊断包导出*，把诊断包发给我们排查
