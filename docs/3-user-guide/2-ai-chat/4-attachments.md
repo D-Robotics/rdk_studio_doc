@@ -1,5 +1,5 @@
 ---
-sidebar_label: '3.2.3 上传文件和截图'
+sidebar_label: '3.2.4 上传文件和截图'
 title: 3.2.4 上传文件和截图
 ---
 
