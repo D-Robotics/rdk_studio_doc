@@ -52,6 +52,13 @@ function pickContentRoot($) {
   return $('body');
 }
 
+function codeBlockText(el) {
+  const code = el.clone();
+  // Docusaurus emits highlighted lines as spans separated by br elements.
+  code.find('br').replaceWith('\n');
+  return code.text().trim();
+}
+
 function walkNode($, el, state, pageMeta, out) {
   const tag = el[0]?.tagName?.toLowerCase?.();
   if (!tag) return;
@@ -96,7 +103,7 @@ function walkNode($, el, state, pageMeta, out) {
     }
   } else if (tag === 'p' || tag === 'li' || tag === 'td' || tag === 'th' || tag === 'pre') {
     const text = tag === 'pre'
-      ? el.text().trim()
+      ? codeBlockText(el)
       : el.text().replace(/\s+/g, ' ').trim();
     if (text.length >= 2 && docScopes.length) {
       const anchor = currentAnchor(state);
