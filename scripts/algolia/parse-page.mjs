@@ -37,14 +37,6 @@ function hierarchyPath(h) {
   return HEADING_TAGS.map((_, i) => h[`lvl${i}`]).filter(Boolean).join(' > ');
 }
 
-function slugifyAnchor(text) {
-  return text
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w\u4e00-\u9fff-]/g, '');
-}
-
 function pickContentRoot($) {
   const sel = [
     'article .theme-doc-markdown',
@@ -78,16 +70,20 @@ function walkNode($, el, state, pageMeta, out) {
 
   if (HEADING_TAGS.includes(tag)) {
     const level = Number(tag[1]) - 1;
-    const text = el.text().trim();
+    const heading = el.clone();
+    heading.find('.hash-link').remove();
+    const text = heading.text().replace(/\u200b/g, '').trim();
     if (!text) {
       // still pop scope if needed at end
     } else {
-      for (let i = level; i < 7; i++) state.hierarchy[`lvl${i}`] = null;
+      for (let i = level; i < 7; i++) {
+        state.hierarchy[`lvl${i}`] = null;
+        state.anchors[i] = '';
+      }
       state.hierarchy[`lvl${level}`] = text;
-      const anchor =
-        el.attr('id') ||
-        slugifyAnchor(text) ||
-        `heading-${state.position}`;
+      // Content links must use the emitted HTML ID, including custom MDX IDs.
+      const anchor = el.attr('id') || '';
+      state.anchors[level] = anchor;
       pushRecord(out, {
         type: `lvl${level}`,
         content: text,
@@ -98,8 +94,10 @@ function walkNode($, el, state, pageMeta, out) {
         position: state.position++,
       });
     }
-  } else if (tag === 'p' || tag === 'li' || tag === 'td') {
-    const text = el.text().replace(/\s+/g, ' ').trim();
+  } else if (tag === 'p' || tag === 'li' || tag === 'td' || tag === 'th' || tag === 'pre') {
+    const text = tag === 'pre'
+      ? el.text().trim()
+      : el.text().replace(/\s+/g, ' ').trim();
     if (text.length >= 2 && docScopes.length) {
       const anchor = currentAnchor(state);
       pushRecord(out, {
@@ -129,7 +127,7 @@ function currentAnchor(state) {
   for (let i = 6; i >= 0; i--) {
     const key = `lvl${i}`;
     if (state.hierarchy[key]) {
-      return slugifyAnchor(state.hierarchy[key]);
+      return state.anchors[i];
     }
   }
   return '';
@@ -184,6 +182,7 @@ export function parsePageHtml(html, url) {
   const root = pickContentRoot($);
   const state = {
     hierarchy: emptyHierarchy(),
+    anchors: Array(7).fill(''),
     position: 0,
     scopeStack: [],
   };

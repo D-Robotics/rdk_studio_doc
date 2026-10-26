@@ -26,7 +26,8 @@ function docScopePlugin() {
         },
       };
     },
-    async postBuild({outDir, siteConfig}) {
+    async postBuild(props) {
+      const {outDir, siteConfig} = props;
       const map = {
         default: defaultDocScope(),
         dimensions: DOC_SCOPE_DIMENSIONS,
@@ -39,6 +40,8 @@ function docScopePlugin() {
         JSON.stringify(map, null, 2),
         'utf8',
       );
+      const {generateMcpSearchIndex} = await import('../scripts/mcp-search-index.mjs');
+      await generateMcpSearchIndex(props);
     },
   };
 }

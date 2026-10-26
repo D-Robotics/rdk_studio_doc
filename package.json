@@ -12,7 +12,8 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "algolia:index": "node scripts/algolia-index.mjs"
+    "algolia:index": "node scripts/algolia-index.mjs",
+    "test:search-index": "node --test scripts/mcp-search-index.test.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
