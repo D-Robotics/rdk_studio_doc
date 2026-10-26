@@ -9,6 +9,10 @@ RDK Studio offers the most comprehensive support for the RDK series development 
 
 You can think of the RDK as the primary development board and other Linux hosts as remote development environments.
 
+## RDK S600
+
+Onboarding includes RDK S600. Flash its system with the S600-specific manual XBurn flow, rather than TF-card images or the in-app S100 writer. Once booted, connect over SSH. Capabilities depend on the current page and detected device. See [S100 and S600 flashing](../3-user-guide/7-system-flashing/4-s100-xburn.md).
+
 ## RDK Device Support
 
 | Item | RDK X3 | RDK X5 | RDK S100 / S100P |

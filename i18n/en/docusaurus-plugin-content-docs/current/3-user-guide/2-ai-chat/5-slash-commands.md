@@ -1,48 +1,37 @@
 ---
 sidebar_label: '3.2.5 Slash commands'
 title: 3.2.5 Slash commands
-unlisted: true
 ---
 
 # 3.2.5 Slash commands
 
-Slash commands start with `/` in the AI Dock. They manage the current session, list skills, or temporarily switch models. They are **not** sent to the model and do **not** use tokens.
+Type `/` in the composer to see the current command menu. Some commands open settings or control tasks; others expand into instructions for the Agent and can use models, tools, and quota.
 
-## Command list
+## Common commands
 
-| Command | Effect |
+| Command | Purpose |
 |---|---|
-| `/help` | Lists available slash commands and what they do |
-| `/clear` | Clears the current session’s reference context and restarts “empty” (history kept) |
-| `/sessions` | Lists past sessions; pick one to continue |
-| `/skills` | Lists skill IDs loaded in this session with short descriptions |
-| `/model` | Temporarily switches the model for **this session only** |
-| `/reset` | Resets Moss: clears context, reloads capabilities, re-probes devices |
+| `/plan <request>` | Switch to Plan and produce steps and risks only |
+| `/build <request>` | Develop an application that runs on RDK |
+| `/debug <problem>` | Investigate and fix a problem from evidence |
+| `/learn <topic>` | Explain using skills and documentation; may suggest saving reusable knowledge |
+| `/review <target>` | Review code or configuration before board deployment |
+| `/team <problem>` | Request an expert team to gather evidence from several perspectives |
+| `/goal set <goal>` | Set a recoverable goal; use `/goal status` to inspect it |
+| `/compact` | Compact the current conversation context |
+| `/settings` | Open settings |
+| `/stop`, `/stop-all` | Request stopping the current task or all related tasks |
 
-## Typical uses
+You can type `/skill <skill-name> [task]` or select a skill through skill search. It may be absent from the `/` menu. The menu may also offer application generation, run, and deployment commands; read their parameter hints first.
 
-### `/clear` vs new chat
+## Examples
 
-`/clear` drops reference context but keeps the session record—good for “new topic, same thread.” **New chat** is better for a fully new task. Pick what fits.
-
-### `/skills` to verify loading
-
-If a skill seems absent (installed but unused), run `/skills` to see what is active.
-
-Skills load on demand: only when your message matches a trigger keyword.
-
-If wording and triggers disagree, adjust triggers in [3.11 Skill Workshop](../11-skill/index.md).
-
-### `/model` for a one-off stronger model
-
-For heavy code generation, temporarily switch:
-
-```
-/model claude-sonnet-4-20250514
+```text
+/plan Add camera preview to this project. Explain dependencies, risks, and verification steps first.
+/debug A ROS 2 node fails to start on the board. Gather logs read-only first.
+/skill rdk-app-development Build a device status web page.
 ```
 
-Takes effect immediately for this session only; does not change global defaults. New sessions revert to defaults.
+Command availability depends on runtime and deployment. Moss commands and expert-team capabilities do not imply identical DSH support. Follow unsupported-operation messages; the task does not automatically switch runtimes.
 
-### `/reset` when Moss misbehaves
-
-If Moss loops a failed step or drifts off-topic, `/reset` clears context, reloads tools, and re-probes the device—stronger than `/clear`.
+Change models through the composer model selector or **Settings → Models & providers**. Manage history through the conversation list.

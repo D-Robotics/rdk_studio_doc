@@ -1,70 +1,44 @@
-﻿---
+---
 sidebar_label: '2.6 First conversation'
 title: 2.6 First conversation
 ---
 
 # 2.6 First conversation
 
-![Workbench first conversation: after sending Hello, Moss replies in the chat area and waits for more input](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/first-conversation.png)
+Open **Agent Workspace** and check that a model/runtime is available. Questions do not require a board; device tasks require the intended device connection.
 
-After sign-in and device setup, send your first message to Moss from the workbench. You can brainstorm without a connected device; for on-board actions Moss will remind you to connect first.
+## Steps
 
-## Open the workbench
+1. Open the workbench and create or select a project if needed.
+2. Check the work-location bar: project, folder, and local/device target.
+3. Check the Moss/DSH indicator. For first use, keep the available default.
+4. Choose a workflow: **Execute** acts, **Plan** only analyzes, and **Spec** creates approvable requirements first.
+5. Describe the goal, attach logs or screenshots if needed, and send.
 
-**Core → Workbench** on the left is Moss’s primary entry. It combines chat with the project workspace; the right rail can surface status, history, diagnostics, changes, files, terminal, and more.
+## Suggested first messages
 
-Finishing onboarding’s last step “Start using Moss” may auto-send an example prompt.
-
-## Pick work style and reply mode
-
-The composer exposes two switches. Defaults are fine for a first try:
-
-| Switch | Options | Meaning |
-|---|---|---|
-| Work style | Execute / Plan | Execute runs tasks directly; Plan lists steps and risks first |
-| Reply mode | Fast / Reasoning | Fast for simple asks; reasoning for debugging, code, multi-step |
-
-If unsure, start with **Execute + Reasoning** so Moss inspects the current device thoroughly.
-
-## First prompts
-
-If a device is connected:
+Connected device:
 
 ```text
-Check this device's system summary—tell me board model, OS version, disk, memory, and what you'd suggest next.
+Read-only: check the current board model, system version, disk, memory, and network. Explain problems and next steps without changing the device.
 ```
 
-If not connected yet:
+No device:
 
 ```text
-Introduce what RDK Studio and Moss can do for me, then give three example prompts I can try after I connect a device over SSH.
+Explain what RDK Studio can help me do and give three tasks to try after connecting an SSH device.
 ```
 
-## What success looks like
+Local project:
 
-A typical on-device task shows:
+```text
+Inspect this project's structure and startup instructions read-only. Explain how to verify that it runs.
+```
 
-- Device chip in the composer shows online/bound state.
-- Moss states what it will check.
-- Results or terminal output stream into the thread.
-- Workspace panels show diagnostics, files, terminal, changes, etc.
-- Risky actions prompt for confirmation.
+## Review results
 
-If the device is offline, Moss can still answer and plan but will not pretend remote commands ran.
+Read the result, failure, or pending confirmation first. Select **Open location** for Terminal and Files. Open execution records from the message's more menu for existing execution details.
 
-## Prompts worth trying
+To change models, open **Settings → Models & providers**. To change runtime, set the default for new tasks and create a task; existing tasks retain their runtime.
 
-| Prompt | What Moss does |
-|---|---|
-| `Which ROS 2 nodes are running on this device?` | SSH to list ROS 2 nodes |
-| `Help me check recent errors under /var/log` | Remote commands or file reads for recent errors |
-| `What does this error mean: <paste error>` | Uses RDK context plus device state |
-| `Summarize Git changes in the current project directory` | Workspace changes or remote Git status |
-| `Give me a plan first—don't execute yet` | Stays in or uses plan mode first |
-
-## Next steps
-
-- Workbench & Moss workspace → [3.1 Workbench](../3-user-guide/1-workbench/index.md)
-- AI Dock composer → [3.2 AI Dock](../3-user-guide/2-ai-chat/index.md)
-- Board agent deploy → [3.10 OpenClaw](../3-user-guide/10-openclaw/index.md)
-- Local models → [3.12 Local LLMs](../3-user-guide/12-local-models/index.md)
+Continue with [Workbench](../3-user-guide/1-workbench/index.md), [AI Dock](../3-user-guide/2-ai-chat/index.md), and [Conversation history](../3-user-guide/2-ai-chat/3-multi-session.md).

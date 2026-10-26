@@ -4,6 +4,6 @@
   "link": {
     "type": "generated-index",
     "slug": "/category/2-quick-start",
-    "description": "按首次使用流程完成第一轮体验：安装登录、选择开发板、准备系统、添加设备、配置模型，并从工作台向 Moss 发起首次任务。"
+    "description": "安装登录、准备系统、连接设备、配置模型，再从工作台发起第一条 Agent 任务。"
   }
 }

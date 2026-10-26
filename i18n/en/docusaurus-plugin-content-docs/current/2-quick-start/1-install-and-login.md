@@ -39,12 +39,11 @@ Onboarding has four steps:
 
 | Step | Screen copy | Goal |
 |---|---|---|
-| 1 | Choose board | Pick RDK X3 / X5 / S100 to tailor image and connection guidance |
+| 1 | Choose board | Pick RDK X3 / X5 / S100 / S600 to tailor image and connection guidance |
 | 2 | Prepare system | Open the flashing wizard or skip flashing by board type |
 | 3 | Add device | Continue via SSH, RDK Type-C direct, or local serial log |
-| 4 | Start using Moss | Send your first message to Moss from the workbench |
+| 4 | Start using Agent | Send your first message to Moss from the workbench |
 
-![Onboarding wizard after first sign-in: choose board, prepare system, add device, start using Moss](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/onboarding-1-board.png)
 
 If the device already boots normally, you can skip flashing and add the device directly. Skipping onboarding does not limit later use; you can restart onboarding from the workbench empty state.
 

@@ -1,54 +1,26 @@
 ---
-sidebar_label: '3.13.5 Import & export'
-title: 3.13.5 Import & export
+sidebar_label: '3.13.5 Import and export configuration'
+title: 3.13.5 Import and export configuration
 ---
 
-# 3.13.5 Import & export
+# 3.13.5 Import and export configuration
 
-Import/export helps when you change PCs, share baseline config with the team, or restore after upgrades. Exported bundles can be imported back into RDK Studio.
-
-## What export can include
-
-| Content | Sensitive fields? |
-|---|---|
-| AI engine model entries | May include API keys (export can **redact**) |
-| Feishu / WeChat channel secrets | Includes app secrets |
-| Device list & SSH creds | Plaintext passwords if password auth |
-| Appearance & UX prefs | No secrets |
-| WeChat binding list | Not included (per-machine binding) |
+The **Export / Import** buttons at the bottom of **Settings → Models & providers** back up and restore model configurations. This is not a full app backup: it does not include device lists, SSH credentials, messaging channels, conversation history, or project code.
 
 ## Export
 
-| Path | *Settings center → top → Export configuration* |
-|---|---|
-| Scope | All / AI engine only / devices only / … |
-| Redact | When checked, keys and passwords become placeholders |
-| Output | `rdk-studio-config-<timestamp>.json` |
+1. Save at least one model configuration.
+2. Select **Export** beneath the model configuration.
+3. Save `rdkstudio-moss-config-<timestamp>.json`.
 
-## Team workflows
-
-| Scenario | Recommendation |
-|---|---|
-| Encrypted handoff to trusted coworker | Full export over encrypted email or IM |
-| Team template without secrets | Export with **redact**; each person adds keys locally |
-| Backup in private Git | **Redact** before commit; lock down repo access |
-
-**Never:**
-
-- Post full-secret JSON in public chats or open mail
-- Commit secrets to public repos
-- Paste secrets in Slack / Feishu groups everyone can read
+Desktop/local exports may contain API keys or other secrets; public Web Cloud exports are restricted. The current interface has no general “all settings / devices only” export and should not be assumed to offer a redaction checkbox. Inspect and remove sensitive values before sharing.
 
 ## Import
 
-| Path | *Settings center → top → Import configuration* |
-|---|---|
-| Action | Pick JSON → confirm → merge into local config |
-| Conflicts | Prompt to overwrite; choose “overwrite all” or confirm one by one |
-| Compatibility | Most fields map automatically; on failure, recreate per page hints |
+Select **Import** in the same location and choose a JSON file containing model entries. After success, check the model list, current selection, key status, and API connectivity before using the workbench.
 
-## File format
+If the file is invalid, lacks model entries, or fails to import, follow the error and repair or recreate the configuration. Do not assume per-entry conflict merging or complete application restore is provided.
 
-Exports are structured JSON—you normally do not edit by hand. For bulk tweaks (e.g. changing device IPs), edit carefully and re-import.
+## Other data
 
-If import says “incompatible format”, recreate settings in Studio instead of forcing old files.
+Back up project files, history, and local data separately. Changing the data directory does not automatically move existing files. Use the dedicated recovery retry for history problems.

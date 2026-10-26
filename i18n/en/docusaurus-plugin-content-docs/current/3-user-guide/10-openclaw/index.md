@@ -36,7 +36,7 @@ OpenClaw is an on-board agent that runs on RDK hardware. Enable AI assistant cap
 |---|---|
 | Short-term debugging with your PC always online | Moss plus SSH is enough |
 | Need the on-board agent to handle device-centric tasks | Deploy OpenClaw |
-| Need to deploy skills to the device | Deploy OpenClaw, then sync from Skill Workshop |
+| Need to deploy skills to the device | Deploy OpenClaw, then sync from Plugin Center → Skills |
 | Non-RDK Linux host | OpenClaw deployment not offered by default—prefer local Moss skills |
 
 ## Before deployment

@@ -1,55 +1,28 @@
 ---
-sidebar_label: '3.13.2 Sign in & account'
-title: 3.13.2 Sign in & account
+sidebar_label: '3.13.2 Accounts'
+title: 3.13.2 Accounts
 ---
 
-# 3.13.2 Sign in & account
+# 3.13.2 Accounts
 
-Account & security shows your signed-in D-Robotics identity and supports sign-out and local session cleanup.
+Check sign-in state in **Settings → Account & security** and follow the available sign-in, sign-out, and account actions. Model requests use the current account's permissions and quota.
 
-## Signed-in details
+## Desktop accounts and local data
 
-After sign-in, the account section shows:
+Saved desktop projects, chats, titles, pins, archives, and drafts belong to the current local data directory. They remain viewable after sign-out or account switching. Changing accounts does not hide local history or remove files.
 
-- Username / email
-- Role (when RBAC is configured)
-- Sign-in time and remaining session validity
-- Linked org / team (when applicable)
+On a shared computer, use separate OS users or data directories to isolate local work. Deleting local history affects users of the same data directory; deleting a project does not delete its files.
 
-## Sign out
+## DSH history
 
-| Action | Behavior |
-|---|---|
-| Sign out | Clears local session tokens; keeps other config (devices, model entries, skills, etc.) |
-| Sign out and clear local data | Also clears device list, model entries, chat history, and similar local data |
+Saved DSH content can be viewed locally; execution recovery uses the official session. Continuing across accounts creates a linked task for the current account. It does not transfer the original account's tasks or approvals.
 
-Next launch requires sign-in again. Use *Sign out* for a temporary logout; use *Sign out and clear local data* before handing the PC to someone else.
+**Delete from local history** and **Permanently delete DSH conversation** are separate actions. The latter is available only for official conversations the current account may delete. See [Conversation history](../2-ai-chat/3-multi-session.md).
 
-## Weird sign-in state
+## Web deployments
 
-If you see “signed in but actions blocked” or the login page loops:
+Web projects, conversations, and tasks are isolated by account. Signing in as another account uses that account's data and permissions. Desktop local-history rules do not apply.
 
-1. In the account section, **Sign out**, then sign in again.
-2. Restart RDK Studio and retry.
-3. If still broken, use the local session cleanup entry on the page, then sign in again.
+## Sign-in problems
 
-You rarely need to touch session files manually—they keep login state only; passwords are not stored locally.
-
-## Switching accounts
-
-To use another D-Robotics account:
-
-1. Sign out
-2. Restart Studio (sometimes needed to clear embedded browser cookie cache)
-3. Sign in with the new account
-
-After switching, Studio syncs that account’s cloud-backed settings when cloud sync is on. Local device lists and skills are **not** overwritten—they stay on the machine.
-
-## Multiple accounts on one PC
-
-Different D-Robotics accounts can use Studio on the same PC, but only one session at a time. Guidance:
-
-- Teams: each person signs in on their own PC
-- Shared PC: sign out and clear local data between users to avoid mixing data
-
-If enterprise SSO fails or you still have no permission after login, contact internal IT or your admin for account status.
+Check network and displayed errors, then sign out and back in; restart the client if needed. If history is in read-only recovery, repair storage or services and retry recovery instead of resetting data as a sign-in fix.

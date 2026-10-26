@@ -36,7 +36,7 @@ OpenClaw 是运行在 RDK 设备上的板端 Agent。需要让设备侧也具备
 |---|---|
 | 短期调试、PC 始终在线 | 直接用 Moss + SSH 即可 |
 | 需要板端 Agent 参与设备任务 | 部署 OpenClaw |
-| 需要把技能部署到设备 | 部署 OpenClaw 后用技能工坊同步 |
+| 需要把技能部署到设备 | 部署 OpenClaw 后用扩展中心 → 技能同步 |
 | 非 RDK Linux 主机 | 默认不提供 OpenClaw 部署，优先使用本机 Moss 技能 |
 
 ## 部署前先确认

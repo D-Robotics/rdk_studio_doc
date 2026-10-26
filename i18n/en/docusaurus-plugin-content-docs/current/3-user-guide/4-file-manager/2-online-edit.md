@@ -5,35 +5,17 @@ title: 3.4.2 Edit files
 
 # 3.4.2 Edit files
 
-Files can edit small text files **on device** without downloading first. Good for quick config tweaks, skimming scripts, or one‑line edits. For whole projects use [3.5 Code editor](../5-remote-ide/index.md).
+Open a text file from the corresponding work location, edit it, and save. This suits small configuration files, scripts, and text; use the code editor for broader project work.
 
-## Edit flow
+## Before saving
 
-| Step | What to do |
-|---|---|
-| 1 | Double‑click the target file in Files |
-| 2 | Editor opens on the side or in a new window |
-| 3 | Edit; double‑check paths and critical settings |
-| 4 | Ctrl+S saves back to device |
+1. Check whether the file is local or belongs to a specific device.
+2. Verify its full path and changes.
+3. Use Save or the save shortcut supported by the interface.
+4. Wait for success. On failure, preserve edits and follow the error.
 
-Expect a success toast. Failures such as permission errors show inline in the editor.
+After a device switch, older edits still belong to the original target. If an origin-mismatch message appears, return to that device before saving. Do not write old content onto the new target.
 
-## Good candidates
+Model files, archives, and binaries should not be saved as text. Download them for complete copies. For large logs, extract the needed section with a terminal first.
 
-Reasonable:
-
-- Config: `.yaml`, `.json`, `.conf`
-- Scripts: `.sh`, `.py`, `.js`
-- Plain text, log snippets, Markdown
-
-Avoid in Files:
-
-- Very large logs
-- Binaries, model weights, archives
-- Multi‑file projects
-
-## Troubleshooting
-
-- Permission denied — confirm this path truly needs edits, then use Moss.
-- Huge file / slow — tail in Terminal or switch to Code editor.
-- App ignores changes — check reload/restart steps for the service.
+Whether configuration changes require a service reload depends on the application. Confirm the save succeeded, then verify according to its instructions.

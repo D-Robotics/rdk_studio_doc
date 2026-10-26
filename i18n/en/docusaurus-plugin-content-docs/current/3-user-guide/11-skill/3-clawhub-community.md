@@ -5,7 +5,7 @@ title: 3.11.3 Find skills
 
 # 3.11.3 Find skills
 
-The skill marketplace / SkillHub is your online doorway to reusable automation. Skill Workshop exposes search, preview, add-to-local Moss, deploy to OpenClaw on the device, plus batch actions.
+The skill marketplace / SkillHub is your online doorway to reusable automation. Plugin Center → Skills exposes search, preview, add-to-local Moss, deploy to OpenClaw on the device, plus batch actions.
 
 ![Skill marketplace: search, taxonomy, preview, add locally, deploy to device](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/skill-marketplace.png)
 
@@ -35,4 +35,4 @@ Bulk add locally or deploy to multiple skills. Failures bubble per row with reme
 
 For GitHub, NodeHub, or normal pages, choose **generate from URL**. Moss pauses after drafting; approve content, then add locally or deploy.
 
-Never bypass draft review—silent writes break Skill Workshop safeguards.
+Never bypass draft review—silent writes break Plugin Center → Skills safeguards.

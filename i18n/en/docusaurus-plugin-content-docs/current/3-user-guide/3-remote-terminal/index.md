@@ -1,29 +1,30 @@
-﻿---
+---
 sidebar_label: '3.3 Terminal'
 title: 3.3 Terminal
 ---
 
 # 3.3 Terminal
 
-![Terminal panel: prompts to add a device when disconnected; after connection you can create SSH or local serial sessions](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/05-terminal.png)
+Terminals can target **your computer** or an **SSH device**. Check the target label and current directory before running commands.
 
-The terminal is for logging into the device, running commands, and viewing output. It feels like typical SSH tooling, while sharing the UI with RDK Studio’s device list and Moss workspace.
+## Choose a terminal
 
-## First-time flow
-
-| Step | What to do |
+| Need | Action |
 |---|---|
-| 1 | Confirm the device was added successfully via SSH or Type-C |
-| 2 | Open the **Terminal** page and select the current device |
-| 3 | Create a new SSH tab and wait for the shell prompt |
-| 4 | Run a simple check such as `pwd` or `uname -a` |
-| 5 | Add a serial connection only when you need boot logs |
+| Run commands in a project on your computer | Select a local project and use Open location → Terminal |
+| Run commands on a board | Verify the intended device's SSH connection, then open Terminal or the task location |
+| View boot logs | Use a serial entry supported on the current platform; serial is not SSH device access |
 
-When Moss runs commands for you, output also appears in the workspace so you can see what ran, whether it succeeded, and any errors.
+Run a simple command such as `pwd` first. Local and board folders are separate bindings, even if their path names look the same.
 
-Under brief network fluctuation the terminal tries to reconnect. Avoid spam-critical commands mid-reconnect; after repeated failures check power, network, host/IP, and SSH.
+## Agent output and manual terminals
 
-## Next
+Agent commands and results can be inspected in conversation execution records or the corresponding task tool. They do not necessarily reuse your manually opened terminal session. Stop the Agent through its task control; Ctrl+C in a manual terminal interrupts that terminal's foreground command.
 
-- [3.3.1 Open SSH terminal](./1-multi-tab-ssh.md): multiple terminal tabs at once
-- [3.3.3 View serial logs](./3-serial.md): view boot logs when there is no network
+After reconnection, inspect process state before restarting services or repeating writes.
+
+## Continue reading
+
+- [SSH terminals](./1-multi-tab-ssh.md)
+- [Reconnection](./2-reconnect.md)
+- [Serial logs](./3-serial.md)

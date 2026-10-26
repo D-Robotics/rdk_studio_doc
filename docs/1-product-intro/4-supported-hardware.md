@@ -9,6 +9,10 @@ RDK Studio 对 RDK 系列开发板支持最完整，同时也允许通过 SSH �
 
 你可以把 RDK 看作主要开发板，把其他 Linux 主机看作远端开发环境。
 
+## RDK S600
+
+新手引导支持选择 RDK S600。系统烧录使用 S600 对应的 XBurn 手动流程，不使用 TF 卡镜像或应用内 S100 写入；设备启动后可通过 SSH 接入。板型能力以当前页面和设备探测为准。详见 [S100 与 S600 烧录](../3-user-guide/7-system-flashing/4-s100-xburn.md)。
+
 ## RDK 设备支持情况
 
 | 项目 | RDK X3 | RDK X5 | RDK S100 / S100P |

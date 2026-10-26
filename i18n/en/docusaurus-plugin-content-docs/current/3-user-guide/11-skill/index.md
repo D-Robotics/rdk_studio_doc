@@ -1,47 +1,40 @@
-﻿---
-sidebar_label: '3.11 Skill Workshop'
-title: 3.11 Skill Workshop
+---
+sidebar_label: '3.11 Plugin Center and skills'
+title: 3.11 Plugin Center and skills
 ---
 
-# 3.11 Skill Workshop
+# 3.11 Plugin Center and skills
 
-Skill Workshop manages Moss and OpenClaw skills. Think of a skill as reusable instructions for the AI—when it triggers, what context to load, and what precautions apply.
+Open **AI capabilities → Plugin Center** to manage plugins, MCP, and skills. Skill management previously described as “Skill Workshop” is now reached here; some internal views still use “Skill center.”
 
-![Skill Workshop: on-board skills, conversational capture, SkillHub, create and link import](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/04-skill.png)
+## Extension types
 
-## Suggested workflow
-
-| Step | What to do |
+| Tab | Purpose |
 |---|---|
-| 1 | Look in SkillHub or local skills for something ready-made |
-| 2 | Preview description and caveats |
-| 3 | When only desktop AI is needed, add to local Moss |
-| 4 | When OpenClaw on the board must run it, deploy to the current device |
-| 5 | If nothing fits, create or generate from a link |
+| Plugins | Inspect and manage packages; install from public sources or import a directory |
+| MCP | Manage tool-service connections; add from MCP Hub or manually |
+| Skills | Browse, enable, create, and manage reusable instructions, with board deployment where supported |
 
-Non-RDK hosts typically cannot deploy OpenClaw skills, yet local Moss skills still work.
+Select **Add** to see installation, import, skill-creation, and MCP options supported in your environment. Actions may require sign-in, enabled services, or deployment permissions.
 
-## Where skills come from today
+## Use a skill
 
-| Source | Target | Notes |
-|---|---|---|
-| Device OpenClaw | Current RDK hardware | Inspect, deploy, redeploy, or delete device-side skills |
-| Local Moss | Skill workspace on this PC | Conversation capture, hand-authored skills, marketplace installs |
-| Skill marketplace / SkillHub | Remote catalog | Search, preview, add locally, or deploy to device |
-| Create skill | Moss-assisted draft | Draft first, confirm, then save or deploy |
-| Generate from link | GitHub / NodeHub / web pages | Moss drafts from URL; confirm before deploy |
+Find and preview a skill in the Skills tab or skill store. Check its devices, steps, and impact before adding it to an allowed location. Use composer skill search or type `/skill <skill-name> [task]` to select one.
 
-## Before you start
+Skills provide instructions. Actual file, command, and device actions still depend on runtime, tools, and authorization. Installing a skill does not grant all permissions or make Moss and DSH capabilities identical.
 
-Creating or importing skills prints drafts plus warnings first; saving locally or deploying needs your confirmation. Read carefully when commands, background services, or networking are involved.
+## Local and board skills
 
-## Sync to the board
+Local skills and board OpenClaw skills are separate targets. To use a skill in OpenClaw, connect the intended device and deploy/sync through the skill view. A computer-side edit does not prove that the board version was updated.
 
-Skills install on the PC for Moss by default. To let board OpenClaw use them, pick skills under **Skill Workshop → Installed (board)** and choose sync.
+Public Web Cloud does not permit arbitrary writes to server-local skill directories; use the store and review flows supported by the deployment.
 
-Sync copies PC skills to the active device—after edits on the PC, sync again.
+## MCP
 
-## Further reading
+MCP supplies external tools to the Agent. Check connection/authentication state, enablement, and tool permissions separately. Installing a plugin or adding a server does not mean authentication succeeded. Configuration is also available at **Settings → MCP services**, subject to deployment permissions.
 
-- [3.11.3 Find skills](./3-clawhub-community.md): Search, preview, add, or deploy from SkillHub.
-- [3.11.4 Create skills](./4-create-and-import.md): Author skills, Moss-assisted drafting, or URL import.
+## Continue reading
+
+- [Find skills](./3-clawhub-community.md)
+- [Create skills](./4-create-and-import.md)
+- [Sync to a board](./6-sync-to-board.md)

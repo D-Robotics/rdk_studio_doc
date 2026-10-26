@@ -27,7 +27,7 @@ The board agent page tracks OpenClaw, model, and network health:
 
 ## Local Ollama rarely feeds OpenClaw directly
 
-If Moss’s thinking model is desktop Ollama, OpenClaw generally **cannot** reuse it. Pick a remote endpoint the board can reach, or host inference on the device.
+If Moss’s current model is desktop Ollama, OpenClaw generally **cannot** reuse it. Pick a remote endpoint the board can reach, or host inference on the device.
 
 ## Triage tips
 

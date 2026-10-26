@@ -73,7 +73,7 @@ rdkstudio "Check current device status"
 cat error.log | rdkstudio --pipe
 ```
 
-Model/API/URL/key errors → fix under *Settings center → AI engine* in the desktop app.
+Model/API/URL/key errors → fix under *Settings center → Models & providers* in the desktop app.
 
 ## Config sources and safety
 
@@ -84,7 +84,7 @@ Model/API/URL/key errors → fix under *Settings center → AI engine* in the de
 | Environment variables | Automation or disposable shells |
 | `rdkstudio config` | Non-secret local preferences |
 
-Prefer storing API keys in the desktop AI engine or env vars—never paste real secrets into docs, scripts, screenshots, or chat.
+Prefer storing API keys in the desktop Models & providers or env vars—never paste real secrets into docs, scripts, screenshots, or chat.
 
 Temporary model override example:
 

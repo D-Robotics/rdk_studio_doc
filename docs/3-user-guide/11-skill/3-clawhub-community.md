@@ -5,7 +5,7 @@ title: 3.11.3 查找技能
 
 # 3.11.3 查找技能
 
-技能市场 / SkillHub 是可复用技能的在线入口。RDK Studio 在技能工坊中提供搜索、预览、添加到本机 Moss、部署到设备 OpenClaw 和批量操作。
+技能市场 / SkillHub 是可复用技能的在线入口。RDK Studio 在扩展中心 → 技能中提供搜索、预览、添加到本机 Moss、部署到设备 OpenClaw 和批量操作。
 
 ![技能市场：搜索、分类、预览、添加到本机、部署到设备](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/skill-marketplace.png)
 
@@ -35,4 +35,4 @@ title: 3.11.3 查找技能
 
 对于 GitHub、NodeHub 或普通网页，可以使用“从链接生成技能”。Moss 会先生成草稿并停下，你确认内容后，再选择添加到本机或部署到设备。
 
-不要让 Moss 在未确认草稿时直接写入设备；这会破坏技能工坊的安全边界。
+不要让 Moss 在未确认草稿时直接写入设备；这会破坏扩展中心 → 技能的安全边界。

@@ -1,57 +1,52 @@
-﻿---
+---
 sidebar_label: '3.1 Workbench'
 title: 3.1 Workbench
 ---
 
 # 3.1 Workbench
 
-After you open RDK Studio, start from the **Workbench**. Here you can chat with Moss, and view the current device, project folder, diagnostics, files, and terminal.
+The **Agent Workspace** starts tasks, resumes conversations, and shows the project and actual work location. Tasks use Moss or DSH; the composer shows the current task's runtime.
 
-![Workbench: after connecting to RDK X5, view device status and choose a workspace or start a conversation](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/workbench-connected.png)
+## First use
 
-## What to check the first time you open it
+1. Open the workbench or create a task from the project/conversation sidebar.
+2. Create or select a project when working with files. Questions can start without a bound folder.
+3. Check the project, location, folder, and target device in the composer.
+4. Choose Execute, Plan, or Spec, describe the goal, and send.
+5. Select **Open location** to inspect Overview, Terminal, or Files for the task workspace.
 
-| Step | What to look at |
+## Create a project
+
+Choose its primary work location:
+
+| Location | Preparation | Typical work |
+|---|---|---|
+| Local computer | Select a project folder and authorize it when prompted | Local code, files, and commands without a connected board |
+| Board | Select the device, then choose a board folder once online | Board development, execution, and file management |
+
+After creation, you can add a folder on the other side. Local and board bindings are stored separately; check the path when changing work locations.
+
+An offline board project keeps its device binding. Restore SSH to that device before choosing folders or running operations. Another online device does not automatically replace it.
+
+## Project, device, and task
+
+- A **project** groups related tasks and folders.
+- A **device** identifies the target for board operations.
+- The **work location** determines whether the task defaults to a local or board workspace.
+- The **runtime** determines whether Moss or DSH executes the task, and stays fixed after creation.
+
+Changing the default runtime does not migrate existing tasks. Switching the selected device should not be treated as confirmation that an old task has changed targets. Check task context before resuming history.
+
+## Open location
+
+| View | Purpose |
 |---|---|
-| 1 | Whether the left sidebar is on **Core → Workbench** |
-| 2 | Whether the input area shows the correct device |
-| 3 | Whether the right side shows the project folder, device status, and diagnostics entry |
-| 4 | If you have no device yet, add one first; if the device is online, you can ask Moss directly |
+| Overview | Current project, device, progress, artifacts, and references |
+| Terminal | Inspect or run commands at the corresponding location |
+| Files | Inspect files and Agent changes at that location |
 
-## Common areas
+Use the task or tool entries provided by the current interface for diagnostics, changes, and previews. Keep actual error messages when execution fails and ask the Agent to investigate from that output.
 
-| Area | Purpose |
-|---|---|
-| Moss chat | Enter tasks, upload attachments, choose Execute/Plan, choose Fast/Think |
-| Live | View current project, device, remote folder, changes, and diagnostics summary |
-| History | Open local chat history and continue the last task |
-| Diagnostics | Collect device runtime status and send it to Moss in one step |
-| Changes | View file changes in the project |
-| Files | Browse and edit files on the current device/host |
-| Terminal | Open an SSH terminal on the current device |
-| Browser | Open web pages or preview pages related to the current task |
+## History and recovery
 
-## Device and project binding
-
-The Workbench organizes information around the **current device + current project directory**. After you pick a remote directory, Terminal, Files, Changes, and Moss all work against that same directory.
-
-Without a bound directory, Moss can still answer questions and propose plans; actions that touch project files will first prompt you to choose a directory.
-
-Device status affects what Moss can do next:
-
-| Status | Moss behavior |
-|---|---|
-| Online | Terminal, Files, Diagnostics, and other device features are available |
-| Pending verification | Verify SSH first, then run device-related tasks |
-| Offline | Plans and knowledge Q&A can continue; on-device execution waits for reconnect or confirmation |
-| Not connected | You can draft a plan first; connect the device before execution |
-
-## Viewing device status
-
-If you only want to see device status, open **Live** or **Diagnostics** from the workspace. If you need to operate the device, enter your goal in Moss, or open the Terminal or Files panel and work manually.
-
-## When the device is offline
-
-When the device is offline, the Workbench shows the last fetched state and marks the device as offline. Moss can still organize plans, analyze existing logs, and answer knowledge questions; actions that must run on the board wait until the device is connected again.
-
-After you switch devices, the Workbench reloads that device’s status, files, and diagnostics—it does not keep using the previous device’s information.
+Use the left conversation list to find, rename, pin, archive, and resume tasks. Deleting a project removes its record and bindings; its chats remain in recent tasks, and local/board files remain intact. See [Conversation history](../2-ai-chat/3-multi-session.md).

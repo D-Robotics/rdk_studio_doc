@@ -1,65 +1,42 @@
-﻿---
-sidebar_label: '3.12 Local LLMs'
-title: 3.12 Local LLMs
+---
+sidebar_label: '3.12 Local models'
+title: 3.12 Local models
 ---
 
-# 3.12 Local LLMs
+# 3.12 Local models
 
-Local LLMs live under **AI Capabilities → Local LLMs**. Install and run Ollama on the PC so Moss can call a fast on-device model for lightweight Q&A, summarization, and similar tasks.
+**AI capabilities → Local models** manages Ollama and models on your computer and can set a supported model as the Agent main model. This requires desktop or a deployment that permits local model execution.
 
-![Local LLMs: manage the Ollama runtime, download models, run smoke tests, and wire fast mode](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/local-llm.png)
+## Steps
 
-## Suggested workflow
+1. Detect the local runtime and install it if needed.
+2. Start the Ollama service.
+3. Enter a model ID, download it, and wait for completion.
+4. Test that the model responds.
+5. Confirm tool-calling support, then select **Set as main model configuration**.
+6. Check the current model in **Settings → Models & providers**, then try a workbench task.
 
-| Step | What to do |
-|---|---|
-| 1 | Open **AI Capabilities → Local LLMs** |
-| 2 | Install or detect the Ollama runtime |
-| 3 | Start the local model service |
-| 4 | Pull a chat model and run a test |
-| 5 | After tests pass, assign it as Moss’s fast model |
+## Model capabilities
 
-## What this page covers
+The Agent main model requires **tool calling**. A successful chat test does not prove tool support. Embedding-only, vision-only, or other models without tool calling cannot directly serve as the main Agent model. Follow detection results for the specific model.
 
-| Capability | Description |
-|---|---|
-| Detect runtime | See whether Ollama is installed and responding |
-| Install / update runtime | Download RDK Studio–managed Ollama in the full desktop client |
-| Start / stop service | Toggle the local inference daemon |
-| Storage management | Inspect model weights, runtime paths, cache, and free disk |
-| Download models | Enter a model tag and track progress |
-| Test model | Run a minimal chat to confirm responses |
-| Fast mode | Promote a model to Moss fast-mode usage |
-
-## First-time walkthrough
-
-1. Open **Local LLMs**.
-2. If prompted that the runtime is missing, choose **Install and start**.
-3. After the service is up, type a model name—often a team-recommended small chat model.
-4. Download and wait for completion.
-5. Run **Test** and confirm you get an answer.
-6. Choose **Apply as fast model config** so Moss fast mode routes here.
+Computer resources, model size, and task complexity affect speed. Verify a small task before attempting multi-step development.
 
 ## Common states
 
-| State | Meaning | Next step |
-|---|---|---|
-| Not installed | No usable Ollama runtime | Install via button, or install manually and refresh |
-| Installed but stopped | Binaries present, daemon down | Start the service |
-| Service failed to start | Another Ollama instance or port conflict | Close duplicate processes or reboot |
-| Empty model list | Daemon healthy, no weights yet | Pull a model by name |
-| Test failed | Wrong tag, non-chat bundle, or runtime error | Switch models or reinstall weights |
+| State | Action |
+|---|---|
+| Not installed | Install the runtime and detect again |
+| Installed but stopped | Start the service |
+| Port occupied or startup failed | Check existing Ollama services and processes |
+| Model missing | Check the full model name and tag, download, and retry |
+| Cannot set as main model | Check tool-calling support |
+| Insufficient disk space | Check capacity and directories in Data locations before downloading |
 
-## Relationship to AI engine settings
+The interface can manage runtime, model, and cache locations. Changing a directory does not automatically migrate files; follow its guidance, including restart requirements. Whether Stop controls the current service depends on the process ownership shown by the page.
 
-Local LLMs focuses on **runtime + weights**; **Settings → AI engine** holds **model registry + defaults**.
+## Related configuration
 
-Choosing **Apply as fast model config** writes or updates an Ollama entry there.
+Local models manages runtime and model files; Models & providers manages model entries. Setting a local main model does not change Moss/DSH task bindings or guarantee that DSH uses the same configuration.
 
-To promote the same weights as a “thinking” model, adjust **Settings → AI engine** manually.
-
-## Relationship to OpenClaw
-
-PC-only models default to localhost. Board OpenClaw generally cannot reach that URL.
-
-For standalone OpenClaw inference, pick a remote endpoint the board can route to, or host a model service on the board and point configuration at a board-local address.
+Board OpenClaw needs a separately configured model service. Your computer's `localhost` refers to that computer and is not automatically a reachable board endpoint.

@@ -1,36 +1,28 @@
 ---
-sidebar_label: '3.13.1 Understand the settings UI'
-title: 3.13.1 Understand the settings UI
-unlisted: true
+sidebar_label: '3.13.1 Understand settings'
+title: 3.13.1 Understand settings
 ---
 
-# 3.13.1 Understand the settings UI
+# 3.13.1 Understand settings
 
-## Areas
+Use the relevant settings section: **Models & providers** for model connectivity, **Device connection** for device failures, and **Data locations** for local data locations.
 
-| Area | Main content | When it applies |
-|---|---|---|
-| Account & security | Sign-in, sign out, local data cleanup | Immediately |
-| Device connection | SSH, online checks, auto-reconnect, LAN collaboration | Mostly immediately |
-| Appearance | Density, scaling, desktop experience | Immediately |
-| AI engine | Model entries, reasoning/fast selection, tests | Immediately |
-| Message channels · Feishu | Feishu app credentials, channel on/off, bindings | After save; runtime ops may restart the channel |
-| Message channels · WeChat | WeChat QR bind, remove accounts, restart | After save or scan |
-| Apps & updates | Version check, CLI, diagnostics, reset | Some ops need restart |
+## Which changes affect a task
 
-## Guidance
+| Change | Effect |
+|---|---|
+| Default runtime for new tasks | Affects newly created tasks only; existing bindings remain |
+| Model entries | Saved/selected model configuration is used without changing the task runtime |
+| Project or device folder | Changes the work location; check the original binding when resuming history |
+| Data directory | Existing files are not automatically migrated; some settings require restart |
+| App update | Save files and restart as instructed |
 
-If you do not know what a setting does, prefer defaults. Most apply immediately after save; a few tied to updates or channel restarts show whether a restart is needed.
+The composer runtime indicator opens runtime settings, and the model settings entry opens Models & providers. A redundant model control may be hidden when only one default alias exists.
 
-## Cross-links
+## Deployment differences
 
-RDK Studio jumps into settings from many places:
+Public Web Cloud isolates user data by account and hides process-wide Data locations, Feishu, and WeChat configuration. Custom MCP and host capabilities also depend on deployment permissions.
 
-- AI Dock model banner → AI engine or local LLMs.
-- OpenClaw model setup → reasoning model in AI engine.
-- Left settings button → opens settings and remembers last section.
-- Apps & updates → CLI and diagnostic bundles.
+## Recovery and reset
 
-## Reset Studio
-
-Reset clears local devices, model config, chat history, and some caches. It is irreversible—export settings first. To sign out only, use *Account & security → Sign out*.
+Model export is not a full local-data backup. If history recovery fails, restore local storage and services, then select **Retry local history recovery**. Resetting or deleting data may affect other accounts using the same local data directory and is not a substitute for signing out.

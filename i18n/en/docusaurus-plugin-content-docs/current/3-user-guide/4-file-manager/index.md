@@ -1,29 +1,28 @@
-﻿---
+---
 sidebar_label: '3.4 Files'
 title: 3.4 Files
 ---
 
 # 3.4 Files
 
-![Files panel: switch to Files view from the workspace sidebar; read-only prompt when no device or remote folder is selected](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/06-file.png)
+Files includes **task-workspace files** and **device file management**. For local projects, use Open location → Files to browse the authorized folder. Device files require the intended SSH connection.
 
-The Files page is for browsing and managing files on the device. You can browse folders, upload, and download files like a local file explorer, or open small files for editing inline.
+## Steps
 
-## First-time workflow
+1. Check the project, work location, and folder.
+2. Open a local project directly; for board projects, verify the device is online and a remote folder is bound.
+3. Browse through the directory tree, path bar, and file list.
+4. Use the upload, download, create, rename, and edit actions provided by the current view.
+5. Verify the target before writing and check the result after saving.
 
-| Step | What to do |
-|---|---|
-| 1 | Confirm the device is online and a remote folder is selected |
-| 2 | Open the **Files** page and review the folder tree on the left and list on the right |
-| 3 | To transfer files, drag and drop or use upload/download |
-| 4 | For one-off text edits, double-click a file to open and save |
-| 5 | If you lack permissions or hit a restricted path, confirm you really need to change it |
+Local and board folders are stored separately. After switching device, project, or location, do not treat an older file list as the new target's content. Follow loading errors rather than assuming success.
 
-Files and Moss see the same filesystem on the same device. Edits saved in Files can be read by Moss later; after Moss modifies files, refresh Files to see updates.
+## Files and the Agent
 
-System and sensitive paths may block writes. If save fails due to permission or non-writable location, verify you really need that path, then share the UI message with Moss for troubleshooting.
+Inspect Agent changes at the corresponding work location. After manual saves, have the Agent reread current content. If another application is editing the file, check for overwrite conflicts before saving.
 
-## Read next
+## Continue reading
 
-- [3.4.1 Browse and transfer files](./1-browse-and-transfer.md): browse folders, upload, download
-- [3.4.2 Edit files](./2-online-edit.md): edit common text files directly in Studio
+- [Browse and transfer](./1-browse-and-transfer.md)
+- [Edit files](./2-online-edit.md)
+- [Paths and permissions](./3-path-access-control.md)

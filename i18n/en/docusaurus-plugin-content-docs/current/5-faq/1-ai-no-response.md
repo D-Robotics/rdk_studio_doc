@@ -1,52 +1,29 @@
 ---
-sidebar_label: '5.1 Moss not responding'
-title: 5.1 Moss not responding
+sidebar_label: '5.1 Agent does not respond'
+title: 5.1 Agent does not respond
 ---
 
-# 5.1 Moss not responding
+# 5.1 Agent does not respond
 
-## Typical symptoms
+First distinguish an **unavailable runtime, failed model request, still-running task, or offline device**.
 
-- The workbench spinner never finishes after you send a message.
-- The composer shows “Fast / thinking model not configured correctly.”
-- Local Ollama reports the service is unreachable.
-- Remote models return key errors, “model not found,” or timeouts.
+## Check in order
 
-## Check composer banners first
+1. Read the Moss/DSH indicator and current task state.
+2. Check runtime status in **Settings → Models & providers**; recheck DSH if needed.
+3. For Moss model failures, test the current model and verify its ID, provider, Base URL, and key state.
+4. For Ollama, confirm the service is running, the model is downloaded, and tool calling is supported.
+5. Inspect the error or existing execution records from the message menu before retrying.
 
-AI Dock surfaces model setup issues proactively:
-
-| Banner | What to do |
+| Symptom | First action |
 |---|---|
-| Fast / thinking points at local Ollama but the service is down | Open [3.12 Local LLMs](../3-user-guide/12-local-models/index.md) and start the service |
-| Model missing from local Ollama list | Pull the matching tag on the Local LLM page, or switch to a full model name from the list |
-| Remote model incomplete | Open *Settings → AI engine* and fill in model name, Base URL, and API key |
+| DSH unavailable / check failed | Resolve its reason; to use Moss, change the default and create a task |
+| Invalid key / permission denied | Correct model credentials and account permissions |
+| Model missing | Check the full model ID and endpoint |
+| Request timeout | Check network, proxy, and service state |
+| Task has not stopped | Wait for the stop result and check state before resubmitting |
+| Device offline | Restore the task's bound device; another online device does not replace it |
 
-## Remote-model checks
+An offline device does not prevent knowledge questions or local-project work; it restricts actions requiring that device. Changing the default runtime does not migrate an existing task.
 
-Go to *Settings → AI engine* and test the current thinking or fast model:
-
-| Error | Common causes |
-|---|---|
-| Key error or insufficient permission | Wrong or expired API key, or missing role |
-| Model not found | Wrong model id, or wrong Base URL |
-| Connection timeout | Network, proxy, corporate firewall, or overloaded endpoint |
-| Provider error | Provider does not match the platform you configured |
-
-When unsure what is wrong, share the vendor’s field guide, the test error (with keys redacted), or a screenshot with keys hidden—do **not** paste API keys into chat.
-
-## Local model checks
-
-If you use Ollama:
-
-1. Open *Local LLM*.
-2. Confirm the runtime is installed.
-3. Confirm the service is running.
-4. Confirm the model name you configured exists in the list.
-5. Run the model test.
-
-More detail: [5.13 Local LLM / Ollama issues](./13-local-llm.md).
-
-## Device offline is not “Moss silent”
-
-When the device is offline, Moss can still plan and answer from docs; board-side commands wait for reconnect or extra confirmation. If you asked for execution, check whether the device chip shows online first.
+If failure persists, retain the version, runtime, error, and request ID for redacted feedback. Do not send API keys in chat.

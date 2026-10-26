@@ -1,59 +1,31 @@
 ---
-sidebar_label: '3.1.2 Cross-page integration'
-title: 3.1.2 Cross-page integration
-unlisted: true
+sidebar_label: '3.1.2 Working across pages'
+title: 3.1.2 Working across pages
 ---
 
-# 3.1.2 Cross-page integration
+# 3.1.2 Working across pages
 
-The Workbench puts Moss chat and the **current workspace** on one screen. The right-hand workspace shows what you can view and operate on, centered on the current project, device, directory, and diagnostic state.
+The composer's work-location bar groups the project, folder, and local/device target. Select **Open location** to show that task's workspace on the right.
 
-## Live cards
+## Use several tools at one location
 
-The workspace **Live** page mainly includes these cards:
-
-| Card | Behavior |
+| View | Purpose |
 |---|---|
-| Device management | Opens device management / add-device; when connected you can switch devices or verify SSH |
-| Project workspace settings | Set or view the current remote project directory; shows a Git change summary when there is a repo |
-| Send current context to Moss | Inserts references to project, device, directory, and change summary into the input box |
-| Diagnostic snapshot | Collect device runtime status and send it to Moss in one step |
-| Chat history | Open a past session and continue the task |
+| Overview | Current task, project, device, artifacts, and references |
+| Terminal | Run commands locally or at the intended device location |
+| Files | Inspect, transfer, and edit files at that location |
 
-At the bottom of the Live page there are shortcuts: **History, Terminal, Files**. They switch panels inside the right workspace without leaving the Workbench.
+When choosing “Open terminal here” from a file menu, check whether the terminal is local or on the board. A board terminal requires a working SSH connection; a local project does not require a device.
 
-## Workspace panels
+## Open dedicated pages
 
-You can switch these panels at the top of the workspace:
+Flasher, Block studio, Remote desktop, Code editor, and Board Agent are under **Device & development**. Plugin Center and Local models are under **AI capabilities**.
 
-| Panel | Role |
-|---|---|
-| Live | Device, project directory, Git status, diagnostic snapshot, and history entry points |
-| Terminal | Open an SSH terminal in the current project directory |
-| Files | Browse, upload, download, and edit remote files under the current directory |
-| Changes | View remote Git status and initialize a repo when needed |
-| History | Open local session history |
-| Browser | Appears when Moss opens a webpage or preview; refresh, copy URL, or close |
+After switching pages, return to the workbench or the left task list to continue. Provide logs, files, or diagnostics as attachments or references when asking for analysis, so the Agent has the relevant material.
 
-Terminal, Files, and Changes all use the same **current project directory**. If no directory is set, the UI will first prompt you to choose an on-board or remote directory.
+## State changes
 
-## Integration with other pages
-
-**Flashing, Remote desktop, Code editor, On-board Agent, Local LLM, and Skill workshop** in the left main nav are separate pages. Moss or workspace panels can take you there, for example:
-
-- Open **Flashing** when you need to reflash the system.
-- Open **Remote desktop** when you need a graphical desktop.
-- Open **Code editor** for project-level development.
-- Open **On-board Agent** to deploy or fix OpenClaw.
-- Open **Local LLM** when you need local Ollama on this machine.
-
-## Offline and read-only states
-
-The workspace header shows the current device, directory, and executable status:
-
-| State | Meaning |
-|---|---|
-| SSH verified / executable | Terminal, Files, Changes, and Moss device operations are available |
-| Offline snapshot / read-only | Existing info and history are viewable; device operations wait for reconnect |
-| On-board directory not set | Terminal, Files, and Changes first prompt to pick a directory |
-| No device selected | Moss can plan and answer knowledge questions; execution needs a device added first |
+- Board offline: keep its project binding and saved information; restore the intended device before operating.
+- No folder selected: bind the appropriate folder through the project or workspace entry.
+- Runtime unavailable: open settings and recheck. Changing the default requires creating a new task.
+- Task running: check its state before adding instructions, stopping, or starting another task to avoid duplicate execution.
