@@ -37,6 +37,21 @@ test('shared HTML extraction preserves real section IDs and command examples', (
   assert(!records.some(r => /NAV_SENTINEL|FOOTER_SENTINEL/.test(r.content)));
 });
 
+test('Docusaurus highlighted code keeps br-separated commands in both index consumers', async () => fixture(async outDir => {
+  const {generateMcpSearchIndex} = await import('./mcp-search-index.mjs');
+  const code = '<pre><code><span class="token-line"><span class="token plain">export DMOSS_MODEL=qwen3.6-plus</span><br></span><span class="token-line"><span class="token plain">export DMOSS_BASE_URL=https://provider.example/v1</span><br></span></code></pre>';
+  const source = html.replace(/<pre>[\s\S]*?<\/pre>/, code);
+  const expected = 'export DMOSS_MODEL=qwen3.6-plus\nexport DMOSS_BASE_URL=https://provider.example/v1';
+  const records = parsePageHtml(source, 'https://developer.d-robotics.cc/rdk_studio_doc/guide/');
+  const record = records.find(r => r.content.startsWith('export DMOSS_MODEL='));
+  assert.equal(record.content, expected);
+  assert.equal(record.anchor, 'real-custom-id');
+  await fs.writeFile(path.join(outDir, 'guide/index.html'), source);
+  await generateMcpSearchIndex(settings(outDir));
+  const shards = JSON.parse(await fs.readFile(path.join(outDir, 'search-index.json'), 'utf8'));
+  assert.equal(shards[1].documents.find(d => d.t.startsWith('export DMOSS_MODEL=')).t, expected);
+}));
+
 test('post-build index contains full sections and only the current locale routes', async () => fixture(async outDir => {
   const {generateMcpSearchIndex} = await import('./mcp-search-index.mjs');
   await fs.mkdir(path.join(outDir, 'en/old'), {recursive: true});
