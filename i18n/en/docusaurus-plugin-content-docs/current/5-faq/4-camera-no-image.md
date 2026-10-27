@@ -79,4 +79,4 @@ Proceed stepwise:
 3. **Verify topics**—RViz2 or `ros2 topic echo` should show steady frames  
 4. **Then** stack detection/other nodes  
 
-For ROS / TROS details see [official RDK documentation](https://developer.d-robotics.cc/rdk_doc/Robot_development).
+For ROS / TROS details see [official RDK documentation](https://d-robotics.github.io/tros_doc/en/tros).

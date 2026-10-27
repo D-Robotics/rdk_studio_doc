@@ -79,4 +79,4 @@ v4l2-ctl -d /dev/video0 --list-formats-ext
 3. **确认 topic 出图**：在 RViz 或 `ros2 topic echo` 中确认图像流稳定
 4. **再挂检测或识别节点**
 
-详细板端 ROS / TROS 配置请查阅 [RDK 官方文档](https://developer.d-robotics.cc/rdk_doc/Robot_development)。
+详细板端 ROS / TROS 配置请查阅 [RDK 官方文档](https://developer.d-robotics.cc/tros_doc/)。
