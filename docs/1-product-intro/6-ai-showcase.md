@@ -76,7 +76,7 @@ title: 1.6 AI Dock 实战演示
 
 **对话产出**
 
-![AI Dock 生成社区发帖草稿：标题"【无脑抄下草稿】"，正文"RDK X5 5 分钟跑通 YOLO-World 开放词汇目标检测"；章节自顶向下依次为——环境与准备（设备 RDK X5 8GB、系统 RDK 官方 Ubuntu 22.04 + TROS Humble、摄像头普通 USB 免驱 720P、软件包 tros-humble-hobot-yolo-world v0.4.1）；完整运行步骤（1 安装软件 / 2 准备配置与环境 / 3 启动检测服务，含 USB 摄像头版 / MIPI 摄像头版 / 本地图片测试版三段 bash 命令）；实测性能数据表（推理帧率 ~6fps / 单帧推理耗时 ~150ms / BPU 占用率 ~60% / 全分区资源 76bit）；效果查看（提供 http://板子IP:8000 / 若弹出独立窗口可使用 studio_open_url）；常见问题与解决（浏览器不开 / 启动成功但页面不开 / 摄像头不能用 / 检测框不稳定 / 检测不到物体 5 个常见场景的原因与命令）；进阶玩法（自定义检测类别 yolo_world_texts、保存检测结果、二次开发）；总结段落建议直接按此步骤复制操作](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/showcase-case3-forum-draft.png)
+![AI Dock 生成社区发帖草稿：标题"【无脑抄下草稿】"，正文"RDK X5 5 分钟跑通 YOLO-World 开放词汇目标检测"；章节自顶向下依次为——环境与准备（设备 RDK X5 8GB、系统 RDK 官方 Ubuntu 22.04 + TROS Humble、摄像头普通 USB 免驱 720P、软件包 tros-humble-hobot-yolo-world v0.4.1）；完整运行步骤（1 安装软件 / 2 准备配置与环境 / 3 启动检测服务，含 USB 摄像头版 / MIPI 摄像头版 / 本地图片测试版三段 bash 命令）；实测性能数据表（推理帧率 ~6fps / 单帧推理耗时 ~150ms / BPU 占用率 ~60% / 全分区资源 76bit）；效果查看（提供板子IP:8000 / 若弹出独立窗口可使用 studio_open_url）；常见问题与解决（浏览器不开 / 启动成功但页面不开 / 摄像头不能用 / 检测框不稳定 / 检测不到物体 5 个常见场景的原因与命令）；进阶玩法（自定义检测类别 yolo_world_texts、保存检测结果、二次开发）；总结段落建议直接按此步骤复制操作](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/showcase-case3-forum-draft.png)
 
 观察到的要点：
 

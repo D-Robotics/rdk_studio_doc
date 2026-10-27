@@ -26,7 +26,7 @@ RDK Studio 会在烧录页引导你获取 D-Robotics 提供的 xburn-gui。
 | Windows | Studio 烧录页提供 Windows 安装包链接 |
 | macOS（Apple Silicon / M 系列芯片） | Studio 烧录页提供 dmg 链接 |
 
-xburn-gui 由 D-Robotics 维护。详细使用文档请查阅 [RDK 官方文档](https://developer.d-robotics.cc/rdk_doc) 中的 RDK S100 烧录章节。
+xburn-gui 由 D-Robotics 维护。详细使用文档请查阅 [RDK 官方文档](https://developer.d-robotics.cc/rdk_doc_center/) 中的 RDK S100 烧录章节。
 
 ## 镜像准备
 

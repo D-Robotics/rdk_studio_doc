@@ -26,7 +26,7 @@ When available, the desktop client also offers *Open local xburn* and *one-click
 | Windows | Install package link on the Studio flashing page |
 | macOS (Apple Silicon / M series) | DMG link on the Studio flashing page |
 
-xburn-gui is maintained by D-Robotics. For full usage docs, see the RDK S100 flashing section in [RDK official documentation](https://developer.d-robotics.cc/rdk_doc).
+xburn-gui is maintained by D-Robotics. For full usage docs, see the RDK S100 flashing section in [RDK official documentation](https://d-robotics.github.io/rdk_doc_center/en/).
 
 ## Preparing the image
 
