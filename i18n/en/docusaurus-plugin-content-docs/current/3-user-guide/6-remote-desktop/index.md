@@ -1,11 +1,12 @@
 ﻿---
 sidebar_label: '3.6 Remote desktop'
 title: 3.6 Remote desktop
+description: 'View and control the board desktop inside Studio'
 ---
 
 # 3.6 Remote desktop
 
-![Remote desktop after connecting to RDK X5: operate the device GUI inside Studio](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/remote-desktop-connected.png)
+![Remote desktop after connecting to RDK X5: operate the device GUI inside Studio](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/remote-desktop-connected.png)
 
 Once connected Studio shows device desktop inline — mouse, keyboard, and UI like controlling a thin client.
 
@@ -37,4 +38,4 @@ Desktop streaming is sensitive to network quality. When the picture stutters, lo
 
 ## Read next
 
-- [3.6.1 Open remote desktop](./1-startup-auth.md): first‑run prep and viewer password auth
+- [3.6.1 Open remote desktop](./1-startup-auth.md): first-run prep and viewer password auth

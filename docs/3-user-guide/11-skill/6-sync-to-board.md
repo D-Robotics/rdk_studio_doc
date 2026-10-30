@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.11.6 同步到设备'
 title: 3.11.6 同步到设备
+description: '把本机 Moss 技能同步到板端 OpenClaw 工作区'
 ---
 
 # 3.11.6 同步到设备

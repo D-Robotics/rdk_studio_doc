@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.7.3 eMMC flashing'
 title: 3.7.3 eMMC flashing
+description: 'Flash and back up the system on RDK X5 models with eMMC'
 ---
 
 # 3.7.3 eMMC flashing
@@ -28,7 +29,7 @@ Make a backup before each eMMC flash when possible:
 3. Start backup—progress appears live.
 4. When done, download the image to your PC (saved as an `.img` file).
 
-Backup images can be restored: pick that file under *Local image*, then follow the same eMMC flashing flow to return to the backed‑up state. This **backup → upgrade → rollback if needed** loop matters a lot in production.
+Backup images can be restored: pick that file under *Local image*, then follow the same eMMC flashing flow to return to the backed-up state. This **backup → upgrade → rollback if needed** loop matters a lot in production.
 
 ## Boot mode switching
 

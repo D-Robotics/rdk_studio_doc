@@ -1,11 +1,12 @@
 ---
 sidebar_label: '3.6 远程桌面'
 title: 3.6 远程桌面
+description: '在 Studio 内查看并操作板端桌面'
 ---
 
 # 3.6 远程桌面
 
-![远程桌面页面：连接 RDK X5 后在 Studio 内查看和操作板端桌面](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/remote-desktop-connected.png)
+![远程桌面页面：连接 RDK X5 后在 Studio 内查看和操作板端桌面](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/remote-desktop-connected.png)
 
 连接成功后，Studio 会在同一页面显示板端桌面，你可以像远程操作一台电脑一样点击、输入和查看图形界面。
 

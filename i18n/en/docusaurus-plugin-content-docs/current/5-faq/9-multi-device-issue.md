@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.9 Wrong device target'
 title: 5.9 Wrong device target
+description: 'Confirm the actual target device when several are connected'
 ---
 
 # 5.9 Wrong device target

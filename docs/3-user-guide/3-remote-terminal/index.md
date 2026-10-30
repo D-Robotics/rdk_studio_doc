@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.3 终端'
 title: 3.3 终端
+description: '本机与设备终端的切换和目录核对'
 ---
 
 # 3.3 终端

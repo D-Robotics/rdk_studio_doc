@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.2 SSH 连接失败'
 title: 5.2 SSH 连接失败
+description: '排查 SSH 超时、密码错误与拒绝连接'
 ---
 
 # 5.2 SSH 连接失败

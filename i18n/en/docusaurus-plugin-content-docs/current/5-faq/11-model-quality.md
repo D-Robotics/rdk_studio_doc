@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.11 Model answer quality'
 title: 5.11 Model answer quality
+description: 'Improve off-topic answers, repeated failures, and tool misuse'
 ---
 
 # 5.11 Model answer quality

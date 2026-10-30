@@ -1,6 +1,7 @@
 ---
 sidebar_label: '1.1 产品概述'
 title: 1.1 产品概述
+description: 'RDK Studio 的定位、核心能力与适用场景总览'
 ---
 
 # 1.1 产品概述

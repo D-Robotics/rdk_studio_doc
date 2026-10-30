@@ -1,11 +1,12 @@
 ---
 sidebar_label: '3.8 网络配置'
 title: 3.8 网络配置
+description: '网络配置的入口与最简连接流程'
 ---
 
 # 3.8 网络配置
 
-![Wi-Fi 配置弹窗：选择网络、填写密码并查看连接状态](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/wifi-config-dialog.png)
+![Wi-Fi 配置弹窗：选择网络、填写密码并查看连接状态](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/wifi-config-dialog.png)
 
 网络配置用于把设备接入 Wi-Fi。第一次使用时，可以先按 [2.4 配置网络](../../2-quick-start/4-configure-network.md) 完成最简流程。
 

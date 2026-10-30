@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.2 SSH connection failed'
 title: 5.2 SSH connection failed
+description: 'Troubleshoot SSH timeouts, bad passwords, and refused connections'
 ---
 
 # 5.2 SSH connection failed
@@ -21,7 +22,7 @@ When adding a device under *Device manager*, you may see timeout, bad password, 
 ## Checklist
 
 1. **Host / IP** — Enter the device’s IP or hostname, **not** the PC’s.
-2. **Network** — Host and studio must reach each other. Type-C issues: [5.3 Type-C direct failed](./3-typec-flash-failed.md). Wi‑Fi issues: [5.7 Wi-Fi connection failed](./7-network-failed.md).
+2. **Network** — Host and studio must reach each other. Type-C issues: [5.3 Type-C direct failed](./3-typec-flash-failed.md). Wi-Fi issues: [5.7 Wi-Fi connection failed](./7-network-failed.md).
 3. **Account** — Official images commonly `root/root`; follow your image notes if passwords changed.
 4. **Remote login** — If boot is broken, use serial first and enable SSH.
 5. **Stale profiles** — After reflash, remove old saved connections and add fresh.
@@ -32,7 +33,7 @@ When adding a device under *Device manager*, you may see timeout, bad password, 
 |---|---|---|
 | Type-C direct | `192.168.128.10` | Complete the Type-C add flow first |
 | Ethernet | Per image docs | Screen, docs, or serial log |
-| Wi‑Fi / DHCP | From router | Router admin UI, OS network UI, or serial |
+| Wi-Fi / DHCP | From router | Router admin UI, OS network UI, or serial |
 
 ## Follow-up
 

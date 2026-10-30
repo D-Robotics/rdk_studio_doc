@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.5 Connect an AI model'
 title: 2.5 Connect an AI model
+description: 'Add a model configuration in Settings and test connectivity'
 ---
 
 # 2.5 Connect an AI model

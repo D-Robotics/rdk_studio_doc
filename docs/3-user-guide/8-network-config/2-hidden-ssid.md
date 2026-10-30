@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.8.2 添加隐藏 Wi-Fi'
 title: 3.8.2 添加隐藏 Wi-Fi
+description: '手动添加不广播 SSID 的隐藏网络'
 ---
 
 # 3.8.2 添加隐藏 Wi-Fi

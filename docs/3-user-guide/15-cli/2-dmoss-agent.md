@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.16.2 dmoss-agent'
 title: 3.16.2 dmoss-agent
+description: '在 CI、Docker 等自动化环境使用 dmoss-agent'
 ---
 
 # 3.16.2 dmoss-agent

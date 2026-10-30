@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.8 Code editor won’t start'
 title: 5.8 Code editor won’t start
+description: 'Troubleshoot a blank editor, failed installs, and hangs'
 ---
 
 # 5.8 Code editor won’t start

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.7 烧录'
 title: 3.7 烧录
+description: '选择板型与镜像并开始系统烧录'
 ---
 
 # 3.7 烧录

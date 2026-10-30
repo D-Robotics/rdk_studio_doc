@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.14.1 接入飞书'
 title: 3.14.1 接入飞书
+description: '将 Moss 接入企业飞书机器人并配置通道'
 ---
 
 # 3.14.1 接入飞书
@@ -15,7 +16,7 @@ title: 3.14.1 接入飞书
 
 在 *配置中心 → 消息渠道 · 飞书* 配置以下字段：
 
-![配置中心 · 消息渠道 · 飞书：通道状态、日常用法、应用凭据和连接模式配置](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/settings-feishu.png)
+![配置中心 · 消息渠道 · 飞书：通道状态、日常用法、应用凭据和连接模式配置](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/settings-feishu.png)
 
 | 字段 | 必填 | 来源 |
 |---|---|---|

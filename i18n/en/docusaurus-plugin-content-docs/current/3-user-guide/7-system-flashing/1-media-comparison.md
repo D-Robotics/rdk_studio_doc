@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.7.1 Choose a flashing method'
 title: 3.7.1 Choose a flashing method
-unlisted: true
+description: 'Compare TF card, eMMC, and S100/S600 flashing methods'
 ---
 
 # 3.7.1 Choose a flashing method
@@ -26,9 +26,9 @@ RDK Studio supports three flashing methods for different boards and scenarios. S
 
 ## TF card tips
 
-Some TF cards are not suitable as a system drive. Follow the image page or the board’s official guidance, and prefer reliable, healthy cards from trusted sources. Low‑quality TF cards often show:
+Some TF cards are not suitable as a system drive. Follow the image page or the board’s official guidance, and prefer reliable, healthy cards from trusted sources. Low-quality TF cards often show:
 
-- Fake capacity leading to failures mid‑flash
+- Fake capacity leading to failures mid-flash
 - Slow writes stretching flash time significantly
 - Frequent read/write errors after some use
 

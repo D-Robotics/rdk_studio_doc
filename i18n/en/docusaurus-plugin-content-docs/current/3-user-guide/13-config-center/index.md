@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.13 Configuration'
 title: 3.13 Configuration
+description: 'Purpose-based sections and entry points in the configuration center'
 ---
 
 # 3.13 Configuration

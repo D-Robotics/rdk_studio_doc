@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.1.3 Offline cache'
 title: 3.1.3 Offline cache
-unlisted: true
+description: 'The workbench keeps the last known state while offline and refreshes on reconnect'
 ---
 
 # 3.1.3 Offline cache

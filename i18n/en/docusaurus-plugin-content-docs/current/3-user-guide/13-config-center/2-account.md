@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.13.2 Accounts'
 title: 3.13.2 Accounts
+description: 'Check sign-in status and how accounts relate to local data'
 ---
 
 # 3.13.2 Accounts

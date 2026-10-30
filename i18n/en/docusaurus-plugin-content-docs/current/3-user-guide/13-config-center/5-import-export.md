@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.13.5 Import and export configuration'
 title: 3.13.5 Import and export configuration
+description: 'Back up and restore model configurations, including scope and steps'
 ---
 
 # 3.13.5 Import and export configuration

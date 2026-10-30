@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.14 Serial list empty'
 title: 5.14 Serial list empty
+description: 'Fix an empty serial list and serial authorization issues'
 ---
 
 # 5.14 Serial list empty

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.11.4 Create skills'
 title: 3.11.4 Create skills
+description: 'Create or import a skill and validate it on a small task'
 ---
 
 # 3.11.4 Create skills

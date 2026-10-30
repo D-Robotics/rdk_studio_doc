@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.12 Remote desktop slow or disconnected'
 title: 5.12 Remote desktop slow or disconnected
+description: 'Troubleshoot remote desktop connection, stutter, and black screen'
 ---
 
 # 5.12 Remote desktop slow or disconnected
@@ -23,7 +24,10 @@ Studio bootstraps VNC-ish pieces on demand. Typical blockers = offline board, di
 
 ### 2. Motion judder / latency
 
-Higher pixel clocks stress SoC uplinks. Mitigate via toolbar quality presets—or lower desktop resolution directly on-device.
+Remote desktop uses board and network resources. Larger frames and higher quality make stutter more likely. Two ways to reduce load:
+
+- Lower quality from the *Remote desktop* toolbar.
+- Lower the board desktop resolution.
 
 ### 3. Cursor offset
 

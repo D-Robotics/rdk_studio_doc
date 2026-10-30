@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.12 本地大模型'
 title: 3.12 本地大模型
+description: '在本机安装 Ollama、下载模型并设为主模型'
 ---
 
 # 3.12 本地大模型

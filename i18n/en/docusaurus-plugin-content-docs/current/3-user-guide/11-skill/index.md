@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.11 Plugin Center and skills'
 title: 3.11 Plugin Center and skills
+description: 'Manage plugins, MCP, and skills in the Plugin Center'
 ---
 
 # 3.11 Plugin Center and skills

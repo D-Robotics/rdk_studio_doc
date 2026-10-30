@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.17 Block studio'
 title: 3.17 Block studio
+description: 'Build programs with blocks, simulate, and run on a device'
 ---
 
 # 3.17 Block studio

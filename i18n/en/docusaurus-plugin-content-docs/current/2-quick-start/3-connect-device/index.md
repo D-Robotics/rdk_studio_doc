@@ -1,6 +1,7 @@
 ﻿---
 sidebar_label: '2.3 Connect a device'
 title: 2.3 Connect a device
+description: 'Choose SSH, direct Type-C, or serial log to connect a device'
 ---
 
 # 2.3 Connect a device
@@ -9,7 +10,7 @@ Add-device flows use three entry points: **SSH device**, **RDK Type-C direct**, 
 
 Only SSH and Type-C save a device to the list; serial opens a local debug terminal only and is not stored as a device.
 
-![Add device dialog: SSH device, RDK Type-C direct, and local serial log—the three entry points](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/add-device-dialog.png)
+![Add device dialog: SSH device, RDK Type-C direct, and local serial log—the three entry points](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/add-device-dialog.png)
 
 ## Compare the three
 

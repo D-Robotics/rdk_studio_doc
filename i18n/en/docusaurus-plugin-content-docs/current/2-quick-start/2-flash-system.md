@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.2 Flash a system image'
 title: 2.2 Flash a system image
+description: 'Choose an image and flash a system onto the board'
 ---
 
 # 2.2 Flash a system image

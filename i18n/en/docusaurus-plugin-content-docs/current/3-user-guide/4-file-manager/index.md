@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.4 Files'
 title: 3.4 Files
+description: 'Entries for workspace files and device file management'
 ---
 
 # 3.4 Files

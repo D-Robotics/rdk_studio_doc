@@ -1,13 +1,14 @@
 ﻿---
 sidebar_label: '3.16.1 rdkstudio'
 title: 3.16.1 rdkstudio
+description: 'Use rdkstudio to list devices, run commands, or ask Moss'
 ---
 
 # 3.16.1 rdkstudio
 
 `rdkstudio` is RDK Studio’s command-line entry point. After enabling it you can list devices, run short commands, browse remote files, or hand a question to Moss from the terminal.
 
-![rdkstudio cheat sheet: interactive mode, one-shot prompt, devices, exec, files](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/cli-rdkstudio-help.png)
+![rdkstudio cheat sheet: interactive mode, one-shot prompt, devices, exec, files](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/cli-rdkstudio-help.png)
 
 ## When to use it
 

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '1.1 Product overview'
 title: 1.1 Product overview
+description: 'Positioning, core capabilities, and use cases for RDK Studio'
 ---
 
 # 1.1 Product overview

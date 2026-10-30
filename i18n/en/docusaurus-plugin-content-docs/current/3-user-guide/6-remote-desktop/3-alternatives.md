@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.6.3 Other remote approaches'
 title: 3.6.3 Other remote approaches
-unlisted: true
+description: 'Compare the built-in remote desktop with other remote options'
 ---
 
 # 3.6.3 Other remote approaches
@@ -21,13 +21,13 @@ Bundled viewer covers most robotics GUI needs. Pursue natives only if chasing lo
 
 ### Studio remote desktop (default)
 
-rviz, camera feeds, generic GUI validation — built‑in path wins.
+rviz, camera feeds, generic GUI validation — built-in path wins.
 
 ### Native VNC
 
-Long sessions where micro‑stutter matters. Examples:
+Long sessions where micro-stutter matters. Examples:
 
-- macOS (Apple Silicon): built‑in *Screen Sharing*
+- macOS (Apple Silicon): built-in *Screen Sharing*
 - Windows: RealVNC Viewer, TigerVNC Viewer
 
 You own networking + hardening — advanced users.
@@ -40,7 +40,7 @@ Only if image plays nice and you want RDP semantics:
 - Configure users + session type
 - Client: Windows *Remote Desktop Connection*; macOS (Apple Silicon) Microsoft Remote Desktop
 
-ARM xrdp hit‑or‑miss — pilot before fleet roll.
+ARM xrdp hit-or-miss — pilot before fleet roll.
 
 ### SSH X11 forwarding
 

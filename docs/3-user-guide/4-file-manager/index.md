@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.4 文件'
 title: 3.4 文件
+description: '任务工作区文件与设备文件管理的入口'
 ---
 
 # 3.4 文件

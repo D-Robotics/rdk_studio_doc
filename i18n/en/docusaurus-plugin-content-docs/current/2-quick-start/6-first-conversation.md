@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.6 First conversation'
 title: 2.6 First conversation
+description: 'Start a first task by choosing project, engine, and work mode'
 ---
 
 # 2.6 First conversation

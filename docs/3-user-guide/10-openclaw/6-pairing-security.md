@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.10.6 配对和确认'
 title: 3.10.6 配对和确认
+description: 'OpenClaw 的连接授权、配对与安全注意事项'
 ---
 
 # 3.10.6 配对和确认

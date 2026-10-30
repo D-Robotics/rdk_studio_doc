@@ -1,9 +1,10 @@
 ---
-sidebar_label: '1.4 Supported Hardware'
-title: 1.4 Supported Hardware
+sidebar_label: '1.4 Supported hardware'
+title: 1.4 Supported hardware
+description: 'Supported RDK boards, general SSH hosts, and flashing methods'
 ---
 
-# 1.4 Supported Hardware
+# 1.4 Supported hardware
 
 RDK Studio offers the most comprehensive support for the RDK series development boards, while also allowing SSH access to standard Linux hosts, Jetson, Raspberry Pi, Rockchip, and other devices.
 
@@ -13,11 +14,11 @@ You can think of the RDK as the primary development board and other Linux hosts 
 
 Onboarding includes RDK S600. Flash its system with the S600-specific manual XBurn flow, rather than TF-card images or the in-app S100 writer. Once booted, connect over SSH. Capabilities depend on the current page and detected device. See [S100 and S600 flashing](../3-user-guide/7-system-flashing/4-s100-xburn.md).
 
-## RDK Device Support
+## RDK device support
 
 | Item | RDK X3 | RDK X5 | RDK S100 / S100P |
 |---|---|---|---|
-| **Flashing Method** | TF card flashing | TF card flashing; models with eMMC can use the eMMC process | S100 flashing process; the page will guide you to prepare xburn |
+| **Flashing Method** | TF card flashing | TF card flashing; models with eMMC can use the eMMC process | S100 flashing process; the page will guide you to prepare XBurn |
 | **Type-C Direct Connection** | Not supported | Supported | Supported |
 | **OpenClaw Deployment** | Supported, requires SSH access to the device | Supported, requires SSH or Type-C access to the device | Supported, requires the device to be online with network access |
 
@@ -29,7 +30,7 @@ For hardware specifications such as memory, storage, and interfaces, please refe
 - [RDK X5](https://developer.d-robotics.cc/rdkx5)
 - [RDK S100](https://developer.d-robotics.cc/rdks100)
 
-## General SSH Devices
+## General SSH devices
 
 The **SSH Device** option in "Add Device" is a general entry point, not limited to RDK. The following devices can be used as remote hosts:
 
@@ -44,7 +45,7 @@ RDK Studio distinguishes between "RDK development boards" and "Linux hosts" base
 
 Some features are only displayed on RDK or board-type devices, such as Wi-Fi configuration, Type-C direct connection, BPU temperature, and the OpenClaw installation entry.
 
-## Pay Attention to hbm When Running On-Device AI Models
+## Pay attention to hbm when running on-device AI models
 
 hbm is the model file format used by the RDK's on-board BPU, typically with a `.hbm` file extension. It is only relevant to **on-device AI inference** and is not prerequisite knowledge for connecting devices or using RDK Studio.
 
@@ -60,7 +61,7 @@ If you encounter issues like `hbm version mismatch`, `model incompatible`, or mo
 
 For detailed troubleshooting, see [5.5 Cannot load hbm model](../5-faq/5-hbm-not-found.md).
 
-## Recommendations for Choosing Connection Methods
+## Recommendations for choosing connection methods
 
 | Scenario | Recommended Entry |
 |---|---|

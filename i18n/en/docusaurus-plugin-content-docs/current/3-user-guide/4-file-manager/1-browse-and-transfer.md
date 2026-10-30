@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.4.1 Browse and transfer files'
 title: 3.4.1 Browse and transfer files
+description: 'Browse local or device directories and transfer files'
 ---
 
 # 3.4.1 Browse and transfer files

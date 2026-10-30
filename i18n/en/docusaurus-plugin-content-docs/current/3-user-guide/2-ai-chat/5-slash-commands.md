@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.2.5 Slash commands'
 title: 3.2.5 Slash commands
+description: 'Use the / menu and shortcuts to control tasks and settings'
 ---
 
 # 3.2.5 Slash commands

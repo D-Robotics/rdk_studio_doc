@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.15 Monitoring and operations'
 title: 3.15 Monitoring and operations
+description: 'Entries for tasks, processes, and scheduled jobs in the run overview'
 ---
 
 # 3.15 Monitoring and operations

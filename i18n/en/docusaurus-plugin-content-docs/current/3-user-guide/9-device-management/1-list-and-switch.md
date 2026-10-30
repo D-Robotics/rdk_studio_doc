@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.9.1 Switch active device'
 title: 3.9.1 Switch active device
+description: 'Read device details and switch the active device in the list'
 ---
 
 # 3.9.1 Switch active device

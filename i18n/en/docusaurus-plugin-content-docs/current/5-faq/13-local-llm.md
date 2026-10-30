@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.13 Local models / Ollama issues'
 title: 5.13 Local models / Ollama issues
+description: 'Troubleshoot the local Ollama environment, service, and tool calling'
 ---
 
 # 5.13 Local models / Ollama issues

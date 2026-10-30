@@ -1,11 +1,12 @@
 ﻿---
 sidebar_label: '3.9 Device management'
 title: 3.9 Device management
+description: 'Multi-device management, add and remove, and capability detection'
 ---
 
 # 3.9 Device management
 
-![Device connection settings: connection settings, saved devices, and add-device entry](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/settings-device-connection.png)
+![Device connection settings: connection settings, saved devices, and add-device entry](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/settings-device-connection.png)
 
 Device management is where you work with multiple devices: online status, active device switching, adding/removing devices, notes and connection details. Terminal, Files, IDE, Remote Desktop, and AI Dock track the selected device after you switch.
 

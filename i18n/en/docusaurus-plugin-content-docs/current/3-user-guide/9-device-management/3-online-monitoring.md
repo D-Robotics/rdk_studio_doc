@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.9.3 View online status'
 title: 3.9.3 View online status
-unlisted: true
+description: 'Automatic online status checks and handling for stale states'
 ---
 
 # 3.9.3 View online status

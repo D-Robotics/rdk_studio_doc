@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.16.3 自动化示例'
 title: 3.16.3 自动化示例
+description: 'CI、定时任务与日志分析的 CLI 示例'
 ---
 
 # 3.16.3 自动化示例

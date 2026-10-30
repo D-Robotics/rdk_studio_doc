@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.13.3 Configure AI models'
 title: 3.13.3 Configure AI models
+description: 'Configure the runtime engine, model services, and action confirmations'
 ---
 
 # 3.13.3 Configure AI models

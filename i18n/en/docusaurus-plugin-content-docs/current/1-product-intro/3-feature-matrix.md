@@ -1,6 +1,7 @@
 ---
 sidebar_label: '1.3 Feature entries'
 title: 1.3 Feature entries
+description: 'Common feature entries by navigation area, including deployment differences'
 ---
 
 # 1.3 Feature entries

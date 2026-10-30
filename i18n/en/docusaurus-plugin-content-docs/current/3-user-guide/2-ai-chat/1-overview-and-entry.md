@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.2.1 Open AI Dock'
 title: 3.2.1 Open AI Dock
+description: 'How to open AI Dock and what to check before sending'
 ---
 
 # 3.2.1 Open AI Dock

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.10.2 部署和卸载'
 title: 3.10.2 部署和卸载
+description: '一键部署、卸载或重新部署板端 OpenClaw'
 ---
 
 # 3.10.2 部署和卸载

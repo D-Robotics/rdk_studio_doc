@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.7.4 S100 and S600 flashing'
 title: 3.7.4 S100 and S600 flashing
+description: 'Flash S100 and S600 firmware using the XBurn flow'
 ---
 
 # 3.7.4 S100 and S600 flashing
