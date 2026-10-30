@@ -1,6 +1,7 @@
 ---
 sidebar_label: '4.1 Share skills'
 title: 4.1 Share skills
+description: 'Share skills with local Moss or deploy them to OpenClaw on a device'
 ---
 
 # 4.1 Share skills

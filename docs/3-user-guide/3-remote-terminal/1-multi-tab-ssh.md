@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.3.1 打开 SSH 终端'
 title: 3.3.1 打开 SSH 终端
+description: '打开面向设备的 SSH 终端并管理多个标签'
 ---
 
 # 3.3.1 打开 SSH 终端

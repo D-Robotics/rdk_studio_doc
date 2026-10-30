@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.3 Type-C 直连失败'
 title: 5.3 Type-C 直连失败
+description: '处理 Type-C 直连识别与认证失败'
 ---
 
 # 5.3 Type-C 直连失败

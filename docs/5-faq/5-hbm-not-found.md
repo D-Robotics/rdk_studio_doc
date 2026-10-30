@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.5 hbm 模型无法加载'
 title: 5.5 hbm 模型无法加载
+description: '排查 hbm 模型无法加载与版本不匹配'
 ---
 
 # 5.5 hbm 模型无法加载

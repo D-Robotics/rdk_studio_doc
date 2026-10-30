@@ -1,6 +1,7 @@
 ---
 sidebar_label: '1.6 AI Dock examples'
 title: 1.6 AI Dock examples
+description: 'Example tasks showing AI Dock usage from goal to verification'
 ---
 
 # 1.6 AI Dock examples

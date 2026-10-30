@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.2.2 Device operations and results'
 title: 3.2.2 Device operations and results
+description: 'Confirm targets, permissions, and results for device tasks'
 ---
 
 # 3.2.2 Device operations and results

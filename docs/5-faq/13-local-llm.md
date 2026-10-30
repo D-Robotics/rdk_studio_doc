@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.13 本地大模型 / Ollama 问题'
 title: 5.13 本地大模型 / Ollama 问题
+description: '排查本地 Ollama 环境、服务与工具调用'
 ---
 
 # 5.13 本地大模型 / Ollama 问题

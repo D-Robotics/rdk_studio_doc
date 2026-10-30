@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.11.6 Sync to device'
 title: 3.11.6 Sync to device
-unlisted: true
+description: 'Sync local Moss skills to the on-device OpenClaw workspace'
 ---
 
 # 3.11.6 Sync to device

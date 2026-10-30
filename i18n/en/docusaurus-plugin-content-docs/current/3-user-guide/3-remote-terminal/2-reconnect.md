@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.3.2 Reconnect after disconnect'
 title: 3.3.2 Reconnect after disconnect
-unlisted: true
+description: 'Automatic reconnect and what output recovers after a drop'
 ---
 
 # 3.3.2 Reconnect after disconnect

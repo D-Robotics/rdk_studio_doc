@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.2.3 Conversation history'
 title: 3.2.3 Conversation history
+description: 'Find, resume, and manage past conversations'
 ---
 
 # 3.2.3 Conversation history

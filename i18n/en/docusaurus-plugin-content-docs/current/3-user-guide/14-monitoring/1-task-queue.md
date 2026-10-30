@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.15.1 Task progress'
 title: 3.15.1 Task progress
+description: 'Track current tasks, background runs, and background processes'
 ---
 
 # 3.15.1 Task progress

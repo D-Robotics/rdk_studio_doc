@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.13.4 Device connection defaults'
 title: 3.13.4 Device connection defaults
-unlisted: true
+description: 'Adjust global device connection defaults such as timeouts'
 ---
 
 # 3.13.4 Device connection defaults

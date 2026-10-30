@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.10.1 Decide whether you need OpenClaw'
 title: 3.10.1 Decide whether you need OpenClaw
-unlisted: true
+description: 'Decide when OpenClaw is needed and when Moss + SSH is enough'
 ---
 
 # 3.10.1 Decide whether you need OpenClaw

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.4.2 Edit files'
 title: 3.4.2 Edit files
+description: 'Edit and save small text files directly in the file page'
 ---
 
 # 3.4.2 Edit files

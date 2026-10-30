@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.3.1 Open SSH terminals'
 title: 3.3.1 Open SSH terminals
+description: 'Open an SSH terminal for a device and manage multiple tabs'
 ---
 
 # 3.3.1 Open SSH terminals

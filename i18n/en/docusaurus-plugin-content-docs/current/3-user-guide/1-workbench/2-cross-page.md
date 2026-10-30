@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.1.2 Working across pages'
 title: 3.1.2 Working across pages
+description: 'How the work-location bar links to file and terminal workspaces'
 ---
 
 # 3.1.2 Working across pages

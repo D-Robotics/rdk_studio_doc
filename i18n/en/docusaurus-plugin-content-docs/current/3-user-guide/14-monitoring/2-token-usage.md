@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.15.2 Token usage'
 title: 3.15.2 Token usage
+description: 'Understand token accounting and usage fields across engines'
 ---
 
 # 3.15.2 Token usage

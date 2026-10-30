@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.10.2 Deploy and uninstall'
 title: 3.10.2 Deploy and uninstall
+description: 'Deploy, uninstall, or redeploy OpenClaw on the board'
 ---
 
 # 3.10.2 Deploy and uninstall

@@ -1,13 +1,14 @@
 ---
 sidebar_label: '3.10 OpenClaw'
 title: 3.10 OpenClaw
+description: '板端 Agent 的能力、部署入口与适用场景'
 ---
 
 # 3.10 OpenClaw
 
 OpenClaw 是运行在 RDK 设备上的板端 Agent。需要让设备侧也具备 AI 助手能力时，再打开 **AI 能力 → 板端 Agent** 配置它。
 
-![板端 Agent 页面：连接 RDK X5 后查看部署状态、模型配置和快捷操作](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/openclaw-connected.png)
+![板端 Agent 页面：连接 RDK X5 后查看部署状态、模型配置和快捷操作](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/openclaw-connected.png)
 
 ## 使用顺序
 

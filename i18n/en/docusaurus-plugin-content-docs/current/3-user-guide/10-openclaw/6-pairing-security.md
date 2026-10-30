@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.10.6 Pairing and confirmations'
 title: 3.10.6 Pairing and confirmations
-unlisted: true
+description: 'Connection authorization, pairing, and security notes for OpenClaw'
 ---
 
 # 3.10.6 Pairing and confirmations

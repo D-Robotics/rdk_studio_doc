@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.6 OpenClaw 安装失败'
 title: 5.6 OpenClaw 安装失败
+description: '处理 OpenClaw 安装失败与模型不可达'
 ---
 
 # 5.6 OpenClaw 安装失败

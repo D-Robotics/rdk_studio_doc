@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.1 Agent does not respond'
 title: 5.1 Agent does not respond
+description: 'Diagnose no-response issues across engine, model, and device'
 ---
 
 # 5.1 Agent does not respond

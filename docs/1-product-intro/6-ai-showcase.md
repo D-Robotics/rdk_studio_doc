@@ -1,6 +1,7 @@
 ---
 sidebar_label: '1.6 AI Dock 实战演示'
 title: 1.6 AI Dock 实战演示
+description: '用示例任务演示 AI Dock 从目标到验证的用法'
 ---
 
 # 1.6 AI Dock 实战演示
@@ -33,7 +34,7 @@ title: 1.6 AI Dock 实战演示
 把本次实际跑通的过程整理为文档草稿，包含环境、步骤、验证结果、失败记录与未验证事项。没有测到的性能数据不要编造，不要直接发布。
 ```
 
-检查代码、命令与数据来源后保存。需要技能复用时，到 [扩展中心](../3-user-guide/11-skill/index.md)整理技能；需要图形化编程时，尝试 [积木工作室](../3-user-guide/17-block-studio/index.md)。
+检查代码、命令与数据来源后保存。需要技能复用时，到 [扩展中心](../3-user-guide/11-skill/index.md) 整理技能；需要图形化编程时，尝试 [积木工作室](../3-user-guide/17-block-studio/index.md)。
 
 ## 查看与分享
 

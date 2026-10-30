@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.9.2 Automatic device detection'
 title: 3.9.2 Automatic device detection
-unlisted: true
+description: 'Automatic hardware and system detection when adding a device'
 ---
 
 # 3.9.2 Automatic device detection

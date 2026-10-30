@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.2.1 打开 AI Dock'
 title: 3.2.1 打开 AI Dock
+description: 'AI Dock 的打开方式与发送前检查项'
 ---
 
 # 3.2.1 打开 AI Dock

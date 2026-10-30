@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.2.4 Upload files and screenshots'
 title: 3.2.4 Upload files and screenshots
+description: 'Upload files, images, and screenshots as task context'
 ---
 
 # 3.2.4 Upload files and screenshots

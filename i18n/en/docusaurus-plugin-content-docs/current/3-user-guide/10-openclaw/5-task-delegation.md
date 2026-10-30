@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.10.5 Handle on-board tasks'
 title: 3.10.5 Handle on-board tasks
-unlisted: true
+description: 'Hand tasks that fit the board over to OpenClaw'
 ---
 
 # 3.10.5 Handle on-board tasks
@@ -26,7 +26,12 @@ High-risk actions still require your confirmation.
 
 ## Task output
 
-After OpenClaw runs, key outcomes appear in Studio—inspection summaries, logs, failure reasons, or the next confirmation step.
+After OpenClaw runs, key outcomes appear in Studio. For example:
+
+- Inspection summaries
+- Execution logs
+- Failure reasons
+- Next steps that need your confirmation
 
 If the device is offline, Studio guides you to restore connection from the page state.
 

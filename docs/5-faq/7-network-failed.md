@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.7 Wi-Fi 连接失败'
 title: 5.7 Wi-Fi 连接失败
+description: '排查 Wi-Fi 连接失败与地址变化'
 ---
 
 # 5.7 Wi-Fi 连接失败

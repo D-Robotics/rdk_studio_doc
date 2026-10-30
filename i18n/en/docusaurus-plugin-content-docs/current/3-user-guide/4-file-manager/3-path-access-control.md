@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.4.3 Paths and permissions'
 title: 3.4.3 Paths and permissions
+description: 'Path authorization, system directory limits, and permission boundaries'
 ---
 
 # 3.4.3 Paths and permissions

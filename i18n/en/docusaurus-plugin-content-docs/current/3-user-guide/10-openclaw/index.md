@@ -1,13 +1,14 @@
 ﻿---
 sidebar_label: '3.10 OpenClaw'
 title: 3.10 OpenClaw
+description: 'On-device Agent capabilities, deployment entry, and use cases'
 ---
 
 # 3.10 OpenClaw
 
 OpenClaw is an on-board agent that runs on RDK hardware. Enable AI assistant capabilities on the device by configuring it under **AI Capabilities → On-device Agent**.
 
-![On-device Agent page: after connecting RDK X5, view deployment status, model settings, and quick actions](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/openclaw-connected.png)
+![On-device Agent page: after connecting RDK X5, view deployment status, model settings, and quick actions](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/openclaw-connected.png)
 
 ## Suggested workflow
 

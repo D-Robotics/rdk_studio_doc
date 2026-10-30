@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.2 AI Dock'
 title: 3.2 AI Dock
+description: 'What the AI Dock input area contains and what to verify before sending'
 ---
 
 # 3.2 AI Dock

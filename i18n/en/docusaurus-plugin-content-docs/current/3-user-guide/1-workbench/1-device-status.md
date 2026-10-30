@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.1.1 Device state and diagnostics'
 title: 3.1.1 Device state and diagnostics
+description: 'Verify the device target and review diagnostics in the workbench'
 ---
 
 # 3.1.1 Device state and diagnostics

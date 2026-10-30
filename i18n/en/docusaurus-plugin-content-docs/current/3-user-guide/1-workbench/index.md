@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.1 Workbench'
 title: 3.1 Workbench
+description: 'Start tasks, bind projects, and open workspaces from the workbench'
 ---
 
 # 3.1 Workbench

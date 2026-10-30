@@ -1,6 +1,7 @@
 ---
 sidebar_label: '4.1 技能分享'
 title: 4.1 技能分享
+description: '将技能分享给本机 Moss 或部署到板端 OpenClaw'
 ---
 
 # 4.1 技能分享

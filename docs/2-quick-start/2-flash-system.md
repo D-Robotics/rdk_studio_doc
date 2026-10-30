@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.2 烧录系统镜像'
 title: 2.2 烧录系统镜像
+description: '为开发板选择镜像并完成系统烧录'
 ---
 
 # 2.2 烧录系统镜像
@@ -30,4 +31,4 @@ S100 的固件可选择受支持的压缩包或文件夹；S600 进入配套工�
 
 支持 Web 烧录桥的页面由本机桥接程序读取镜像和写盘，需要先按指引启动并确认桥在线。桥读取的是本机绝对路径，浏览器不会直接写盘。没有桥接能力时使用桌面客户端。
 
-详见 [烧录手册](../3-user-guide/7-system-flashing/index.md)与[S100 / S600 流程](../3-user-guide/7-system-flashing/4-s100-xburn.md)。
+详见 [烧录手册](../3-user-guide/7-system-flashing/index.md) 与 [S100 / S600 流程](../3-user-guide/7-system-flashing/4-s100-xburn.md)。

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.15.2 查看 Token 用量'
 title: 3.15.2 查看 Token 用量
+description: '理解 Token 计量与不同引擎的用量字段'
 ---
 
 # 3.15.2 查看 Token 用量

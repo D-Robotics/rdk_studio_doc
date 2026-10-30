@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.11.1 How to author SKILL.md'
 title: 3.11.1 How to author SKILL.md
-unlisted: true
+description: 'Frontmatter fields and body steps for SKILL.md'
 ---
 
 # 3.11.1 How to author SKILL.md

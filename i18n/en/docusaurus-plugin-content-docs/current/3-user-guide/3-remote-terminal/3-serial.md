@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.3.3 View serial logs'
 title: 3.3.3 View serial logs
+description: 'View boot logs over serial in the terminal page'
 ---
 
 # 3.3.3 View serial logs

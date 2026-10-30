@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.4 USB 摄像头无图像'
 title: 5.4 USB 摄像头无图像
+description: '排查 USB 摄像头无图像与格式不支持'
 ---
 
 # 5.4 USB 摄像头无图像

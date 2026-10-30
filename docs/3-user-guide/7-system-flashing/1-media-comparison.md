@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.7.1 选择烧录方式'
 title: 3.7.1 选择烧录方式
+description: '对比 TF 卡、eMMC 与 S100/S600 烧录方式'
 ---
 
 # 3.7.1 选择烧录方式

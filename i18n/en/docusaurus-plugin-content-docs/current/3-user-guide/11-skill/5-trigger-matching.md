@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.11.5 Select and trigger skills'
 title: 3.11.5 Select and trigger skills
+description: 'How skills are selected, triggered, and actually loaded'
 ---
 
 # 3.11.5 Select and trigger skills

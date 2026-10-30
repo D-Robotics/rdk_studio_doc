@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.11.2 Built-in skills'
 title: 3.11.2 Built-in skills
+description: 'Browse the bundled official skills and device knowledge'
 ---
 
 # 3.11.2 Built-in skills

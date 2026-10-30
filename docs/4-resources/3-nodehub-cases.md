@@ -1,6 +1,7 @@
 ---
 sidebar_label: '4.3 NodeHub 案例'
 title: 4.3 NodeHub 案例
+description: 'NodeHub 案例平台与技能市场的区别'
 ---
 
 # 4.3 NodeHub 案例

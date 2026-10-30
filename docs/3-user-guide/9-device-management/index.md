@@ -1,11 +1,12 @@
 ---
 sidebar_label: '3.9 设备管理'
 title: 3.9 设备管理
+description: '多设备管理、添加移除与能力识别'
 ---
 
 # 3.9 设备管理
 
-![设备连接设置页：查看连接设置、已保存设备和添加设备入口](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/settings-device-connection.png)
+![设备连接设置页：查看连接设置、已保存设备和添加设备入口](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/settings-device-connection.png)
 
 设备管理是管理多台设备的地方。你可以在这里查看设备是否在线、切换当前设备、添加或移除设备、修改备注和连接信息。切换设备后，终端、文件、代码编辑器、远程桌面和 AI Dock 会跟着切换。
 

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.6 发起首次对话'
 title: 2.6 发起首次对话
+description: '在工作台选择项目、引擎与工作方式后发送第一条任务'
 ---
 
 # 2.6 发起首次对话
@@ -41,4 +42,4 @@ title: 2.6 发起首次对话
 
 需要换模型时进入 **设置 → AI 模型与服务**。需要换运行引擎时，在设置修改新任务默认值，再新建任务；旧任务继续保留原引擎。
 
-继续了解 [工作台](../3-user-guide/1-workbench/index.md)、[AI Dock](../3-user-guide/2-ai-chat/index.md)和[历史会话](../3-user-guide/2-ai-chat/3-multi-session.md)。
+继续了解 [工作台](../3-user-guide/1-workbench/index.md)、[AI Dock](../3-user-guide/2-ai-chat/index.md) 和 [历史会话](../3-user-guide/2-ai-chat/3-multi-session.md)。

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.10 Unexpected token usage'
 title: 5.10 Unexpected token usage
+description: 'Find tasks and configurations behind unexpectedly high token usage'
 ---
 
 # 5.10 Unexpected token usage

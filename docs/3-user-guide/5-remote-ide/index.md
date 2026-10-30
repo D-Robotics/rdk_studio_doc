@@ -1,11 +1,12 @@
 ---
 sidebar_label: '3.5 代码编辑器'
 title: 3.5 代码编辑器
+description: '在板端项目中使用代码编辑器'
 ---
 
 # 3.5 代码编辑器
 
-![代码编辑器页面：连接 RDK X5 后在 Studio 内编辑板端文件](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/remote-ide.png)
+![代码编辑器页面：连接 RDK X5 后在 Studio 内编辑板端文件](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/remote-ide.png)
 
 连接设备后，代码编辑器会在主区域打开板端项目。桌面客户端还可以把编辑器独立成悬浮窗口，方便一边看文档或 Moss，一边改代码。
 

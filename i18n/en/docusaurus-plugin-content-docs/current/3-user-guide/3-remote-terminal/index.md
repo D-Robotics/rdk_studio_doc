@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.3 Terminal'
 title: 3.3 Terminal
+description: 'Switch between local and device terminals and verify directories'
 ---
 
 # 3.3 Terminal

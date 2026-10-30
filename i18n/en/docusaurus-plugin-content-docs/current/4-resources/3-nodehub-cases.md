@@ -1,11 +1,12 @@
 ---
 sidebar_label: '4.3 NodeHub cases'
 title: 4.3 NodeHub cases
+description: 'How the NodeHub case platform differs from the skill marketplace'
 ---
 
 # 4.3 NodeHub cases
 
-NodeHub is the D‑Robotics official case hub for full projects, sample code, and run instructions.
+NodeHub is the D-Robotics official case hub for full projects, sample code, and run instructions.
 
 The skill marketplace / SkillHub focuses on a single `SKILL.md`; NodeHub focuses on downloadable, runnable project cases.
 

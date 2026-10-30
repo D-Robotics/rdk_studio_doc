@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.13.1 Understand settings'
 title: 3.13.1 Understand settings
+description: 'Find the right settings section for each problem'
 ---
 
 # 3.13.1 Understand settings

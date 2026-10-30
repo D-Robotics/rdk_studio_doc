@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.5 Cannot load hbm model'
 title: 5.5 Cannot load hbm model
+description: 'Troubleshoot hbm model loading and version mismatches'
 ---
 
 # 5.5 Cannot load hbm model
@@ -104,6 +105,6 @@ So **relative hbm lookups are flaky**.
 | Practice | Why |
 |---|---|
 | Ban relative paths in reviewed launches | Keeps onboarding predictable |
-| Keep core models under `/opt/tros/humble/lib/<pkg>/config/` | ROS‑standard placement |
+| Keep core models under `/opt/tros/humble/lib/<pkg>/config/` | ROS-standard placement |
 | Custom weights in writable areas | e.g. `/userdata/models/` survives many SD swaps |
 | Per-board binaries in CI | Produce one hbm per SKU |

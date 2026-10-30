@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.5 接入 AI 模型'
 title: 2.5 接入 AI 模型
+description: '在设置中新增模型配置并测试连通性'
 ---
 
 # 2.5 接入 AI 模型

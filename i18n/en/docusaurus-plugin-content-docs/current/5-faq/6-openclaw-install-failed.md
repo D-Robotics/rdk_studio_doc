@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.6 OpenClaw install failed'
 title: 5.6 OpenClaw install failed
+description: 'Handle OpenClaw installation failures and unreachable models'
 ---
 
 # 5.6 OpenClaw install failed

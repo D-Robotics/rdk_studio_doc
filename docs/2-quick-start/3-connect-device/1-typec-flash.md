@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.3.1 Type-C 直连'
 title: 2.3.1 Type-C 直连
+description: '通过 Type-C 直连识别并添加 RDK 设备'
 ---
 
 # 2.3.1 Type-C 直连

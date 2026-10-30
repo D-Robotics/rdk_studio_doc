@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.2 AI Dock'
 title: 3.2 AI Dock
+description: 'AI Dock 输入区的组成与发送前核对项'
 ---
 
 # 3.2 AI Dock

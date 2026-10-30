@@ -1,6 +1,7 @@
 ---
 sidebar_label: '1.2 Core architecture'
 title: 1.2 Core architecture
+description: 'How the client, workbench Agent, and on-device Agent work together'
 ---
 
 # 1.2 Core architecture

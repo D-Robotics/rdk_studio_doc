@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.5.1 Open the code editor'
 title: 3.5.1 Open the code editor
-unlisted: true
+description: 'Open the code editor for the first time and install its board-side environment'
 ---
 
 # 3.5.1 Open the code editor
@@ -27,4 +27,4 @@ Rarely needed manually. Retry per page guidance after:
 
 ## Signs of success
 
-You should see a VS Code‑like layout: device tree, open buffers, integrated terminal. Persistent blank page or install errors — copy the UI text to Moss.
+You should see a VS Code-like layout: device tree, open buffers, integrated terminal. Persistent blank page or install errors — copy the UI text to Moss.

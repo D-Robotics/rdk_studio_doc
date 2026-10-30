@@ -1,6 +1,7 @@
 ---
 sidebar_label: '1.5 Version notes'
 title: 1.5 Version notes
+description: 'The 1.5.0 feature baseline, upgrade paths, and manual checks'
 ---
 
 # 1.5 Version notes

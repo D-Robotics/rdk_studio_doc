@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.7 Flashing'
 title: 3.7 Flashing
+description: 'Choose a board and image, then start flashing'
 ---
 
 # 3.7 Flashing

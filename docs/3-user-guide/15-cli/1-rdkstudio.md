@@ -1,13 +1,14 @@
 ---
 sidebar_label: '3.16.1 rdkstudio'
 title: 3.16.1 rdkstudio
+description: '用 rdkstudio 查看设备、执行命令或向 Moss 提问'
 ---
 
 # 3.16.1 rdkstudio
 
 `rdkstudio` 是 RDK Studio 的命令行工具。启用后，你可以在终端里查看设备、执行简单命令、查看文件，或把一段问题交给 Moss 分析。
 
-![rdkstudio 常用命令示意：进入交互模式、单次提问、查看设备、执行命令、查看文件](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/cli-rdkstudio-help.png)
+![rdkstudio 常用命令示意：进入交互模式、单次提问、查看设备、执行命令、查看文件](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/cli-rdkstudio-help.png)
 
 ## 什么时候用
 

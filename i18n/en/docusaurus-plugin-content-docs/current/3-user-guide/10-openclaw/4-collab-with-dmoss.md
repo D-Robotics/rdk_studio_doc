@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.10.4 Work with Moss'
 title: 3.10.4 Work with Moss
-unlisted: true
+description: 'How desktop Moss and on-device OpenClaw split and hand off work'
 ---
 
 # 3.10.4 Work with Moss

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.12 Local models'
 title: 3.12 Local models
+description: 'Install Ollama, download models, and set the primary model locally'
 ---
 
 # 3.12 Local models

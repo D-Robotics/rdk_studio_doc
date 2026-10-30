@@ -1,11 +1,12 @@
 ﻿---
 sidebar_label: '3.7.2 TF card flashing'
 title: 3.7.2 TF card flashing
+description: 'Create a TF card system disk for RDK X3 / X5'
 ---
 
 # 3.7.2 TF card flashing
 
-![Flashing wizard: choose an official image or a local image file](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/flash-wizard-select-image.png)
+![Flashing wizard: choose an official image or a local image file](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/flash-wizard-select-image.png)
 
 TF card flashing is the most common way to install the system on RDK X3 and RDK X5. You only need a TF card and a reader—in RDK Studio pick the board type, image, target TF card, then start writing.
 
@@ -26,7 +27,7 @@ Flashing erases whatever was on that TF card. Before you start, make sure you se
 The flashing page may offer “stable mode” and “fast mode”:
 
 - **Stable mode**: broader compatibility—prefer this by default.
-- **Fast mode**: better for higher‑quality fast TF cards.
+- **Fast mode**: better for higher-quality fast TF cards.
 
 If you are unsure about card quality, use stable mode.
 
@@ -55,6 +56,6 @@ If your team provides a custom image, upload the file in the image step. The res
 |---|---|
 | TF card not detected | Try another reader or USB port; the card may be faulty |
 | Write or verify failed | Card may have bad blocks—format and retry or replace the card |
-| Board won’t boot after flash | Image/board mismatch—re‑flash with an officially matched build |
+| Board won’t boot after flash | Image/board mismatch—re-flash with an officially matched build |
 
 If it still fails, copy the flashing page error message to Moss so it can suggest next steps.

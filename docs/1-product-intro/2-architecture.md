@@ -1,6 +1,7 @@
 ---
 sidebar_label: '1.2 核心架构'
 title: 1.2 核心架构
+description: '客户端、工作台 Agent 与板端 Agent 的协作关系'
 ---
 
 # 1.2 核心架构

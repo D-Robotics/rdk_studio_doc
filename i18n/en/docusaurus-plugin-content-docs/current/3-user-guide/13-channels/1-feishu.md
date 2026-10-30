@@ -1,6 +1,7 @@
 ﻿---
 sidebar_label: '3.14.1 Connect Feishu'
 title: 3.14.1 Connect Feishu
+description: 'Connect Moss to an enterprise Feishu bot and configure the channel'
 ---
 
 # 3.14.1 Connect Feishu
@@ -15,7 +16,7 @@ The Feishu channel connects Moss to an enterprise Feishu bot. Team members can:
 
 In *Settings center → Message channels · Feishu*, set:
 
-![Settings center · Message channels · Feishu: channel status, everyday usage, app credentials, and connection mode](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/settings-feishu.png)
+![Settings center · Message channels · Feishu: channel status, everyday usage, app credentials, and connection mode](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/settings-feishu.png)
 
 | Field | Required | Where to get it |
 |---|---|---|
@@ -67,4 +68,4 @@ The Feishu bot capabilities are nearly the same as AI Dock:
 - Commands: “Restart ROS node camera_publisher”
 - Use loaded related skills
 
-For high‑risk commands, file writes, or tasks that might change device state, the bot will ask you to confirm again in Feishu. Because Feishu is external, confirmation is stricter than inside Studio.
+For high-risk commands, file writes, or tasks that might change device state, the bot will ask you to confirm again in Feishu. Because Feishu is external, confirmation is stricter than inside Studio.

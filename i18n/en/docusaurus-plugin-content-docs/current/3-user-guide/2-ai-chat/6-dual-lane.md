@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.2.6 Runtime and models'
 title: 3.2.6 Runtime and models
+description: 'Choose the task engine, work mode, and model configuration'
 ---
 
 # 3.2.6 Runtime and models

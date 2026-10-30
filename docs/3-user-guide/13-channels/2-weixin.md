@@ -1,11 +1,12 @@
 ---
 sidebar_label: '3.14.2 接入微信'
 title: 3.14.2 接入微信
+description: '通过个人微信账号绑定并接入 Moss'
 ---
 
 # 3.14.2 接入微信
 
-![配置中心 · 微信：扫码绑定个人微信账号并管理通道状态](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/settings-weixin.png)
+![配置中心 · 微信：扫码绑定个人微信账号并管理通道状态](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/settings-weixin.png)
 
 微信通道通过绑定你的微信个人账号接入 Moss。这里绑定的是**个人微信账号**，不是企业微信。绑定后，你可以在微信中给机器人发消息、查询板端状态或触发已配置的任务。
 

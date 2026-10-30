@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.3 接入设备'
 title: 2.3 接入设备
+description: '选择 SSH、Type-C 直连或串口日志接入设备'
 ---
 
 # 2.3 接入设备
@@ -9,7 +10,7 @@ title: 2.3 接入设备
 
 只有 SSH 与 Type-C 会把设备保存到设备列表；串口只是打开本机调试终端，不会保存为设备。
 
-![添加设备对话框：SSH 设备、RDK Type-C 直连、本机串口日志三种入口](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/add-device-dialog.png)
+![添加设备对话框：SSH 设备、RDK Type-C 直连、本机串口日志三种入口](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/add-device-dialog.png)
 
 ## 三种入口对比
 
