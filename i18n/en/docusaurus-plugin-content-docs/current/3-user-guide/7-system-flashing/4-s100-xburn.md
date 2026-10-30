@@ -32,4 +32,4 @@ Do not reuse older S100 tools or firmware. Follow current S600 guidance for tool
 
 ## Troubleshooting
 
-Keep the failed phase, error, firmware source, and tool version. Check cables, USB connectivity, flashing mode, and firmware integrity. Wait for the original writing process to stop before retrying. See [official RDK documentation](https://developer.d-robotics.cc/rdk_doc) for detailed board procedures.
+Keep the failed phase, error, firmware source, and tool version. Check cables, USB connectivity, flashing mode, and firmware integrity. Wait for the original writing process to stop before retrying. See [official RDK documentation](https://d-robotics.github.io/rdk_doc_center/en/) for detailed board procedures.
