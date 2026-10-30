@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.3.1 Type-C direct'
 title: 2.3.1 Type-C direct
+description: 'Detect and add an RDK device over a direct Type-C connection'
 ---
 
 # 2.3.1 Type-C direct

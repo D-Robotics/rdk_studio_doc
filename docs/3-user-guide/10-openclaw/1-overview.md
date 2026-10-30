@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.10.1 判断是否需要 OpenClaw'
 title: 3.10.1 判断是否需要 OpenClaw
+description: '判断何时需要 OpenClaw，何时 Moss + SSH 已足够'
 ---
 
 # 3.10.1 判断是否需要 OpenClaw

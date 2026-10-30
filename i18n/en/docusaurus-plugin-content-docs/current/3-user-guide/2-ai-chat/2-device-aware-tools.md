@@ -1,68 +1,32 @@
 ---
 sidebar_label: '3.2.2 Device operations and results'
 title: 3.2.2 Device operations and results
+description: 'Confirm targets, permissions, and results for device tasks'
 ---
 
 # 3.2.2 Device operations and results
 
-Asking Moss to inspect the device, run commands, read files, or call OpenClaw counts as device work. This page explains how the target device is chosen, where execution shows up, and what needs your confirmation.
+For a device task, establish **which device, which folder, and which result**. Projects and historical conversations may retain an earlier device binding; checking which device happens to be online is insufficient.
 
-## What counts as device operations
-
-These kinds of requests involve the device:
-
-- Check OS version, disk, memory, network, or service status.
-- Run commands, scripts, or samples on the device.
-- Read, upload, or modify files on the device.
-- Deploy OpenClaw, sync skills, or check on-board models.
-- Trigger device-related actions via Feishu, WeChat, or other channels.
-
-Pure concepts, documentation lookup, or drafting plans may not require a connection.
-
-## How the target device is chosen
-
-Moss prioritizes the device chip in the AI Dock. Before sending, check:
-
-- Whether the current device is the one you intend.
-- Whether it is online and SSH-verified.
-- Whether the current project directory is the one you mean.
-
-In multi-device setups you can name the target explicitly:
+## Start with read-only checks
 
 ```text
-Check the network on RDK-X5-workstation-1 only—do not touch other devices.
+Check the network and disk on this project's bound device. Gather information read-only, then explain problems and suggestions.
 ```
 
-Fix the device chip if wrong; if offline, Moss can still plan until you reconnect.
+While offline, you can analyze saved logs and prepare a proposal. Actual board commands, file operations, and services require the intended device connection. Another online device does not automatically take over.
 
-## Where results appear
+## Execution and approval
 
-Depending on the task, output may show up here:
+Execute allows the Agent to use available tools, while permission policies still check each action and target. When an approval card appears, review the device, path, command, and impact before allowing or rejecting it. Plan only analyzes; Spec first produces requirements and steps for approval.
 
-| Location | What you see |
-|---|---|
-| Chat stream | Moss explanations, steps, errors, and next-step advice |
-| Terminal | Commands and their return values |
-| Files | Paths read or written |
-| Diagnostics | Device, network, and service checks |
-| On-board Agent | OpenClaw deploy/check/model/skill results |
+Moss and DSH may support different tools. If the runtime or action is unavailable, follow the displayed reason. “Task submitted” is not proof that an operation succeeded.
 
-If results look wrong, re-check the device chip, then terminal output or on-page errors.
+## Verify results
 
-## Operations that need confirmation
+- Read completed work, remaining work, failures, and next steps in the answer.
+- For underlying details, open **Execution records** from the message's more menu to inspect existing tool, terminal, or plan records for that message.
+- Check actual output and changes in Terminal and Files under “Open location.”
+- Ordinary copy and share focus on answer content and omit internal tool arguments and verification records by default, while preserving code, commands, and protocol examples.
 
-Plain queries, status reads, and log reviews usually return directly. These can affect the device or external systems and will ask you to confirm:
-
-- Write, overwrite, or delete files.
-- Change network, service, or system configuration.
-- Stop processes, restart services, or reboot the device.
-- Send messages via Feishu, WeChat, or other external channels.
-- Deploy, uninstall, or redeploy OpenClaw, skills, and similar components.
-
-When scope is unclear, switch to **Plan** so Moss lists steps and risks.
-
-## Serial is not full device access
-
-Local serial logs only show boot output. They do **not** create an SSH device Moss can use, and they do not automatically enable Files, remote desktop, code editor, or OpenClaw.
-
-After the network is back, add the device over SSH.
+Stopping requests that further execution end; completed actions are not automatically rolled back. Before redeploying, restarting, or repeating a write, check the current device state.

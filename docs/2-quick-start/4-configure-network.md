@@ -1,11 +1,12 @@
 ---
 sidebar_label: '2.4 配置网络'
 title: 2.4 配置网络
+description: '设备验证通过后接入 Wi-Fi 并确认联网状态'
 ---
 
 # 2.4 配置网络
 
-![Wi-Fi 配置弹窗：扫描网络、输入密码并连接设备 Wi-Fi](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/wifi-config-dialog.png)
+![Wi-Fi 配置弹窗：扫描网络、输入密码并连接设备 Wi-Fi](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/wifi-config-dialog.png)
 
 Wi-Fi 配置通常出现在 **添加设备验证通过之后**。RDK Studio 会复用刚建立的 SSH 连接，在设备端扫描 Wi-Fi、连接网络，并提示设备是否联网。
 

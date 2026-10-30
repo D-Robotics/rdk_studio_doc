@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.7.3 eMMC 烧录'
 title: 3.7.3 eMMC 烧录
+description: '为带 eMMC 的 RDK X5 烧录并备份系统'
 ---
 
 # 3.7.3 eMMC 烧录

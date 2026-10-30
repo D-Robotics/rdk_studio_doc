@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.6 OpenClaw 安装失败'
 title: 5.6 OpenClaw 安装失败
+description: '处理 OpenClaw 安装失败与模型不可达'
 ---
 
 # 5.6 OpenClaw 安装失败
@@ -27,7 +28,7 @@ title: 5.6 OpenClaw 安装失败
 
 ## 本地 Ollama 通常不能直接给 OpenClaw 用
 
-如果 Moss 思考模型是电脑本机 Ollama，OpenClaw 通常不能直接复用。请选择板端也能访问到的远程模型服务，或在板端部署自己的模型服务。
+如果 Moss 当前模型是电脑本机 Ollama，OpenClaw 通常不能直接复用。请选择板端也能访问到的远程模型服务，或在板端部署自己的模型服务。
 
 ## 排查建议
 

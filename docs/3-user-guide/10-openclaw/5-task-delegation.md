@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.10.5 处理板端任务'
 title: 3.10.5 处理板端任务
+description: '把适合板端处理的任务交给 OpenClaw'
 ---
 
 # 3.10.5 处理板端任务

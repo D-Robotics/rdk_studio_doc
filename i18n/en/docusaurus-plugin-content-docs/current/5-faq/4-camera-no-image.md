@@ -1,6 +1,7 @@
 ---
 sidebar_label: '5.4 USB camera no image'
 title: 5.4 USB camera no image
+description: 'Troubleshoot a USB camera with no image or unsupported formats'
 ---
 
 # 5.4 USB camera no image
@@ -64,7 +65,7 @@ Width, height, and fps should match a line from `v4l2-ctl`. Drop to `320x240@15`
 
 5. **Paste logs**
 
-   Drop the full traceback into AI Dock—Moss can suggest RDK‑specific fixes.
+   Drop the full traceback into AI Dock—Moss can suggest RDK-specific fixes.
 
 ## Why this works
 

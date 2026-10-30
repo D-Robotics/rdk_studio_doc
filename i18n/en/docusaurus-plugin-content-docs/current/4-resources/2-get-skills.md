@@ -1,18 +1,19 @@
 ---
 sidebar_label: '4.2 Get skills'
 title: 4.2 Get skills
+description: 'Acquire, create, and generate skills from links in the Plugin Center'
 ---
 
 # 4.2 Get skills
 
-All acquisition flows live in **Skill Workshop**. From there you can manage Moss skills on this PC, OpenClaw skills on the device, the marketplace, manual creation, and link-based generation.
+All acquisition flows live in **Plugin Center → Skills**. From there you can manage Moss skills on this PC, OpenClaw skills on the device, the marketplace, manual creation, and link-based generation.
 
 ## How to acquire
 
 | Path | Best for |
 |---|---|
 | Skill marketplace / SkillHub | Search remote skills; add locally or deploy to the current device |
-| Built‑in deployable skills | Curated skills bundled with RDK Studio |
+| Built-in deployable skills | Curated skills bundled with RDK Studio |
 | Local saved skills | User skills from chats, manual creation, or marketplace installs |
 | Generate from links | Turn GitHub, NodeHub, web, or doc URLs into a skill draft |
 | Paste manually | Paste an existing `SKILL.md`, review on the creation page, then save |
@@ -34,4 +35,4 @@ Ask on the workbench:
 Are there skills that help troubleshoot a black screen on a USB webcam? List candidates only—don't install anything yet.
 ```
 
-After you pick candidates, have Moss open Skill Workshop or generate from links. Always review risk fields before deploy or save.
+After you pick candidates, have Moss open Plugin Center → Skills or generate from links. Always review risk fields before deploy or save.

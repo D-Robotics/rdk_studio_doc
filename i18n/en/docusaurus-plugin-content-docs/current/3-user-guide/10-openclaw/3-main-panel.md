@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.10.3 View status and configure'
 title: 3.10.3 View status and configure
+description: 'Read the on-device Agent status summary, controls, and chat'
 ---
 
 # 3.10.3 View status and configure

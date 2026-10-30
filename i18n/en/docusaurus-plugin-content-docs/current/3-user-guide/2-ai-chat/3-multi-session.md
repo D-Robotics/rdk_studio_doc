@@ -1,33 +1,43 @@
 ---
-sidebar_label: '3.2.3 View chat history'
-title: 3.2.3 View chat history
-unlisted: true
+sidebar_label: '3.2.3 Conversation history'
+title: 3.2.3 Conversation history
+description: 'Find, resume, and manage past conversations'
 ---
 
-# 3.2.3 View chat history
+# 3.2.3 Conversation history
 
-Moss sessions are stored locally. Use the history drawer, workspace context, and current device chip to organize work.
+Find and resume tasks from the project/conversation list on the left. Search, rename, pin, and archive are available. Before continuing, check the project, device, folder, and task runtime.
 
-## New session
+## New task or continue
 
-Click **New chat** at the top of the Dock for a blank thread. Good when:
+Continue the same goal in its original conversation. Create a task for an unrelated goal, another project, or a different runtime. Existing tasks retain their Moss/DSH binding when the default for new tasks changes.
 
-- The last task is done and you want a new topic.
-- The session’s token use is high and earlier context was compressed.
-- Device, project, or goal changed and you do not want old assumptions mixed in.
+Long conversations may compact older content. Keep important logs, configuration, and conclusions in files or attachments. `/compact` availability depends on the current runtime.
 
-## Resume history
+## Desktop local history
 
-The history button opens the local chat list. When resuming, Moss reads that session’s messages, results, and summaries; if device or project changed, state the new target first to avoid stale assumptions.
+Projects, chats, titles, pins, archives, and drafts belong to the current local data directory. Saved records remain viewable after sign-out or account switching; new execution uses the current account's permissions and quota. Different OS users or data directories do not automatically merge history.
 
-## Long sessions get summarized
+| Action | Effect |
+|---|---|
+| Delete project | Removes its record and bindings; chats stay in recent tasks and local/board files remain |
+| Delete from local history | Applies to accounts using the same data directory and prevents retained older sources from reappearing in the list |
+| Permanently delete DSH conversation | A separate official-session deletion action for conversations the current account is allowed to delete |
 
-Near the model’s context limit, RDK Studio summarizes older content and keeps summaries plus recent messages. Conversation can continue, but early detail thins out. Keep important logs, configs, and conclusions as attachments or files.
+Deleting local history does not permanently delete the official DSH conversation. Verify the target and confirmation before permanent deletion.
 
-## Cancel and continue
+## Upgrade recovery
 
-In-flight tasks can be canceled. Cancellation does not roll back finished commands, file writes, or device changes; your next message can say “continue from the failed step” and Moss will try to pick up from the last run record.
+The new version copies and validates older local history while retaining the original sources. If recovery fails or storage is full, restore storage and local services, then select **Retry local history recovery**. Read-only recovery preserves the records; do not delete old records or reset the app to troubleshoot it.
 
-## Multi-device tip
+Rolling back does not automatically import chats created by the newer version. Keep the data directory and run the newer version again to continue recovery.
 
-Avoid vague “that board” in one message. Prefer device aliases, hostnames, or workspace labels to name the target.
+## DSH and account switching
+
+Saved local DSH history is available for viewing; execution recovery uses the official session. Continuing across accounts creates a linked task for the current account and retains the original record. A new account does not take over the old account's tasks or approvals.
+
+Web deployments isolate conversations, projects, and tasks by account. Desktop shared local-history rules do not apply there.
+
+## Continue after stopping
+
+Stopping does not roll back completed commands, file writes, or device state. State the goal and check previous results before continuing to avoid repeating actions.

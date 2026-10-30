@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.14 Message channels'
 title: 3.14 Message channels
+description: 'Send messages to Moss and receive results through Feishu or WeChat'
 ---
 
 # 3.14 Message channels

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.8.3 保存 Wi-Fi 配置'
 title: 3.8.3 保存 Wi-Fi 配置
+description: 'Wi-Fi 配置的保存、自动重连与排查'
 ---
 
 # 3.8.3 保存 Wi-Fi 配置
@@ -28,4 +29,4 @@ title: 3.8.3 保存 Wi-Fi 配置
 
 长期使用的设备更建议使用有线网络和固定 IP，减少 Wi-Fi 信号波动和地址变化带来的影响。
 
-完整的 WiFi 故障排查见 [5.7 网络连接失败](../../5-faq/7-network-failed.md)。
+完整的 Wi-Fi 故障排查见 [5.7 网络连接失败](../../5-faq/7-network-failed.md)。

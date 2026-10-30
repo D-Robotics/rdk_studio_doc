@@ -1,53 +1,23 @@
 ---
-sidebar_label: '3.4.3 Paths you cannot edit'
-title: 3.4.3 Paths you cannot edit
-unlisted: true
+sidebar_label: '3.4.3 Paths and permissions'
+title: 3.4.3 Paths and permissions
+description: 'Path authorization, system directory limits, and permission boundaries'
 ---
 
-# 3.4.3 Paths you cannot edit
+# 3.4.3 Paths and permissions
 
-Some sensitive paths (e.g. `/sys`, `/proc`) block **direct Files writes**, reducing risk of accidental kernel or boot breakage.
+File access depends on workspace authorization, path restrictions, device state, and OS permissions. Seeing a path does not grant write access.
 
-## Restricted paths
+## Common restrictions
 
-| Path | Why writes are risky |
+| Situation | Action |
 |---|---|
-| `/sys/` | Kernel interface; writes can change behaviour or hurt hardware |
-| `/proc/` | Process/kernel state interface; writes can interfere with running processes |
-| `/dev/` | Device nodes — bad writes risk device malfunction |
-| `/boot/` | Boot assets — edits can brick boot |
+| No work folder bound | Select or authorize a project folder |
+| Path outside the workspace | Return to the authorized folder or use the folder-authorization flow |
+| Device offline / target mismatch | Restore the original target connection |
+| System or sensitive path restricted | Read the error, check the need, and use a supported operation entry |
+| OS permission denied | Check ownership, mount state, and device permissions |
 
-Reads are unrestricted. Blocks apply to write operations only.
+Paths such as `/sys`, `/proc`, `/dev`, and `/boot` can affect the kernel, devices, and startup. Access depends on the specific operation; do not assume universal read or write support.
 
-## When you truly need writes
-
-Two ways:
-
-### Option 1 — Terminal
-
-In [3.3 Terminal](../3-remote-terminal/index.md), run explicitly:
-
-```bash
-echo 1 > /sys/class/leds/red/brightness
-```
-
-Commands run on‑device shell. Verify command and paths before pressing Enter.
-
-### Option 2 — Explicit AI Dock authorization
-
-State authorization clearly in AI Dock, e.g.
-
-> “I authorize writes under `/sys/class/leds`. Turn on the red LED.”
-
-Moss proceeds **only after** explicit approval when the destination is sensitive.
-
-## What you see when blocked
-
-When Files blocks a write:
-
-```
-This path is restricted and cannot be written via Files directly.
-Use Terminal manually or give explicit authorization in AI Dock.
-```
-
-The UI surfaces the cause — not a silent apparent success.
+Saying “I authorize this” in chat does not automatically bypass path restrictions or OS permissions. Use the corresponding approval or authorization flow when required. Preserve rejection reasons rather than treating a failed write as success.

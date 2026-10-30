@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.16 Command-Line Interface (CLI)'
 title: 3.16 Command-Line Interface (CLI)
+description: 'Choosing and enabling the command-line tools'
 ---
 
 # 3.16 Command-Line Interface (CLI)

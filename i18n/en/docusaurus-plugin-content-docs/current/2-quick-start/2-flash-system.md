@@ -1,53 +1,34 @@
-﻿---
-sidebar_label: '2.2 Flash system image'
-title: 2.2 Flash system image
+---
+sidebar_label: '2.2 Flash a system image'
+title: 2.2 Flash a system image
+description: 'Choose an image and flash a system onto the board'
 ---
 
-# 2.2 Flash system image
+# 2.2 Flash a system image
 
-Start here when the board has no usable OS, the OS is damaged, or you need to switch images. If the device already boots normally, skip this and go to [2.3 Connect a device](./3-connect-device/index.md).
+Use Flasher when the board has no usable system or needs reinstalling. A bootable device with an IP can proceed to [Connect a device](./3-connect-device/index.md). Flashing overwrites target storage; back up important data first.
 
-## Enter flashing from onboarding
+## Choose a flow
 
-After “Choose board” in first-time onboarding, you reach “Prepare system.” If you choose to flash, the full flashing page opens. The wizard has four steps:
-
-1. **Choose device**: RDK X3, RDK X5, RDK S100 / S100P, or another target for writing a local image.
-2. **Choose image**: Official image, or a local image / firmware file.
-3. **Start flash**: Confirm the TF card, disk, or device to write, then begin.
-4. **Done**: Safely remove the TF card as prompted, or wait for the device to reboot.
-
-![RDK Studio flash wizard: first choose the device type to flash](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/08-burning.png)
-
-## Device and flash method
-
-| Device | Recommended method | Notes |
-|---|---|---|
-| RDK X3 | TF card | Pick an official image and write to TF card |
-| RDK X5 | TF card; eMMC-capable boards can use eMMC flow | Official image list is filtered by board |
-| RDK S100 / S100P | S100 flash flow | Official firmware package or extracted firmware folder |
-| Other device | Local image write | Generic SD / TF write for non-RDK boards |
-
-RDK S100 supports firmware download, environment prep, and writing inside RDK Studio. If the local environment is unsupported or write fails, the UI will point you to the official flashing tool.
-
-## Stable vs high-speed mode
-
-TF-style writes offer two performance modes:
-
-| Mode | Best for |
+| Device | Flow |
 |---|---|
-| Stable mode | Default; lower resource use; suitable for most PCs |
-| High-speed mode | Faster writes; higher resource use; may affect other apps on low-end PCs |
+| RDK X3 / X5 | Choose the board-specific image, usually written to TF/SD; use the appropriate flow for eMMC models |
+| RDK S100 / S100P | Supported desktop environments can prepare firmware and flash within the app |
+| RDK S600 | Follow official XBurn manual-flashing guidance rather than TF-card images |
+| Other media | Choose a compatible local image and verify device compatibility |
 
-Flashing erases the target card or disk. Before starting, confirm you did not select the system disk, a portable drive, or any volume with important data.
+## Image and target confirmation
 
-## What not to do while flashing
+1. Confirm the board type and choose an official image or local image/firmware.
+2. Continue to target-disk/device confirmation as instructed.
+3. Verify media name, capacity, and path; read the erase warning before starting.
+4. Wait for actual download, preparation, writing, and validation results. Keep cables connected and the computer awake.
+5. Start the device as instructed, then connect it to RDK Studio.
 
-- Do not unplug the TF card, reader, Type-C cable, or S100 connection.
-- Do not sleep, shut down, or force-quit RDK Studio.
-- Do not dismiss system permission dialogs carelessly; canceling during S100 write may still require waiting for the writer to stop.
+S100 accepts supported firmware archives or folders. S600 uses companion-tool guidance. If the environment is unsupported, follow the upgrade or official-tool instructions.
 
-## Next steps
+## Web
 
-Power the device after flashing. When the system boots, go to [2.3 Connect a device](./3-connect-device/index.md).
+Pages supporting Flash Bridge use a program on your computer to read images and write disks. Start it as instructed and confirm it is online. It reads local absolute paths; the browser does not write disks directly. Use the desktop client when bridge support is absent.
 
-For full TF card, eMMC, S100, and local image write coverage, see [3.7 System Flashing](../3-user-guide/7-system-flashing/index.md).
+See [Flashing](../3-user-guide/7-system-flashing/index.md) and [S100 / S600](../3-user-guide/7-system-flashing/4-s100-xburn.md).

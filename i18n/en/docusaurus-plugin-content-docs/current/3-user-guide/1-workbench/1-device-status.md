@@ -1,52 +1,30 @@
 ---
-sidebar_label: '3.1.1 Device status and diagnostics'
-title: 3.1.1 Device status and diagnostics
-unlisted: true
+sidebar_label: '3.1.1 Device state and diagnostics'
+title: 3.1.1 Device state and diagnostics
+description: 'Verify the device target and review diagnostics in the workbench'
 ---
 
-# 3.1.1 Device status and diagnostics
+# 3.1.1 Device state and diagnostics
 
-The Workbench surfaces device status through the **current workspace** Live page, diagnostic snapshots, device online status, and Moss task information.
+Use the device label, work-location bar, and task overview to confirm the intended target and connection state. Before diagnosis, verify the project's bound device rather than assuming another online device is the target.
 
-## What the Workbench shows
-
-| Area | Content |
+| State | Meaning |
 |---|---|
-| Top of current workspace | Current device, remote directory, SSH verification status, executable/read-only status |
-| Live cards | Device management, project workspace settings, Git change summary, diagnostic snapshots, chat history |
-| Diagnostic snapshot | Collect device runtime info and send it to Moss in one step |
-| Moss chat | Answers or executes tasks using the current device, project directory, diagnostics, and file content |
+| Online / SSH verified | Device commands, files, and diagnostics can be requested |
+| Pending verification / connecting | Wait for connection checks; old state does not prove current access |
+| Offline | Saved history/logs remain readable; device operations require reconnection |
+| No device selected | Ask questions or work locally; connect a device for board tasks |
 
-## Diagnostic snapshot
-
-When you click **Diagnostic snapshot** on the Live page, RDK Studio collects runtime information for the current device and shows a summary in the workspace. To dig deeper, you can send the snapshot to Moss.
-
-Diagnostics typically cover:
-
-| Type | Examples |
-|---|---|
-| System | Board type, image version, kernel, uptime |
-| Resources | Memory, disk, temperature, CPU/BPU-related status |
-| Network | IP, NICs, external reachability |
-| Services | OpenClaw, code editor, remote desktop, ROS/TROS-related status |
-
-Different boards, images, and network conditions may yield different fields. Missing fields appear as “unknown” or with a failure reason; that does not mean the whole device is unusable.
-
-## Ask Moss to assess health
-
-Describe what you need in the AI Dock, for example:
+## Request a read-only check
 
 ```text
-Please assess this board’s overall health and list the issues that need attention first.
+Read-only: check the bound device's model, system version, CPU, memory, disk, temperature, network, and key services. State any missing information. Do not change configuration or restart anything.
 ```
 
-Moss combines the current device information, diagnostic snapshot, and available capabilities. Compared with reading a wall of metrics, this is better for troubleshooting and next-step guidance.
+The Agent gathers information using tools available to its runtime. Fields vary by board, OS, permissions, and connection. Inspect the reason for missing information; a missing field does not mean the entire device is unavailable.
 
-## What statuses mean when offline
+## Verify the diagnosis
 
-| Status | Meaning |
-|---|---|
-| Online | Diagnostics collection, Terminal/Files, and device tools can run |
-| Pending verification | SSH must be verified first to avoid misjudging from stale cache |
-| Offline | History and cached info are viewable; device execution waits for recovery |
-| Not connected | Moss can plan; device actions first prompt you to add a device |
+Review problems, evidence, and suggestions in the answer. Open existing execution records from the message's more menu if needed. Preserve command failures, timeouts, and missing-field messages; they are not a successful diagnosis.
+
+Offline snapshots describe previously collected information. Working local files or terminals do not prove that the board connection has recovered.

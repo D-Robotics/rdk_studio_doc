@@ -1,44 +1,31 @@
-﻿---
-sidebar_label: '3.13 Configuration center'
-title: 3.13 Configuration center
+---
+sidebar_label: '3.13 Configuration'
+title: 3.13 Configuration
+description: 'Purpose-based sections and entry points in the configuration center'
 ---
 
-# 3.13 Configuration center
+# 3.13 Configuration
 
-The settings center is at the bottom of the left sidebar. Defaults are fine for most users—open it when you hit connection, model, message channel, or account issues.
+Open **Settings** at the bottom of the left sidebar. Settings are grouped by purpose, with entries depending on deployment capabilities.
 
-![Settings center: categories on the left, current page on the right](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/settings-panel.png)
-
-## Recommended order
-
-| Step | What to do |
+| Section | Content |
 |---|---|
-| 1 | Confirm the signed-in account is correct |
-| 2 | If a device will not connect, open **Device connection** |
-| 3 | If Moss or the model misbehaves, open **AI engine** |
-| 4 | To use Feishu or WeChat, configure message channels |
-| 5 | To move machines or share with the team, use import/export |
+| Account & security | Sign-in state, account, and security actions |
+| Appearance | Theme, language, and conversation display preferences |
+| Device connection | SSH and device connection options |
+| Data locations | Local data locations, disk capacity, and directory settings; hidden on public Web Cloud |
+| Models & providers | Default runtime for new tasks, model configurations, API tests, and action-confirmation policy |
+| MCP services | Configure and manage permitted MCP connections |
+| Feishu / WeChat messaging | Channel configuration; public Web Cloud does not expose these process-wide settings |
+| App & updates | Version, updates, CLI, diagnostics, and maintenance |
 
-## Areas
+Ollama installation, downloads, and model files are managed on the separate [Local models](../12-local-models/index.md) page.
 
-| Area | Main content |
-|---|---|
-| Account & security | Current account, sign out, local session and data cleanup |
-| Device connection | SSH defaults, connectivity, networking, reconnect options |
-| Appearance | Density, fonts/zoom, desktop quick-window behavior |
-| AI engine | Reasoning/fast models, provider, API key, base URL, connectivity test |
-| Message channels · Feishu | Feishu bot credentials, channel on/off, paired users |
-| Message channels · WeChat | WeChat QR bind, account list, channel restart |
-| Apps & updates | Updates, CLI, diagnostic bundles, maintenance |
+Model services, task runtimes, and workflows are distinct settings. Runtime-default changes apply only to new tasks; existing tasks keep their runtime.
 
-Installing local Ollama, downloads, and model files live under [3.12 Local LLMs](../12-local-models/index.md).
+## Continue reading
 
-The AI engine area only configures Moss fast/reasoning model presets.
-
-When unsure what a setting does, leave the default. For problems, send page messages or redacted screenshots to Moss.
-
-## Next
-
-- [3.13.2 Sign in & account](./2-account.md): Sign-in status, sign out, clear local session.
-- [3.13.3 Configure AI models](./3-ai-engine.md): Fast/reasoning models and connectivity tests.
-- [3.13.5 Import & export](./5-import-export.md): Sync across machines and share with the team.
+- [Understand settings](./1-overview.md)
+- [Accounts and local history](./2-account.md)
+- [Configure AI models](./3-ai-engine.md)
+- [Import and export model configuration](./5-import-export.md)

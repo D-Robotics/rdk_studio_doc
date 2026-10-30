@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.1 安装与登录'
 title: 2.1 安装与登录
+description: '安装客户端、登录账号并完成首次启动设置'
 ---
 
 # 2.1 安装与登录
@@ -24,7 +25,7 @@ Windows 与 macOS（Apple Silicon）首次启动时，系统可能会提示确�
 
 启动桌面客户端后会打开 D-Robotics 统一登录平台。RDK Studio 使用 D-Robotics 账号登录，本机不保存你的账号密码，只保存登录状态。
 
-![D-Robotics 统一登录平台页面：账号登录和短信登录入口](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/login-sso-empty.png)
+![D-Robotics 统一登录平台页面：账号登录和短信登录入口](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/login-sso-empty.png)
 
 登录步骤：
 
@@ -39,12 +40,10 @@ Windows 与 macOS（Apple Silicon）首次启动时，系统可能会提示确�
 
 | 步骤 | 页面文案 | 目标 |
 |---|---|---|
-| 1 | 选择开发板 | 选择 RDK X3 / X5 / S100，用于推荐镜像和接入方式 |
+| 1 | 选择开发板 | 选择 RDK X3 / X5 / S100 / S600，用于推荐镜像和接入方式 |
 | 2 | 准备系统 | 根据板型进入烧录向导或跳过烧录 |
 | 3 | 添加设备 | 通过 SSH、RDK Type-C 直连或本机串口日志进入下一步 |
-| 4 | 开始使用 Moss | 在工作台向 Moss 发送第一条消息 |
-
-![首次登录后的引导向导：选择开发板、准备系统、添加设备、开始使用 Moss](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/onboarding-1-board.png)
+| 4 | 开始使用 Agent | 在工作台向 Moss 发送第一条消息 |
 
 如果设备已经能正常启动，也可以跳过烧录，直接添加设备。跳过引导不会影响后续使用；工作台空态里仍能重新开始引导。
 

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.10.4 和 Moss 配合使用'
 title: 3.10.4 和 Moss 配合使用
+description: '电脑端 Moss 与板端 OpenClaw 的分工与配合流程'
 ---
 
 # 3.10.4 和 Moss 配合使用

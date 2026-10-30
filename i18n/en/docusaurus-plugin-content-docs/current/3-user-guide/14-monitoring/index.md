@@ -1,25 +1,16 @@
 ---
-sidebar_label: '3.15 Monitoring & operations'
-title: 3.15 Monitoring & operations
+sidebar_label: '3.15 Monitoring and operations'
+title: 3.15 Monitoring and operations
+description: 'Entries for tasks, processes, and scheduled jobs in the run overview'
 ---
 
-# 3.15 Monitoring & operations
+# 3.15 Monitoring and operations
 
-Operations view focuses on two things: the header task queue, and AI Dock token usage. One shows task progress; the other helps spot unusually expensive AI work.
+The runtime overview shows current tasks, background runs, processes, and scheduled tasks as supported by the runtime and deployment.
 
-## Recommended order
+- Check whether a task is running, waiting, awaiting confirmation, stopped, or pending recovery.
+- Open its details for results and errors; use its stop control when needed.
+- Service processes, Agent runs, and scheduled tasks are managed separately. Stopping one does not mean all have ended.
+- Usage and cost displays assist observation; consult the account/model platform for official quota and billing.
 
-| Step | What to check |
-|---|---|
-| 1 | During flash, deploy, or bulk transfer, watch the header task chips |
-| 2 | Click a chip to jump back to the feature page for details |
-| 3 | When AI feels slow or cost looks wrong, open token usage |
-| 4 | For billing truth, rely on your model provider |
-
-## Task progress
-
-The right side of the header lists long-running work: flashing, OpenClaw deploy, bulk file transfers, skill sync, and similar. Chips deep-link you to each feature. Finish important tasks on the page before closing the window.
-
-## Token usage
-
-AI Dock shows approximate model usage for the current conversation or task—useful for complexity and anomaly checks. Final billing still comes from the provider console.
+Continue with [Task progress](./1-task-queue.md) and [Token usage](./2-token-usage.md).

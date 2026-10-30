@@ -1,66 +1,29 @@
 ---
 sidebar_label: '3.4.1 Browse and transfer files'
 title: 3.4.1 Browse and transfer files
+description: 'Browse local or device directories and transfer files'
 ---
 
 # 3.4.1 Browse and transfer files
 
-The Files UI has three parts: the folder tree on the left, the file list on the right, and the task bar at the bottom.
+Check the local/device target, then browse with the tree, breadcrumbs, path bar, or file list. The task-workspace folder selector can also switch projects or change the corresponding folder.
 
-## Layout
+## Upload and download
 
-| Area | What it shows |
-|---|---|
-| Left folder tree | Common root folders on device and children of what you expanded |
-| Right file list | Files in the current folder: name, size, modified time, permissions |
-| Top address bar | Type a path to jump quickly (e.g. `/opt/tros/humble/lib/`) |
-| Top breadcrumbs | Each segment can be clicked |
-| Bottom task bar | Active uploads/downloads with speed and ETA |
+- Upload through the button or drag files into a supported view. Folder and batch support depend on the entry.
+- Download through the file row or menu, then follow the system save prompt.
+- On failure, check device connectivity, directory permissions, and the displayed error before retrying.
 
-## Upload files
+File views do not necessarily share batch download, folder-archive, or drag-out capabilities. Use the actions actually provided; do not assume ZIP packaging or dragging to the desktop is available everywhere.
 
-| Method | How |
-|---|---|
-| Drag and drop | Drag files or folders from the PC onto the Studio window |
-| Upload button | **Upload** in the toolbar opens a file picker |
-| Bulk upload | Select multiple files or a whole folder in one shot |
+## File operations
 
-Progress appears in the task bar. Writes to sensitive paths (e.g. `/sys`, `/proc`) follow access-control rules — see [3.4.3 Paths you cannot edit](./3-path-access-control.md).
+Use the current menu to create files/folders, rename, delete, copy paths, or open a terminal here. Check the location and target before deleting. After opening a terminal, verify whether it is local or on the intended device.
 
-## Download files
+Name filters apply to the current view. For broader searches, specify the scope to the Agent:
 
-| Method | How |
-|---|---|
-| Download icon | Icon next to a file downloads to your PC default download folder |
-| Bulk download | Select multiple files → right‑click **Download selection** → gets a ZIP |
-| Drag out | On hosts that support it, drag to desktop or Explorer |
+```text
+Read-only: find .hbm files under this board project's folder and list full paths. Do not modify anything.
+```
 
-## Context menu
-
-Right‑click a file or folder:
-
-| Action | Purpose |
-|---|---|
-| New file | Creates an empty file in this folder |
-| New folder | Creates a subfolder here |
-| Rename | Renames the file or folder |
-| Delete | Deletes the selection (Delete key works too) |
-| Copy full path | Copies absolute path to clipboard |
-| Open terminal here | Opens a new **Terminal** tab with `cd` to this folder |
-
-## Filename search
-
-The search box searches file names **only** in the current folder (no recursion), avoiding stalls on huge trees.
-
-For wider search, tell AI Dock: “Under `/opt/tros`, find `.hbm` files” — Moss can run appropriate find commands.
-
-## Common paths
-
-| Path | Use |
-|---|---|
-| `/userdata/` | RDK‑recommended writable user area (survives image refresh) |
-| `/tmp/` | Temp files cleared on reboot |
-| `/opt/tros/humble/` | TROS install (lib, share, include) |
-| `/home/<user>/` | User home |
-| `/var/log/` | System logs |
-| `/etc/` | System configuration |
+`/tmp` is typically temporary; system and model folders vary by image. Whether flashing, partitioning, or upgrading retains a directory depends on the procedure. Do not treat `/userdata` or any similar folder as a guaranteed backup.

@@ -1,50 +1,35 @@
 ---
-sidebar_label: '3.7.4 S100 flashing'
-title: 3.7.4 S100 flashing
+sidebar_label: '3.7.4 S100 and S600 flashing'
+title: 3.7.4 S100 and S600 flashing
+description: 'Flash S100 and S600 firmware using the XBurn flow'
 ---
 
-# 3.7.4 S100 flashing
+# 3.7.4 S100 and S600 flashing
 
-RDK S100 uses the dedicated **xburn** tool—you cannot flash a TF card the same way as RDK X3 / X5.
+S100 and S600 both require board-specific firmware and flashing procedures, but current in-app support differs.
 
-RDK Studio’s flashing page guides you to download **xburn-gui** from D-Robotics.
+## S100 / S100P
 
-## Steps
+1. Select the matching S100 model in the desktop Flasher.
+2. Choose official firmware or a local **firmware archive or folder**.
+3. Connect Type-C and prepare the flashing mode as instructed.
+4. Confirm and select **Start flashing (in app)**, then wait for preparation and writing results.
 
-1. In the desktop client, open *Flashing → S100*.
-2. Studio shows an xburn-gui download link (matched to your OS).
-3. Download and install xburn-gui.
-4. Prepare the image—usually `product.zip` or an extracted folder.
-5. Follow the in-Studio guide and complete flashing in xburn-gui.
+macOS prepares the environment automatically and may request administrator authorization for writing. Windows can offer a manual-flashing-mode option. Firmware format and paths must pass validation; do not modify package contents.
 
-When available, the desktop client also offers *Open local xburn* and *one-click CLI flash* to reduce manual tool launches.
+If the version cannot flash S100 in the app, follow its upgrade or official companion-tool guidance.
 
-## Getting xburn-gui
+## S600
 
-| OS | Download |
-|---|---|
-| Windows | Install package link on the Studio flashing page |
-| macOS (Apple Silicon / M series) | DMG link on the Studio flashing page |
+S600 uses **manual XBurn flashing**. It has no in-app S600 writer or ordinary TF-card image flow.
 
-xburn-gui is maintained by D-Robotics. For full usage docs, see the RDK S100 flashing section in [RDK official documentation](https://d-robotics.github.io/rdk_doc_center/en/).
+1. Obtain the S600-compatible XBurn and official guidance from the current flashing page.
+2. Download and prepare firmware as instructed, then connect the board over Type-C.
+3. Select its firmware directory in XBurn and flash.
+4. Confirm the tool's actual result before starting and connecting the device.
 
-## Preparing the image
-
-RDK S100 images are often shipped as `product.zip` containing:
-
-- The system image
-- Bootloader
-- Partition layout
-- Checksums / metadata
-
-Do **not** manually unpack and edit contents—that can brick the flash or fail boot. Provide `product.zip` to xburn-gui as-is.
+Do not reuse older S100 tools or firmware. Follow current S600 guidance for tool/image compatibility.
 
 ## Troubleshooting
 
-| Symptom | What to try |
-|---|---|
-| xburn-gui won’t start | Install required drivers/components per D‑Robotics docs |
-| Board not responding | Full-feature USB cable? Correct boot mode? |
-| Flash fails mid-way | Re-seat USB and retry; if persistent, verify `product.zip` integrity |
-
-If troubleshooting stalls, check the S100 section on [RDK developer community](https://developer.d-robotics.cc) or describe the error in AI Dock.
+Keep the failed phase, error, firmware source, and tool version. Check cables, USB connectivity, flashing mode, and firmware integrity. Wait for the original writing process to stop before retrying. See [official RDK documentation](https://d-robotics.github.io/rdk_doc_center/en/) for detailed board procedures.

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.3.3 Serial log'
 title: 2.3.3 Serial log
+description: 'View boot logs over a local serial port without adding a device'
 ---
 
 # 2.3.3 Serial log

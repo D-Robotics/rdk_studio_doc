@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.11.6 Sync to device'
 title: 3.11.6 Sync to device
-unlisted: true
+description: 'Sync local Moss skills to the on-device OpenClaw workspace'
 ---
 
 # 3.11.6 Sync to device
@@ -14,7 +14,7 @@ To let board OpenClaw handle them—on-board chat, device-side messaging, hardwa
 
 | Step | Action |
 |---|---|
-| 1 | *Skill Workshop → Installed* (board scope) |
+| 1 | *Plugin Center → Skills → Installed* (board scope) |
 | 2 | Select skills (multi-select OK) |
 | 3 | Press *Sync skills* |
 | 4 | Wait until the progress banner clears |
@@ -41,8 +41,8 @@ Teams needing parity should agree on cadence or run manual batch sync periodical
 
 ## Progress and failures
 
-Status chips live directly in Skill Workshop. On failure validate device uptime and OpenClaw health, retry sync afterward.
+Status chips live directly in Plugin Center → Skills. On failure validate device uptime and OpenClaw health, retry sync afterward.
 
 ## Uninstall from board
 
-Under *Skill Workshop → Installed* (board), pick **Remove from board**. That wipes the device copy—not the PC originals.
+Under *Plugin Center → Skills → Installed* (board), pick **Remove from board**. That wipes the device copy—not the PC originals.

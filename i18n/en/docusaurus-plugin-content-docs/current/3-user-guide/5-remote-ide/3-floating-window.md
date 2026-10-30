@@ -1,12 +1,12 @@
 ---
 sidebar_label: '3.5.3 Pop out the editor window'
 title: 3.5.3 Pop out the editor window
-unlisted: true
+description: 'Detach the code editor into a floating window and configure common extensions'
 ---
 
 # 3.5.3 Pop out the editor window
 
-Floating windows split the editor — great for Moss/docs plus code, and for multi‑monitor. ARM64 extension tips for RDK included.
+Floating windows split the editor — great for Moss/docs plus code, and for multi-monitor. ARM64 extension tips for RDK included.
 
 ## Floating mode
 
@@ -20,7 +20,7 @@ Float shares device list, models, skills with the main window — close and pop 
 
 ## Suggested extensions
 
-Handy for RDK (ARM64‑friendly):
+Handy for RDK (ARM64-friendly):
 
 | Extension | Role |
 |---|---|
@@ -35,7 +35,7 @@ Avoid Pylance (x64 binary only). For Python IntelliSense basics, the stock Pytho
 
 ## Integrated terminal
 
-The built‑in shell is **device** SSH, not your PC shell — iterate code/commands in one frame.
+The built-in shell is **device** SSH, not your PC shell — iterate code/commands in one frame.
 
 ## Security
 
@@ -45,6 +45,6 @@ The built‑in shell is **device** SSH, not your PC shell — iterate code/comma
 | Manual remote exposure | Strong passwords; trusted viewers only |
 | Shared hardware | Coordinate who edits to avoid overwriting |
 
-## Cross‑device parity
+## Cross-device parity
 
-Configs are per‑device. For uniform fleets, bake one golden image after tuning a reference board.
+Configs are per-device. For uniform fleets, bake one golden image after tuning a reference board.

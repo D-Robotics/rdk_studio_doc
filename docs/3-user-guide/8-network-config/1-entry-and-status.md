@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.8.1 打开 Wi-Fi 配置'
 title: 3.8.1 打开 Wi-Fi 配置
+description: '打开 Wi-Fi 配置弹窗并读懂连接状态'
 ---
 
 # 3.8.1 打开 Wi-Fi 配置

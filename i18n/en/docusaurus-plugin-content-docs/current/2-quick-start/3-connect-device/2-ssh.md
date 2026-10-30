@@ -1,6 +1,7 @@
 ﻿---
 sidebar_label: '2.3.2 Add device via SSH'
 title: 2.3.2 Add device via SSH
+description: 'Add a LAN or remote device with its SSH address and credentials'
 ---
 
 # 2.3.2 Add device via SSH
@@ -9,7 +10,7 @@ SSH is the most universal device entry in RDK Studio. If your host is reachable 
 
 It works for RDK boards and for generic Linux hosts, Jetson, Raspberry Pi, Rockchip, and other remote machines.
 
-![Add device dialog: SSH configuration form](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/add-device-ssh-form.png)
+![Add device dialog: SSH configuration form](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/add-device-ssh-form.png)
 
 ## Step 1: Gather connection details
 

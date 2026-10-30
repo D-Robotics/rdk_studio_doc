@@ -1,43 +1,28 @@
 ---
 sidebar_label: '3.15.1 Task progress'
 title: 3.15.1 Task progress
-unlisted: true
+description: 'Track current tasks, background runs, and background processes'
 ---
 
 # 3.15.1 Task progress
 
-The task queue sits on the right side of RDK Studio’s header and lists in-flight long tasks so you need not hunt through pages—flashing, deploys, bulk transfers, and more.
+Open the runtime overview in the top bar for current Agent execution, plans, background conversations/processes, and other long operations. Progress and controls vary by task.
 
-## Typical chip types
+## Observe and stop
 
-The queue favors work that lasts a while and still matters after you navigate away:
-
-| Type | When it appears |
+| Object | Check |
 |---|---|
-| Flash | After you start flashing from *Flash* |
-| OpenClaw install / uninstall | Long jobs from *On-device agent* |
-| Bulk file transfer | Multiple uploads/downloads in *Files* |
-| Skill batch install or sync | Batch actions in *Skill workshop* |
-| Device diagnostics | Moss- or UI-triggered diagnostics |
+| Current Agent task | Execution state, pending confirmation, and whether stopping completed |
+| Background task | Conversation, runtime, and recovery state |
+| Background process | Device/local location, logs, and stop entry |
+| Flashing or other long operation | Actual progress and result on the original tool page |
 
-## Tasks that skip the header
+Pending recovery does not mean still executing. Open the task and verify state before continuing. Changing pages or closing a panel does not prove a background task stopped.
 
-Short actions usually do not spawn chips—for example ordinary chat, a single SSH command, or periodic online checks. Results show in AI Dock, the terminal, or the originating page.
+## Scheduled tasks
 
-If you do not see a chip, the job may still be running—return to where you started it.
+Where offered, the scheduled-task panel shows prompts, schedules, next-run times, and state. Check the name, instructions, and schedule when creating one. Tasks pending approval must be approved before running.
 
-## Actions
+Use the available approve, pause, resume, and stop buttons. Pending approval, paused, circuit-open, and active are distinct states. Resolve errors instead of creating duplicates. Accounts should see/control only tasks they may manage; support depends on deployment.
 
-| Action | How |
-|---|---|
-| Details | Click the chip → jump to the owning page (e.g. Flash) |
-| Cancel | Only some chips expose cancel; others need the feature page |
-| Pause / retry | Handled per feature—not centralized in the header |
-
-## Before closing the window
-
-Let important jobs finish on the page when possible. After closing the window chips may disappear; whether work continues depends on the feature.
-
-## History
-
-Chips reflect **current** work only. For history, visit each area—flash history on *Flash*, Moss transcripts in AI Dock sessions, etc.
+Before closing the app, verify important work completed or stopped. Scheduling requires the relevant services to remain available; do not assume every task continues after exiting the client.

@@ -1,11 +1,12 @@
 ---
 sidebar_label: '3.7.2 TF 卡烧录'
 title: 3.7.2 TF 卡烧录
+description: '为 RDK X3 / X5 制作 TF 卡系统盘'
 ---
 
 # 3.7.2 TF 卡烧录
 
-![烧录向导：选择官方镜像或本机镜像文件](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/flash-wizard-select-image.png)
+![烧录向导：选择官方镜像或本机镜像文件](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/flash-wizard-select-image.png)
 
 TF 卡烧录是 RDK X3 与 RDK X5 最常用的装系统方式。你只需要准备一张 TF 卡和读卡器，在 RDK Studio 里选择板型、选择镜像、选择目标 TF 卡，然后开始写入。
 

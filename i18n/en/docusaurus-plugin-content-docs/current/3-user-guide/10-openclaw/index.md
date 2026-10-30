@@ -1,13 +1,14 @@
 ﻿---
 sidebar_label: '3.10 OpenClaw'
 title: 3.10 OpenClaw
+description: 'On-device Agent capabilities, deployment entry, and use cases'
 ---
 
 # 3.10 OpenClaw
 
 OpenClaw is an on-board agent that runs on RDK hardware. Enable AI assistant capabilities on the device by configuring it under **AI Capabilities → On-device Agent**.
 
-![On-device Agent page: after connecting RDK X5, view deployment status, model settings, and quick actions](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/openclaw-connected.png)
+![On-device Agent page: after connecting RDK X5, view deployment status, model settings, and quick actions](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/openclaw-connected.png)
 
 ## Suggested workflow
 
@@ -36,7 +37,7 @@ OpenClaw is an on-board agent that runs on RDK hardware. Enable AI assistant cap
 |---|---|
 | Short-term debugging with your PC always online | Moss plus SSH is enough |
 | Need the on-board agent to handle device-centric tasks | Deploy OpenClaw |
-| Need to deploy skills to the device | Deploy OpenClaw, then sync from Skill Workshop |
+| Need to deploy skills to the device | Deploy OpenClaw, then sync from Plugin Center → Skills |
 | Non-RDK Linux host | OpenClaw deployment not offered by default—prefer local Moss skills |
 
 ## Before deployment

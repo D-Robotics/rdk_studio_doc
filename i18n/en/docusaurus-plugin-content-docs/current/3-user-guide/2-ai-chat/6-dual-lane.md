@@ -1,36 +1,33 @@
 ---
-sidebar_label: '3.2.6 Choose reply mode'
-title: 3.2.6 Choose reply mode
+sidebar_label: '3.2.6 Runtime and models'
+title: 3.2.6 Runtime and models
+description: 'Choose the task engine, work mode, and model configuration'
 ---
 
-# 3.2.6 Choose reply mode
+# 3.2.6 Runtime and models
 
-RDK Studio offers **Fast** and **Think** reply modes. Toggle them in the input area; defaults can be set separately in settings.
+The current version separates **task runtime**, **workflow**, and **model configuration**. The older Fast/Thinking dual-mode description is no longer a guide to the current composer.
 
-## What each mode is for
-
-| Mode | Good for | Suggested models |
+| Setting | Determines | Entry |
 |---|---|---|
-| Fast | Short Q&A, summarizing execution output, light file notes | Small or local Ollama models |
-| Think | Multi-step troubleshooting, code changes, execution plans, complex device tasks | Stronger cloud or self-hosted models |
+| Runtime | Whether Moss or DSH executes new tasks | Settings → Models & providers → Runtime |
+| Workflow | Execute, Plan, or Spec | Composer workflow menu |
+| Model | The model-service configuration used by the Agent | Composer model selector and Models & providers |
+| Reasoning depth | Reasoning settings for models/Agents supporting the capability | Reasoning controls exposed by the current interface |
 
-If Fast is unset, simple tasks fall back to Think—slower and costlier. Configure at least one low-cost Fast model.
+## Use DSH
 
-## Local Ollama with Fast mode
+1. Open **Settings → Models & providers**.
+2. Check DSH status and select **Check runtime availability again** if needed.
+3. Once ready, select DSH as the default for new tasks.
+4. Create a task, verify its runtime indicator, and send a message.
 
-On the Local LLM page you can one-click assign a downloaded Ollama model as Moss **Fast** mode. Typical flow:
+Existing tasks keep their original runtime. Follow the reason shown when detection fails or DSH is unavailable. DSH does not automatically fall back to Moss. To use Moss, change the default and create a new task.
 
-1. Open *AI capabilities → Local LLM*.
-2. Install and start Ollama.
-3. Download a chat model.
-4. Test the model.
-5. Click **Set as Fast model configuration**.
+## Change the model
 
-If the input warns that Ollama is unreachable, the local service is not running or is blocked by another process.
+Moss uses saved model entries, selectable from the composer or added and tested in settings. A redundant model selector may be hidden when only the default Moss alias exists.
 
-## Where to configure
+Changing a Moss model does not configure DSH or change a task's runtime. Available models and tools depend on the actual runtime state.
 
-- Fast setup: left sidebar *AI capabilities → Local LLM*.
-- Full setup: *Settings → AI engine*.
-
-Service type on each model entry must match the provider. Field details: [3.13.3 Configure AI models](../13-config-center/3-ai-engine.md).
+After downloading an Ollama model, select **Set as main model configuration**. The model must support tool calling. See [Local models](../12-local-models/index.md) and [Model settings](../13-config-center/3-ai-engine.md).

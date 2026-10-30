@@ -1,34 +1,31 @@
 ---
-sidebar_label: '1.5 Version Release Notes'
-title: 1.5 Version Release Notes
+sidebar_label: '1.5 Version notes'
+title: 1.5 Version notes
+description: 'The 1.5.0 feature baseline, upgrade paths, and manual checks'
 ---
 
-# Version 1.5 Release Notes
+# 1.5 Version notes
 
-RDK Studio is continuously updated. In general, you can directly follow the interface and prompts displayed in the client; there is no need to remember specific version numbers for daily use.
+This manual is refreshed against the RDK Studio **1.5.0 feature baseline**. Check official releases and **Settings → App & updates** for actual package availability and upgrade eligibility.
 
-## Viewing and Upgrading
+## Manual changes
 
-Open the desktop client and go to **Settings → Application & Updates** to check the application status, look for updates, and perform upgrades. Upgrades will retain user data such as the local device list, model entries, local models, skills, and chat history.
+| Change | Read more |
+|---|---|
+| New tasks can use Moss or DSH; existing tasks retain their runtime | [Runtime and models](../3-user-guide/2-ai-chat/6-dual-lane.md) |
+| Execute, Plan, and Spec are distinct workflows | [AI Dock](../3-user-guide/2-ai-chat/index.md) |
+| Projects can bind local and board folders with an explicit work location | [Workbench](../3-user-guide/1-workbench/index.md) |
+| Local history recovery, account switching, and DSH deletion are distinguished | [Conversation history](../3-user-guide/2-ai-chat/3-multi-session.md) |
+| Answers focus on results; message menus expose existing execution records | [Device operations and results](../3-user-guide/2-ai-chat/2-device-aware-tools.md) |
+| Plugin Center, MCP, and local main-model configuration | [Extensions](../3-user-guide/11-skill/index.md), [Model settings](../3-user-guide/13-config-center/3-ai-engine.md) |
+| Block programming, simulation, and project/case import and export | [Block studio](../3-user-guide/17-block-studio/index.md) |
 
-The command-line tools can be enabled or re-enabled in **Settings → Application & Updates → Command-line Tools**. When confirmation is required in the terminal, you can run:
+## Check and upgrade
 
-```text
-rdkstudio --version
-dmoss-agent --version
-```
+On desktop, open **Settings → App & updates** to view the version and check for updates. Web deployments do not upgrade through the desktop updater.
 
-## Before and After Upgrading
+Save code and files before upgrading. The new version attempts to migrate and validate older local history. If recovery fails or storage is full, keep the original data and retry after restoring storage and local services. Do not reset data to fix history recovery.
 
-- Before upgrading, it is recommended to save any code and files you are editing.
-- Do not force quit the installer during the upgrade process.
-- If the interface after the upgrade differs significantly from the description you see, first check the update status in **Settings → Application & Updates**.
-- Local configurations such as devices, models, and skills are usually retained. If you need to switch computers, back up your configuration using the export feature.
+Back up important projects, conversations, models, skills, and device settings independently. [Model configuration export](../3-user-guide/13-config-center/5-import-export.md) does not include project code or conversation history.
 
-## Contact Us
-
-If you encounter issues during use, you can seek help through the following channels:
-
-- *Resources & Support → D-Robotics Developer Forum* on the left side of RDK Studio
-- *Resources & Support → User Feedback* on the left side of RDK Studio
-- D-Robotics Official Technical Support Group
+For help, use the forum or feedback entry in the client's support resources, including your version and redacted error details.

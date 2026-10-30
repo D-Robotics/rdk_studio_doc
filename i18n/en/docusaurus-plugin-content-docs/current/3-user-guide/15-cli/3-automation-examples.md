@@ -1,7 +1,7 @@
 ---
 sidebar_label: '3.16.3 Automation examples'
 title: 3.16.3 Automation examples
-unlisted: true
+description: 'CLI examples for CI, scheduled jobs, and log analysis'
 ---
 
 # 3.16.3 Automation examples

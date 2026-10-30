@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.11.1 技能文件怎么写'
 title: 3.11.1 技能文件怎么写
+description: 'SKILL.md 的头部字段与正文步骤写法'
 ---
 
 # 3.11.1 技能文件怎么写

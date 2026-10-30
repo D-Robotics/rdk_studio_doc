@@ -1,41 +1,22 @@
 ---
-sidebar_label: '5.10 Token usage looks high'
-title: 5.10 Token usage looks high
+sidebar_label: '5.10 Unexpected token usage'
+title: 5.10 Unexpected token usage
+description: 'Find tasks and configurations behind unexpectedly high token usage'
 ---
 
-# 5.10 Token usage looks high
+# 5.10 Unexpected token usage
 
-**Typical symptoms:** After only a handful of prompts, AI Dock shows large token totals; billing portals spike too.
+For unexpectedly high usage, check the task runtime, model, scope, and repeated execution first.
 
-## Revisit model pairing
+## Inspect
 
-Under *Settings → AI engine*, confirm defaults for **Thinking** vs **Fast**:
+- Whether the selected model fits the task or uses an unexpectedly costly configuration.
+- Repeated long logs, images, or entire code folders.
+- Duplicate tasks, background runs, or repeated failed attempts.
+- Large amounts of unrelated conversation context.
 
-- Fast unset ⇒ even tiny asks may ride the heavy thinking backend.
-- Wrong fast model ⇒ pick a lighter model tuned for summaries/short QA.
-- If settings look sane, inspect whether oversized attachments/logs repeat every turn.
+Stop unnecessary tasks, narrow the scope, and provide relevant excerpts. Change models in **Settings → Models & providers**, rather than troubleshooting through the older Fast/Thinking dual-mode settings.
 
-## What the counters mean
+Usage display depends on runtime, provider data, and measurement scope. Missing values do not mean zero. Usage/cost estimates are not invoices; consult the account or model-service platform for official quota and billing.
 
-| UI surface | Accuracy |
-|---|---|
-| AI Dock capsule (current session) | Live session rollup |
-| Post-task summaries | Matches that single invocation |
-| Cross-session / dollar estimates | Guidance only—invoices beat UI |
-
-Budget hardening tips:
-
-- **Short term:** note the AI Dock capsule daily.
-- **Long term:** configure spend alerts inside the inference vendor portal.
-
-## Scenario drill-down
-
-1. **Fast lane empty** — Thinking excels at deep work; fast should soak short pings. Populate fast in *AI engine*.
-2. **Huge files every message** — reprocessing full logs/screens blows tokens: prefer *Attachments*, trim snippets first, fork new chats once threads sprawl.
-3. **Mega single tasks** — long tool/agent loops accumulate tokens organically; leave sane iteration caps—don't crank max turns sky high without reason.
-
-## Remediation recap
-
-- Wire up a cheap fast endpoint.
-- Chunk long inputs.
-- Reconcile invoices regularly; escalate anomalies via this playbook.
+For apparent duplicate charges or unexpected quota after failure, retain the task, time, request ID, and error, then report them instead of repeatedly submitting the same task.

@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.14 消息渠道'
 title: 3.14 消息渠道
+description: '通过飞书或微信向 Moss 发送消息并接收结果'
 ---
 
 # 3.14 消息渠道

@@ -4,19 +4,19 @@
     "description": "The label for version current"
   },
   "sidebar.tutorialSidebar.category.1. 产品简介": {
-    "message": "1. Product Introduction",
+    "message": "1. Product introduction",
     "description": "The label for category 1. 产品简介 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.2. 快速入门": {
-    "message": "2. Quick Start",
+    "message": "2. Quick start",
     "description": "The label for category 2. 快速入门 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.2.3 接入设备": {
-    "message": "2.3 Connect a Device",
+    "message": "2.3 Connect a device",
     "description": "The label for category 2.3 接入设备 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3. 用户指南": {
-    "message": "3. User Guide",
+    "message": "3. User guide",
     "description": "The label for category 3. 用户指南 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.1 工作台": {
@@ -36,55 +36,51 @@
     "description": "The label for category 3.4 文件 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.5 代码编辑器": {
-    "message": "3.5 Code Editor",
+    "message": "3.5 Code editor",
     "description": "The label for category 3.5 代码编辑器 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.6 远程桌面": {
-    "message": "3.6 Remote Desktop",
+    "message": "3.6 Remote desktop",
     "description": "The label for category 3.6 远程桌面 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.7 烧录": {
-    "message": "3.7 System Flashing",
+    "message": "3.7 System flashing",
     "description": "The label for category 3.7 烧录 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.8 网络配置": {
-    "message": "3.8 Network Configuration",
+    "message": "3.8 Network configuration",
     "description": "The label for category 3.8 网络配置 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.9 设备管理": {
-    "message": "3.9 Device Management",
+    "message": "3.9 Device management",
     "description": "The label for category 3.9 设备管理 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.10 OpenClaw": {
     "message": "3.10 OpenClaw",
     "description": "The label for category 3.10 OpenClaw in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.3.11 技能工坊": {
-    "message": "3.11 Skill Workshop",
-    "description": "The label for category 3.11 技能工坊 in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.3.12 本地大模型": {
     "message": "3.12 Local LLMs",
     "description": "The label for category 3.12 本地大模型 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.13 配置中心": {
-    "message": "3.13 Configuration Center",
+    "message": "3.13 Configuration center",
     "description": "The label for category 3.13 配置中心 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.14 消息渠道": {
-    "message": "3.14 Message Channels",
+    "message": "3.14 Message channels",
     "description": "The label for category 3.14 消息渠道 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.15 监控与运维": {
-    "message": "3.15 Monitoring & Operations",
+    "message": "3.15 Monitoring & operations",
     "description": "The label for category 3.15 监控与运维 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3.16 命令行": {
-    "message": "3.16 Command-Line Tools",
+    "message": "3.16 Command-line tools",
     "description": "The label for category 3.16 命令行 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.4. 资源与社区": {
-    "message": "4. Resources & Community",
+    "message": "4. Resources & community",
     "description": "The label for category 4. 资源与社区 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.5. 常见问题": {
@@ -96,11 +92,11 @@
     "description": "The generated-index page description for category 1. 产品简介 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.2. 快速入门.link.generated-index.description": {
-    "message": "The shortest path for new users: install and sign in, flash system images, connect the board over SSH, Type-C, or serial, then configure network and AI models and run your first conversation.",
+    "message": "Install and sign in, prepare the system, connect a device, configure a model, and start your first Agent task.",
     "description": "The generated-index page description for category 2. 快速入门 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.3. 用户指南.link.generated-index.description": {
-    "message": "Feature-by-feature guidance: dashboard, AI chat, remote terminal and file manager, remote IDE, remote desktop, flashing, networking, device management, OpenClaw, skills, configuration center, and more.",
+    "message": "Tasks and projects, Moss/DSH, device tools, flashing, plugins and skills, models and settings, and block programming.",
     "description": "The generated-index page description for category 3. 用户指南 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.4. 资源与社区.link.generated-index.description": {
@@ -110,5 +106,13 @@
   "sidebar.tutorialSidebar.category.5. 常见问题.link.generated-index.description": {
     "message": "Troubleshooting for common issues: SSH, Type-C flash, camera, model loading, WiFi, remote IDE, multi-device switching, token usage, model quality, and VNC or desktop latency.",
     "description": "The generated-index page description for category 5. 常见问题 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.11 扩展中心与技能": {
+    "message": "3.11 Plugin Center and skills",
+    "description": "The label for category 3.11 扩展中心与技能 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.17 积木工作室": {
+    "message": "3.17 Block studio",
+    "description": "The label for category 3.17 积木工作室 in sidebar tutorialSidebar"
   }
 }

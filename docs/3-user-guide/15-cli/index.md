@@ -1,6 +1,7 @@
 ---
 sidebar_label: '3.16 命令行'
 title: 3.16 命令行
+description: '命令行工具的选择与启用前提'
 ---
 
 # 3.16 命令行

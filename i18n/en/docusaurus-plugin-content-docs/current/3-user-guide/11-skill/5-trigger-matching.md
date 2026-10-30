@@ -1,55 +1,27 @@
 ---
-sidebar_label: '3.11.5 Tune trigger keywords'
-title: 3.11.5 Tune trigger keywords
-unlisted: true
+sidebar_label: '3.11.5 Select and trigger skills'
+title: 3.11.5 Select and trigger skills
+description: 'How skills are selected, triggered, and actually loaded'
 ---
 
-# 3.11.5 Tune trigger keywords
+# 3.11.5 Select and trigger skills
 
-Each skill lists `trigger` keywords. Mentioning those words in AI Dock biases Moss to preload the skill—grounding replies in your playbook.
+A skill's name, description, and trigger information help the Agent decide when to use it. Runtime, enabled state, task context, and tool support affect actual use; trigger words are not a guarantee of loading.
 
-## How matching works
+## Select a specific skill
 
-Think of triggers as wake words:
+1. Confirm it exists and inspect it in **Plugin Center → Skills**.
+2. Select it with composer skill search or type:
 
-1. Studio inventories installed skills.
-2. Moss inspects recent user text against each trigger table.
-3. Matches fold the corresponding instructions into the session.
-4. Answers blend skill steps with live telemetry and tooling output.
-
-Say you authored “USB camera blackout troubleshooting” with triggers like `USB camera`, `camera`, `hobot_usb_cam`; messages that include those substrings load it faster than paraphrases with no literal overlap.
-
-## Precision trade-offs
-
-Triggers are naive substring checks—no semantic reranking yet:
-
-| Trigger | Message | Hits? |
-|---|---|---|
-| `USB camera` | "USB camera black screen help" | Yes (literal match) |
-| `USB camera` | "Board camera preview empty" | No (same idea, different words—unless you broaden triggers) |
-| `USB camera,camera,hobot_usb_cam` | "Board camera preview empty" | Yes (trigger list includes `camera`) |
-
-Improve coverage while authoring:
-
-- Add synonyms, bilingual spellings if your team mixes languages, and shorthand
-- Copy distinctive error salts such as `code -6`, `SIGABRT`
-- Include colloquial phrasing teammates actually paste
-
-## `/skills` quick check
-
-In AI Dock enter:
-
-```
-/skills
+```text
+/skill rdk-app-development Build a device status web page.
 ```
 
-Sample output:
+3. Specify the device, working folder, and acceptance criteria.
+4. Review the answer and existing execution records to confirm the relevant workflow was used.
 
-```
-Skills loaded this session:
-- rdk-device-ops (device operations core)
-- rdk-x5-camera-debug (X5 camera troubleshooting)
-- rdk-developer-docs (official docs search)
-```
+## Write trigger information
 
-If a skill installs but refuses to attach, wording likely missed triggers—iterate keywords in Skill Workshop, restart Studio per guidance, reload skills.
+Describe specific use cases, device types, common problems, and distinctive errors. Include useful Chinese/English variants and abbreviations, but avoid broad terms such as “development” or “device” alone.
+
+If the expected skill is not selected, check its state and runtime support, then improve the description or select it explicitly. Loading a skill does not mean an action ran; verify tool results.

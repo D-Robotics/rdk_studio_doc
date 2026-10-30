@@ -1,13 +1,14 @@
 ---
 sidebar_label: '3.16.1 rdkstudio'
 title: 3.16.1 rdkstudio
+description: '用 rdkstudio 查看设备、执行命令或向 Moss 提问'
 ---
 
 # 3.16.1 rdkstudio
 
 `rdkstudio` 是 RDK Studio 的命令行工具。启用后，你可以在终端里查看设备、执行简单命令、查看文件，或把一段问题交给 Moss 分析。
 
-![rdkstudio 常用命令示意：进入交互模式、单次提问、查看设备、执行命令、查看文件](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/cli-rdkstudio-help.png)
+![rdkstudio 常用命令示意：进入交互模式、单次提问、查看设备、执行命令、查看文件](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/cli-rdkstudio-help.png)
 
 ## 什么时候用
 
@@ -73,7 +74,7 @@ rdkstudio "查看当前设备状态"
 cat error.log | rdkstudio --pipe
 ```
 
-如果提示模型、API、URL 或访问密钥错误，先回到桌面客户端的 *配置中心 → AI 引擎* 检查模型配置。
+如果提示模型、API、URL 或访问密钥错误，先回到桌面客户端的 *配置中心 → AI 模型与服务* 检查模型配置。
 
 ## 配置来源和安全
 
@@ -84,7 +85,7 @@ cat error.log | rdkstudio --pipe
 | 环境变量 | 自动化脚本或临时终端会话 |
 | `rdkstudio config` | 管理 CLI 的普通本地偏好 |
 
-访问密钥建议在桌面客户端的 AI 引擎里配置，或使用环境变量。不要把真实密钥写进文档、脚本、截图或聊天内容。
+访问密钥建议在桌面客户端的 AI 模型与服务里配置，或使用环境变量。不要把真实密钥写进文档、脚本、截图或聊天内容。
 
 需要临时换模型时，可以这样写：
 

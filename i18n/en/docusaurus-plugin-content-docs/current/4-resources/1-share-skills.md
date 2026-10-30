@@ -1,6 +1,7 @@
 ---
 sidebar_label: '4.1 Share skills'
 title: 4.1 Share skills
+description: 'Share skills with local Moss or deploy them to OpenClaw on a device'
 ---
 
 # 4.1 Share skills
@@ -11,10 +12,10 @@ Skills can be shared for **local Moss** or deployed for **device OpenClaw**. Pub
 
 | Path | Best for | How it is used |
 |---|---|---|
-| Skill marketplace / SkillHub | Community, public sharing | Others search, preview, add, or deploy from Skill Workshop |
+| Skill marketplace / SkillHub | Community, public sharing | Others search, preview, add, or deploy from Plugin Center → Skills |
 | Git / GitHub | Teams, private repos, frequent iteration | Send repo links so colleagues generate or import from them |
 | NodeHub cases | Full projects plus matching skills | Publish project code and let Moss draft a skill from the case URL |
-| Send files directly | One-offs | Share the skill file; the recipient imports it in Skill Workshop |
+| Send files directly | One-offs | Share the skill file; the recipient imports it in Plugin Center → Skills |
 
 ## Pre-publish checklist
 
@@ -32,4 +33,4 @@ Skills can be shared for **local Moss** or deployed for **device OpenClaw**. Pub
 | Local Moss | Doc retrieval, code analysis, project work, generic Linux commands |
 | Device OpenClaw | RDK device operations, board-side chat, channels, or tasks tied to the current device |
 
-If the skill mainly helps Moss parse logs, you usually do not need to deploy it to the board; if OpenClaw must run it on the device, deploy from Skill Workshop to the device.
+If the skill mainly helps Moss parse logs, you usually do not need to deploy it to the board; if OpenClaw must run it on the device, deploy from Plugin Center → Skills to the device.

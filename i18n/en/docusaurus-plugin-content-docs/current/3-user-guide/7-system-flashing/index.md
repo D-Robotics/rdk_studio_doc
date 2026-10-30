@@ -1,30 +1,28 @@
-﻿---
-sidebar_label: '3.7 System Flashing'
-title: 3.7 System Flashing
+---
+sidebar_label: '3.7 Flashing'
+title: 3.7 Flashing
+description: 'Choose a board and image, then start flashing'
 ---
 
-# 3.7 System Flashing
+# 3.7 Flashing
 
-![Flashing wizard: choose the board type to flash](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/08-burnning.png)
+Open **Device & development → Flasher**, choose the board and image, then confirm the target disk/device. Flashing overwrites target media; back up data and verify the target first.
 
-The Flashing page is used to install or reinstall the system on your board. Follow the prompts to select the board type, choose an image, pick the write target, then wait until it finishes.
-
-[2.2 Flash system image](../../2-quick-start/2-flash-system.md) covers the fastest path to get started. The sections below go into detail by device and storage type.
-
-## Suggested order
-
-| Step | What to do |
+| Scenario | Action |
 |---|---|
-| 1 | Confirm the board type you are flashing |
-| 2 | Choose the officially recommended image, or upload an image provided by your team |
-| 3 | Select the write target—double‑check it is **not** your PC’s system disk |
-| 4 | After starting the flash, wait until it completes—do not unplug cables or let the PC sleep |
-| 5 | When flashing is done, boot the device and connect it to RDK Studio |
+| RDK X3 / X5 TF card | Select an official/local image, insert the card, and choose its disk |
+| X5 eMMC | Use the flow matching the specific eMMC model |
+| S100 / S100P | Use in-app firmware preparation and writing where supported by the desktop environment |
+| S600 | Follow official XBurn guidance to select firmware and flash manually |
+| Web Flash Bridge | Start the bridge on your computer; it scans and writes once online |
 
-Common choices are straightforward: RDK X3 / X5 usually start with TF‑card flashing; RDK X5 boards with eMMC can use eMMC flashing; RDK S100 uses the dedicated xburn tool.
+System/internal disks may be hidden by protection policy. Changing board type does not bypass target restrictions. Keep power and cables stable and wait for actual results.
 
-## Read next
+An Agent opening Flasher or checking readiness does not mean disk writing was authorized or started. Follow explicit confirmation and real progress on the page.
 
-- [3.7.2 TF card flashing](./2-tf-card.md): common way to install the system on RDK X3 and RDK X5
-- [3.7.3 eMMC flashing](./3-emmc.md): flashing and backup/restore for RDK X5 with eMMC
-- [3.7.4 S100 flashing](./4-s100-xburn.md): dedicated flashing flow for RDK S100
+## Continue reading
+
+- [Quick flashing flow](../../2-quick-start/2-flash-system.md)
+- [TF card](./2-tf-card.md)
+- [eMMC](./3-emmc.md)
+- [S100 / S600](./4-s100-xburn.md)

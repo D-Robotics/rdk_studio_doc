@@ -1,6 +1,7 @@
 ---
 sidebar_label: '2.3.2 SSH 添加设备'
 title: 2.3.2 SSH 添加设备
+description: '通过 SSH 地址与凭据添加局域网或远端设备'
 ---
 
 # 2.3.2 SSH 添加设备
@@ -9,7 +10,7 @@ SSH 是 RDK Studio 最通用的设备入口。只要目标设备能被电脑通�
 
 它适用于 RDK 开发板，也适用于普通 Linux 主机、Jetson、Raspberry Pi、Rockchip 等远端主机。
 
-![添加设备对话框 · SSH 配置表单](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/add-device-ssh-form.png)
+![添加设备对话框 · SSH 配置表单](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/zh/add-device-ssh-form.png)
 
 ## 第 1 步：准备连接信息
 

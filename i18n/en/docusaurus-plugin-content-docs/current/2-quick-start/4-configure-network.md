@@ -1,11 +1,12 @@
 ﻿---
 sidebar_label: '2.4 Configure network'
 title: 2.4 Configure network
+description: 'Join Wi-Fi after device verification and confirm connectivity'
 ---
 
 # 2.4 Configure network
 
-![Wi-Fi setup dialog: scan networks, enter password, and connect the device to Wi-Fi](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/wifi-config-dialog.png)
+![Wi-Fi setup dialog: scan networks, enter password, and connect the device to Wi-Fi](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/wifi-config-dialog.png)
 
 Wi-Fi setup usually appears **after device verification succeeds**. RDK Studio reuses the SSH session to scan Wi-Fi on the device, join a network, and report whether it is online.
 

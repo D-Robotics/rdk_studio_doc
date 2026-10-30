@@ -1,55 +1,43 @@
-﻿---
+---
 sidebar_label: '3.13.3 Configure AI models'
 title: 3.13.3 Configure AI models
+description: 'Configure the runtime engine, model services, and action confirmations'
 ---
 
 # 3.13.3 Configure AI models
 
-The AI engine tells Moss which model handles complex work and which handles quick answers. Start by understanding **reasoning** vs **fast** defaults.
+Open **Settings → Models & providers**. Runtime, model-service, and action-confirmation controls are grouped here but have separate effects.
 
-![Settings center · AI engine: default models for reasoning and fast modes](http://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/rdk_studio/en/settings-ai-engine.png)
+## Runtime
 
-## Reasoning vs fast
+**Moss** is built in. **DSH** can be selected after its availability check succeeds. Use **Check runtime availability again** to inspect readiness and reasons.
 
-| Mode | Use for | Typical choice |
-|---|---|---|
-| Reasoning | Main chat, heavy tasks, device triage, code changes | Stronger cloud or team-hosted model |
-| Fast | Short Q&A, summaries, file skim | Cheaper model or local Ollama |
+Changing the default affects newly created tasks only; existing tasks keep their runtime. The composer shows the current task runtime or the default for a new task and links back to settings. Unavailable DSH does not automatically switch to Moss.
 
-If fast mode points to local Ollama but the model is not running, AI Dock prompts you to open [3.12 Local LLMs](../12-local-models/index.md).
+## Current model
 
-## Field reference
+Model configuration primarily serves Moss. Choose a saved model, add and enable one, or edit, test, and delete the current entry.
 
-| Field | What to enter |
+| Field | Value |
 |---|---|
-| Display name | A label you recognize, e.g. “Company model” or “Local fast” |
-| Provider | Match your platform or self-hosted stack |
-| Model name | Exactly as the provider documents (case-sensitive) |
-| API key | Usually required for remote models; often empty for local Ollama. Enter in settings—do not paste keys into chat |
-| Base URL | For self-hosted gateways; leave empty for vendor defaults |
+| Display name | A recognizable name |
+| Provider | The actual provider, or the corresponding compatible interface |
+| Model ID / name | The complete value supplied by the provider |
+| API key | Enter it in settings; retain or replace saved keys as instructed |
+| Base URL | The endpoint supplied by your provider or team |
 
-After saving, pick different models independently for reasoning and fast.
+Test the provider API, then select **Save** or **Add and enable**. If saving fails, read the error; entering new fields does not mean the configuration was saved.
 
-## Wrong provider
+Where available, the composer model selector can switch models. A redundant selector may be hidden when only one default Moss alias exists. Moss model configuration does not rebind DSH tasks or serve as DSH model settings.
 
-Provider must match the platform. “OpenAI-compatible” services use the matching compatible type; local Ollama uses Ollama. Wrong provider often shows failed tests, unknown model, or invalid key.
+## Built-in and local models
 
-If unsure, share provider docs or internal field specs with Moss—**redact keys** in screenshots.
+Reapply the built-in preset if the deployment has one available. Follow missing-key or missing-preset messages. **Keep built-in presets only** deletes extra local model entries, so check which configurations you need first.
 
-## Relationship to local LLMs
+Install and download Ollama models on [Local models](../12-local-models/index.md). Confirm tool-calling support before selecting **Set as main model configuration**. Board OpenClaw requires a model endpoint reachable from the board.
 
-The local LLMs page installs, starts, downloads, and tests Ollama models; the AI engine assigns them to Moss. Recommended: on local LLMs click “set as fast model config”, then confirm in AI engine.
+## MCP and legacy Agent diagnostics
 
-## Relationship to OpenClaw
+Manage custom tool connections under **MCP services**, subject to deployment permissions. Legacy Agent diagnostics describe compatible-session installation or invocation issues; they do not make external coding Agents selectable in the current workbench.
 
-On-device agents can follow Moss’s reasoning model, but some models cannot run on device. Local Ollama on the PC is not reachable from the board by default—the UI warns when that matters.
-
-## Connectivity test
-
-Click test before relying on a profile. If it fails, check:
-
-- Provider choice
-- Model name spelling
-- Full API key copied (no extra spaces)
-- Base URL if your team requires a custom endpoint
-- Local Ollama is running and the model is downloaded
+See [Model configuration import and export](./5-import-export.md) for backup.
