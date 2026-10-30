@@ -134,7 +134,7 @@ const config = {
         logo: {
           alt: "地瓜 logo",
           src: "img/logo.png",
-          href: "https://d-robotics.cc/", // 修改为文档根路径
+          href: "https://developer.d-robotics.cc/rdk_doc_center/", // brand 由 src/theme/Navbar/Logo swizzle 接管,此 href 不生效
         },
         items: [
           {
