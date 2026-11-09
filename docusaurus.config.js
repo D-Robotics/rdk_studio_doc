@@ -48,14 +48,8 @@ const config = {
       async: true,
     },
     // Dify Chatbot Configuration
-    {
-      src: "/rdk_studio_doc/js/dify-config.js",
-    },
-    {
-      src: "https://rdk.d-robotics.cc/embed.min.js",
-      id: "MltLQTHPb5EeP7uz",
-      defer: true,
-    },
+
+
     {
       src: `/rdk_studio_doc${localePrefix}/js/umami-events.js`,
       defer: true,
@@ -222,7 +216,7 @@ const config = {
       },
     }),
   themes: ["@docusaurus/theme-mermaid"],
-  plugins: [require.resolve("./plugins/docScopePlugin.js")],
+  plugins: ['@d-robotics/docusaurus-plugin-guaji', require.resolve("./plugins/docScopePlugin.js")],
 };
 
 export default config;
