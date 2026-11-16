@@ -216,7 +216,7 @@ const config = {
       },
     }),
   themes: ["@docusaurus/theme-mermaid"],
-  plugins: ['@d-robotics/docusaurus-plugin-guaji', require.resolve("./plugins/docScopePlugin.js")],
+  plugins: [['@d-robotics/docusaurus-plugin-guaji', { assistantOrigin: process.env.GUAJI_ASSISTANT_ORIGIN?.trim() || undefined }], require.resolve("./plugins/docScopePlugin.js")],
 };
 
 export default config;
